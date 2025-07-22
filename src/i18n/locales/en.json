@@ -1,0 +1,52 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "button": {
+    "primary": "Primary Button",
+    "secondary": "Secondary Button",
+    "outline": "Outline Button",
+    "text": "Text Button",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "disabled": "Disabled"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "services": "Services",
+    "products": "Products"
+  },
+  "form": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "password": "Password must be at least 8 characters",
+    "confirmPassword": "Passwords do not match",
+    "name": "Name",
+    "phone": "Phone Number",
+    "address": "Address"
+  },
+  "message": {
+    "welcome": "Welcome to {{name}}",
+    "goodbye": "Goodbye, {{name}}!",
+    "itemCount": "You have {{count}} item",
+    "itemCount_plural": "You have {{count}} items"
+  }
+}

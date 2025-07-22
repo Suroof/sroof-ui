@@ -1,0 +1,51 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "search": "搜索",
+    "close": "关闭",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "submit": "提交",
+    "reset": "重置"
+  },
+  "button": {
+    "primary": "主要按钮",
+    "secondary": "次要按钮",
+    "outline": "边框按钮",
+    "text": "文本按钮",
+    "small": "小号",
+    "medium": "中号",
+    "large": "大号",
+    "disabled": "禁用"
+  },
+  "navigation": {
+    "home": "首页",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "services": "服务",
+    "products": "产品"
+  },
+  "form": {
+    "required": "此字段为必填项",
+    "email": "请输入有效的邮箱地址",
+    "password": "密码至少需要8个字符",
+    "confirmPassword": "密码不匹配",
+    "name": "姓名",
+    "phone": "电话号码",
+    "address": "地址"
+  },
+  "message": {
+    "welcome": "欢迎来到{{name}}",
+    "goodbye": "再见，{{name}}！",
+    "itemCount": "您有{{count}}个项目"
+  }
+}
