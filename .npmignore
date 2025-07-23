@@ -1,0 +1,34 @@
+# 源代码（只发布构建后的dist）
+src/
+public/
+.storybook/
+.trae/
+.vercel/
+.vscode/
+
+# 配置文件
+tsconfig.json
+tsconfig.build.json
+rollup.config.js
+eslint.config.mjs
+
+# 开发文件
+*.test.ts
+*.test.tsx
+*.stories.tsx
+App.tsx
+App.css
+App.test.tsx
+index.tsx
+setupTests.ts
+reportWebVitals.ts
+
+# 构建工具
+package-lock.json
+pnpm-lock.yaml
+
+# 其他
+.gitignore
+*.log
+node_modules/
+.git/

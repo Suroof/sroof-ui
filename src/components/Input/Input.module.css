@@ -2,12 +2,13 @@ input {
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-medium);
   border: 1px solid var(--color-primary-500);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: default; 
 }
 
 .input-text {

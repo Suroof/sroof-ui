@@ -31,7 +31,7 @@
   overflow: hidden;
   border: 1px solid var(--color-neutral-300, #d1d5db);
   background-color: var(--color-primary-500, #f3f4f6);
-   padding-right: 5px; /* 添加内边距，为指示器留出空间 */
+  padding-right: 5px;
 }
 
 .indicator {
