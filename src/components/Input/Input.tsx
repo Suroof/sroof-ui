@@ -35,6 +35,7 @@ export const Input: React.FC<InputProps> = ({
       type={type}
       placeholder={placeholder}
       value={value}
+      disabled={disabled}
       onChange={onChange}
     />
   );

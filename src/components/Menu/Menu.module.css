@@ -1,0 +1,84 @@
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  background-color: #ffffff;
+}
+
+.menu-horizontal {
+  flex-direction: row;
+}
+
+.menu-vertical {
+  flex-direction: column;
+}
+
+.menu-inline {
+  display: inline-flex;
+}
+
+.menuItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+}
+
+.menuItem:hover,
+.menuItemActive {
+  background-color: #e0e0e0;
+}
+
+.menuItem:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+}
+
+.menuItemDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.subMenu {
+  position: relative;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+}
+
+.subMenu:hover,
+.subMenuActive {
+  background-color: #e0e0e0;
+}
+
+.subMenu:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+}
+
+.subMenuDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.subMenuList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  min-width: 120px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
