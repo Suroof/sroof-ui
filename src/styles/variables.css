@@ -6,6 +6,12 @@
   --color-primary-500:rgb(81, 133, 108);
   --color-primary-600:rgb(66, 113, 85);
   
+  /* 主题色调 */
+  --color-primary-1:#64BF83
+  --color-primary-2:#A6A6A6
+  --color-primary-3:#FF7700
+  --color-primary-4:#93B9EB
+
   /* 中性色 */
   --color-neutral-200:rgb(189, 189, 189);
   --color-neutral-300:rgb(159, 159, 159);
