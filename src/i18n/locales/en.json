@@ -48,5 +48,10 @@
     "goodbye": "Goodbye, {{name}}!",
     "itemCount": "You have {{count}} item",
     "itemCount_plural": "You have {{count}} items"
+  },
+  "input": {
+    "small": "Small Input",
+    "medium": "Medium Input",
+    "large": "Large Input"
   }
 }

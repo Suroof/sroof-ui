@@ -7,7 +7,8 @@ type TranslationKey =
   | `button.${string}`
   | `navigation.${string}`
   | `form.${string}`
-  | `message.${string}`;
+  | `message.${string}`
+  | `input.${string}`;
 
 interface UseTranslationReturn {
   t: (key: TranslationKey, options?: any) => string;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLanguageSwitch } from '../../i18n/hooks/useTranslation';
 import { supportedLanguages, type SupportedLanguage } from '../../i18n';
 import styles from './LanguageSwitcher.module.css';
@@ -18,10 +18,39 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     switchLanguage(language);
   };
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
+  const languageEntries = Object.entries(supportedLanguages);
+  const currentIndex = languageEntries.findIndex(([code]) => code === currentLanguage);
+
+  useEffect(() => {
+    if (containerRef.current && variant === 'buttons') {
+      const buttons = containerRef.current.querySelectorAll('button');
+      const activeButton = buttons[currentIndex] as HTMLButtonElement;
+      
+      if (activeButton) {
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const buttonRect = activeButton.getBoundingClientRect();
+        
+        setIndicatorStyle({
+          width: `${buttonRect.width}px`,
+          transform: `translateX(${buttonRect.left - containerRect.left}px)`,
+        });
+      }
+    }
+  }, [currentLanguage, variant, currentIndex]);
+
   if (variant === 'buttons') {
     return (
-      <div className={`${styles.buttonGroup} ${className || ''}`}>
-        {Object.entries(supportedLanguages).map(([code, name]) => (
+      <div 
+        ref={containerRef}
+        className={`${styles.buttonGroup} ${className || ''}`}
+      >
+        <div 
+          className={styles.indicator}
+          style={indicatorStyle}
+        />
+        {languageEntries.map(([code, name]) => (
           <button
             key={code}
             className={`${

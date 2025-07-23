@@ -47,5 +47,10 @@
     "welcome": "欢迎来到{{name}}",
     "goodbye": "再见，{{name}}！",
     "itemCount": "您有{{count}}个项目"
+  },
+  "input": {
+    "small": "小号输入框",
+    "medium": "中号输入框",
+    "large": "大号输入框"
   }
 }

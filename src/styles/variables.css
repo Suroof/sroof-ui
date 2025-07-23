@@ -1,12 +1,19 @@
 :root {
   /* 颜色变量 */
+  --color-white: #fff;
   --color-primary-50: #eff6ff;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
+  --color-primary-100:rgb(168, 213, 182);
+  --color-primary-500:rgb(81, 133, 108);
+  --color-primary-600:rgb(66, 113, 85);
   
   /* 中性色 */
+  --color-neutral-200:rgb(189, 189, 189);
+  --color-neutral-300:rgb(159, 159, 159);
   --color-neutral-500: #6C757D;
   --color-neutral-600: #5a6268;
+  --color-neutral-700: #495057;
+  --color-neutral-800: #343a40;
+  --color-neutral-900: #000000;
   
   /* 语义化颜色 */
   --color-success: #10b981;
