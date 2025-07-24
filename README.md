@@ -5,16 +5,16 @@ A modern React UI component library with TypeScript support and internationaliza
 ## Installation
 
 ```bash
-npm install @your-username/sroof-ui
+npm install sroof-ui
 # or
-yarn add @your-username/sroof-ui
+yarn add sroof-ui
 ```
 
 ## Usage
 
 ```tsx
-import { Button, LanguageSwitcher } from '@your-username/sroof-ui';
-import '@your-username/sroof-ui/dist/index.css';
+import { Button, LanguageSwitcher, Menu, Tabs, Tab, Radio, Switch, Form } from 'sroof-ui';
+import 'sroof-ui/dist/index.css';
 
 function App() {
   return (
@@ -28,9 +28,14 @@ function App() {
 
 ## Components
 
-- **Button**: Customizable button component
-- **Input**: Form input with validation
+- **Button**: Customizable button component with multiple variants
+- **Input**: Form input with validation support
 - **LanguageSwitcher**: Internationalization language switcher
+- **Menu**: Flexible menu component with horizontal/vertical layouts
+- **Tabs**: Tab navigation component with controlled/uncontrolled modes
+- **Radio**: Radio button component for single selection
+- **Switch**: Toggle switch component
+- **Form**: Form wrapper component with validation
 
 ## Development
 

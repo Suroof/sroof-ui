@@ -73,8 +73,8 @@ export const Switch: React.FC<SwitchProps> = ({
         onChange={handleChange}
         className={styles.input}
         role="switch"
-        aria-checked={isChecked.toString()}
-        aria-disabled={(disabled || loading).toString()}
+        aria-checked={isChecked ? "true" : "false"}
+        aria-disabled={disabled || loading ? "true" : "false"}
       />
       <span 
         className={styles.slider}

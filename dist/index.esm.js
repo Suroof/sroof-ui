@@ -1,17 +1,17 @@
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { createContext, useContext, useCallback, useState, useRef, useEffect } from 'react';
+import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
+import React, { createContext, useContext, useCallback, useState, useRef, useEffect } from 'react';
 
-var styles$2 = {"button":"Button-module_button__2ZuB7","button-primary":"Button-module_button-primary__fgpLW","disabled":"Button-module_disabled__Tl9fh","button-secondary":"Button-module_button-secondary__Wt8pw","button-outline":"Button-module_button-outline__LZHKr","button-text":"Button-module_button-text__CbCCC","button-small":"Button-module_button-small__z1jVz","button-medium":"Button-module_button-medium__Iy0Bv","button-large":"Button-module_button-large__Dftqb"};
+var styles$7 = {"button":"Button-module_button__2ZuB7","button-primary":"Button-module_button-primary__fgpLW","disabled":"Button-module_disabled__Tl9fh","button-secondary":"Button-module_button-secondary__Wt8pw","button-outline":"Button-module_button-outline__LZHKr","button-text":"Button-module_button-text__CbCCC","button-small":"Button-module_button-small__z1jVz","button-medium":"Button-module_button-medium__Iy0Bv","button-large":"Button-module_button-large__Dftqb"};
 
 /*
 基础按钮组件
 */
 const Button = ({ children, variant = "primary", size = "medium", onClick, disabled = false, className = "", }) => {
     const buttonClasses = [
-        styles$2.button,
-        styles$2[`button-${variant}`],
-        styles$2[`button-${size}`],
-        disabled ? styles$2.disabled : "",
+        styles$7.button,
+        styles$7[`button-${variant}`],
+        styles$7[`button-${size}`],
+        disabled ? styles$7.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -19,14 +19,14 @@ const Button = ({ children, variant = "primary", size = "medium", onClick, disab
     return (jsx("button", Object.assign({ className: buttonClasses, onClick: onClick, disabled: disabled, type: "button" }, { children: children })));
 };
 
-var styles$1 = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
+var styles$6 = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
 
 const Input = ({ type, placeholder, value, size, disabled, className = "", onChange, }) => {
     const inputClasses = [
-        styles$1.input,
-        styles$1[`input-${type}`],
-        styles$1[`input-${size}`],
-        disabled ? styles$1.disabled : "",
+        styles$6.input,
+        styles$6[`input-${type}`],
+        styles$6[`input-${size}`],
+        disabled ? styles$6.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -3161,7 +3161,7 @@ const getLanguageNativeName = (language) => {
     return names[language];
 };
 
-var styles = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
+var styles$5 = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
 
 const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
     const { switchLanguage, currentLanguage } = useLanguageSwitch();
@@ -3187,9 +3187,208 @@ const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
         }
     }, [currentLanguage, variant, currentIndex]);
     if (variant === 'buttons') {
-        return (jsxs("div", Object.assign({ ref: containerRef, className: `${styles.buttonGroup} ${className || ''}` }, { children: [jsx("div", { className: styles.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsx("button", Object.assign({ className: `${styles.languageButton} ${currentLanguage === code ? styles.active : ''}`, onClick: () => handleLanguageChange(code), type: "button" }, { children: name }), code)))] })));
+        return (jsxs("div", Object.assign({ ref: containerRef, className: `${styles$5.buttonGroup} ${className || ''}` }, { children: [jsx("div", { className: styles$5.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsx("button", Object.assign({ className: `${styles$5.languageButton} ${currentLanguage === code ? styles$5.active : ''}`, onClick: () => handleLanguageChange(code), type: "button" }, { children: name }), code)))] })));
     }
-    return (jsx("div", Object.assign({ className: `${styles.dropdown} ${className || ''}` }, { children: jsx("select", Object.assign({ value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles.select }, { children: Object.entries(supportedLanguages).map(([code, name]) => (jsx("option", Object.assign({ value: code }, { children: name }), code))) })) })));
+    return (jsx("div", Object.assign({ className: `${styles$5.dropdown} ${className || ''}` }, { children: jsx("select", Object.assign({ value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$5.select }, { children: Object.entries(supportedLanguages).map(([code, name]) => (jsx("option", Object.assign({ value: code }, { children: name }), code))) })) })));
+};
+
+var styles$4 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","menuItem":"Menu-module_menuItem__96xoX","menuItemActive":"Menu-module_menuItemActive__9XppC","menuItemDisabled":"Menu-module_menuItemDisabled__YCbDU","subMenu":"Menu-module_subMenu__AhIAI","subMenuActive":"Menu-module_subMenuActive__NdiKe","subMenuDisabled":"Menu-module_subMenuDisabled__V99kV","subMenuList":"Menu-module_subMenuList__bYOQB"};
+
+const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", onSelect, }) => {
+    const [selectedKey, setSelectedKey] = useState(defaultSelectedKey);
+    const menuClasses = [styles$4.menu, styles$4[`menu-${mode}`], className]
+        .filter(Boolean)
+        .join(" ");
+    const handleItemClick = (key, onClick) => {
+        setSelectedKey(key);
+        onSelect === null || onSelect === void 0 ? void 0 : onSelect(key);
+        onClick === null || onClick === void 0 ? void 0 : onClick();
+    };
+    const renderMenuItems = (items) => {
+        return React.Children.map(items, (child) => {
+            if (React.isValidElement(child)) {
+                if (child.type === MenuItem) {
+                    const itemProps = child.props;
+                    return React.cloneElement(child, {
+                        isActive: itemProps.key === selectedKey,
+                        onClick: () => handleItemClick(itemProps.key, itemProps.onClick),
+                    });
+                }
+                if (child.type === SubMenu) {
+                    const subMenuProps = child.props;
+                    return React.cloneElement(child, {
+                        isActive: hasActiveChild(subMenuProps.children, selectedKey),
+                        onItemSelect: handleItemClick,
+                    });
+                }
+            }
+            return child;
+        });
+    };
+    // 辅助函数：检查子菜单是否有激活的子项
+    const hasActiveChild = (children, activeKey) => {
+        let hasActive = false;
+        React.Children.forEach(children, (child) => {
+            if (React.isValidElement(child) && child.type === MenuItem) {
+                const itemProps = child.props;
+                if (itemProps.key === activeKey) {
+                    hasActive = true;
+                }
+            }
+        });
+        return hasActive;
+    };
+    return jsx("ul", Object.assign({ className: menuClasses }, { children: renderMenuItems(children) }));
+};
+const MenuItem = ({ label, isActive = false, onClick, disabled = false, }) => {
+    const handleClick = () => {
+        if (!disabled && onClick) {
+            onClick();
+        }
+    };
+    const handleKeyDown = (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !disabled) {
+            event.preventDefault();
+            handleClick();
+        }
+    };
+    return (jsx("li", Object.assign({ className: `${isActive ? styles$4.menuItemActive : styles$4.menuItem} ${disabled ? styles$4.menuItemDisabled : ""}`, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled }, { children: label })));
+};
+const SubMenu = ({ label, children, isActive = false, disabled = false, onItemSelect }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleToggle = () => {
+        if (!disabled) {
+            setIsOpen(!isOpen);
+        }
+    };
+    const handleKeyDown = (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !disabled) {
+            event.preventDefault();
+            handleToggle();
+        }
+    };
+    const renderSubMenuItems = () => {
+        return React.Children.map(children, (child) => {
+            if (React.isValidElement(child) && child.type === MenuItem) {
+                const itemProps = child.props;
+                return React.cloneElement(child, {
+                    onClick: () => {
+                        var _a;
+                        onItemSelect === null || onItemSelect === void 0 ? void 0 : onItemSelect(itemProps.key);
+                        (_a = itemProps.onClick) === null || _a === void 0 ? void 0 : _a.call(itemProps);
+                        setIsOpen(false); // 点击子项后关闭子菜单
+                    },
+                });
+            }
+            return child;
+        });
+    };
+    return (jsxs("li", Object.assign({ className: `${isActive ? styles$4.subMenuActive : styles$4.subMenu} ${disabled ? styles$4.subMenuDisabled : ""}`, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "true" }, { children: [jsx("span", { children: label }), isOpen && (jsx("ul", Object.assign({ className: styles$4.subMenuList, role: "menu" }, { children: renderSubMenuItems() })))] })));
+};
+
+var styles$3 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
+
+/**
+ * Tab 组件 - 单个标签页
+ * @param children 标签页内容
+ */
+const Tab = ({ children }) => {
+    return jsx(Fragment, { children: children });
+};
+/**
+ * Tabs 组件 - 标签页容器
+ * 支持受控和非受控两种模式
+ */
+const Tabs = ({ activeKey, children, className, defaultActiveKey, onChange, }) => {
+    var _a, _b;
+    // 将 children 转换为数组，并保持原始的 key
+    const tabs = (_a = React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+            return child;
+        }
+        return null;
+    })) === null || _a === void 0 ? void 0 : _a.filter(Boolean);
+    // 获取第一个标签的 key 作为默认值
+    const firstTabKey = ((_b = tabs[0]) === null || _b === void 0 ? void 0 : _b.key) || "";
+    const [internalActiveKey, setInternalActiveKey] = useState(activeKey || defaultActiveKey || firstTabKey);
+    // 同步外部 activeKey 和内部状态
+    useEffect(() => {
+        if (activeKey !== undefined && activeKey !== internalActiveKey) {
+            setInternalActiveKey(activeKey);
+        }
+    }, [activeKey, internalActiveKey]);
+    const handleTabClick = (key) => {
+        // 如果是非受控模式，更新内部状态
+        if (activeKey === undefined) {
+            setInternalActiveKey(key);
+        }
+        if (onChange) {
+            onChange(key);
+        }
+    };
+    const currentActiveKey = activeKey !== null && activeKey !== void 0 ? activeKey : internalActiveKey;
+    const activeTab = tabs.find((tab) => tab.key === currentActiveKey);
+    return (jsxs("div", Object.assign({ className: `${styles$3['tabs-container']} ${className || ""}` }, { children: [jsx("div", Object.assign({ className: styles$3.tabs }, { children: tabs.map((tab) => (jsx("div", Object.assign({ className: `${styles$3.tab} ${tab.key === currentActiveKey ? styles$3.active : ""}`, onClick: () => handleTabClick(tab.key) }, { children: tab.props.label }), tab.key))) })), jsx("div", Object.assign({ className: styles$3.content }, { children: activeTab && activeTab.props.children }))] })));
+};
+
+var styles$2 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP"};
+
+const Radio = ({ children, value, disabled = false, checked, defaultChecked = false, name, onChange, className, }) => {
+    const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
+    // 受控或非受控模式
+    const isChecked = checked !== undefined ? checked : internalChecked;
+    const handleChange = (event) => {
+        const isChecked = event.target.checked;
+        // 非受控模式下更新内部状态
+        if (checked === undefined) {
+            setInternalChecked(isChecked);
+        }
+        // 调用外部回调
+        if (onChange && isChecked) {
+            onChange(value);
+        }
+    };
+    const radioId = React.useId();
+    return (jsxs("label", Object.assign({ className: `${styles$2.radio} ${disabled ? styles$2.disabled : ""} ${className || ""}`, htmlFor: radioId }, { children: [jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsx("span", Object.assign({ className: styles$2.label }, { children: children }))] })));
+};
+
+var styles$1 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
+
+const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, className, size = 'medium', children, labelPosition = 'right', loading = false, color, }) => {
+    const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
+    // 判断是否为受控模式
+    const isControlled = checked !== undefined;
+    // 受控或非受控模式的当前值
+    const isChecked = isControlled ? checked : internalChecked;
+    const handleChange = (event) => {
+        const newChecked = event.target.checked;
+        // 非受控模式下更新内部状态
+        if (!isControlled) {
+            setInternalChecked(newChecked);
+        }
+        // 调用外部回调
+        if (onChange && !loading) {
+            onChange(newChecked);
+        }
+    };
+    const switchId = React.useId();
+    const switchElement = (jsxs("label", Object.assign({ className: `${styles$1.switch} ${styles$1[size]} ${disabled ? styles$1.disabled : ''} ${loading ? styles$1.loading : ''} ${className || ''}`, htmlFor: switchId }, { children: [jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$1.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsx("span", Object.assign({ className: styles$1.slider, style: color && isChecked ? { backgroundColor: color } : undefined }, { children: loading && jsx("span", { className: styles$1.spinner }) }))] })));
+    if (children) {
+        return (jsxs("div", Object.assign({ className: `${styles$1.switchWrapper} ${styles$1[`label-${labelPosition}`]}` }, { children: [labelPosition === 'left' && (jsx("span", Object.assign({ className: styles$1.label }, { children: children }))), switchElement, labelPosition === 'right' && (jsx("span", Object.assign({ className: styles$1.label }, { children: children })))] })));
+    }
+    return switchElement;
+};
+
+var styles = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
+
+const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medium', bordered = true, }) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (onSubmit) {
+            onSubmit(e);
+        }
+    };
+    return (jsx("form", Object.assign({ className: `${styles.form} ${styles[layout]} ${styles[size]} ${bordered ? styles.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true }, { children: children })));
 };
 
 // 设计令牌 - 定义设计系统的基础变量
@@ -3246,5 +3445,5 @@ const tokens = {
     },
 };
 
-export { Button, Button as ButtonDefault, Input, Input as InputDefault, LanguageSwitcher, LanguageSwitcher as LanguageSwitcherDefault, formatCurrency, formatDate, formatNumber, getBrowserLanguage, getLanguageNativeName, getSavedLanguage, getTextDirection, instance as i18n, isValidLanguage, saveLanguage, supportedLanguages, tokens, useCurrentLanguage, useLanguageSwitch, useTranslation };
+export { Button, Button as ButtonDefault, Form, Form as FormDefault, Input, Input as InputDefault, LanguageSwitcher, LanguageSwitcher as LanguageSwitcherDefault, Menu, Menu as MenuDefault, Radio, Radio as RadioDefault, Switch, Switch as SwitchDefault, Tab, Tabs, Tabs as TabsDefault, formatCurrency, formatDate, formatNumber, getBrowserLanguage, getLanguageNativeName, getSavedLanguage, getTextDirection, instance as i18n, isValidLanguage, saveLanguage, supportedLanguages, tokens, useCurrentLanguage, useLanguageSwitch, useTranslation };
 //# sourceMappingURL=index.esm.js.map
