@@ -1,0 +1,400 @@
+/* 表单容器 */
+.form {
+  font-family: var(--font-family-sans, 'Inter', system-ui, sans-serif);
+  color: var(--color-neutral-800, #1f2937);
+  line-height: 1.6;
+  max-width: 100%;
+  box-sizing: border-box; /* 确保表单容器也使用 border-box */
+}
+
+.form.bordered {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid var(--color-neutral-200, #e5e7eb);
+  border-radius: 16px;
+  padding: 1rem 5rem;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* 确保 padding 包含在宽度内 */
+  width: 100%;
+  max-width: 600px; /* 设置最大宽度，防止在大屏幕上过宽 */
+}
+
+.form.bordered::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(168, 213, 182), transparent);
+}
+
+/* 表单布局 */
+.form.vertical .formItem {
+  margin-bottom: 2rem;
+}
+
+.form.horizontal .formItem {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  padding-top:1rem;
+  margin-bottom: 2rem;
+}
+
+.form.horizontal .formItem .label {
+  margin-bottom: 0;
+  padding-top: 0.75rem;
+}
+
+.form.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.form.inline .formItem {
+  margin-bottom: 0;
+  flex: 0 0 auto;
+  min-width: 200px;
+}
+
+/* 表单大小 */
+.form.small {
+  font-size: 0.875rem;
+}
+
+.form.small.bordered {
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.form.medium {
+  font-size: 1rem;
+}
+
+.form.large {
+  font-size: 1.125rem;
+}
+
+.form.large.bordered {
+  padding: 3rem;
+  border-radius: 20px;
+}
+
+/* 表单项 */
+.formItem {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止子元素超出 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止子元素超出 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止子元素超出 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止子元素超出 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止子元素超出 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止子元素超出 */
+}
+
+.formItem:hover {
+  transform: translateY(-1px);
+}
+
+.formItem.error .control input,
+.formItem.error .control textarea,
+.formItem.error .control select {
+  border-color: var(--color-error, #ef4444);
+  box-shadow: 
+    0 0 0 3px rgba(239, 68, 68, 0.1),
+    0 1px 3px rgba(239, 68, 68, 0.1);
+  background-color: rgba(254, 242, 242, 0.5);
+}
+
+/* 标签 */
+.label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-neutral-700, #374151);
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0.025em;
+  position: relative;
+}
+
+.label::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-500, #3b82f6), var(--color-primary-600, #2563eb));
+  transition: width 0.3s ease;
+}
+
+.formItem:focus-within .label::after {
+  width: 30px;
+}
+
+.required {
+  color: var(--color-error, #ef4444);
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
+/* 控件容器 */
+.control {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.control input,
+.control textarea,
+.control select {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid var(--color-neutral-200, #e5e7eb);
+  border-radius: 12px;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: 1.5;;
+  box-sizing: border-box !important; /* 强制使用 border-box */
+  max-width: 100%; /* 防止超出容器 */
+}
+
+/* 重置所有可能影响宽度的样式 */
+.control * {
+  box-sizing: border-box;
+  color: var(--color-neutral-800, #1f2937);
+  background-color: #ffffff;;
+  box-sizing: border-box !important; /* 强制使用 border-box */
+  max-width: 100%; /* 防止超出容器 */
+}
+
+/* 重置所有可能影响宽度的样式 */
+.control * {
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box !important; /* 强制使用 border-box */
+  max-width: 100%; /* 防止超出容器 */
+}
+
+/* 重置所有可能影响宽度的样式 */
+.control * {
+  box-sizing: border-box;
+}
+
+.control input::placeholder,
+.control textarea::placeholder {
+  color: var(--color-neutral-400, #9ca3af);
+  font-weight: 400;
+}
+
+.control input:focus,
+.control textarea:focus,
+.control select:focus {
+  outline: none;
+  border-color: var(--color-primary-500, #3b82f6);
+  transform: translateY(-2px);
+  background-color: #ffffff;
+}
+
+.control input:hover:not(:focus):not(:disabled),
+.control textarea:hover:not(:focus):not(:disabled),
+.control select:hover:not(:focus):not(:disabled) {
+  border-color: var(--color-primary-300, #93c5fd);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.control input:disabled,
+.control textarea:disabled,
+.control select:disabled {
+  background-color: var(--color-neutral-50, #f9fafb);
+  color: var(--color-neutral-500, #6b7280);
+  cursor: not-allowed;
+  opacity: 0.7;
+  border-color: var(--color-neutral-200, #e5e7eb);
+}
+
+.control textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* 错误信息 */
+.errorMessage {
+  color: var(--color-error, #ef4444);
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  animation: slideInDown 0.3s ease;
+}
+
+.errorMessage::before {
+  content: '⚠';
+  font-size: 1rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 帮助文本 */
+.helpText {
+  color: var(--color-neutral-500, #6b7280);
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* 表单操作区域 */
+.formActions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-neutral-200, #e5e7eb);
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  justify-content: center; /* 默认居中 */
+}
+
+.formActions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary-500, #3b82f6), transparent);
+}
+
+.formActions.align-left {
+  justify-content: flex-start;
+}
+
+.formActions.align-center {
+  justify-content: center;
+}
+
+.formActions.align-right {
+  justify-content: flex-end;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .form.horizontal .formItem {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .form.horizontal .formItem .label {
+    padding-top: 0;
+  }
+  
+  .form.inline {
+    flex-direction: column;
+  }
+  
+  .form.inline .formItem {
+    min-width: 100%;
+  }
+  
+  .form.bordered {
+    padding: 2rem 1.5rem;
+  }
+  
+  .formActions {
+    flex-direction: column;
+  }
+}
+
+/* 动画效果 */
+.formItem {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .form.bordered {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-color: #374151;
+    color: #f9fafb;
+  }
+  
+  .control input,
+  .control textarea,
+  .control select {
+.formItem:nth-child(4) { animation-delay: 0.4s; }
+.formItem:nth-child(5) { animation-delay: 0.5s; }
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .control input::placeholder,
+  .control textarea::placeholder {
+    color: #9ca3af;
+  }
+}
+
+/* 微交互增强 */
+.formItem:nth-child(1) { animation-delay: 0.1s; }
+.formItem:nth-child(2) { animation-delay: 0.2s; }
+.formItem:nth-child(3) { animation-delay: 0.3s; }
+.formItem:nth-child(4) { animation-delay: 0.4s; }
+.formItem:nth-child(5) { animation-delay: 0.5s; }
