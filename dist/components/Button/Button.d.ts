@@ -1,11 +1,17 @@
 import React from "react";
-export interface ButtonProps {
-    children: React.ReactNode;
-    variant?: "primary" | "secondary" | "outline" | "text";
-    size?: "small" | "medium" | "large";
-    onClick?: () => void;
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    /** 按钮变体 */
+    variant?: 'primary' | 'secondary' | 'outline' | 'text';
+    /** 按钮大小 */
+    size?: 'small' | 'medium' | 'large';
+    /** 是否禁用 */
     disabled?: boolean;
+    /** 自定义类名 */
     className?: string;
+    /** 子元素 */
+    children: React.ReactNode;
+    /** 按钮类型 */
+    type?: 'button' | 'submit' | 'reset';
 }
 export declare const Button: React.FC<ButtonProps>;
 export default Button;

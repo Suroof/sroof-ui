@@ -33,7 +33,7 @@ const Input = ({ type, placeholder, value, size, disabled, className = "", onCha
     ]
         .filter(Boolean)
         .join(" ");
-    return (jsxRuntime.jsx("input", { className: inputClasses, type: type, placeholder: placeholder, value: value, onChange: onChange }));
+    return (jsxRuntime.jsx("input", { className: inputClasses, type: type, placeholder: placeholder, value: value, disabled: disabled, onChange: onChange }));
 };
 
 const warn = (i18n, code, msg, rest) => {
