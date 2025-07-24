@@ -1,0 +1,51 @@
+.radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  color: #333;
+  gap: 8px;
+}
+
+.radio input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.radio.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.radio.disabled input[type="radio"] {
+  cursor: not-allowed;
+}
+
+.label {
+  cursor: inherit;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.radioGroup.vertical {
+  flex-direction: column;
+}
+
+.radioGroup.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.radioGroup.horizontal .radio {
+  margin-right: 16px;
+}
+
+.radioGroup.horizontal .radio:last-child {
+  margin-right: 0;
+}
