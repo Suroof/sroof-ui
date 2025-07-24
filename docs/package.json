@@ -1,0 +1,23 @@
+{
+  "name": "sroof-ui-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Documentation for Sroof UI component library",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vue": "^3.3.0"
+  },
+  "dependencies": {
+    "markdown-it-container": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vitepress": "^1.6.3"
+  }
+}

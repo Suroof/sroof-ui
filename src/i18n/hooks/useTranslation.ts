@@ -26,7 +26,10 @@ export const useTranslation = (): UseTranslationReturn => {
   const { t, i18n, ready } = useI18nTranslation();
 
   return {
-    t: (key: TranslationKey, options?: any) => t(key, options),
+    t: (key: TranslationKey, options?: any) => {
+      const result = t(key, options);
+      return typeof result === 'string' ? result : String(result);
+    },
     i18n: {
       language: i18n.language,
       changeLanguage: (lng: SupportedLanguage) => i18n.changeLanguage(lng),

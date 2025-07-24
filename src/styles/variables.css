@@ -6,25 +6,25 @@
   /* 主品牌色系 - 绿色调 */
   --color-primary-50: #f0f9f4;
   --color-primary-100: #dcf4e3;
-  --color-primary-200: #a8d5b6;  /* 原 rgb(168, 213, 182) */
-  --color-primary-300: #64bf83;  /* 原 --color-primary-1 */
-  --color-primary-400: #4ade80;
-  --color-primary-500: #518570;  /* 原 rgb(81, 133, 108) - 主色 */
-  --color-primary-600: #427155;  /* 原 rgb(66, 113, 85) */
+  --color-primary-200: #a8d5b6; 
+  --color-primary-300: #64bf83;
+  --color-primary-400: #538258;
+  --color-primary-500: #518570;  
+  --color-primary-600: #427155;  
   --color-primary-700: #365a47;
   --color-primary-800: #1f3429;
   --color-primary-900: #0f1a14;
 
   /* 辅助色系 */
-  --color-secondary-500: #a6a6a6;  /* 原 --color-primary-2 */
-  --color-accent-orange: #ff7700;  /* 原 --color-primary-3 */
-  --color-accent-blue: #93b9eb;    /* 原 --color-primary-4 */
+  --color-secondary-500: #a6a6a6;  
+  --color-accent-orange: #ff7700; 
+  --color-accent-blue: #93b9eb;  
   
   /* 中性色系 */
   --color-neutral-50: #f9fafb;
   --color-neutral-100: #f3f4f6;
-  --color-neutral-200: #bdbdbd;   /* 原 rgb(189, 189, 189) */
-  --color-neutral-300: #9f9f9f;   /* 原 rgb(159, 159, 159) */
+  --color-neutral-200: #bdbdbd;
+  --color-neutral-300: #9f9f9f;
   --color-neutral-400: #9ca3af;
   --color-neutral-500: #6c757d;
   --color-neutral-600: #5a6268;

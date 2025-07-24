@@ -5,18 +5,21 @@ export interface MenuProps {
     mode?: "horizontal" | "vertical" | "inline";
     defaultSelectedKey?: string;
     onSelect?: (key: string) => void;
+    theme?: "light" | "dark" | "glass";
 }
 export interface MenuItemProps {
     key: string;
     label: string;
     onClick?: () => void;
     disabled?: boolean;
+    icon?: React.ReactNode;
 }
 export interface SubMenuProps {
     key: string;
     label: string;
     children: React.ReactNode;
     disabled?: boolean;
+    icon?: React.ReactNode;
 }
 export declare const Menu: React.FC<MenuProps>;
 export declare const MenuItem: React.FC<MenuItemProps & {

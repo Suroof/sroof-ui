@@ -3,32 +3,32 @@
 var jsxRuntime = require('react/jsx-runtime');
 var React = require('react');
 
-var styles$7 = {"button":"Button-module_button__2ZuB7","button-primary":"Button-module_button-primary__fgpLW","disabled":"Button-module_disabled__Tl9fh","button-secondary":"Button-module_button-secondary__Wt8pw","button-outline":"Button-module_button-outline__LZHKr","button-text":"Button-module_button-text__CbCCC","button-small":"Button-module_button-small__z1jVz","button-medium":"Button-module_button-medium__Iy0Bv","button-large":"Button-module_button-large__Dftqb"};
+var styles$8 = {"button":"Button-module_button__2ZuB7","button-primary":"Button-module_button-primary__fgpLW","disabled":"Button-module_disabled__Tl9fh","button-secondary":"Button-module_button-secondary__Wt8pw","button-outline":"Button-module_button-outline__LZHKr","button-text":"Button-module_button-text__CbCCC","button-small":"Button-module_button-small__z1jVz","button-medium":"Button-module_button-medium__Iy0Bv","button-large":"Button-module_button-large__Dftqb"};
 
 /*
 基础按钮组件
 */
 const Button = ({ children, variant = "primary", size = "medium", onClick, disabled = false, className = "", }) => {
     const buttonClasses = [
-        styles$7.button,
-        styles$7[`button-${variant}`],
-        styles$7[`button-${size}`],
-        disabled ? styles$7.disabled : "",
+        styles$8.button,
+        styles$8[`button-${variant}`],
+        styles$8[`button-${size}`],
+        disabled ? styles$8.disabled : "",
         className,
     ]
         .filter(Boolean)
         .join(" ");
-    return (jsxRuntime.jsx("button", Object.assign({ className: buttonClasses, onClick: onClick, disabled: disabled, type: "button" }, { children: children })));
+    return (jsxRuntime.jsx("button", { className: buttonClasses, onClick: onClick, disabled: disabled, type: "button", children: children }));
 };
 
-var styles$6 = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
+var styles$7 = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
 
 const Input = ({ type, placeholder, value, size, disabled, className = "", onChange, }) => {
     const inputClasses = [
-        styles$6.input,
-        styles$6[`input-${type}`],
-        styles$6[`input-${size}`],
-        disabled ? styles$6.disabled : "",
+        styles$7.input,
+        styles$7[`input-${type}`],
+        styles$7[`input-${size}`],
+        disabled ? styles$7.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -91,7 +91,7 @@ const hasLoadedNamespace = (ns, i18n, options = {}) => {
   return i18n.hasLoadedNamespace(ns, {
     lng: options.lng,
     precheck: (i18nInstance, loadNotPending) => {
-      if (options.bindI18n?.indexOf('languageChanging') > -1 && i18nInstance.services.backendConnector.backend && i18nInstance.isLanguageChangingTo && !loadNotPending(i18nInstance.isLanguageChangingTo, ns)) return false;
+      if (options.bindI18n && options.bindI18n.indexOf('languageChanging') > -1 && i18nInstance.services.backendConnector.backend && i18nInstance.isLanguageChangingTo && !loadNotPending(i18nInstance.isLanguageChangingTo, ns)) return false;
     }
   });
 };
@@ -252,7 +252,7 @@ const useTranslation$1 = (ns, props = {}) => {
     if (bindI18nStore) i18n?.store.on(bindI18nStore, boundReset);
     return () => {
       isMounted.current = false;
-      if (i18n) bindI18n?.split(' ').forEach(e => i18n.off(e, boundReset));
+      if (i18n && bindI18n) bindI18n?.split(' ').forEach(e => i18n.off(e, boundReset));
       if (bindI18nStore && i18n) bindI18nStore.split(' ').forEach(e => i18n.store.off(e, boundReset));
     };
   }, [i18n, joinedNS]);
@@ -282,7 +282,10 @@ const useTranslation$1 = (ns, props = {}) => {
 const useTranslation = () => {
     const { t, i18n, ready } = useTranslation$1();
     return {
-        t: (key, options) => t(key, options),
+        t: (key, options) => {
+            const result = t(key, options);
+            return typeof result === 'string' ? result : String(result);
+        },
         i18n: {
             language: i18n.language,
             changeLanguage: (lng) => i18n.changeLanguage(lng),
@@ -3163,7 +3166,7 @@ const getLanguageNativeName = (language) => {
     return names[language];
 };
 
-var styles$5 = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
+var styles$6 = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
 
 const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
     const { switchLanguage, currentLanguage } = useLanguageSwitch();
@@ -3189,18 +3192,21 @@ const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
         }
     }, [currentLanguage, variant, currentIndex]);
     if (variant === 'buttons') {
-        return (jsxRuntime.jsxs("div", Object.assign({ ref: containerRef, className: `${styles$5.buttonGroup} ${className || ''}` }, { children: [jsxRuntime.jsx("div", { className: styles$5.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsxRuntime.jsx("button", Object.assign({ className: `${styles$5.languageButton} ${currentLanguage === code ? styles$5.active : ''}`, onClick: () => handleLanguageChange(code), type: "button" }, { children: name }), code)))] })));
+        return (jsxRuntime.jsxs("div", { ref: containerRef, className: `${styles$6.buttonGroup} ${className || ''}`, children: [jsxRuntime.jsx("div", { className: styles$6.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsxRuntime.jsx("button", { className: `${styles$6.languageButton} ${currentLanguage === code ? styles$6.active : ''}`, onClick: () => handleLanguageChange(code), type: "button", children: name }, code)))] }));
     }
-    return (jsxRuntime.jsx("div", Object.assign({ className: `${styles$5.dropdown} ${className || ''}` }, { children: jsxRuntime.jsx("select", Object.assign({ value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$5.select }, { children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntime.jsx("option", Object.assign({ value: code }, { children: name }), code))) })) })));
+    return (jsxRuntime.jsx("div", { className: `${styles$6.dropdown} ${className || ''}`, children: jsxRuntime.jsx("select", { value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$6.select, children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntime.jsx("option", { value: code, children: name }, code))) }) }));
 };
 
-var styles$4 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","menuItem":"Menu-module_menuItem__96xoX","menuItemActive":"Menu-module_menuItemActive__9XppC","menuItemDisabled":"Menu-module_menuItemDisabled__YCbDU","subMenu":"Menu-module_subMenu__AhIAI","subMenuActive":"Menu-module_subMenuActive__NdiKe","subMenuDisabled":"Menu-module_subMenuDisabled__V99kV","subMenuList":"Menu-module_subMenuList__bYOQB"};
+var styles$5 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","menuItem":"Menu-module_menuItem__96xoX","menuItemContent":"Menu-module_menuItemContent__O6JS3","menuItemIcon":"Menu-module_menuItemIcon__G3hxf","menuItemLabel":"Menu-module_menuItemLabel__oV-Gk","menuItemDisabled":"Menu-module_menuItemDisabled__YCbDU","menuItemActive":"Menu-module_menuItemActive__9XppC","activeIndicator":"Menu-module_activeIndicator__MtELc","subMenu":"Menu-module_subMenu__AhIAI","subMenuTrigger":"Menu-module_subMenuTrigger__U1F7m","subMenuIcon":"Menu-module_subMenuIcon__-PxnO","subMenuLabel":"Menu-module_subMenuLabel__8fo2q","subMenuArrow":"Menu-module_subMenuArrow__W7szs","subMenuArrowOpen":"Menu-module_subMenuArrowOpen__piP9W","subMenuDisabled":"Menu-module_subMenuDisabled__V99kV","subMenuActive":"Menu-module_subMenuActive__NdiKe","subMenuList":"Menu-module_subMenuList__bYOQB","slideDown":"Menu-module_slideDown__67Oew","theme-light":"Menu-module_theme-light__4gP4u","theme-dark":"Menu-module_theme-dark__Sf8Gn","theme-glass":"Menu-module_theme-glass__VjAfu"};
 
-const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", onSelect, }) => {
+const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", onSelect, theme = "light", }) => {
     const [selectedKey, setSelectedKey] = React.useState(defaultSelectedKey);
-    const menuClasses = [styles$4.menu, styles$4[`menu-${mode}`], className]
-        .filter(Boolean)
-        .join(" ");
+    const menuClasses = [
+        styles$5.menu,
+        styles$5[`menu-${mode}`],
+        styles$5[`theme-${theme}`],
+        className
+    ].filter(Boolean).join(" ");
     const handleItemClick = (key, onClick) => {
         setSelectedKey(key);
         onSelect === null || onSelect === void 0 ? void 0 : onSelect(key);
@@ -3227,7 +3233,6 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
             return child;
         });
     };
-    // 辅助函数：检查子菜单是否有激活的子项
     const hasActiveChild = (children, activeKey) => {
         let hasActive = false;
         React.Children.forEach(children, (child) => {
@@ -3240,9 +3245,9 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
         });
         return hasActive;
     };
-    return jsxRuntime.jsx("ul", Object.assign({ className: menuClasses }, { children: renderMenuItems(children) }));
+    return jsxRuntime.jsx("ul", { className: menuClasses, children: renderMenuItems(children) });
 };
-const MenuItem = ({ label, isActive = false, onClick, disabled = false, }) => {
+const MenuItem = ({ label, isActive = false, onClick, disabled = false, icon, }) => {
     const handleClick = () => {
         if (!disabled && onClick) {
             onClick();
@@ -3254,9 +3259,9 @@ const MenuItem = ({ label, isActive = false, onClick, disabled = false, }) => {
             handleClick();
         }
     };
-    return (jsxRuntime.jsx("li", Object.assign({ className: `${isActive ? styles$4.menuItemActive : styles$4.menuItem} ${disabled ? styles$4.menuItemDisabled : ""}`, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled }, { children: label })));
+    return (jsxRuntime.jsx("li", { className: `${styles$5.menuItem} ${isActive ? styles$5.menuItemActive : ""} ${disabled ? styles$5.menuItemDisabled : ""}`, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, children: jsxRuntime.jsxs("div", { className: styles$5.menuItemContent, children: [icon && jsxRuntime.jsx("span", { className: styles$5.menuItemIcon, children: icon }), jsxRuntime.jsx("span", { className: styles$5.menuItemLabel, children: label }), isActive && jsxRuntime.jsx("div", { className: styles$5.activeIndicator })] }) }));
 };
-const SubMenu = ({ label, children, isActive = false, disabled = false, onItemSelect }) => {
+const SubMenu = ({ label, children, isActive = false, disabled = false, onItemSelect, icon }) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const handleToggle = () => {
         if (!disabled) {
@@ -3278,17 +3283,17 @@ const SubMenu = ({ label, children, isActive = false, disabled = false, onItemSe
                         var _a;
                         onItemSelect === null || onItemSelect === void 0 ? void 0 : onItemSelect(itemProps.key);
                         (_a = itemProps.onClick) === null || _a === void 0 ? void 0 : _a.call(itemProps);
-                        setIsOpen(false); // 点击子项后关闭子菜单
+                        setIsOpen(false);
                     },
                 });
             }
             return child;
         });
     };
-    return (jsxRuntime.jsxs("li", Object.assign({ className: `${isActive ? styles$4.subMenuActive : styles$4.subMenu} ${disabled ? styles$4.subMenuDisabled : ""}`, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "true" }, { children: [jsxRuntime.jsx("span", { children: label }), isOpen && (jsxRuntime.jsx("ul", Object.assign({ className: styles$4.subMenuList, role: "menu" }, { children: renderSubMenuItems() })))] })));
+    return (jsxRuntime.jsxs("li", { className: `${styles$5.subMenu} ${isActive ? styles$5.subMenuActive : ""} ${disabled ? styles$5.subMenuDisabled : ""} ${isOpen ? styles$5.subMenuOpen : ""}`, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "true", children: [jsxRuntime.jsxs("div", { className: styles$5.subMenuTrigger, children: [icon && jsxRuntime.jsx("span", { className: styles$5.subMenuIcon, children: icon }), jsxRuntime.jsx("span", { className: styles$5.subMenuLabel, children: label }), jsxRuntime.jsx("span", { className: `${styles$5.subMenuArrow} ${isOpen ? styles$5.subMenuArrowOpen : ""}`, children: "\u25BC" }), isActive && jsxRuntime.jsx("div", { className: styles$5.activeIndicator })] }), isOpen && (jsxRuntime.jsx("ul", { className: styles$5.subMenuList, role: "menu", children: renderSubMenuItems() }))] }));
 };
 
-var styles$3 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
+var styles$4 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
 
 /**
  * Tab 组件 - 单个标签页
@@ -3330,10 +3335,10 @@ const Tabs = ({ activeKey, children, className, defaultActiveKey, onChange, }) =
     };
     const currentActiveKey = activeKey !== null && activeKey !== void 0 ? activeKey : internalActiveKey;
     const activeTab = tabs.find((tab) => tab.key === currentActiveKey);
-    return (jsxRuntime.jsxs("div", Object.assign({ className: `${styles$3['tabs-container']} ${className || ""}` }, { children: [jsxRuntime.jsx("div", Object.assign({ className: styles$3.tabs }, { children: tabs.map((tab) => (jsxRuntime.jsx("div", Object.assign({ className: `${styles$3.tab} ${tab.key === currentActiveKey ? styles$3.active : ""}`, onClick: () => handleTabClick(tab.key) }, { children: tab.props.label }), tab.key))) })), jsxRuntime.jsx("div", Object.assign({ className: styles$3.content }, { children: activeTab && activeTab.props.children }))] })));
+    return (jsxRuntime.jsxs("div", { className: `${styles$4['tabs-container']} ${className || ""}`, children: [jsxRuntime.jsx("div", { className: styles$4.tabs, children: tabs.map((tab) => (jsxRuntime.jsx("div", { className: `${styles$4.tab} ${tab.key === currentActiveKey ? styles$4.active : ""}`, onClick: () => handleTabClick(tab.key), children: tab.props.label }, tab.key))) }), jsxRuntime.jsx("div", { className: styles$4.content, children: activeTab && activeTab.props.children })] }));
 };
 
-var styles$2 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP"};
+var styles$3 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP"};
 
 const Radio = ({ children, value, disabled = false, checked, defaultChecked = false, name, onChange, className, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3351,10 +3356,10 @@ const Radio = ({ children, value, disabled = false, checked, defaultChecked = fa
         }
     };
     const radioId = React.useId();
-    return (jsxRuntime.jsxs("label", Object.assign({ className: `${styles$2.radio} ${disabled ? styles$2.disabled : ""} ${className || ""}`, htmlFor: radioId }, { children: [jsxRuntime.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntime.jsx("span", Object.assign({ className: styles$2.label }, { children: children }))] })));
+    return (jsxRuntime.jsxs("label", { className: `${styles$3.radio} ${disabled ? styles$3.disabled : ""} ${className || ""}`, htmlFor: radioId, children: [jsxRuntime.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntime.jsx("span", { className: styles$3.label, children: children })] }));
 };
 
-var styles$1 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
+var styles$2 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
 
 const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, className, size = 'medium', children, labelPosition = 'right', loading = false, color, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3374,14 +3379,14 @@ const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, c
         }
     };
     const switchId = React.useId();
-    const switchElement = (jsxRuntime.jsxs("label", Object.assign({ className: `${styles$1.switch} ${styles$1[size]} ${disabled ? styles$1.disabled : ''} ${loading ? styles$1.loading : ''} ${className || ''}`, htmlFor: switchId }, { children: [jsxRuntime.jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$1.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsxRuntime.jsx("span", Object.assign({ className: styles$1.slider, style: color && isChecked ? { backgroundColor: color } : undefined }, { children: loading && jsxRuntime.jsx("span", { className: styles$1.spinner }) }))] })));
+    const switchElement = (jsxRuntime.jsxs("label", { className: `${styles$2.switch} ${styles$2[size]} ${disabled ? styles$2.disabled : ''} ${loading ? styles$2.loading : ''} ${className || ''}`, htmlFor: switchId, children: [jsxRuntime.jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$2.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsxRuntime.jsx("span", { className: styles$2.slider, style: color && isChecked ? { backgroundColor: color } : undefined, children: loading && jsxRuntime.jsx("span", { className: styles$2.spinner }) })] }));
     if (children) {
-        return (jsxRuntime.jsxs("div", Object.assign({ className: `${styles$1.switchWrapper} ${styles$1[`label-${labelPosition}`]}` }, { children: [labelPosition === 'left' && (jsxRuntime.jsx("span", Object.assign({ className: styles$1.label }, { children: children }))), switchElement, labelPosition === 'right' && (jsxRuntime.jsx("span", Object.assign({ className: styles$1.label }, { children: children })))] })));
+        return (jsxRuntime.jsxs("div", { className: `${styles$2.switchWrapper} ${styles$2[`label-${labelPosition}`]}`, children: [labelPosition === 'left' && (jsxRuntime.jsx("span", { className: styles$2.label, children: children })), switchElement, labelPosition === 'right' && (jsxRuntime.jsx("span", { className: styles$2.label, children: children }))] }));
     }
     return switchElement;
 };
 
-var styles = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
+var styles$1 = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
 
 const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medium', bordered = true, }) => {
     const handleSubmit = (e) => {
@@ -3390,7 +3395,23 @@ const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medi
             onSubmit(e);
         }
     };
-    return (jsxRuntime.jsx("form", Object.assign({ className: `${styles.form} ${styles[layout]} ${styles[size]} ${bordered ? styles.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true }, { children: children })));
+    return (jsxRuntime.jsx("form", { className: `${styles$1.form} ${styles$1[layout]} ${styles$1[size]} ${bordered ? styles$1.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true, children: children }));
+};
+
+var styles = {"card":"Card-module_card__Cb1o4","bordered":"Card-module_bordered__fBy0-","borderless":"Card-module_borderless__YB3u0","shadow-none":"Card-module_shadow-none__z6-54","shadow-sm":"Card-module_shadow-sm__wDVK9","shadow-md":"Card-module_shadow-md__67vf0","shadow-lg":"Card-module_shadow-lg__64Kwt","shadow-xl":"Card-module_shadow-xl__QOvW4","clickable":"Card-module_clickable__qbwhm","header":"Card-module_header__PTXf2","titleSection":"Card-module_titleSection__sNCOq","icon":"Card-module_icon__jzes9","title":"Card-module_title__mSgoo","actions":"Card-module_actions__AUI-1","content":"Card-module_content__oFIQa","small":"Card-module_small__n-USZ","medium":"Card-module_medium__6Gszi","large":"Card-module_large__CSDTa","default":"Card-module_default__qq3ax","primary":"Card-module_primary__dDgYl","success":"Card-module_success__Numc6","warning":"Card-module_warning__20v4Q","danger":"Card-module_danger__cv1fT","glass":"Card-module_glass__YcnwR","gradient":"Card-module_gradient__oGNK8","loading":"Card-module_loading__pF1ro","loadingOverlay":"Card-module_loadingOverlay__D0ZLN","spinner":"Card-module_spinner__eUbE8","spin":"Card-module_spin__iMQ71","fadeInUp":"Card-module_fadeInUp__hR-uu"};
+
+const Card = ({ title, children, className, size = "medium", type = "default", clickable = false, onClick, bordered = true, shadow = "md", icon, actions, loading = false, }) => {
+    const cardClasses = [
+        styles.card,
+        styles[size],
+        styles[type],
+        bordered ? styles.bordered : styles.borderless,
+        styles[`shadow-${shadow}`],
+        clickable ? styles.clickable : '',
+        loading ? styles.loading : '',
+        className || ''
+    ].filter(Boolean).join(' ');
+    return (jsxRuntime.jsxs("div", { className: cardClasses, onClick: clickable ? onClick : undefined, role: clickable ? "button" : undefined, tabIndex: clickable ? 0 : undefined, children: [loading && jsxRuntime.jsx("div", { className: styles.loadingOverlay, children: jsxRuntime.jsx("div", { className: styles.spinner }) }), (title || icon || actions) && (jsxRuntime.jsxs("div", { className: styles.header, children: [jsxRuntime.jsxs("div", { className: styles.titleSection, children: [icon && jsxRuntime.jsx("div", { className: styles.icon, children: icon }), title && jsxRuntime.jsx("div", { className: styles.title, children: title })] }), actions && jsxRuntime.jsx("div", { className: styles.actions, children: actions })] })), jsxRuntime.jsx("div", { className: styles.content, children: children })] }));
 };
 
 // 设计令牌 - 定义设计系统的基础变量
@@ -3408,11 +3429,11 @@ const tokens = {
     typography: {
         fontFamily: '"Segoe UI", "Roboto", "Oxygen", sans-serif',
         fontSize: {
-            xs: '0.75rem',
-            sm: '0.875rem',
-            md: '1rem',
-            lg: '1.125rem',
-            xl: '1.25rem',
+            xs: '0.75rem', // 12px
+            sm: '0.875rem', // 14px
+            md: '1rem', // 16px
+            lg: '1.125rem', // 18px
+            xl: '1.25rem', // 20px
             xxl: '1.5rem', // 24px
         },
         fontWeight: {
@@ -3422,17 +3443,17 @@ const tokens = {
         },
     },
     spacing: {
-        xs: '0.25rem',
-        sm: '0.5rem',
-        md: '1rem',
-        lg: '1.5rem',
-        xl: '2rem',
+        xs: '0.25rem', // 4px
+        sm: '0.5rem', // 8px
+        md: '1rem', // 16px
+        lg: '1.5rem', // 24px
+        xl: '2rem', // 32px
         xxl: '3rem', // 48px
     },
     borderRadius: {
-        sm: '0.25rem',
-        md: '0.5rem',
-        lg: '1rem',
+        sm: '0.25rem', // 4px
+        md: '0.5rem', // 8px
+        lg: '1rem', // 16px
         pill: '50rem', // 圆形按钮
     },
     shadows: {
@@ -3449,6 +3470,8 @@ const tokens = {
 
 exports.Button = Button;
 exports.ButtonDefault = Button;
+exports.Card = Card;
+exports.CardDefault = Card;
 exports.Form = Form;
 exports.FormDefault = Form;
 exports.Input = Input;

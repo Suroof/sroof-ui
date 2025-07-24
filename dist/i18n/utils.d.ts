@@ -26,11 +26,11 @@ export declare const formatCurrency: (amount: number, language: SupportedLanguag
 /**
  * 获取文本方向（RTL/LTR）
  */
-export declare const getTextDirection: (language: SupportedLanguage) => 'ltr' | 'rtl';
+export declare const getTextDirection: (language: SupportedLanguage) => "ltr" | "rtl";
 /**
  * 检查是否为有效的语言代码
  */
-export declare const isValidLanguage: (lang: string) => lang is "en" | "zh";
+export declare const isValidLanguage: (lang: string) => lang is SupportedLanguage;
 /**
  * 获取语言的本地化名称
  */

@@ -7,6 +7,7 @@ export interface MenuProps {
   mode?: "horizontal" | "vertical" | "inline";
   defaultSelectedKey?: string;
   onSelect?: (key: string) => void;
+  theme?: "light" | "dark" | "glass";
 }
 
 export interface MenuItemProps {
@@ -14,13 +15,15 @@ export interface MenuItemProps {
   label: string;
   onClick?: () => void;
   disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 export interface SubMenuProps {
   key: string;
   label: string;
-  children: React.ReactNode
+  children: React.ReactNode;
   disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 export const Menu: React.FC<MenuProps> = ({
@@ -29,12 +32,16 @@ export const Menu: React.FC<MenuProps> = ({
   mode = "horizontal",
   defaultSelectedKey = "",
   onSelect,
+  theme = "light",
 }) => {
   const [selectedKey, setSelectedKey] = useState(defaultSelectedKey);
 
-  const menuClasses = [styles.menu, styles[`menu-${mode}`], className]
-    .filter(Boolean)
-    .join(" ");
+  const menuClasses = [
+    styles.menu, 
+    styles[`menu-${mode}`], 
+    styles[`theme-${theme}`],
+    className
+  ].filter(Boolean).join(" ");
 
   const handleItemClick = (key: string, onClick?: () => void) => {
     setSelectedKey(key);
@@ -76,7 +83,6 @@ export const Menu: React.FC<MenuProps> = ({
     });
   };
 
-  // 辅助函数：检查子菜单是否有激活的子项
   const hasActiveChild = (
     children: React.ReactNode,
     activeKey: string
@@ -101,6 +107,7 @@ export const MenuItem: React.FC<MenuItemProps & { isActive?: boolean }> = ({
   isActive = false,
   onClick,
   disabled = false,
+  icon,
 }) => {
   const handleClick = () => {
     if (!disabled && onClick) {
@@ -117,23 +124,27 @@ export const MenuItem: React.FC<MenuItemProps & { isActive?: boolean }> = ({
 
   return (
     <li
-      className={`${isActive ? styles.menuItemActive : styles.menuItem} ${
-        disabled ? styles.menuItemDisabled : ""
-      }`}
+      className={`${styles.menuItem} ${
+        isActive ? styles.menuItemActive : ""
+      } ${disabled ? styles.menuItemDisabled : ""}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="menuitem"
       tabIndex={disabled ? -1 : 0}
       aria-disabled={disabled}
     >
-      {label}
+      <div className={styles.menuItemContent}>
+        {icon && <span className={styles.menuItemIcon}>{icon}</span>}
+        <span className={styles.menuItemLabel}>{label}</span>
+        {isActive && <div className={styles.activeIndicator}></div>}
+      </div>
     </li>
   );
 };
 
 export const SubMenu: React.FC<
   SubMenuProps & { isActive?: boolean; onItemSelect?: (key: string) => void }
-> = ({ label, children, isActive = false, disabled = false, onItemSelect }) => {
+> = ({ label, children, isActive = false, disabled = false, onItemSelect, icon }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -157,7 +168,7 @@ export const SubMenu: React.FC<
           onClick: () => {
             onItemSelect?.(itemProps.key);
             itemProps.onClick?.();
-            setIsOpen(false); // 点击子项后关闭子菜单
+            setIsOpen(false);
           },
         });
       }
@@ -167,8 +178,10 @@ export const SubMenu: React.FC<
 
   return (
     <li
-      className={`${isActive ? styles.subMenuActive : styles.subMenu} ${
-        disabled ? styles.subMenuDisabled : ""
+      className={`${styles.subMenu} ${
+        isActive ? styles.subMenuActive : ""
+      } ${disabled ? styles.subMenuDisabled : ""} ${
+        isOpen ? styles.subMenuOpen : ""
       }`}
       onClick={handleToggle}
       onKeyDown={handleKeyDown}
@@ -178,7 +191,14 @@ export const SubMenu: React.FC<
       aria-expanded={isOpen}
       aria-haspopup="true"
     >
-      <span>{label}</span>
+      <div className={styles.subMenuTrigger}>
+        {icon && <span className={styles.subMenuIcon}>{icon}</span>}
+        <span className={styles.subMenuLabel}>{label}</span>
+        <span className={`${styles.subMenuArrow} ${isOpen ? styles.subMenuArrowOpen : ""}`}>
+          ▼
+        </span>
+        {isActive && <div className={styles.activeIndicator}></div>}
+      </div>
       {isOpen && (
         <ul className={styles.subMenuList} role="menu">
           {renderSubMenuItems()}

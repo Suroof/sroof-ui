@@ -22,7 +22,7 @@ export declare const useCurrentLanguage: () => SupportedLanguage;
 export declare const useLanguageSwitch: () => {
     switchLanguage: (language: SupportedLanguage) => void;
     getCurrentLanguage: () => SupportedLanguage;
-    currentLanguage: "en" | "zh";
+    currentLanguage: SupportedLanguage;
 };
 export {};
 //# sourceMappingURL=useTranslation.d.ts.map
