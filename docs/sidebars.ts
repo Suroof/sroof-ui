@@ -22,6 +22,9 @@ const sidebars: SidebarsConfig = {
       items: [
         'components/button',
         'components/menu',
+        'components/card',
+        'components/form',
+        'components/input',
       ],
     },
   ],

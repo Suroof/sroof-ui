@@ -6,7 +6,7 @@ export { Menu, MenuItem, SubMenu, type MenuProps, type MenuItemProps, type SubMe
 export { Tabs, Tab, type TabsProps, type TabProps } from './components/Tabs';
 export { Radio, type RadioProps } from './components/Radio';
 export { Switch, type SwitchProps } from './components/Switch';
-export { Form, type FormProps } from './components/Form';
+export { Form,FormItem,FormActions, type FormProps, type FormItemProps, type FormActionsProps} from './components/Form';
 export { Card, type CardProps } from './components/Card';
 
 // 导出默认组件（使用不同的别名）
