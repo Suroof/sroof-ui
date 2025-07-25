@@ -1,0 +1,152 @@
+---
+sidebar_position: 2
+---
+
+# Menu 菜单
+
+导航菜单组件，支持多级菜单和各种交互模式。
+
+## 基本用法
+
+```jsx live
+function MenuExample() {
+  return (
+    <div className="menu">
+      <div className="menu-item">首页</div>
+      <div className="menu-item">产品</div>
+      <div className="menu-item">关于我们</div>
+      <div className="menu-item">联系我们</div>
+    </div>
+  );
+}
+```
+
+```jsx
+import { Menu } from 'sroof-ui';
+
+function Example() {
+  const items = [
+    { key: '1', label: '首页' },
+    { key: '2', label: '产品' },
+    { key: '3', label: '关于我们' },
+    { key: '4', label: '联系我们' }
+  ];
+
+  return (
+    <Menu
+      items={items}
+      selectedKey="1"
+      onSelect={(key) => console.log('选中:', key)}
+    />
+  );
+}
+```
+
+## 垂直菜单
+
+```jsx live
+function VerticalMenuExample() {
+  return (
+    <div className="menu menu-vertical">
+      <div className="menu-item">导航一</div>
+      <div className="menu-item">导航二</div>
+      <div className="menu-item">导航三</div>
+      <div className="menu-item">导航四</div>
+    </div>
+  );
+}
+```
+
+```jsx
+<Menu
+  mode="vertical"
+  items={items}
+  selectedKey="2"
+/>
+```
+
+## 子菜单
+
+```jsx live
+function SubMenuExample() {
+  return (
+    <div className="menu">
+      <div className="menu-item">首页</div>
+      <div className="menu-submenu">
+        <div className="menu-submenu-title">产品</div>
+        <div className="menu-submenu-content">
+          <div className="menu-item">产品A</div>
+          <div className="menu-item">产品B</div>
+          <div className="menu-item">产品C</div>
+        </div>
+      </div>
+      <div className="menu-item">关于我们</div>
+    </div>
+  );
+}
+```
+
+```jsx
+const items = [
+  { key: '1', label: '首页' },
+  {
+    key: '2',
+    label: '产品',
+    children: [
+      { key: '2-1', label: '产品A' },
+      { key: '2-2', label: '产品B' },
+      { key: '2-3', label: '产品C' }
+    ]
+  },
+  { key: '3', label: '关于我们' }
+];
+
+<Menu items={items} selectedKey="2-1" />
+```
+
+## 禁用项
+
+```jsx live
+function DisabledMenuExample() {
+  return (
+    <div className="menu">
+      <div className="menu-item">可用项</div>
+      <div className="menu-item menu-item-disabled">禁用项</div>
+      <div className="menu-item">另一个可用项</div>
+    </div>
+  );
+}
+```
+
+```jsx
+<Menu
+  items={[
+    { key: '1', label: '可用项' },
+    { key: '2', label: '禁用项', disabled: true },
+    { key: '3', label: '另一个可用项' }
+  ]}
+  selectedKey="1"
+/>
+```
+
+## API
+
+### Menu Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| items | `MenuItem[]` | `[]` | 菜单项数据 |
+| mode | `'horizontal' \| 'vertical'` | `'horizontal'` | 菜单模式 |
+| selectedKey | `string` | - | 当前选中的菜单项 |
+| onSelect | `(key: string) => void` | - | 选择菜单项时的回调 |
+| className | `string` | - | 自定义类名 |
+| style | `CSSProperties` | - | 自定义样式 |
+
+### MenuItem
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| key | `string` | 菜单项的唯一标识 |
+| label | `ReactNode` | 菜单项显示内容 |
+| disabled | `boolean` | 是否禁用 |
+| children | `MenuItem[]` | 子菜单项 |
