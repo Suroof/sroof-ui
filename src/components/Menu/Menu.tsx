@@ -45,7 +45,6 @@ export const Menu: React.FC<MenuProps> = ({
   onSelect,
   theme = "light",
   expandIcon,
-  collapsible = false,
 }) => {
   const [internalSelectedKey, setInternalSelectedKey] = useState(defaultSelectedKey);
   const [openSubMenus, setOpenSubMenus] = useState<Set<string>>(new Set());
@@ -218,7 +217,6 @@ export const MenuItem: React.FC<MenuItemProps & {
 }> = ({
   children,
   className = "",
-  itemKey,
   onClick,
   disabled = false,
   icon,
