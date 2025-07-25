@@ -1,7 +1,7 @@
 export { Button, type ButtonProps } from './components/Button';
 export { Input, type InputProps } from './components/Input';
 export { LanguageSwitcher } from './components/LanguageSwitcher';
-export { Menu, type MenuProps } from './components/Menu';
+export { Menu, MenuItem, SubMenu, type MenuProps, type MenuItemProps, type SubMenuProps } from './components/Menu';
 export { Tabs, Tab, type TabsProps, type TabProps } from './components/Tabs';
 export { Radio, type RadioProps } from './components/Radio';
 export { Switch, type SwitchProps } from './components/Switch';
@@ -10,7 +10,6 @@ export { Card, type CardProps } from './components/Card';
 export { default as ButtonDefault } from './components/Button';
 export { default as InputDefault } from './components/Input';
 export { default as LanguageSwitcherDefault } from './components/LanguageSwitcher';
-export { default as MenuDefault } from './components/Menu';
 export { default as TabsDefault } from './components/Tabs';
 export { default as RadioDefault } from './components/Radio';
 export { default as SwitchDefault } from './components/Switch';

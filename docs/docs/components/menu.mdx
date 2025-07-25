@@ -11,33 +11,27 @@ sidebar_position: 2
 ```jsx live
 function MenuExample() {
   return (
-    <div className="menu">
-      <div className="menu-item">首页</div>
-      <div className="menu-item">产品</div>
-      <div className="menu-item">关于我们</div>
-      <div className="menu-item">联系我们</div>
-    </div>
+    <Menu defaultSelectedKey="1" onSelect={(key) => console.log('选中:', key)}>
+      <MenuItem key="1" label="首页" />
+      <MenuItem key="2" label="产品" />
+      <MenuItem key="3" label="关于我们" />
+      <MenuItem key="4" label="联系我们" />
+    </Menu>
   );
 }
 ```
 
 ```jsx
-import { Menu } from 'sroof-ui';
+import { Menu, MenuItem } from 'sroof-ui';
 
 function Example() {
-  const items = [
-    { key: '1', label: '首页' },
-    { key: '2', label: '产品' },
-    { key: '3', label: '关于我们' },
-    { key: '4', label: '联系我们' }
-  ];
-
   return (
-    <Menu
-      items={items}
-      selectedKey="1"
-      onSelect={(key) => console.log('选中:', key)}
-    />
+    <Menu defaultSelectedKey="1" onSelect={(key) => console.log('选中:', key)}>
+      <MenuItem key="1" label="首页" />
+      <MenuItem key="2" label="产品" />
+      <MenuItem key="3" label="关于我们" />
+      <MenuItem key="4" label="联系我们" />
+    </Menu>
   );
 }
 ```
@@ -47,22 +41,23 @@ function Example() {
 ```jsx live
 function VerticalMenuExample() {
   return (
-    <div className="menu menu-vertical">
-      <div className="menu-item">导航一</div>
-      <div className="menu-item">导航二</div>
-      <div className="menu-item">导航三</div>
-      <div className="menu-item">导航四</div>
-    </div>
+    <Menu mode="vertical" defaultSelectedKey="2">
+      <MenuItem key="1" label="导航一" />
+      <MenuItem key="2" label="导航二" />
+      <MenuItem key="3" label="导航三" />
+      <MenuItem key="4" label="导航四" />
+    </Menu>
   );
 }
 ```
 
 ```jsx
-<Menu
-  mode="vertical"
-  items={items}
-  selectedKey="2"
-/>
+<Menu mode="vertical" defaultSelectedKey="2">
+  <MenuItem key="1" label="导航一" />
+  <MenuItem key="2" label="导航二" />
+  <MenuItem key="3" label="导航三" />
+  <MenuItem key="4" label="导航四" />
+</Menu>
 ```
 
 ## 子菜单
@@ -70,38 +65,31 @@ function VerticalMenuExample() {
 ```jsx live
 function SubMenuExample() {
   return (
-    <div className="menu">
-      <div className="menu-item">首页</div>
-      <div className="menu-submenu">
-        <div className="menu-submenu-title">产品</div>
-        <div className="menu-submenu-content">
-          <div className="menu-item">产品A</div>
-          <div className="menu-item">产品B</div>
-          <div className="menu-item">产品C</div>
-        </div>
-      </div>
-      <div className="menu-item">关于我们</div>
-    </div>
+    <Menu defaultSelectedKey="2-1">
+      <MenuItem key="1" label="首页" />
+      <SubMenu key="2" label="产品">
+        <MenuItem key="2-1" label="产品A" />
+        <MenuItem key="2-2" label="产品B" />
+        <MenuItem key="2-3" label="产品C" />
+      </SubMenu>
+      <MenuItem key="3" label="关于我们" />
+    </Menu>
   );
 }
 ```
 
 ```jsx
-const items = [
-  { key: '1', label: '首页' },
-  {
-    key: '2',
-    label: '产品',
-    children: [
-      { key: '2-1', label: '产品A' },
-      { key: '2-2', label: '产品B' },
-      { key: '2-3', label: '产品C' }
-    ]
-  },
-  { key: '3', label: '关于我们' }
-];
+import { Menu, MenuItem, SubMenu } from 'sroof-ui';
 
-<Menu items={items} selectedKey="2-1" />
+<Menu defaultSelectedKey="2-1">
+  <MenuItem key="1" label="首页" />
+  <SubMenu key="2" label="产品">
+    <MenuItem key="2-1" label="产品A" />
+    <MenuItem key="2-2" label="产品B" />
+    <MenuItem key="2-3" label="产品C" />
+  </SubMenu>
+  <MenuItem key="3" label="关于我们" />
+</Menu>
 ```
 
 ## 禁用项
@@ -109,24 +97,21 @@ const items = [
 ```jsx live
 function DisabledMenuExample() {
   return (
-    <div className="menu">
-      <div className="menu-item">可用项</div>
-      <div className="menu-item menu-item-disabled">禁用项</div>
-      <div className="menu-item">另一个可用项</div>
-    </div>
+    <Menu defaultSelectedKey="1">
+      <MenuItem key="1" label="可用项" />
+      <MenuItem key="2" label="禁用项" disabled />
+      <MenuItem key="3" label="另一个可用项" />
+    </Menu>
   );
 }
 ```
 
 ```jsx
-<Menu
-  items={[
-    { key: '1', label: '可用项' },
-    { key: '2', label: '禁用项', disabled: true },
-    { key: '3', label: '另一个可用项' }
-  ]}
-  selectedKey="1"
-/>
+<Menu defaultSelectedKey="1">
+  <MenuItem key="1" label="可用项" />
+  <MenuItem key="2" label="禁用项" disabled />
+  <MenuItem key="3" label="另一个可用项" />
+</Menu>
 ```
 
 ## API
@@ -135,18 +120,29 @@ function DisabledMenuExample() {
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| items | `MenuItem[]` | `[]` | 菜单项数据 |
-| mode | `'horizontal' \| 'vertical'` | `'horizontal'` | 菜单模式 |
-| selectedKey | `string` | - | 当前选中的菜单项 |
+| children | `ReactNode` | - | 菜单项内容 |
+| mode | `'horizontal' \| 'vertical' \| 'inline'` | `'horizontal'` | 菜单模式 |
+| defaultSelectedKey | `string` | - | 默认选中的菜单项 |
 | onSelect | `(key: string) => void` | - | 选择菜单项时的回调 |
+| theme | `'light' \| 'dark' \| 'glass'` | `'light'` | 菜单主题 |
 | className | `string` | - | 自定义类名 |
-| style | `CSSProperties` | - | 自定义样式 |
 
-### MenuItem
+### MenuItem Props
 
 | 属性 | 类型 | 说明 |
 | --- | --- | --- |
 | key | `string` | 菜单项的唯一标识 |
-| label | `ReactNode` | 菜单项显示内容 |
+| label | `string` | 菜单项显示内容 |
 | disabled | `boolean` | 是否禁用 |
-| children | `MenuItem[]` | 子菜单项 |
+| icon | `ReactNode` | 菜单项图标 |
+| onClick | `() => void` | 点击回调 |
+
+### SubMenu Props
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| key | `string` | 子菜单的唯一标识 |
+| label | `string` | 子菜单显示内容 |
+| children | `ReactNode` | 子菜单项 |
+| disabled | `boolean` | 是否禁用 |
+| icon | `ReactNode` | 子菜单图标 |

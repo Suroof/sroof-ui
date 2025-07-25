@@ -3623,36 +3623,101 @@ const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
     return (jsxRuntimeExports.jsx("div", { className: `${styles$6.dropdown} ${className || ''}`, children: jsxRuntimeExports.jsx("select", { value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$6.select, children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntimeExports.jsx("option", { value: code, children: name }, code))) }) }));
 };
 
-var styles$5 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","menuItem":"Menu-module_menuItem__96xoX","menuItemContent":"Menu-module_menuItemContent__O6JS3","menuItemIcon":"Menu-module_menuItemIcon__G3hxf","menuItemLabel":"Menu-module_menuItemLabel__oV-Gk","menuItemDisabled":"Menu-module_menuItemDisabled__YCbDU","menuItemActive":"Menu-module_menuItemActive__9XppC","activeIndicator":"Menu-module_activeIndicator__MtELc","subMenu":"Menu-module_subMenu__AhIAI","subMenuTrigger":"Menu-module_subMenuTrigger__U1F7m","subMenuIcon":"Menu-module_subMenuIcon__-PxnO","subMenuLabel":"Menu-module_subMenuLabel__8fo2q","subMenuArrow":"Menu-module_subMenuArrow__W7szs","subMenuArrowOpen":"Menu-module_subMenuArrowOpen__piP9W","subMenuDisabled":"Menu-module_subMenuDisabled__V99kV","subMenuActive":"Menu-module_subMenuActive__NdiKe","subMenuList":"Menu-module_subMenuList__bYOQB","slideDown":"Menu-module_slideDown__67Oew","theme-light":"Menu-module_theme-light__4gP4u","theme-dark":"Menu-module_theme-dark__Sf8Gn","theme-glass":"Menu-module_theme-glass__VjAfu"};
+var styles$5 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","theme-light":"Menu-module_theme-light__4gP4u","theme-dark":"Menu-module_theme-dark__Sf8Gn","theme-glass":"Menu-module_theme-glass__VjAfu","menuItem":"Menu-module_menuItem__96xoX","active":"Menu-module_active__9VPd8","disabled":"Menu-module_disabled__tsEzc","danger":"Menu-module_danger__-VLkc","item-vertical":"Menu-module_item-vertical__wo-SD","item-inline":"Menu-module_item-inline__SWpbT","item-dark":"Menu-module_item-dark__udJlm","item-glass":"Menu-module_item-glass__gpRhW","icon":"Menu-module_icon__n6RdC","label":"Menu-module_label__4FBGa","subMenu":"Menu-module_subMenu__AhIAI","subMenuTitle":"Menu-module_subMenuTitle__D3W-m","arrow":"Menu-module_arrow__tTOIg","open":"Menu-module_open__xadrD","subMenuList":"Menu-module_subMenuList__bYOQB","submenu-horizontal":"Menu-module_submenu-horizontal__bbET6","submenu-vertical":"Menu-module_submenu-vertical__JkTOB","submenu-inline":"Menu-module_submenu-inline__mn61l","submenu-dark":"Menu-module_submenu-dark__lTShV","submenu-glass":"Menu-module_submenu-glass__CE5va","slideDown":"Menu-module_slideDown__67Oew","slideUp":"Menu-module_slideUp__jTLiZ"};
 
-const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", onSelect, theme = "light", }) => {
-    const [selectedKey, setSelectedKey] = React.useState(defaultSelectedKey);
+// 主菜单组件
+const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", selectedKey: controlledSelectedKey, onSelect, theme = "light", expandIcon, collapsible = false, }) => {
+    const [internalSelectedKey, setInternalSelectedKey] = React.useState(defaultSelectedKey);
+    const [openSubMenus, setOpenSubMenus] = React.useState(new Set());
+    const menuRef = React.useRef(null);
+    const selectedKey = controlledSelectedKey !== null && controlledSelectedKey !== void 0 ? controlledSelectedKey : internalSelectedKey;
     const menuClasses = [
         styles$5.menu,
         styles$5[`menu-${mode}`],
         styles$5[`theme-${theme}`],
         className
     ].filter(Boolean).join(" ");
-    const handleItemClick = (key, onClick) => {
-        setSelectedKey(key);
+    const handleItemClick = React.useCallback((key, onClick) => {
+        if (controlledSelectedKey === undefined) {
+            setInternalSelectedKey(key);
+        }
         onSelect === null || onSelect === void 0 ? void 0 : onSelect(key);
         onClick === null || onClick === void 0 ? void 0 : onClick();
-    };
+    }, [controlledSelectedKey, onSelect]);
+    const handleSubMenuToggle = React.useCallback((key) => {
+        setOpenSubMenus(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(key)) {
+                newSet.delete(key);
+            }
+            else {
+                newSet.add(key);
+            }
+            return newSet;
+        });
+    }, []);
+    const handleKeyDown = React.useCallback((event) => {
+        var _a;
+        const { key } = event;
+        const menuItems = (_a = menuRef.current) === null || _a === void 0 ? void 0 : _a.querySelectorAll('[role="menuitem"]');
+        if (!menuItems)
+            return;
+        const currentIndex = Array.from(menuItems).findIndex(item => item === document.activeElement);
+        let nextIndex = currentIndex;
+        switch (key) {
+            case 'ArrowDown':
+                event.preventDefault();
+                nextIndex = mode === 'horizontal' ? currentIndex : (currentIndex + 1) % menuItems.length;
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                nextIndex = mode === 'horizontal' ? currentIndex : (currentIndex - 1 + menuItems.length) % menuItems.length;
+                break;
+            case 'ArrowRight':
+                event.preventDefault();
+                nextIndex = mode === 'horizontal' ? (currentIndex + 1) % menuItems.length : currentIndex;
+                break;
+            case 'ArrowLeft':
+                event.preventDefault();
+                nextIndex = mode === 'horizontal' ? (currentIndex - 1 + menuItems.length) % menuItems.length : currentIndex;
+                break;
+            case 'Home':
+                event.preventDefault();
+                nextIndex = 0;
+                break;
+            case 'End':
+                event.preventDefault();
+                nextIndex = menuItems.length - 1;
+                break;
+            default:
+                return;
+        }
+        if (nextIndex !== currentIndex) {
+            menuItems[nextIndex].focus();
+        }
+    }, [mode]);
     const renderMenuItems = (items) => {
         return React.Children.map(items, (child) => {
             if (React.isValidElement(child)) {
                 if (child.type === MenuItem) {
                     const itemProps = child.props;
                     return React.cloneElement(child, {
-                        isActive: itemProps.key === selectedKey,
-                        onClick: () => handleItemClick(itemProps.key, itemProps.onClick),
+                        isActive: itemProps.itemKey === selectedKey,
+                        onClick: () => handleItemClick(itemProps.itemKey, itemProps.onClick),
+                        mode,
+                        theme,
                     });
                 }
                 if (child.type === SubMenu) {
                     const subMenuProps = child.props;
                     return React.cloneElement(child, {
                         isActive: hasActiveChild(subMenuProps.children, selectedKey),
+                        isOpen: openSubMenus.has(subMenuProps.itemKey),
                         onItemSelect: handleItemClick,
+                        onToggle: handleSubMenuToggle,
+                        mode,
+                        theme,
+                        expandIcon,
                     });
                 }
             }
@@ -3664,42 +3729,73 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
         React.Children.forEach(children, (child) => {
             if (React.isValidElement(child) && child.type === MenuItem) {
                 const itemProps = child.props;
-                if (itemProps.key === activeKey) {
+                if (itemProps.itemKey === activeKey) {
                     hasActive = true;
                 }
             }
         });
         return hasActive;
     };
-    return jsxRuntimeExports.jsx("ul", { className: menuClasses, children: renderMenuItems(children) });
+    React.useEffect(() => {
+        if (controlledSelectedKey !== undefined) {
+            setInternalSelectedKey(controlledSelectedKey);
+        }
+    }, [controlledSelectedKey]);
+    return (jsxRuntimeExports.jsx("ul", { ref: menuRef, className: menuClasses, role: "menubar", onKeyDown: handleKeyDown, "aria-orientation": mode === 'horizontal' ? 'horizontal' : 'vertical', children: renderMenuItems(children) }));
 };
-const MenuItem = ({ label, isActive = false, onClick, disabled = false, icon, }) => {
+// 菜单项组件
+const MenuItem = ({ children, className = "", itemKey, onClick, disabled = false, icon, isActive = false, mode = "horizontal", theme = "light", danger = false, }) => {
+    const itemClasses = [
+        styles$5.menuItem,
+        isActive && styles$5.active,
+        disabled && styles$5.disabled,
+        danger && styles$5.danger,
+        styles$5[`item-${mode}`],
+        styles$5[`item-${theme}`],
+        className
+    ].filter(Boolean).join(" ");
     const handleClick = () => {
-        if (!disabled && onClick) {
-            onClick();
+        if (!disabled) {
+            onClick === null || onClick === void 0 ? void 0 : onClick();
         }
     };
     const handleKeyDown = (event) => {
-        if ((event.key === "Enter" || event.key === " ") && !disabled) {
+        if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
             handleClick();
         }
     };
-    return (jsxRuntimeExports.jsx("li", { className: `${styles$5.menuItem} ${isActive ? styles$5.menuItemActive : ""} ${disabled ? styles$5.menuItemDisabled : ""}`, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, children: jsxRuntimeExports.jsxs("div", { className: styles$5.menuItemContent, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$5.menuItemIcon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$5.menuItemLabel, children: label }), isActive && jsxRuntimeExports.jsx("div", { className: styles$5.activeIndicator })] }) }));
+    return (jsxRuntimeExports.jsxs("li", { className: itemClasses, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-current": isActive ? 'page' : undefined, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$5.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$5.label, children: children })] }));
 };
-const SubMenu = ({ label, children, isActive = false, disabled = false, onItemSelect, icon }) => {
-    const [isOpen, setIsOpen] = React.useState(false);
+// 子菜单组件
+const SubMenu = ({ children, title, className = "", itemKey, icon, disabled = false, isActive = false, isOpen = false, onItemSelect, onToggle, mode = "horizontal", theme = "light", expandIcon, }) => {
+    const subMenuRef = React.useRef(null);
+    const [maxHeight, setMaxHeight] = React.useState('0px');
+    const subMenuClasses = [
+        styles$5.subMenu,
+        isOpen && styles$5.open,
+        isActive && styles$5.active,
+        disabled && styles$5.disabled,
+        styles$5[`submenu-${mode}`],
+        styles$5[`submenu-${theme}`],
+        className
+    ].filter(Boolean).join(" ");
     const handleToggle = () => {
-        if (!disabled) {
-            setIsOpen(!isOpen);
+        if (!disabled && onToggle) {
+            onToggle(itemKey);
         }
     };
     const handleKeyDown = (event) => {
-        if ((event.key === "Enter" || event.key === " ") && !disabled) {
+        if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
             handleToggle();
         }
     };
+    React.useEffect(() => {
+        if (subMenuRef.current) {
+            setMaxHeight(isOpen ? `${subMenuRef.current.scrollHeight}px` : '0px');
+        }
+    }, [isOpen, children]);
     const renderSubMenuItems = () => {
         return React.Children.map(children, (child) => {
             if (React.isValidElement(child) && child.type === MenuItem) {
@@ -3707,16 +3803,18 @@ const SubMenu = ({ label, children, isActive = false, disabled = false, onItemSe
                 return React.cloneElement(child, {
                     onClick: () => {
                         var _a;
-                        onItemSelect === null || onItemSelect === void 0 ? void 0 : onItemSelect(itemProps.key);
+                        onItemSelect === null || onItemSelect === void 0 ? void 0 : onItemSelect(itemProps.itemKey);
                         (_a = itemProps.onClick) === null || _a === void 0 ? void 0 : _a.call(itemProps);
-                        setIsOpen(false);
                     },
+                    mode,
+                    theme,
                 });
             }
-            return child;
+            return null;
         });
     };
-    return (jsxRuntimeExports.jsxs("li", { className: `${styles$5.subMenu} ${isActive ? styles$5.subMenuActive : ""} ${disabled ? styles$5.subMenuDisabled : ""} ${isOpen ? styles$5.subMenuOpen : ""}`, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "true", children: [jsxRuntimeExports.jsxs("div", { className: styles$5.subMenuTrigger, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$5.subMenuIcon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$5.subMenuLabel, children: label }), jsxRuntimeExports.jsx("span", { className: `${styles$5.subMenuArrow} ${isOpen ? styles$5.subMenuArrowOpen : ""}`, children: "\u25BC" }), isActive && jsxRuntimeExports.jsx("div", { className: styles$5.activeIndicator })] }), isOpen && (jsxRuntimeExports.jsx("ul", { className: styles$5.subMenuList, role: "menu", children: renderSubMenuItems() }))] }));
+    const defaultExpandIcon = isOpen ? (jsxRuntimeExports.jsx("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M2 4l4 4 4-4", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })) : (jsxRuntimeExports.jsx("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M4 2l4 4-4 4", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) }));
+    return (jsxRuntimeExports.jsxs("li", { className: subMenuClasses, children: [jsxRuntimeExports.jsxs("div", { className: styles$5.subMenuTitle, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "menu", children: [icon && jsxRuntimeExports.jsx("span", { className: styles$5.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$5.label, children: title }), jsxRuntimeExports.jsx("span", { className: styles$5.arrow, children: expandIcon || defaultExpandIcon })] }), jsxRuntimeExports.jsx("ul", { ref: subMenuRef, className: styles$5.subMenuList, style: { maxHeight }, role: "menu", "aria-hidden": !isOpen, children: renderSubMenuItems() })] }));
 };
 
 var styles$4 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
@@ -3905,9 +4003,10 @@ exports.InputDefault = Input;
 exports.LanguageSwitcher = LanguageSwitcher;
 exports.LanguageSwitcherDefault = LanguageSwitcher;
 exports.Menu = Menu;
-exports.MenuDefault = Menu;
+exports.MenuItem = MenuItem;
 exports.Radio = Radio;
 exports.RadioDefault = Radio;
+exports.SubMenu = SubMenu;
 exports.Switch = Switch;
 exports.SwitchDefault = Switch;
 exports.Tab = Tab;
