@@ -259,15 +259,19 @@
 .subMenuList .menuItem {
   padding-left: 40px;
   background: transparent;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .subMenuList .menuItem:hover {
   background: rgba(0, 0, 0, 0.04);
+  margin: 0;
 }
 
 .subMenuList .menuItem.active {
   background: #e6f7ff;
   color: #1890ff;
+  margin: 0;
 }
 
 /* 水平模式子菜单 */
