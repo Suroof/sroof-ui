@@ -1,4 +1,4 @@
-name: Deploy VitePress Docs
+name: Deploy Docusaurus Docs
 
 on:
   push:
@@ -28,15 +28,20 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: 'docs/package-lock.json'
           
-      - name: Install dependencies
+      - name: Install root dependencies
+        run: npm ci
+          
+      - name: Build component library
+        run: npm run build:lib
+          
+      - name: Install docs dependencies
         working-directory: ./docs
         run: npm ci
           
-      - name: Build VitePress site
+      - name: Build Docusaurus site
         working-directory: ./docs
-        run: npm run docs:build
+        run: npm run build
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -44,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/.vitepress/dist'
+          path: 'docs/build'
 
   deploy:
     environment:
