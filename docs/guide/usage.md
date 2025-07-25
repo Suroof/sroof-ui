@@ -337,5 +337,5 @@ A: 使用 `Form` 组件的内置验证功能，或者集成第三方验证库如
 ## 下一步
 
 - 查看 [组件文档](/components/) 了解所有可用组件
-- 参考 [设计指南](/design/) 了解设计原则
+- 参考组件文档了解设计原则
 - 查看 [示例代码](https://github.com/Suroof/sroof-ui/tree/main/examples) 获取更多灵感

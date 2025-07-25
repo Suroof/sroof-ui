@@ -45,22 +45,22 @@ function App() {
 
 帮助用户在应用中导航的组件：
 
-- **[菜单 Menu](/components/menu)** - 导航菜单和操作列表
-- **[标签页 Tabs](/components/tabs)** - 在多个面板之间切换
+- **菜单 Menu** - 导航菜单和操作列表（开发中）
+- **标签页 Tabs** - 在多个面板之间切换（开发中）
 
 ### 表单控件
 
 用于构建表单的专用组件：
 
-- **[单选框 Radio](/components/radio)** - 从多个选项中选择一个
-- **[开关 Switch](/components/switch)** - 开启或关闭状态的切换
-- **[表单 Form](/components/form)** - 表单容器和验证
+- **单选框 Radio** - 从多个选项中选择一个（开发中）
+- **开关 Switch** - 开启或关闭状态的切换（开发中）
+- **表单 Form** - 表单容器和验证（开发中）
 
 ### 工具组件
 
 提供特定功能的实用组件：
 
-- **[语言切换器 Language Switcher](/components/language-switcher)** - 多语言切换功能
+- **语言切换器 Language Switcher** - 多语言切换功能（开发中）
 
 ## 组件状态
 
@@ -187,10 +187,9 @@ Sroof UI 支持所有现代浏览器：
 如果您在使用组件时遇到问题：
 
 1. 查看具体组件的文档页面
-2. 检查 [常见问题](/faq)
-3. 在 [GitHub](https://github.com/Suroof/sroof-ui) 上提交 Issue
-4. 参与 [讨论区](https://github.com/Suroof/sroof-ui/discussions)
+2. 在 [GitHub](https://github.com/Suroof/sroof-ui) 上提交 Issue
+3. 参与 [讨论区](https://github.com/Suroof/sroof-ui/discussions)
 
 ## 贡献
 
-我们欢迎社区贡献！请查看 [贡献指南](/contributing) 了解如何参与项目开发。
+我们欢迎社区贡献！请访问我们的 [GitHub 仓库](https://github.com/Suroof/sroof-ui) 了解如何参与项目开发。

@@ -3,8 +3,9 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Sroof UI',
   description: '现代化的 React UI 组件库，支持 TypeScript',
-  base: '/sroof-ui/', // 改为你的仓库名
+  base: '/sroof-ui/', 
   lang: 'zh-CN',
+  ignoreDeadLinks: true,
   
   themeConfig: {
     nav: [
@@ -27,10 +28,7 @@ export default defineConfig({
         {
           text: '基础组件',
           items: [
-            { text: '按钮 Button', link: '/components/button' },
-            { text: '输入框 Input', link: '/components/input' },
-            { text: '菜单 Menu', link: '/components/menu' },
-            { text: '单选框 Radio', link: '/components/radio' }
+            { text: '按钮 Button', link: '/components/button' }
           ]
         }
       ]
