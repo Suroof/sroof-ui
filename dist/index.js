@@ -3626,7 +3626,7 @@ const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
 var styles$5 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","theme-light":"Menu-module_theme-light__4gP4u","theme-dark":"Menu-module_theme-dark__Sf8Gn","theme-glass":"Menu-module_theme-glass__VjAfu","menuItem":"Menu-module_menuItem__96xoX","active":"Menu-module_active__9VPd8","disabled":"Menu-module_disabled__tsEzc","danger":"Menu-module_danger__-VLkc","item-vertical":"Menu-module_item-vertical__wo-SD","item-inline":"Menu-module_item-inline__SWpbT","item-dark":"Menu-module_item-dark__udJlm","item-glass":"Menu-module_item-glass__gpRhW","icon":"Menu-module_icon__n6RdC","label":"Menu-module_label__4FBGa","subMenu":"Menu-module_subMenu__AhIAI","subMenuTitle":"Menu-module_subMenuTitle__D3W-m","arrow":"Menu-module_arrow__tTOIg","open":"Menu-module_open__xadrD","subMenuList":"Menu-module_subMenuList__bYOQB","submenu-horizontal":"Menu-module_submenu-horizontal__bbET6","submenu-vertical":"Menu-module_submenu-vertical__JkTOB","submenu-inline":"Menu-module_submenu-inline__mn61l","submenu-dark":"Menu-module_submenu-dark__lTShV","submenu-glass":"Menu-module_submenu-glass__CE5va","slideDown":"Menu-module_slideDown__67Oew","slideUp":"Menu-module_slideUp__jTLiZ"};
 
 // 主菜单组件
-const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", selectedKey: controlledSelectedKey, onSelect, theme = "light", expandIcon, collapsible = false, }) => {
+const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", selectedKey: controlledSelectedKey, onSelect, theme = "light", expandIcon, }) => {
     const [internalSelectedKey, setInternalSelectedKey] = React.useState(defaultSelectedKey);
     const [openSubMenus, setOpenSubMenus] = React.useState(new Set());
     const menuRef = React.useRef(null);
@@ -3744,7 +3744,7 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
     return (jsxRuntimeExports.jsx("ul", { ref: menuRef, className: menuClasses, role: "menubar", onKeyDown: handleKeyDown, "aria-orientation": mode === 'horizontal' ? 'horizontal' : 'vertical', children: renderMenuItems(children) }));
 };
 // 菜单项组件
-const MenuItem = ({ children, className = "", itemKey, onClick, disabled = false, icon, isActive = false, mode = "horizontal", theme = "light", danger = false, }) => {
+const MenuItem = ({ children, className = "", onClick, disabled = false, icon, isActive = false, mode = "horizontal", theme = "light", danger = false, }) => {
     const itemClasses = [
         styles$5.menuItem,
         isActive && styles$5.active,
@@ -3912,6 +3912,25 @@ const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, c
 
 var styles$1 = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
 
+const FormItem = ({ label, required = false, error, help, className, children, labelPosition = 'top', }) => {
+    const itemId = React.useId();
+    return (jsxRuntimeExports.jsxs("div", { className: `${styles$1.formItem} ${styles$1[`label-${labelPosition}`]} ${error ? styles$1.error : ''} ${className || ''}`, children: [label && (jsxRuntimeExports.jsxs("label", { htmlFor: itemId, className: styles$1.label, children: [label, required && jsxRuntimeExports.jsx("span", { className: styles$1.required, children: "*" })] })), jsxRuntimeExports.jsx("div", { className: styles$1.control, children: React.Children.map(children, (child) => {
+                    if (React.isValidElement(child)) {
+                        const additionalProps = {
+                            id: itemId,
+                        };
+                        if (error) {
+                            additionalProps['aria-describedby'] = `${itemId}-error`;
+                            additionalProps['aria-invalid'] = true;
+                        }
+                        else if (help) {
+                            additionalProps['aria-describedby'] = `${itemId}-help`;
+                        }
+                        return React.cloneElement(child, additionalProps);
+                    }
+                    return child;
+                }) }), error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-error`, className: styles$1.errorMessage, role: "alert", children: error })), help && !error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-help`, className: styles$1.helpText, children: help }))] }));
+};
 const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medium', bordered = true, }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -3920,6 +3939,9 @@ const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medi
         }
     };
     return (jsxRuntimeExports.jsx("form", { className: `${styles$1.form} ${styles$1[layout]} ${styles$1[size]} ${bordered ? styles$1.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true, children: children }));
+};
+const FormActions = ({ align = 'left', className, children, }) => {
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$1.formActions} ${styles$1[`align-${align}`]} ${className || ''}`, children: children }));
 };
 
 var styles = {"card":"Card-module_card__Cb1o4","bordered":"Card-module_bordered__fBy0-","borderless":"Card-module_borderless__YB3u0","shadow-none":"Card-module_shadow-none__z6-54","shadow-sm":"Card-module_shadow-sm__wDVK9","shadow-md":"Card-module_shadow-md__67vf0","shadow-lg":"Card-module_shadow-lg__64Kwt","shadow-xl":"Card-module_shadow-xl__QOvW4","clickable":"Card-module_clickable__qbwhm","header":"Card-module_header__PTXf2","titleSection":"Card-module_titleSection__sNCOq","icon":"Card-module_icon__jzes9","title":"Card-module_title__mSgoo","actions":"Card-module_actions__AUI-1","content":"Card-module_content__oFIQa","small":"Card-module_small__n-USZ","medium":"Card-module_medium__6Gszi","large":"Card-module_large__CSDTa","default":"Card-module_default__qq3ax","primary":"Card-module_primary__dDgYl","success":"Card-module_success__Numc6","warning":"Card-module_warning__20v4Q","danger":"Card-module_danger__cv1fT","glass":"Card-module_glass__YcnwR","gradient":"Card-module_gradient__oGNK8","loading":"Card-module_loading__pF1ro","loadingOverlay":"Card-module_loadingOverlay__D0ZLN","spinner":"Card-module_spinner__eUbE8","spin":"Card-module_spin__iMQ71","fadeInUp":"Card-module_fadeInUp__hR-uu"};
@@ -3997,7 +4019,9 @@ exports.ButtonDefault = Button;
 exports.Card = Card;
 exports.CardDefault = Card;
 exports.Form = Form;
+exports.FormActions = FormActions;
 exports.FormDefault = Form;
+exports.FormItem = FormItem;
 exports.Input = Input;
 exports.InputDefault = Input;
 exports.LanguageSwitcher = LanguageSwitcher;
