@@ -7,6 +7,7 @@ export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './comp
 export { Switch, type SwitchProps } from './components/Switch';
 export { Form, FormItem, FormActions, type FormProps, type FormItemProps, type FormActionsProps } from './components/Form';
 export { Card, type CardProps } from './components/Card';
+export { Pagination, type PaginationProps } from './components/Pagination';
 export { default as ButtonDefault } from './components/Button';
 export { default as InputDefault } from './components/Input';
 export { default as LanguageSwitcherDefault } from './components/LanguageSwitcher';

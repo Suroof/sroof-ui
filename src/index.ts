@@ -8,6 +8,7 @@ export { Radio, RadioGroup ,type RadioProps, type RadioGroupProps } from './comp
 export { Switch, type SwitchProps } from './components/Switch';
 export { Form,FormItem,FormActions, type FormProps, type FormItemProps, type FormActionsProps} from './components/Form';
 export { Card, type CardProps } from './components/Card';
+export { Pagination, type PaginationProps } from './components/Pagination';
 
 // 导出默认组件（使用不同的别名）
 export { default as ButtonDefault } from './components/Button';

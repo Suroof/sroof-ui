@@ -28,7 +28,7 @@ const sidebars: SidebarsConfig = {
         'components/radio',
         'components/tabs',
         'components/language',
-       
+        'components/pagination',
       ],
     },
   ],

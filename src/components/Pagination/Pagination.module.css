@@ -1,0 +1,126 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.pageButton:hover:not(.disabled) {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background-color: #f8fafc;
+}
+
+.pageButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.pageButton.active {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+  color: white;
+}
+
+.pageButton.active:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.pageButton.disabled {
+  border-color: #e5e7eb;
+  background-color: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.prevButton,
+.nextButton {
+  padding: 0;
+  width: 32px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  color: #6b7280;
+  font-weight: 500;
+  user-select: none;
+}
+
+/* 暗色主题 */
+[data-theme="dark"] .pageButton {
+  border-color: #374151;
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .pageButton:hover:not(.disabled) {
+  border-color: #60a5fa;
+  color: #60a5fa;
+  background-color: #1e293b;
+}
+
+[data-theme="dark"] .pageButton:focus {
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+[data-theme="dark"] .pageButton.active {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+  color: white;
+}
+
+[data-theme="dark"] .pageButton.disabled {
+  border-color: #374151;
+  background-color: #111827;
+  color: #6b7280;
+}
+
+[data-theme="dark"] .dots {
+  color: #9ca3af;
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .pagination {
+    gap: 2px;
+  }
+  
+  .pageButton {
+    min-width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+  
+  .prevButton,
+  .nextButton {
+    width: 28px;
+  }
+  
+  .dots {
+    min-width: 28px;
+    height: 28px;
+  }
+}
