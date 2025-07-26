@@ -6,7 +6,7 @@
 
 /* Import sroof-ui styles */
 @import '../../../src/styles/variables.css';
-@import '../../../src/components/Button/Button.module.css';
+@import '../../../src/components/Button/Button.module.scss';
 
 /* You can override the default Infima variables here. */
 :root {

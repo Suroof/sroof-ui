@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** 按钮变体 */
-  variant?: 'primary' | 'secondary' | 'outline' | 'text';
+  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'danger' | 'link' | 'success' | 'warning';
   /** 按钮大小 */
   size?: 'small' | 'medium' | 'large';
   /** 是否禁用 */
