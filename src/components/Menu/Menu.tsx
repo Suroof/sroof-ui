@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import styles from './Menu.module.css';
+import styles from './Menu.module.scss';
 
 // 菜单项接口
 export interface MenuItemProps {
@@ -25,7 +25,7 @@ export interface SubMenuProps {
 // 主菜单接口
 export interface MenuProps {
   children: React.ReactNode;
-  mode?: 'horizontal' | 'vertical' | 'inline';
+  mode?: 'horizontal' | 'vertical';
   theme?: 'light' | 'dark' | 'glass';
   className?: string;
   defaultSelectedKey?: string;

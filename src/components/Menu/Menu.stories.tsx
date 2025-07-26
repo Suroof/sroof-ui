@@ -51,7 +51,7 @@ const meta: Meta<typeof Menu> = {
   argTypes: {
     mode: {
       control: { type: "select" },
-      options: ["horizontal", "vertical", "inline"],
+      options: ["horizontal", "vertical"],
       description: "菜单显示模式",
     },
     theme: {
@@ -298,44 +298,6 @@ export const ControlledMenu: Story = {
       </div>
     );
   },
-};
-
-// 内联模式
-export const InlineMode: Story = {
-  args: {
-    mode: "inline",
-    theme: "light",
-    defaultSelectedKey: "2",
-  },
-  render: (args) => (
-    <div style={{ width: "300px", padding: "20px", background: "#f5f5f5" }}>
-      <Menu {...args}>
-        <MenuItem key="1" itemKey="1" icon={<HomeIcon />}>
-          首页
-        </MenuItem>
-        <MenuItem key="2" itemKey="2" icon={<UserIcon />}>
-          用户管理
-        </MenuItem>
-        <SubMenu key="sub1" itemKey="sub1" title="设置" icon={<SettingsIcon />}>
-          <MenuItem key="3" itemKey="3">
-            基本设置
-          </MenuItem>
-          <MenuItem key="4" itemKey="4">
-            高级设置
-          </MenuItem>
-          <MenuItem key="5" itemKey="5">
-            安全设置
-          </MenuItem>
-        </SubMenu>
-        <MenuItem key="6" itemKey="6" icon={<DocumentIcon />}>
-          文档
-        </MenuItem>
-        <MenuItem key="7" itemKey="7" icon={<HelpIcon />}>
-          帮助
-        </MenuItem>
-      </Menu>
-    </div>
-  ),
 };
 
 // 复杂嵌套菜单

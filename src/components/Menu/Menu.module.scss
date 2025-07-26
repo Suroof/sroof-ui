@@ -1,0 +1,510 @@
+/* 基础菜单样式 */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 水平模式 */
+  &-horizontal {
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #e8e8e8;
+    background: #fff;
+
+    .menuItem.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  /* 垂直模式 */
+  &-vertical {
+    flex-direction: column;
+    width: 256px;
+    min-height: 100%;
+    border-right: 1px solid #e8e8e8;
+    background: #fff;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+/* 主题样式 */
+.theme {
+  &-light {
+    background: #fff;
+    color: #333;
+    border-color: #e8e8e8;
+  }
+
+  &-dark {
+    background: #1f1f1f;
+    color: #fff;
+    border-color: #333;
+  }
+
+  &-glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #333;
+  }
+}
+
+/* 菜单项样式 */
+.menuItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  background: transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+  }
+
+  &.active {
+    background: var(--color-primary-500);
+    color: white;
+    font-weight: 500;
+  }
+
+  &.disabled {
+    color: #bfbfbf;
+    cursor: not-allowed;
+    background: transparent !important;
+  }
+
+  &.danger {
+    color: #ff4d4f;
+
+    &:hover {
+      background: #fff2f0;
+      color: #ff4d4f;
+    }
+
+    &.active {
+      background: #fff2f0;
+      color: #ff4d4f;
+    }
+  }
+}
+
+/* 菜单项模式变体 */
+.item {
+  /* 垂直模式菜单项 */
+  &-vertical {
+    width: 100%;
+    justify-content: flex-start;
+
+    &.active::after {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: auto;
+      width: 3px;
+      height: auto;
+    }
+  }
+
+  /* 暗色主题菜单项 */
+  &-dark {
+    color: #fff;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+      background: rgba(114, 218, 125, 0.54);
+      color: #fff;
+    }
+
+    &.disabled {
+      color: #666;
+    }
+  }
+
+  /* 玻璃主题菜单项 */
+  &-glass {
+    color: #333;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &.active {
+      background: rgba(186, 186, 186, 0.1);
+      color: black;
+    }
+  }
+}
+
+/* 图标和标签样式 */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 子菜单样式 */
+.subMenu {
+  position: relative;
+
+  &.active > .subMenuTitle {
+    background: var(--color-primary-500);
+    color: white;
+    font-weight: 500;
+  } 
+
+  &.disabled > .subMenuTitle {
+    color: #bfbfbf;
+    cursor: not-allowed;
+    background: transparent !important;
+  }
+
+  &.open .arrow {
+    transform: rotate(0deg);
+  }
+}
+
+.subMenuTitle {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  outline: none;
+  wrap: nowrap;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+  }
+}
+
+/* 箭头图标 */
+.arrow {
+  margin-left: auto;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+}
+
+/* 子菜单列表 */
+.subMenuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #fafafa;
+
+  .menuItem {
+    padding-left: 40px;
+    background: transparent;
+    margin: 0;
+    box-sizing: border-box;
+
+    &:hover {
+      background: var(--color-primary-500);
+      margin: 0;
+      color: white;
+    }
+
+    &.active {
+      background: #e6f7ff;
+      color: #1890ff;
+      margin: 0;
+    }
+  }
+
+  /* Light 主题子菜单列表 */
+  &-light {
+    background: #fafafa;
+    border: 1px solid #f0f0f0;
+
+    .menuItem {
+      color: #333;
+
+      &:hover {
+        background: #e6f7ff;
+        color: #1890ff;
+      }
+
+      &.active {
+        background: #e6f7ff;
+        color: #1890ff;
+        font-weight: 500;
+      }
+    }
+  }
+
+  /* Dark 主题子菜单列表 */
+  &-dark {
+    background: #2a2a2a;
+    border: 1px solid #404040;
+
+    .menuItem {
+      color: #fff;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      &.active {
+        background: #1890ff;
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+  }
+
+  /* Glass 主题子菜单列表 */
+  &-glass {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    .menuItem {
+      color: #333;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        color: #1890ff;
+      }
+
+      &.active {
+        background: rgba(24, 144, 255, 0.2);
+        color: #1890ff;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+/* 子菜单模式变体 */
+.submenu {
+  /* 水平模式子菜单 */
+  &-horizontal {
+    position: relative;
+
+    .subMenuList {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 160px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      max-height: none;
+      overflow: visible;
+
+      .menuItem {
+        padding: 8px 16px;
+        width: 100%;
+      }
+    }
+
+    &:not(.open) .subMenuList {
+      display: none;
+    }
+
+    &.open .subMenuList {
+      animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (max-width: 768px) {
+      .subMenuList {
+        position: static;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+  }
+
+  /* 垂直和内联模式子菜单 */
+  &-vertical,
+  &-inline {
+    .subMenuList {
+      position: static;
+      width: 100%;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+
+  /* 暗色主题子菜单 */
+  &-dark {
+    .subMenuTitle {
+      color: #fff;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    &.active > .subMenuTitle {
+      background: rgba(114, 218, 125, 0.54);
+      color: #fff;
+    }
+
+    .subMenuList {
+      background: #2a2a2a;
+
+      .menuItem {
+        color: #fff;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          margin: 0;
+          color: white;
+        }
+
+        &.active {
+          background: #1890ff;
+          color: #fff;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  /* 玻璃主题子菜单 */
+  &-glass {
+    .subMenuTitle {
+      color: #333;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    &.active > .subMenuTitle {
+      background: rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+
+    .subMenuList {
+      .menuItem:hover {
+        background: rgba(0, 0, 0, 0.1);
+        margin: 0;
+        color: white;
+      }
+    }
+  }
+}
+
+/* 动画效果 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .menuItem {
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+      border-color: currentColor;
+    }
+
+    &.active {
+      border-color: #1890ff;
+      background: transparent;
+    }
+  }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .menuItem,
+  .subMenuTitle,
+  .arrow,
+  .subMenuList {
+    transition: none;
+  }
+
+  .submenu-horizontal.open .subMenuList {
+    animation: none;
+  }
+}
