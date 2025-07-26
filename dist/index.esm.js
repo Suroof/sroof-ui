@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useCallback, useState, useRef, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 
 var jsxRuntime = {exports: {}};
 
@@ -427,17 +428,17 @@ function requireJsxRuntime () {
 
 var jsxRuntimeExports = requireJsxRuntime();
 
-var styles$9 = {"button":"Button-module_button__2ZuB7","button-primary":"Button-module_button-primary__fgpLW","disabled":"Button-module_disabled__Tl9fh","button-secondary":"Button-module_button-secondary__Wt8pw","button-outline":"Button-module_button-outline__LZHKr","button-text":"Button-module_button-text__CbCCC","button-small":"Button-module_button-small__z1jVz","button-medium":"Button-module_button-medium__Iy0Bv","button-large":"Button-module_button-large__Dftqb"};
+var styles$a = {"button":"Button-module_button__2ZuB7","button-primary":"Button-module_button-primary__fgpLW","disabled":"Button-module_disabled__Tl9fh","button-secondary":"Button-module_button-secondary__Wt8pw","button-outline":"Button-module_button-outline__LZHKr","button-text":"Button-module_button-text__CbCCC","button-small":"Button-module_button-small__z1jVz","button-medium":"Button-module_button-medium__Iy0Bv","button-large":"Button-module_button-large__Dftqb"};
 
 /*
 基础按钮组件
 */
 const Button = ({ children, variant = "primary", size = "medium", onClick, disabled = false, className = "", }) => {
     const buttonClasses = [
-        styles$9.button,
-        styles$9[`button-${variant}`],
-        styles$9[`button-${size}`],
-        disabled ? styles$9.disabled : "",
+        styles$a.button,
+        styles$a[`button-${variant}`],
+        styles$a[`button-${size}`],
+        disabled ? styles$a.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -445,14 +446,14 @@ const Button = ({ children, variant = "primary", size = "medium", onClick, disab
     return (jsxRuntimeExports.jsx("button", { className: buttonClasses, onClick: onClick, disabled: disabled, type: "button", children: children }));
 };
 
-var styles$8 = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
+var styles$9 = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
 
 const Input = ({ type, placeholder, value, size, disabled, className = "", onChange, }) => {
     const inputClasses = [
-        styles$8.input,
-        styles$8[`input-${type}`],
-        styles$8[`input-${size}`],
-        disabled ? styles$8.disabled : "",
+        styles$9.input,
+        styles$9[`input-${type}`],
+        styles$9[`input-${size}`],
+        disabled ? styles$9.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -3590,7 +3591,7 @@ const getLanguageNativeName = (language) => {
     return names[language];
 };
 
-var styles$7 = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
+var styles$8 = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
 
 const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
     const { switchLanguage, currentLanguage } = useLanguageSwitch();
@@ -3616,12 +3617,12 @@ const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
         }
     }, [currentLanguage, variant, currentIndex]);
     if (variant === 'buttons') {
-        return (jsxRuntimeExports.jsxs("div", { ref: containerRef, className: `${styles$7.buttonGroup} ${className || ''}`, children: [jsxRuntimeExports.jsx("div", { className: styles$7.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsxRuntimeExports.jsx("button", { className: `${styles$7.languageButton} ${currentLanguage === code ? styles$7.active : ''}`, onClick: () => handleLanguageChange(code), type: "button", children: name }, code)))] }));
+        return (jsxRuntimeExports.jsxs("div", { ref: containerRef, className: `${styles$8.buttonGroup} ${className || ''}`, children: [jsxRuntimeExports.jsx("div", { className: styles$8.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsxRuntimeExports.jsx("button", { className: `${styles$8.languageButton} ${currentLanguage === code ? styles$8.active : ''}`, onClick: () => handleLanguageChange(code), type: "button", children: name }, code)))] }));
     }
-    return (jsxRuntimeExports.jsx("div", { className: `${styles$7.dropdown} ${className || ''}`, children: jsxRuntimeExports.jsx("select", { value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$7.select, children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntimeExports.jsx("option", { value: code, children: name }, code))) }) }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$8.dropdown} ${className || ''}`, children: jsxRuntimeExports.jsx("select", { value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$8.select, children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntimeExports.jsx("option", { value: code, children: name }, code))) }) }));
 };
 
-var styles$6 = {"menu":"Menu-module_menu__uj3BS","menu-horizontal":"Menu-module_menu-horizontal__yazET","menu-vertical":"Menu-module_menu-vertical__aFRzd","menu-inline":"Menu-module_menu-inline__3rvy8","theme-light":"Menu-module_theme-light__4gP4u","theme-dark":"Menu-module_theme-dark__Sf8Gn","theme-glass":"Menu-module_theme-glass__VjAfu","menuItem":"Menu-module_menuItem__96xoX","active":"Menu-module_active__9VPd8","disabled":"Menu-module_disabled__tsEzc","danger":"Menu-module_danger__-VLkc","item-vertical":"Menu-module_item-vertical__wo-SD","item-inline":"Menu-module_item-inline__SWpbT","item-dark":"Menu-module_item-dark__udJlm","item-glass":"Menu-module_item-glass__gpRhW","icon":"Menu-module_icon__n6RdC","label":"Menu-module_label__4FBGa","subMenu":"Menu-module_subMenu__AhIAI","subMenuTitle":"Menu-module_subMenuTitle__D3W-m","arrow":"Menu-module_arrow__tTOIg","open":"Menu-module_open__xadrD","subMenuList":"Menu-module_subMenuList__bYOQB","submenu-horizontal":"Menu-module_submenu-horizontal__bbET6","submenu-vertical":"Menu-module_submenu-vertical__JkTOB","submenu-inline":"Menu-module_submenu-inline__mn61l","submenu-dark":"Menu-module_submenu-dark__lTShV","submenu-glass":"Menu-module_submenu-glass__CE5va","slideDown":"Menu-module_slideDown__67Oew","slideUp":"Menu-module_slideUp__jTLiZ"};
+var styles$7 = {"menu":"Menu-module_menu__ZGJ--","menu-horizontal":"Menu-module_menu-horizontal__sepgv","menuItem":"Menu-module_menuItem__vKvih","active":"Menu-module_active__8g-22","menu-vertical":"Menu-module_menu-vertical__ZU7Yf","theme-light":"Menu-module_theme-light__CMlGr","theme-dark":"Menu-module_theme-dark__GN4M-","theme-glass":"Menu-module_theme-glass__AJYYa","disabled":"Menu-module_disabled__IXs87","danger":"Menu-module_danger__t-0VF","item":"Menu-module_item__S3HKY","item-vertical":"Menu-module_item-vertical__bDGRE","item-dark":"Menu-module_item-dark__mG-BW","item-glass":"Menu-module_item-glass__vvOgm","icon":"Menu-module_icon__XtO-r","label":"Menu-module_label__QMf-9","subMenu":"Menu-module_subMenu__RrWRN","subMenuTitle":"Menu-module_subMenuTitle__MR5Qj","open":"Menu-module_open__iHB1t","arrow":"Menu-module_arrow__ZE4Ag","subMenuList":"Menu-module_subMenuList__oqGX8","subMenuList-light":"Menu-module_subMenuList-light__jYaq0","subMenuList-dark":"Menu-module_subMenuList-dark__eMP7C","subMenuList-glass":"Menu-module_subMenuList-glass__pjNDg","submenu":"Menu-module_submenu__1p11G","submenu-horizontal":"Menu-module_submenu-horizontal__4EWDI","slideDown":"Menu-module_slideDown__k-cSj","submenu-vertical":"Menu-module_submenu-vertical__Od2LN","submenu-inline":"Menu-module_submenu-inline__xaW3E","submenu-dark":"Menu-module_submenu-dark__qCv5P","submenu-glass":"Menu-module_submenu-glass__znOmd","slideUp":"Menu-module_slideUp__fRfHr"};
 
 // 主菜单组件
 const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", selectedKey: controlledSelectedKey, onSelect, theme = "light", expandIcon, }) => {
@@ -3630,9 +3631,9 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
     const menuRef = useRef(null);
     const selectedKey = controlledSelectedKey !== null && controlledSelectedKey !== void 0 ? controlledSelectedKey : internalSelectedKey;
     const menuClasses = [
-        styles$6.menu,
-        styles$6[`menu-${mode}`],
-        styles$6[`theme-${theme}`],
+        styles$7.menu,
+        styles$7[`menu-${mode}`],
+        styles$7[`theme-${theme}`],
         className
     ].filter(Boolean).join(" ");
     const handleItemClick = useCallback((key, onClick) => {
@@ -3744,12 +3745,12 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
 // 菜单项组件
 const MenuItem = ({ children, className = "", onClick, disabled = false, icon, isActive = false, mode = "horizontal", theme = "light", danger = false, }) => {
     const itemClasses = [
-        styles$6.menuItem,
-        isActive && styles$6.active,
-        disabled && styles$6.disabled,
-        danger && styles$6.danger,
-        styles$6[`item-${mode}`],
-        styles$6[`item-${theme}`],
+        styles$7.menuItem,
+        isActive && styles$7.active,
+        disabled && styles$7.disabled,
+        danger && styles$7.danger,
+        styles$7[`item-${mode}`],
+        styles$7[`item-${theme}`],
         className
     ].filter(Boolean).join(" ");
     const handleClick = () => {
@@ -3763,19 +3764,19 @@ const MenuItem = ({ children, className = "", onClick, disabled = false, icon, i
             handleClick();
         }
     };
-    return (jsxRuntimeExports.jsxs("li", { className: itemClasses, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-current": isActive ? 'page' : undefined, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$6.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$6.label, children: children })] }));
+    return (jsxRuntimeExports.jsxs("li", { className: itemClasses, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-current": isActive ? 'page' : undefined, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$7.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$7.label, children: children })] }));
 };
 // 子菜单组件
 const SubMenu = ({ children, title, className = "", itemKey, icon, disabled = false, isActive = false, isOpen = false, onItemSelect, onToggle, mode = "horizontal", theme = "light", expandIcon, }) => {
     const subMenuRef = useRef(null);
     const [maxHeight, setMaxHeight] = useState('0px');
     const subMenuClasses = [
-        styles$6.subMenu,
-        isOpen && styles$6.open,
-        isActive && styles$6.active,
-        disabled && styles$6.disabled,
-        styles$6[`submenu-${mode}`],
-        styles$6[`submenu-${theme}`],
+        styles$7.subMenu,
+        isOpen && styles$7.open,
+        isActive && styles$7.active,
+        disabled && styles$7.disabled,
+        styles$7[`submenu-${mode}`],
+        styles$7[`submenu-${theme}`],
         className
     ].filter(Boolean).join(" ");
     const handleToggle = () => {
@@ -3812,10 +3813,10 @@ const SubMenu = ({ children, title, className = "", itemKey, icon, disabled = fa
         });
     };
     const defaultExpandIcon = isOpen ? (jsxRuntimeExports.jsx("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M2 4l4 4 4-4", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })) : (jsxRuntimeExports.jsx("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M4 2l4 4-4 4", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) }));
-    return (jsxRuntimeExports.jsxs("li", { className: subMenuClasses, children: [jsxRuntimeExports.jsxs("div", { className: styles$6.subMenuTitle, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "menu", children: [icon && jsxRuntimeExports.jsx("span", { className: styles$6.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$6.label, children: title }), jsxRuntimeExports.jsx("span", { className: styles$6.arrow, children: expandIcon || defaultExpandIcon })] }), jsxRuntimeExports.jsx("ul", { ref: subMenuRef, className: styles$6.subMenuList, style: { maxHeight }, role: "menu", "aria-hidden": !isOpen, children: renderSubMenuItems() })] }));
+    return (jsxRuntimeExports.jsxs("li", { className: subMenuClasses, children: [jsxRuntimeExports.jsxs("div", { className: styles$7.subMenuTitle, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "menu", children: [icon && jsxRuntimeExports.jsx("span", { className: styles$7.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$7.label, children: title }), jsxRuntimeExports.jsx("span", { className: styles$7.arrow, children: expandIcon || defaultExpandIcon })] }), jsxRuntimeExports.jsx("ul", { ref: subMenuRef, className: styles$7.subMenuList, style: { maxHeight }, role: "menu", "aria-hidden": !isOpen, children: renderSubMenuItems() })] }));
 };
 
-var styles$5 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
+var styles$6 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
 
 /**
  * Tab 组件 - 单个标签页
@@ -3857,10 +3858,10 @@ const Tabs = ({ activeKey, children, className, defaultActiveKey, onChange, }) =
     };
     const currentActiveKey = activeKey !== null && activeKey !== void 0 ? activeKey : internalActiveKey;
     const activeTab = tabs.find((tab) => tab.key === currentActiveKey);
-    return (jsxRuntimeExports.jsxs("div", { className: `${styles$5['tabs-container']} ${className || ""}`, children: [jsxRuntimeExports.jsx("div", { className: styles$5.tabs, children: tabs.map((tab) => (jsxRuntimeExports.jsx("div", { className: `${styles$5.tab} ${tab.key === currentActiveKey ? styles$5.active : ""}`, onClick: () => handleTabClick(tab.key), children: tab.props.label }, tab.key))) }), jsxRuntimeExports.jsx("div", { className: styles$5.content, children: activeTab && activeTab.props.children })] }));
+    return (jsxRuntimeExports.jsxs("div", { className: `${styles$6['tabs-container']} ${className || ""}`, children: [jsxRuntimeExports.jsx("div", { className: styles$6.tabs, children: tabs.map((tab) => (jsxRuntimeExports.jsx("div", { className: `${styles$6.tab} ${tab.key === currentActiveKey ? styles$6.active : ""}`, onClick: () => handleTabClick(tab.key), children: tab.props.label }, tab.key))) }), jsxRuntimeExports.jsx("div", { className: styles$6.content, children: activeTab && activeTab.props.children })] }));
 };
 
-var styles$4 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP","radioGroup":"Radio-module_radioGroup__W9xve","vertical":"Radio-module_vertical__WksGU","horizontal":"Radio-module_horizontal__1Ovgu"};
+var styles$5 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP","radioGroup":"Radio-module_radioGroup__W9xve","vertical":"Radio-module_vertical__WksGU","horizontal":"Radio-module_horizontal__1Ovgu"};
 
 const Radio = ({ children, value, disabled = false, checked, defaultChecked = false, name, onChange, className, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3878,7 +3879,7 @@ const Radio = ({ children, value, disabled = false, checked, defaultChecked = fa
         }
     };
     const radioId = React.useId();
-    return (jsxRuntimeExports.jsxs("label", { className: `${styles$4.radio} ${disabled ? styles$4.disabled : ""} ${className || ""}`, htmlFor: radioId, children: [jsxRuntimeExports.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntimeExports.jsx("span", { className: styles$4.label, children: children })] }));
+    return (jsxRuntimeExports.jsxs("label", { className: `${styles$5.radio} ${disabled ? styles$5.disabled : ""} ${className || ""}`, htmlFor: radioId, children: [jsxRuntimeExports.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntimeExports.jsx("span", { className: styles$5.label, children: children })] }));
 };
 const RadioGroup = ({ value, defaultValue, name, onChange, disabled = false, className, children, direction = "vertical", }) => {
     const [internalValue, setInternalValue] = React.useState(defaultValue || "");
@@ -3904,10 +3905,10 @@ const RadioGroup = ({ value, defaultValue, name, onChange, disabled = false, cla
             return child;
         });
     };
-    return (jsxRuntimeExports.jsx("div", { className: `${styles$4.radioGroup} ${styles$4[direction]} ${className || ""}`, role: "radiogroup", children: renderChildren() }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$5.radioGroup} ${styles$5[direction]} ${className || ""}`, role: "radiogroup", children: renderChildren() }));
 };
 
-var styles$3 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
+var styles$4 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
 
 const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, className, size = 'medium', children, labelPosition = 'right', loading = false, color, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3927,18 +3928,18 @@ const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, c
         }
     };
     const switchId = React.useId();
-    const switchElement = (jsxRuntimeExports.jsxs("label", { className: `${styles$3.switch} ${styles$3[size]} ${disabled ? styles$3.disabled : ''} ${loading ? styles$3.loading : ''} ${className || ''}`, htmlFor: switchId, children: [jsxRuntimeExports.jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$3.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsxRuntimeExports.jsx("span", { className: styles$3.slider, style: color && isChecked ? { backgroundColor: color } : undefined, children: loading && jsxRuntimeExports.jsx("span", { className: styles$3.spinner }) })] }));
+    const switchElement = (jsxRuntimeExports.jsxs("label", { className: `${styles$4.switch} ${styles$4[size]} ${disabled ? styles$4.disabled : ''} ${loading ? styles$4.loading : ''} ${className || ''}`, htmlFor: switchId, children: [jsxRuntimeExports.jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$4.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsxRuntimeExports.jsx("span", { className: styles$4.slider, style: color && isChecked ? { backgroundColor: color } : undefined, children: loading && jsxRuntimeExports.jsx("span", { className: styles$4.spinner }) })] }));
     if (children) {
-        return (jsxRuntimeExports.jsxs("div", { className: `${styles$3.switchWrapper} ${styles$3[`label-${labelPosition}`]}`, children: [labelPosition === 'left' && (jsxRuntimeExports.jsx("span", { className: styles$3.label, children: children })), switchElement, labelPosition === 'right' && (jsxRuntimeExports.jsx("span", { className: styles$3.label, children: children }))] }));
+        return (jsxRuntimeExports.jsxs("div", { className: `${styles$4.switchWrapper} ${styles$4[`label-${labelPosition}`]}`, children: [labelPosition === 'left' && (jsxRuntimeExports.jsx("span", { className: styles$4.label, children: children })), switchElement, labelPosition === 'right' && (jsxRuntimeExports.jsx("span", { className: styles$4.label, children: children }))] }));
     }
     return switchElement;
 };
 
-var styles$2 = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
+var styles$3 = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
 
 const FormItem = ({ label, required = false, error, help, className, children, labelPosition = 'top', }) => {
     const itemId = React.useId();
-    return (jsxRuntimeExports.jsxs("div", { className: `${styles$2.formItem} ${styles$2[`label-${labelPosition}`]} ${error ? styles$2.error : ''} ${className || ''}`, children: [label && (jsxRuntimeExports.jsxs("label", { htmlFor: itemId, className: styles$2.label, children: [label, required && jsxRuntimeExports.jsx("span", { className: styles$2.required, children: "*" })] })), jsxRuntimeExports.jsx("div", { className: styles$2.control, children: React.Children.map(children, (child) => {
+    return (jsxRuntimeExports.jsxs("div", { className: `${styles$3.formItem} ${styles$3[`label-${labelPosition}`]} ${error ? styles$3.error : ''} ${className || ''}`, children: [label && (jsxRuntimeExports.jsxs("label", { htmlFor: itemId, className: styles$3.label, children: [label, required && jsxRuntimeExports.jsx("span", { className: styles$3.required, children: "*" })] })), jsxRuntimeExports.jsx("div", { className: styles$3.control, children: React.Children.map(children, (child) => {
                     if (React.isValidElement(child)) {
                         const additionalProps = {
                             id: itemId,
@@ -3953,7 +3954,7 @@ const FormItem = ({ label, required = false, error, help, className, children, l
                         return React.cloneElement(child, additionalProps);
                     }
                     return child;
-                }) }), error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-error`, className: styles$2.errorMessage, role: "alert", children: error })), help && !error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-help`, className: styles$2.helpText, children: help }))] }));
+                }) }), error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-error`, className: styles$3.errorMessage, role: "alert", children: error })), help && !error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-help`, className: styles$3.helpText, children: help }))] }));
 };
 const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medium', bordered = true, }) => {
     const handleSubmit = (e) => {
@@ -3962,29 +3963,29 @@ const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medi
             onSubmit(e);
         }
     };
-    return (jsxRuntimeExports.jsx("form", { className: `${styles$2.form} ${styles$2[layout]} ${styles$2[size]} ${bordered ? styles$2.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true, children: children }));
+    return (jsxRuntimeExports.jsx("form", { className: `${styles$3.form} ${styles$3[layout]} ${styles$3[size]} ${bordered ? styles$3.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true, children: children }));
 };
 const FormActions = ({ align = 'left', className, children, }) => {
-    return (jsxRuntimeExports.jsx("div", { className: `${styles$2.formActions} ${styles$2[`align-${align}`]} ${className || ''}`, children: children }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$3.formActions} ${styles$3[`align-${align}`]} ${className || ''}`, children: children }));
 };
 
-var styles$1 = {"card":"Card-module_card__Cb1o4","bordered":"Card-module_bordered__fBy0-","borderless":"Card-module_borderless__YB3u0","shadow-none":"Card-module_shadow-none__z6-54","shadow-sm":"Card-module_shadow-sm__wDVK9","shadow-md":"Card-module_shadow-md__67vf0","shadow-lg":"Card-module_shadow-lg__64Kwt","shadow-xl":"Card-module_shadow-xl__QOvW4","clickable":"Card-module_clickable__qbwhm","header":"Card-module_header__PTXf2","titleSection":"Card-module_titleSection__sNCOq","icon":"Card-module_icon__jzes9","title":"Card-module_title__mSgoo","actions":"Card-module_actions__AUI-1","content":"Card-module_content__oFIQa","small":"Card-module_small__n-USZ","medium":"Card-module_medium__6Gszi","large":"Card-module_large__CSDTa","default":"Card-module_default__qq3ax","primary":"Card-module_primary__dDgYl","success":"Card-module_success__Numc6","warning":"Card-module_warning__20v4Q","danger":"Card-module_danger__cv1fT","glass":"Card-module_glass__YcnwR","gradient":"Card-module_gradient__oGNK8","loading":"Card-module_loading__pF1ro","loadingOverlay":"Card-module_loadingOverlay__D0ZLN","spinner":"Card-module_spinner__eUbE8","spin":"Card-module_spin__iMQ71","fadeInUp":"Card-module_fadeInUp__hR-uu"};
+var styles$2 = {"card":"Card-module_card__Cb1o4","bordered":"Card-module_bordered__fBy0-","borderless":"Card-module_borderless__YB3u0","shadow-none":"Card-module_shadow-none__z6-54","shadow-sm":"Card-module_shadow-sm__wDVK9","shadow-md":"Card-module_shadow-md__67vf0","shadow-lg":"Card-module_shadow-lg__64Kwt","shadow-xl":"Card-module_shadow-xl__QOvW4","clickable":"Card-module_clickable__qbwhm","header":"Card-module_header__PTXf2","titleSection":"Card-module_titleSection__sNCOq","icon":"Card-module_icon__jzes9","title":"Card-module_title__mSgoo","actions":"Card-module_actions__AUI-1","content":"Card-module_content__oFIQa","small":"Card-module_small__n-USZ","medium":"Card-module_medium__6Gszi","large":"Card-module_large__CSDTa","default":"Card-module_default__qq3ax","primary":"Card-module_primary__dDgYl","success":"Card-module_success__Numc6","warning":"Card-module_warning__20v4Q","danger":"Card-module_danger__cv1fT","glass":"Card-module_glass__YcnwR","gradient":"Card-module_gradient__oGNK8","loading":"Card-module_loading__pF1ro","loadingOverlay":"Card-module_loadingOverlay__D0ZLN","spinner":"Card-module_spinner__eUbE8","spin":"Card-module_spin__iMQ71","fadeInUp":"Card-module_fadeInUp__hR-uu"};
 
 const Card = ({ title, children, className, size = "medium", type = "default", clickable = false, onClick, bordered = true, shadow = "md", icon, actions, loading = false, }) => {
     const cardClasses = [
-        styles$1.card,
-        styles$1[size],
-        styles$1[type],
-        bordered ? styles$1.bordered : styles$1.borderless,
-        styles$1[`shadow-${shadow}`],
-        clickable ? styles$1.clickable : '',
-        loading ? styles$1.loading : '',
+        styles$2.card,
+        styles$2[size],
+        styles$2[type],
+        bordered ? styles$2.bordered : styles$2.borderless,
+        styles$2[`shadow-${shadow}`],
+        clickable ? styles$2.clickable : '',
+        loading ? styles$2.loading : '',
         className || ''
     ].filter(Boolean).join(' ');
-    return (jsxRuntimeExports.jsxs("div", { className: cardClasses, onClick: clickable ? onClick : undefined, role: clickable ? "button" : undefined, tabIndex: clickable ? 0 : undefined, children: [loading && jsxRuntimeExports.jsx("div", { className: styles$1.loadingOverlay, children: jsxRuntimeExports.jsx("div", { className: styles$1.spinner }) }), (title || icon || actions) && (jsxRuntimeExports.jsxs("div", { className: styles$1.header, children: [jsxRuntimeExports.jsxs("div", { className: styles$1.titleSection, children: [icon && jsxRuntimeExports.jsx("div", { className: styles$1.icon, children: icon }), title && jsxRuntimeExports.jsx("div", { className: styles$1.title, children: title })] }), actions && jsxRuntimeExports.jsx("div", { className: styles$1.actions, children: actions })] })), jsxRuntimeExports.jsx("div", { className: styles$1.content, children: children })] }));
+    return (jsxRuntimeExports.jsxs("div", { className: cardClasses, onClick: clickable ? onClick : undefined, role: clickable ? "button" : undefined, tabIndex: clickable ? 0 : undefined, children: [loading && jsxRuntimeExports.jsx("div", { className: styles$2.loadingOverlay, children: jsxRuntimeExports.jsx("div", { className: styles$2.spinner }) }), (title || icon || actions) && (jsxRuntimeExports.jsxs("div", { className: styles$2.header, children: [jsxRuntimeExports.jsxs("div", { className: styles$2.titleSection, children: [icon && jsxRuntimeExports.jsx("div", { className: styles$2.icon, children: icon }), title && jsxRuntimeExports.jsx("div", { className: styles$2.title, children: title })] }), actions && jsxRuntimeExports.jsx("div", { className: styles$2.actions, children: actions })] })), jsxRuntimeExports.jsx("div", { className: styles$2.content, children: children })] }));
 };
 
-var styles = {"pagination":"Pagination-module_pagination__icb-v","pageButton":"Pagination-module_pageButton__AL1wT","disabled":"Pagination-module_disabled__x47WD","active":"Pagination-module_active__1kqsJ","prevButton":"Pagination-module_prevButton__MAF64","nextButton":"Pagination-module_nextButton__-k5WS","dots":"Pagination-module_dots__Yl9da"};
+var styles$1 = {"pagination":"Pagination-module_pagination__icb-v","pageButton":"Pagination-module_pageButton__AL1wT","disabled":"Pagination-module_disabled__x47WD","active":"Pagination-module_active__1kqsJ","prevButton":"Pagination-module_prevButton__MAF64","nextButton":"Pagination-module_nextButton__-k5WS","dots":"Pagination-module_dots__Yl9da"};
 
 // 生成页码范围的工具函数
 const range = (start, end) => {
@@ -4042,12 +4043,88 @@ const Pagination = ({ total, current, pageSize, onChange, siblingCount = 1, elli
     const handleNext = () => {
         handlePageChange(current + 1);
     };
-    return (jsxRuntimeExports.jsxs("nav", { className: `${styles.pagination} ${className}`, "aria-label": "\u5206\u9875\u5BFC\u822A", children: [jsxRuntimeExports.jsx("button", { className: `${styles.pageButton} ${styles.prevButton} ${current === 1 ? styles.disabled : ''}`, onClick: handlePrevious, disabled: current === 1, "aria-label": "\u4E0A\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M10 12l-4-4 4-4v8z" }) }) }), paginationRange.map((pageNumber, index) => {
+    return (jsxRuntimeExports.jsxs("nav", { className: `${styles$1.pagination} ${className}`, "aria-label": "\u5206\u9875\u5BFC\u822A", children: [jsxRuntimeExports.jsx("button", { className: `${styles$1.pageButton} ${styles$1.prevButton} ${current === 1 ? styles$1.disabled : ''}`, onClick: handlePrevious, disabled: current === 1, "aria-label": "\u4E0A\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M10 12l-4-4 4-4v8z" }) }) }), paginationRange.map((pageNumber, index) => {
                 if (pageNumber === DOTS) {
-                    return (jsxRuntimeExports.jsx("span", { className: styles.dots, children: ellipsis }, `dots-${index}`));
+                    return (jsxRuntimeExports.jsx("span", { className: styles$1.dots, children: ellipsis }, `dots-${index}`));
                 }
-                return (jsxRuntimeExports.jsx("button", { className: `${styles.pageButton} ${pageNumber === current ? styles.active : ''}`, onClick: () => handlePageChange(pageNumber), "aria-label": `第 ${pageNumber} 页`, "aria-current": pageNumber === current ? 'page' : undefined, children: pageNumber }, pageNumber));
-            }), jsxRuntimeExports.jsx("button", { className: `${styles.pageButton} ${styles.nextButton} ${current === totalPageCount ? styles.disabled : ''}`, onClick: handleNext, disabled: current === totalPageCount, "aria-label": "\u4E0B\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M6 4l4 4-4 4V4z" }) }) })] }));
+                return (jsxRuntimeExports.jsx("button", { className: `${styles$1.pageButton} ${pageNumber === current ? styles$1.active : ''}`, onClick: () => handlePageChange(pageNumber), "aria-label": `第 ${pageNumber} 页`, "aria-current": pageNumber === current ? 'page' : undefined, children: pageNumber }, pageNumber));
+            }), jsxRuntimeExports.jsx("button", { className: `${styles$1.pageButton} ${styles$1.nextButton} ${current === totalPageCount ? styles$1.disabled : ''}`, onClick: handleNext, disabled: current === totalPageCount, "aria-label": "\u4E0B\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M6 4l4 4-4 4V4z" }) }) })] }));
+};
+
+var styles = {"overlay":"Drawer-module_overlay__YWL02","entering":"Drawer-module_entering__ia4Cx","entered":"Drawer-module_entered__-f3NF","exiting":"Drawer-module_exiting__Co1mt","exited":"Drawer-module_exited__8rCfM","drawer":"Drawer-module_drawer__IKoOm","drawer-left":"Drawer-module_drawer-left__xanOl","drawer-right":"Drawer-module_drawer-right__Xah9j","drawer-top":"Drawer-module_drawer-top__NhSXJ","drawer-bottom":"Drawer-module_drawer-bottom__YyFIt","drawer-small":"Drawer-module_drawer-small__fH0k3","drawer-large":"Drawer-module_drawer-large__6NnLl","drawer-light":"Drawer-module_drawer-light__w-QlZ","drawer-dark":"Drawer-module_drawer-dark__eUw-z","drawer-glass":"Drawer-module_drawer-glass__3ihP2","header":"Drawer-module_header__-OScS","title":"Drawer-module_title__-yf3P","closeButton":"Drawer-module_closeButton__WdXyR","content":"Drawer-module_content__L0Scr","footer":"Drawer-module_footer__0kQ83"};
+
+const Drawer = ({ open, onClose, title, children, placement = 'right', size = 'default', theme = 'light', closable = true, maskClosable = true, footer, className, closeIcon, afterOpenChange, }) => {
+    const drawerRef = useRef(null);
+    const [animationState, setAnimationState] = React.useState('exited');
+    // 处理动画状态
+    useEffect(() => {
+        if (open) {
+            setAnimationState('entering');
+            const timer = setTimeout(() => {
+                setAnimationState('entered');
+                afterOpenChange === null || afterOpenChange === void 0 ? void 0 : afterOpenChange(true);
+            }, 50);
+            return () => clearTimeout(timer);
+        }
+        else {
+            setAnimationState('exiting');
+            const timer = setTimeout(() => {
+                setAnimationState('exited');
+                afterOpenChange === null || afterOpenChange === void 0 ? void 0 : afterOpenChange(false);
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, [open, afterOpenChange]);
+    // 处理键盘事件
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape' && open) {
+                onClose();
+            }
+        };
+        if (open) {
+            document.addEventListener('keydown', handleKeyDown);
+            // 禁止背景滚动
+            document.body.style.overflow = 'hidden';
+        }
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = '';
+        };
+    }, [open, onClose]);
+    // 焦点管理
+    useEffect(() => {
+        if (open && drawerRef.current) {
+            const focusableElements = drawerRef.current.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstElement = focusableElements[0];
+            firstElement === null || firstElement === void 0 ? void 0 : firstElement.focus();
+        }
+    }, [open]);
+    const handleMaskClick = () => {
+        if (maskClosable) {
+            onClose();
+        }
+    };
+    const handleDrawerClick = (e) => {
+        e.stopPropagation();
+    };
+    const drawerClasses = [
+        styles.drawer,
+        styles[`drawer-${placement}`],
+        styles[`drawer-${theme}`],
+        size !== 'default' && styles[`drawer-${size}`],
+        styles[animationState],
+        className
+    ].filter(Boolean).join(' ');
+    const overlayClasses = [
+        styles.overlay,
+        styles[animationState]
+    ].join(' ');
+    if (!open && animationState === 'exited') {
+        return null;
+    }
+    const drawerContent = (jsxRuntimeExports.jsx("div", { className: overlayClasses, onClick: handleMaskClick, children: jsxRuntimeExports.jsxs("div", { ref: drawerRef, className: drawerClasses, onClick: handleDrawerClick, role: "dialog", "aria-modal": "true", "aria-labelledby": title ? 'drawer-title' : undefined, children: [(title || closable) && (jsxRuntimeExports.jsxs("div", { className: styles.header, children: [title && (jsxRuntimeExports.jsx("h3", { id: "drawer-title", className: styles.title, children: title })), closable && (jsxRuntimeExports.jsx("button", { className: styles.closeButton, onClick: onClose, "aria-label": "\u5173\u95ED\u62BD\u5C49", children: closeIcon || (jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M8 7.293l2.146-2.147a.5.5 0 01.708.708L8.707 8l2.147 2.146a.5.5 0 01-.708.708L8 8.707l-2.146 2.147a.5.5 0 01-.708-.708L7.293 8 5.146 5.854a.5.5 0 01.708-.708L8 7.293z" }) })) }))] })), jsxRuntimeExports.jsx("div", { className: styles.content, children: children }), footer && (jsxRuntimeExports.jsx("div", { className: styles.footer, children: footer }))] }) }));
+    return createPortal(drawerContent, document.body);
 };
 
 // 设计令牌 - 定义设计系统的基础变量
@@ -4104,5 +4181,5 @@ const tokens = {
     },
 };
 
-export { Button, Button as ButtonDefault, Card, Card as CardDefault, Form, FormActions, Form as FormDefault, FormItem, Input, Input as InputDefault, LanguageSwitcher, LanguageSwitcher as LanguageSwitcherDefault, Menu, MenuItem, Pagination, Radio, Radio as RadioDefault, RadioGroup, SubMenu, Switch, Switch as SwitchDefault, Tab, Tabs, Tabs as TabsDefault, formatCurrency, formatDate, formatNumber, getBrowserLanguage, getLanguageNativeName, getSavedLanguage, getTextDirection, instance as i18n, isValidLanguage, saveLanguage, supportedLanguages, tokens, useCurrentLanguage, useLanguageSwitch, useTranslation };
+export { Button, Button as ButtonDefault, Card, Card as CardDefault, Drawer, Form, FormActions, Form as FormDefault, FormItem, Input, Input as InputDefault, LanguageSwitcher, LanguageSwitcher as LanguageSwitcherDefault, Menu, MenuItem, Pagination, Radio, Radio as RadioDefault, RadioGroup, SubMenu, Switch, Switch as SwitchDefault, Tab, Tabs, Tabs as TabsDefault, formatCurrency, formatDate, formatNumber, getBrowserLanguage, getLanguageNativeName, getSavedLanguage, getTextDirection, instance as i18n, isValidLanguage, saveLanguage, supportedLanguages, tokens, useCurrentLanguage, useLanguageSwitch, useTranslation };
 //# sourceMappingURL=index.esm.js.map

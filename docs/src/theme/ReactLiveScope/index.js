@@ -14,7 +14,8 @@ import {
   FormItem,
   FormActions,
   LanguageSwitcher,
-  Pagination 
+  Pagination,
+  Drawer
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -35,7 +36,8 @@ const ReactLiveScope = {
   FormItem,
   FormActions,
   LanguageSwitcher,
-  Pagination 
+  Pagination,
+  Drawer
 };
 
 export default ReactLiveScope;

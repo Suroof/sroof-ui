@@ -18,7 +18,7 @@ export interface SubMenuProps {
 }
 export interface MenuProps {
     children: React.ReactNode;
-    mode?: 'horizontal' | 'vertical' | 'inline';
+    mode?: 'horizontal' | 'vertical';
     theme?: 'light' | 'dark' | 'glass';
     className?: string;
     defaultSelectedKey?: string;

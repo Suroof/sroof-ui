@@ -1,0 +1,452 @@
+---
+sidebar_position: 8
+---
+
+# Drawer 抽屉
+
+抽屉组件，从屏幕边缘滑出的浮层面板，支持多种位置、尺寸和主题。
+
+## 基本用法
+
+```jsx live
+function DrawerExample() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>打开抽屉</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="基本抽屉"
+        placement="right"
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>这是抽屉的内容区域。</p>
+          <p>你可以在这里放置任何内容。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+```jsx
+import { Drawer, Button } from "sroof-ui";
+
+function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>打开抽屉</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="基本抽屉"
+      >
+        <p>抽屉内容</p>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 不同位置
+
+抽屉可以从四个方向滑出：左侧、右侧、顶部、底部。
+
+```jsx live
+function DrawerPlacementExample() {
+  const [placement, setPlacement] = React.useState('right');
+  const [open, setOpen] = React.useState(false);
+
+  const showDrawer = (direction) => {
+    setPlacement(direction);
+    setOpen(true);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      <Button onClick={() => showDrawer('left')}>左侧抽屉</Button>
+      <Button onClick={() => showDrawer('right')}>右侧抽屉</Button>
+      <Button onClick={() => showDrawer('top')}>顶部抽屉</Button>
+      <Button onClick={() => showDrawer('bottom')}>底部抽屉</Button>
+      
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title={`${placement === 'left' ? '左侧' : placement === 'right' ? '右侧' : placement === 'top' ? '顶部' : '底部'}抽屉`}
+        placement={placement}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>这是从{placement === 'left' ? '左侧' : placement === 'right' ? '右侧' : placement === 'top' ? '顶部' : '底部'}滑出的抽屉。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 不同尺寸
+
+支持三种预设尺寸：小、默认、大。
+
+```jsx live
+function DrawerSizeExample() {
+  const [size, setSize] = React.useState('default');
+  const [open, setOpen] = React.useState(false);
+
+  const showDrawer = (drawerSize) => {
+    setSize(drawerSize);
+    setOpen(true);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button onClick={() => showDrawer('small')}>小尺寸</Button>
+      <Button onClick={() => showDrawer('default')}>默认尺寸</Button>
+      <Button onClick={() => showDrawer('large')}>大尺寸</Button>
+      
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title={`${size === 'small' ? '小' : size === 'large' ? '大' : '默认'}尺寸抽屉`}
+        size={size}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>这是{size === 'small' ? '小' : size === 'large' ? '大' : '默认'}尺寸的抽屉。</p>
+          <p>宽度：{size === 'small' ? '256px' : size === 'large' ? '736px' : '378px'}</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 主题样式
+
+支持三种主题：浅色、深色、毛玻璃效果。
+
+```jsx live
+function DrawerThemeExample() {
+  const [theme, setTheme] = React.useState('light');
+  const [open, setOpen] = React.useState(false);
+
+  const showDrawer = (drawerTheme) => {
+    setTheme(drawerTheme);
+    setOpen(true);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button onClick={() => showDrawer('light')}>浅色主题</Button>
+      <Button onClick={() => showDrawer('dark')}>深色主题</Button>
+      <Button onClick={() => showDrawer('glass')}>毛玻璃主题</Button>
+      
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title={`${theme === 'light' ? '浅色' : theme === 'dark' ? '深色' : '毛玻璃'}主题抽屉`}
+        theme={theme}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>这是{theme === 'light' ? '浅色' : theme === 'dark' ? '深色' : '毛玻璃'}主题的抽屉。</p>
+          <p>不同主题提供不同的视觉效果。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 带底部操作区
+
+可以在抽屉底部添加操作按钮。
+
+```jsx live
+function DrawerWithFooterExample() {
+  const [open, setOpen] = React.useState(false);
+
+  const footer = (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button onClick={() => setOpen(false)}>取消</Button>
+      <Button variant="primary" onClick={() => setOpen(false)}>确定</Button>
+    </div>
+  );
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>带底部操作的抽屉</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="确认操作"
+        footer={footer}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>请确认是否要执行此操作？</p>
+          <p>此操作不可撤销，请谨慎选择。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 自定义关闭图标
+
+可以自定义关闭按钮的图标。
+
+```jsx live
+function DrawerCustomCloseExample() {
+  const [open, setOpen] = React.useState(false);
+
+  const customCloseIcon = (
+    <span style={{ fontSize: '18px' }}>✕</span>
+  );
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>自定义关闭图标</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="自定义关闭图标"
+        closeIcon={customCloseIcon}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>这个抽屉使用了自定义的关闭图标。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 禁用遮罩关闭
+
+可以禁用点击遮罩层关闭抽屉的功能。
+
+```jsx live
+function DrawerNoMaskCloseExample() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>禁用遮罩关闭</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="禁用遮罩关闭"
+        maskClosable={false}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <p>点击遮罩层无法关闭此抽屉。</p>
+          <p>只能通过关闭按钮或 ESC 键关闭。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 无标题栏
+
+可以隐藏标题栏，创建更简洁的抽屉。
+
+```jsx live
+function DrawerNoHeaderExample() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>无标题栏抽屉</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        closable={false}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+            <h3 style={{ margin: 0 }}>自定义标题区域</h3>
+            <Button size="small" onClick={() => setOpen(false)}>关闭</Button>
+          </div>
+          <p>这是一个没有默认标题栏的抽屉。</p>
+          <p>你可以完全自定义头部区域。</p>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## 复杂内容示例
+
+展示抽屉中包含复杂内容的用法。
+
+```jsx live
+function DrawerComplexExample() {
+  const [open, setOpen] = React.useState(false);
+
+  const footer = (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button onClick={() => setOpen(false)}>取消</Button>
+      <Button variant="primary" onClick={() => setOpen(false)}>保存</Button>
+    </div>
+  );
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>复杂内容抽屉</Button>
+      <Drawer
+        open={open}
+        onClose={() => setOpen(false)}
+        title="用户信息编辑"
+        size="large"
+        footer={footer}
+      >
+        <div style={{ padding: '20px 0' }}>
+          <div style={{ marginBottom: '24px' }}>
+            <h4>基本信息</h4>
+            <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}>姓名</label>
+                <input 
+                  type="text" 
+                  placeholder="请输入姓名" 
+                  style={{ 
+                    width: '100%', 
+                    padding: '8px 12px', 
+                    border: '1px solid #d9d9d9', 
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }} 
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}>邮箱</label>
+                <input 
+                  type="email" 
+                  placeholder="请输入邮箱" 
+                  style={{ 
+                    width: '100%', 
+                    padding: '8px 12px', 
+                    border: '1px solid #d9d9d9', 
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }} 
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div style={{ marginBottom: '24px' }}>
+            <h4>联系方式</h4>
+            <div style={{ display: 'grid', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}>电话号码</label>
+                <input 
+                  type="tel" 
+                  placeholder="请输入电话号码" 
+                  style={{ 
+                    width: '100%', 
+                    padding: '8px 12px', 
+                    border: '1px solid #d9d9d9', 
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }} 
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}>地址</label>
+                <textarea 
+                  placeholder="请输入地址" 
+                  rows={3}
+                  style={{ 
+                    width: '100%', 
+                    padding: '8px 12px', 
+                    border: '1px solid #d9d9d9', 
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    resize: 'vertical'
+                  }} 
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4>其他设置</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input type="checkbox" />
+                接收邮件通知
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input type="checkbox" />
+                接收短信通知
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input type="checkbox" />
+                公开个人资料
+              </label>
+            </div>
+          </div>
+        </div>
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## API
+
+### Drawer Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| open | 是否显示抽屉 | `boolean` | `false` |
+| onClose | 关闭抽屉的回调 | `() => void` | - |
+| title | 抽屉标题 | `string` | - |
+| children | 抽屉内容 | `React.ReactNode` | - |
+| placement | 抽屉位置 | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` |
+| size | 抽屉尺寸 | `'small' \| 'default' \| 'large'` | `'default'` |
+| theme | 主题样式 | `'light' \| 'dark' \| 'glass'` | `'light'` |
+| closable | 是否显示关闭按钮 | `boolean` | `true` |
+| maskClosable | 是否点击遮罩层关闭 | `boolean` | `true` |
+| footer | 底部操作区域 | `React.ReactNode` | - |
+| className | 自定义类名 | `string` | - |
+| closeIcon | 自定义关闭图标 | `React.ReactNode` | - |
+| afterOpenChange | 动画完成后的回调 | `(open: boolean) => void` | - |
+
+## 设计指南
+
+### 何时使用
+
+- 需要在不离开当前页面的情况下，快速查看或编辑内容
+- 需要展示详细信息或复杂表单
+- 作为对话框的替代方案，提供更大的内容空间
+
+### 最佳实践
+
+1. **合理选择位置**：根据内容类型和用户习惯选择抽屉滑出方向
+2. **适当的尺寸**：根据内容量选择合适的抽屉尺寸
+3. **清晰的标题**：提供明确的标题说明抽屉用途
+4. **便捷的关闭**：提供多种关闭方式（按钮、ESC、遮罩）
+5. **响应式设计**：在移动端提供良好的体验
+
+### 注意事项
+
+- 避免在抽屉中嵌套其他抽屉
+- 确保抽屉内容不会过于复杂
+- 在移动端考虑触摸操作的便利性
+- 注意抽屉打开时的焦点管理
+
+## 无障碍性
+
+- 支持键盘导航（Tab、Shift+Tab、ESC）
+- 提供适当的 ARIA 属性
+- 自动焦点管理
+- 支持屏幕阅读器
+- 遵循 WCAG 2.1 标准

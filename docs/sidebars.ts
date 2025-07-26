@@ -23,6 +23,7 @@ const sidebars: SidebarsConfig = {
         'components/button',
         'components/input',
         'components/card',
+        'components/drawer',
       ],
     },
     {

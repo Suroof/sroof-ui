@@ -1,0 +1,303 @@
+/* 抽屉遮罩层 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.entering,
+  &.entered {
+    opacity: 1;
+  }
+
+  &.exiting,
+  &.exited {
+    opacity: 0;
+  }
+}
+
+/* 抽屉容器 */
+.drawer {
+  position: fixed;
+  background: #fff;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.176);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 位置变体 */
+  &-left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 378px;
+
+    &.entering,
+    &.entered {
+      transform: translateX(0);
+    }
+
+    &.exiting,
+    &.exited {
+      transform: translateX(-100%);
+    }
+  }
+
+  &-right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 378px;
+
+    &.entering,
+    &.entered {
+      transform: translateX(0);
+    }
+
+    &.exiting,
+    &.exited {
+      transform: translateX(100%);
+    }
+  }
+
+  &-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 378px;
+
+    &.entering,
+    &.entered {
+      transform: translateY(0);
+    }
+
+    &.exiting,
+    &.exited {
+      transform: translateY(-100%);
+    }
+  }
+
+  &-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 378px;
+
+    &.entering,
+    &.entered {
+      transform: translateY(0);
+    }
+
+    &.exiting,
+    &.exited {
+      transform: translateY(100%);
+    }
+  }
+
+  /* 尺寸变体 */
+  &-small {
+    &.drawer-left,
+    &.drawer-right {
+      width: 256px;
+    }
+
+    &.drawer-top,
+    &.drawer-bottom {
+      height: 256px;
+    }
+  }
+
+  &-large {
+    &.drawer-left,
+    &.drawer-right {
+      width: 736px;
+    }
+
+    &.drawer-top,
+    &.drawer-bottom {
+      height: 736px;
+    }
+  }
+
+  /* 主题变体 */
+  &-light {
+    background: #fff;
+    color: #333;
+  }
+
+  &-dark {
+    background: #1f1f1f;
+    color: #fff;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  &-glass {
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter:blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #333;
+  }
+}
+
+/* 抽屉头部 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+
+  .drawer-dark & {
+    border-bottom-color: #404040;
+  }
+
+  .drawer-glass & {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* 抽屉标题 */
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: inherit;
+}
+
+/* 关闭按钮 */
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #333;
+  }
+
+  .drawer-dark & {
+    color: #999;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+  }
+
+  .drawer-glass & {
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+/* 抽屉内容 */
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+
+  /* 自定义滚动条 */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .drawer-dark & {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+}
+
+/* 抽屉底部 */
+.footer {
+  padding: 16px 24px;
+  border-top: 1px solid #f0f0f0;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+
+  .drawer-dark & {
+    border-top-color: #404040;
+  }
+
+  .drawer-glass & {
+    border-top-color: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .drawer {
+    &-left,
+    &-right {
+      width: 100% !important;
+    }
+
+    &-top,
+    &-bottom {
+      height: 80vh !important;
+    }
+  }
+}
+
+/* 无障碍支持 */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .drawer {
+    transition: none;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .drawer {
+    border: 2px solid currentColor;
+  }
+
+  .header,
+  .footer {
+    border-color: currentColor;
+  }
+
+  .closeButton {
+    border: 1px solid currentColor;
+  }
+}
