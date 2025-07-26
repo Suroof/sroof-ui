@@ -7,11 +7,13 @@ import {
   Card,
   Input,
   Tabs,
+  Tab,
   Radio,
   RadioGroup,
   Form,
   FormItem,
-  FormActions 
+  FormActions,
+  LanguageSwitcher
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -25,11 +27,13 @@ const ReactLiveScope = {
   Card,
   Input,
   Tabs,
+  Tab,
   Radio,
   RadioGroup,
   Form,
   FormItem,
-  FormActions 
+  FormActions,
+  LanguageSwitcher
 };
 
 export default ReactLiveScope;

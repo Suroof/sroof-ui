@@ -26,7 +26,9 @@ const sidebars: SidebarsConfig = {
         'components/form',
         'components/input',
         'components/radio',
+        'components/tabs',
         'components/languageSwitcher',
+       
       ],
     },
   ],

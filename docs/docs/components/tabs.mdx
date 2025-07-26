@@ -1,0 +1,2697 @@
+---
+sidebar_position: 7
+---
+
+# Tabs 标签页
+
+标签页组件，支持受控和非受控两种模式，提供灵活的标签页导航功能。
+
+## 基本用法
+
+```jsx live
+function TabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 1 内容</h3>
+          <p>这是第一个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 2 内容</h3>
+          <p>这是第二个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 3 内容</h3>
+          <p>这是第三个标签页的内容。</p>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+import { Tabs, Tab } from 'sroof-ui';
+
+function Example() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div>标签页 1 的内容</div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div>标签页 2 的内容</div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div>标签页 3 的内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 受控模式
+
+```jsx live
+function ControlledTabsExample() {
+  const [activeKey, setActiveKey] = React.useState('home');
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <p>当前激活标签: <strong>{activeKey}</strong></p>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button 
+            onClick={() => setActiveKey('home')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'home' ? '#3b82f6' : 'white',
+              color: activeKey === 'home' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到首页
+          </button>
+          <button 
+            onClick={() => setActiveKey('profile')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'profile' ? '#3b82f6' : 'white',
+              color: activeKey === 'profile' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到个人资料
+          </button>
+        </div>
+      </div>
+      
+      <Tabs
+        activeKey={activeKey}
+        onChange={(key) => {
+          setActiveKey(key);
+          console.log('标签页切换到:', key);
+        }}
+      >
+        <Tab key="home" label="🏠 首页">
+          <div style={{ padding: '20px' }}>
+            <h3>欢迎来到首页</h3>
+            <p>这里是应用的主页面，展示最重要的信息。</p>
+          </div>
+        </Tab>
+        <Tab key="profile" label="👤 个人资料">
+          <div style={{ padding: '20px' }}>
+            <h3>个人资料</h3>
+            <p>在这里可以查看和编辑您的个人信息。</p>
+          </div>
+        </Tab>
+        <Tab key="settings" label="⚙️ 设置">
+          <div style={{ padding: '20px' }}>
+            <h3>系统设置</h3>
+            <p>配置应用的各种选项和偏好设置。</p>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function ControlledTabs() {
+  const [activeKey, setActiveKey] = useState('home');
+
+  return (
+    <Tabs
+      activeKey={activeKey}
+      onChange={(key) => {
+        setActiveKey(key);
+        console.log('切换到:', key);
+      }}
+    >
+      <Tab key="home" label="首页">
+        <div>首页内容</div>
+      </Tab>
+      <Tab key="profile" label="个人资料">
+        <div>个人资料内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 带图标的标签页
+
+```jsx live
+function IconTabsExample() {
+  return (
+    <Tabs defaultActiveKey="dashboard">
+      <Tab 
+        key="dashboard" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📊 仪表盘
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>仪表盘</h3>
+          <p>查看系统的整体运行状态和关键指标。</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginTop: '16px' }}>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>用户数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>1,234</p>
+            </div>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>订单数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>567</p>
+            </div>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="analytics" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📈 分析
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>数据分析</h3>
+          <p>深入分析用户行为和业务数据。</p>
+          <div style={{ marginTop: '16px' }}>
+            <h4>热门页面</h4>
+            <ul>
+              <li>首页 - 45%</li>
+              <li>产品页 - 28%</li>
+              <li>关于我们 - 15%</li>
+              <li>联系我们 - 12%</li>
+            </ul>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="reports" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📋 报告
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>报告中心</h3>
+          <p>生成和查看各类业务报告。</p>
+          <div style={{ marginTop: '16px' }}>
+            <button style={{ 
+              padding: '8px 16px', 
+              marginRight: '8px',
+              border: 'none', 
+              borderRadius: '4px', 
+              background: '#3b82f6', 
+              color: 'white',
+              cursor: 'pointer'
+            }}>
+              生成月度报告
+            </button>
+            <button style={{ 
+              padding: '8px 16px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px', 
+              background: 'white',
+              cursor: 'pointer'
+            }}>
+              导出数据
+            </button>
+          </div>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="dashboard">
+  <Tab 
+    key="dashboard" 
+    label={<span><Icon name="dashboard" /> 仪表盘</span>}
+  >
+    <DashboardContent />
+  </Tab>
+  <Tab 
+    key="analytics" 
+    label={<span><Icon name="chart" /> 分析</span>}
+  >
+    <AnalyticsContent />
+  </Tab>
+</Tabs>
+```
+
+## 多标签页示例
+
+```jsx live
+function ManyTabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      {Array.from({ length: 6 }, (_, index) => (
+        <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+          <div style={{ padding: '20px' }}>
+            <h3>标签 {index + 1} 内容</h3>
+            <p>这是第 {index + 1} 个标签页的内容。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>功能特性 {index + 1}</h4>
+              <ul>
+                <li>特性 A - 提供基础功能</li>
+                <li>特性 B - 增强用户体验</li>
+                <li>特性 C - 优化性能表现</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      ))}
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1">
+  {Array.from({ length: 8 }, (_, index) => (
+    <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+      <div>标签 {index + 1} 的内容</div>
+    </Tab>
+  ))}
+</Tabs>
+```
+
+## 自定义样式
+
+```jsx live
+function CustomStyleTabsExample() {
+  return (
+    <div>
+      <style>{`
+        .custom-tabs {
+          border: 2px solid #3b82f6;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
+      <Tabs defaultActiveKey="design" className="custom-tabs">
+        <Tab key="design" label="🎨 设计">
+          <div style={{ padding: '24px' }}>
+            <h3>设计系统</h3>
+            <p>统一的设计语言和组件规范。</p>
+            <div style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              marginTop: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#3b82f6', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                主色
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#10b981', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                成功
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#f59e0b', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                警告
+              </div>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="development" label="💻 开发">
+          <div style={{ padding: '24px' }}>
+            <h3>开发指南</h3>
+            <p>组件开发的最佳实践和规范。</p>
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '16px', 
+              borderRadius: '8px',
+              marginTop: '16px',
+              fontFamily: 'monospace'
+            }}>
+              <code>
+                npm install sroof-ui<br/>
+                import &#123; Tabs, Tab &#125; from 'sroof-ui';
+              </code>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="testing" label="🧪 测试">
+          <div style={{ padding: '24px' }}>
+            <h3>测试策略</h3>
+            <p>确保组件质量的测试方法。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>测试类型</h4>
+              <ul>
+                <li>单元测试 - 测试组件功能</li>
+                <li>集成测试 - 测试组件交互</li>
+                <li>视觉测试 - 测试UI一致性</li>
+                <li>可访问性测试 - 确保无障碍访问</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1" className="custom-tabs">
+  <Tab key="tab1" label="自定义标签 1">
+    <CustomContent1 />
+  </Tab>
+  <Tab key="tab2" label="自定义标签 2">
+    <CustomContent2 />
+  </Tab>
+</Tabs>
+```
+
+## 动态标签页
+
+```jsx live
+function DynamicTabsExample() {
+  const [tabs, setTabs] = React.useState([
+    { key: 'tab1', label: '标签 1', content: '这是标签 1 的内容' },
+    { key: 'tab2', label: '标签 2', content: '这是标签 2 的内容' }
+  ]);
+  const [activeKey, setActiveKey] = React.useState('tab1');
+  const [counter, setCounter] = React.useState(3);
+
+  const addTab = () => {
+    const newTab = {
+      key: `tab${counter}`,
+      label: `标签 ${counter}`,
+      content: `这是动态添加的标签 ${counter} 的内容`
+    };
+    setTabs([...tabs, newTab]);
+    setActiveKey(newTab.key);
+    setCounter(counter + 1);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <button 
+          onClick={addTab}
+          style={{ 
+            padding: '8px 16px', 
+            border: 'none', 
+            borderRadius: '4px', 
+            background: '#10b981', 
+            color: 'white',
+            cursor: 'pointer',
+            marginRight: '8px'
+          }}
+        >
+          ➕ 添加标签页
+        </button>
+        <span style={{ color: '#6b7280' }}>
+          当前有 {tabs.length} 个标签页
+        </span>
+      </div>
+
+      <Tabs
+        activeKey={activeKey}
+        onChange={setActiveKey}
+      >
+        {tabs.map(tab => (
+          <Tab 
+            key={tab.key} 
+            label={
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {tab.label}
+                {tabs.length > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeTab(tab.key);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      padding: '2px',
+                      borderRadius: '2px',
+                      fontSize: '12px'
+                    }}
+                    title="关闭标签页"
+                  >
+                    ✕
+                  </button>
+                )}
+              </span>
+            }
+          >
+            <div style={{ padding: '20px' }}>
+              <h3>{tab.label}</h3>
+              <p>{tab.content}</p>
+              <div style={{ marginTop: '16px', color: '#6b7280', fontSize: '14px' }}>
+                标签页 ID: {tab.key}
+              </div>
+            </div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function DynamicTabs() {
+  const [tabs, setTabs] = useState([
+    { key: 'tab1', label: '标签 1', content: '内容 1' }
+  ]);
+  const [activeKey, setActiveKey] = useState('tab1');
+
+  const addTab = () => {
+    const newKey = `tab${Date.now()}`;
+    setTabs([...tabs, { 
+      key: newKey, 
+      label: `新标签 ${tabs.length + 1}`, 
+      content: `新内容 ${tabs.length + 1}` 
+    }]);
+    setActiveKey(newKey);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={addTab}>添加标签页</button>
+      <Tabs activeKey={activeKey} onChange={setActiveKey}>
+        {tabs.map(tab => (
+          <Tab key={tab.key} label={tab.label}>
+            <div>{tab.content}</div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+## API
+
+### Tabs Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| activeKey | `string` | - | 当前激活的标签页 key（受控模式） |
+| children | `React.ReactNode` | - | Tab 子组件 |
+| centered | `boolean` | `false` | 标签页是否居中显示 |
+| className | `string` | - | 自定义样式类名 |
+| defaultActiveKey | `string` | - | 默认激活的标签页 key（非受控模式） |
+| onChange | `(key: string) => void` | - | 标签页切换时的回调函数 |
+
+### Tab Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| key | `string` | - | 标签页的唯一标识符（必填） |
+| label | `React.ReactNode` | - | 标签页显示的标签文本或元素 |
+| children | `React.ReactNode` | - | 标签页的内容 |
+
+## 使用示例
+
+### 表单分步骤
+
+```jsx
+function StepForm() {
+  const [currentStep, setCurrentStep] = useState('basic');
+  const [formData, setFormData] = useState({});
+
+  return (
+    <Tabs activeKey={currentStep} onChange={setCurrentStep}>
+      <Tab key="basic" label="基本信息">
+        <BasicInfoForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('contact')}
+        />
+      </Tab>
+      <Tab key="contact" label="联系方式">
+        <ContactForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('confirm')}
+          onPrev={() => setCurrentStep('basic')}
+        />
+      </Tab>
+      <Tab key="confirm" label="确认提交">
+        <ConfirmForm 
+          data={formData}
+          onPrev={() => setCurrentStep('contact')}
+          onSubmit={handleSubmit}
+        />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 内容管理
+
+```jsx
+function ContentManager() {
+  const [activeTab, setActiveTab] = useState('articles');
+
+  return (
+    <Tabs activeKey={activeTab} onChange={setActiveTab}>
+      <Tab key="articles" label="📝 文章管理">
+        <ArticleList />
+      </Tab>
+      <Tab key="media" label="🖼️ 媒体库">
+        <MediaLibrary />
+      </Tab>
+      <Tab key="comments" label="💬 评论管理">
+        <CommentManager />
+      </Tab>
+      <Tab key="settings" label="⚙️ 设置">
+        <ContentSettings />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 数据展示
+
+```jsx
+function DataDashboard() {
+  return (
+    <Tabs defaultActiveKey="overview">
+      <Tab key="overview" label="概览">
+        <OverviewCharts />
+      </Tab>
+      <Tab key="users" label="用户分析">
+        <UserAnalytics />
+      </Tab>
+      <Tab key="sales" label="销售数据">
+        <SalesData />
+      </Tab>
+      <Tab key="performance" label="性能监控">
+        <PerformanceMetrics />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 注意事项
+
+1. **Key 的重要性**: 每个 `Tab` 必须有唯一的 `key` 属性
+2. **受控 vs 非受控**: 使用 `activeKey` 为受控模式，使用 `defaultActiveKey` 为非受控模式
+3. **内容渲染**: 只有当前激活的标签页内容会被渲染
+4. **键盘导航**: 支持左右箭头键在标签间导航
+5. **无障碍访问**: 自动生成正确的 ARIA 属性和角色
+
+## 最佳实践
+
+1. **标签数量**: 建议标签页数量不超过 7 个，过多会影响用户体验
+2. **标签文本**: 保持标签文本简洁明了，避免过长
+3. **内容组织**: 确保标签页之间的内容逻辑清晰
+4. **响应式**: 在移动端考虑标签页的显示方式
+5. **状态管理**: 合理使用受控和非受控模式
+
+# Tabs 标签页
+
+标签页组件，支持受控和非受控两种模式，提供灵活的标签页导航功能。
+
+## 基本用法
+
+```jsx live
+function TabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 1 内容</h3>
+          <p>这是第一个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 2 内容</h3>
+          <p>这是第二个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 3 内容</h3>
+          <p>这是第三个标签页的内容。</p>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+import { Tabs, Tab } from 'sroof-ui';
+
+function Example() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div>标签页 1 的内容</div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div>标签页 2 的内容</div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div>标签页 3 的内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 受控模式
+
+```jsx live
+function ControlledTabsExample() {
+  const [activeKey, setActiveKey] = React.useState('home');
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <p>当前激活标签: <strong>{activeKey}</strong></p>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button 
+            onClick={() => setActiveKey('home')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'home' ? '#3b82f6' : 'white',
+              color: activeKey === 'home' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到首页
+          </button>
+          <button 
+            onClick={() => setActiveKey('profile')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'profile' ? '#3b82f6' : 'white',
+              color: activeKey === 'profile' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到个人资料
+          </button>
+        </div>
+      </div>
+      
+      <Tabs
+        activeKey={activeKey}
+        onChange={(key) => {
+          setActiveKey(key);
+          console.log('标签页切换到:', key);
+        }}
+      >
+        <Tab key="home" label="🏠 首页">
+          <div style={{ padding: '20px' }}>
+            <h3>欢迎来到首页</h3>
+            <p>这里是应用的主页面，展示最重要的信息。</p>
+          </div>
+        </Tab>
+        <Tab key="profile" label="👤 个人资料">
+          <div style={{ padding: '20px' }}>
+            <h3>个人资料</h3>
+            <p>在这里可以查看和编辑您的个人信息。</p>
+          </div>
+        </Tab>
+        <Tab key="settings" label="⚙️ 设置">
+          <div style={{ padding: '20px' }}>
+            <h3>系统设置</h3>
+            <p>配置应用的各种选项和偏好设置。</p>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function ControlledTabs() {
+  const [activeKey, setActiveKey] = useState('home');
+
+  return (
+    <Tabs
+      activeKey={activeKey}---
+      onChange={(key) => {
+        setActiveKey(key);
+        console.log('切换到:', key);
+      }}
+    >
+      <Tab key="home" label="首页">
+        <div>首页内容</div>
+      </Tab>
+      <Tab key="profile" label="个人资料">
+        <div>个人资料内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 带图标的标签页
+
+```jsx live
+function IconTabsExample() {
+  return (
+    <Tabs defaultActiveKey="dashboard">
+      <Tab 
+        key="dashboard" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📊 仪表盘
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>仪表盘</h3>
+          <p>查看系统的整体运行状态和关键指标。</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginTop: '16px' }}>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>用户数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>1,234</p>
+            </div>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>订单数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>567</p>
+            </div>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="analytics" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📈 分析
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>数据分析</h3>
+          <p>深入分析用户行为和业务数据。</p>
+          <div style={{ marginTop: '16px' }}>
+            <h4>热门页面</h4>
+            <ul>
+              <li>首页 - 45%</li>
+              <li>产品页 - 28%</li>
+              <li>关于我们 - 15%</li>
+              <li>联系我们 - 12%</li>
+            </ul>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="reports" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📋 报告
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>报告中心</h3>
+          <p>生成和查看各类业务报告。</p>
+          <div style={{ marginTop: '16px' }}>
+            <button style={{ 
+              padding: '8px 16px', 
+              marginRight: '8px',
+              border: 'none', 
+              borderRadius: '4px', 
+              background: '#3b82f6', 
+              color: 'white',
+              cursor: 'pointer'
+            }}>
+              生成月度报告
+            </button>
+            <button style={{ 
+              padding: '8px 16px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px', 
+              background: 'white',
+              cursor: 'pointer'
+            }}>
+              导出数据
+            </button>
+          </div>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="dashboard">
+  <Tab 
+    key="dashboard" 
+    label={<span><Icon name="dashboard" /> 仪表盘</span>}
+  >
+    <DashboardContent />
+  </Tab>
+  <Tab 
+    key="analytics" 
+    label={<span><Icon name="chart" /> 分析</span>}
+  >
+    <AnalyticsContent />
+  </Tab>
+</Tabs>
+```
+
+## 多标签页示例
+
+```jsx live
+function ManyTabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      {Array.from({ length: 6 }, (_, index) => (
+        <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+          <div style={{ padding: '20px' }}>
+            <h3>标签 {index + 1} 内容</h3>
+            <p>这是第 {index + 1} 个标签页的内容。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>功能特性 {index + 1}</h4>
+              <ul>
+                <li>特性 A - 提供基础功能</li>
+                <li>特性 B - 增强用户体验</li>
+                <li>特性 C - 优化性能表现</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      ))}
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1">
+  {Array.from({ length: 8 }, (_, index) => (
+    <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+      <div>标签 {index + 1} 的内容</div>
+    </Tab>
+  ))}
+</Tabs>
+```
+
+## 自定义样式
+
+```jsx live
+function CustomStyleTabsExample() {
+  return (
+    <div>
+      <style>{`
+        .custom-tabs {
+          border: 2px solid #3b82f6;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
+      <Tabs defaultActiveKey="design" className="custom-tabs">
+        <Tab key="design" label="🎨 设计">
+          <div style={{ padding: '24px' }}>
+            <h3>设计系统</h3>
+            <p>统一的设计语言和组件规范。</p>
+            <div style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              marginTop: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#3b82f6', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                主色
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#10b981', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                成功
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#f59e0b', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                警告
+              </div>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="development" label="💻 开发">
+          <div style={{ padding: '24px' }}>
+            <h3>开发指南</h3>
+            <p>组件开发的最佳实践和规范。</p>
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '16px', 
+              borderRadius: '8px',
+              marginTop: '16px',
+              fontFamily: 'monospace'
+            }}>
+              <code>
+                npm install sroof-ui<br/>
+                import &#123; Tabs, Tab &#125; from 'sroof-ui';
+              </code>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="testing" label="🧪 测试">
+          <div style={{ padding: '24px' }}>
+            <h3>测试策略</h3>
+            <p>确保组件质量的测试方法。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>测试类型</h4>
+              <ul>
+                <li>单元测试 - 测试组件功能</li>
+                <li>集成测试 - 测试组件交互</li>
+                <li>视觉测试 - 测试UI一致性</li>
+                <li>可访问性测试 - 确保无障碍访问</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1" className="custom-tabs">
+  <Tab key="tab1" label="自定义标签 1">
+    <CustomContent1 />
+  </Tab>
+  <Tab key="tab2" label="自定义标签 2">
+    <CustomContent2 />
+  </Tab>
+</Tabs>
+```
+
+## 动态标签页
+
+```jsx live
+function DynamicTabsExample() {
+  const [tabs, setTabs] = React.useState([
+    { key: 'tab1', label: '标签 1', content: '这是标签 1 的内容' },
+    { key: 'tab2', label: '标签 2', content: '这是标签 2 的内容' }
+  ]);
+  const [activeKey, setActiveKey] = React.useState('tab1');
+  const [counter, setCounter] = React.useState(3);
+
+  const addTab = () => {
+    const newTab = {
+      key: `tab${counter}`,
+      label: `标签 ${counter}`,
+      content: `这是动态添加的标签 ${counter} 的内容`
+    };
+    setTabs([...tabs, newTab]);
+    setActiveKey(newTab.key);
+    setCounter(counter + 1);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <button 
+          onClick={addTab}
+          style={{ 
+            padding: '8px 16px', 
+            border: 'none', 
+            borderRadius: '4px', 
+            background: '#10b981', 
+            color: 'white',
+            cursor: 'pointer',
+            marginRight: '8px'
+          }}
+        >
+          ➕ 添加标签页
+        </button>
+        <span style={{ color: '#6b7280' }}>
+          当前有 {tabs.length} 个标签页
+        </span>
+      </div>
+
+      <Tabs
+        activeKey={activeKey}
+        onChange={setActiveKey}
+      >
+        {tabs.map(tab => (
+          <Tab 
+            key={tab.key} 
+            label={
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {tab.label}
+                {tabs.length > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeTab(tab.key);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      padding: '2px',
+                      borderRadius: '2px',
+                      fontSize: '12px'
+                    }}
+                    title="关闭标签页"
+                  >
+                    ✕
+                  </button>
+                )}
+              </span>
+            }
+          >
+            <div style={{ padding: '20px' }}>
+              <h3>{tab.label}</h3>
+              <p>{tab.content}</p>
+              <div style={{ marginTop: '16px', color: '#6b7280', fontSize: '14px' }}>
+                标签页 ID: {tab.key}
+              </div>
+            </div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function DynamicTabs() {
+  const [tabs, setTabs] = useState([
+    { key: 'tab1', label: '标签 1', content: '内容 1' }
+  ]);
+  const [activeKey, setActiveKey] = useState('tab1');
+
+  const addTab = () => {
+    const newKey = `tab${Date.now()}`;
+    setTabs([...tabs, { 
+      key: newKey, 
+      label: `新标签 ${tabs.length + 1}`, 
+      content: `新内容 ${tabs.length + 1}` 
+    }]);
+    setActiveKey(newKey);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={addTab}>添加标签页</button>
+      <Tabs activeKey={activeKey} onChange={setActiveKey}>
+        {tabs.map(tab => (
+          <Tab key={tab.key} label={tab.label}>
+            <div>{tab.content}</div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+## API
+
+### Tabs Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| activeKey | `string` | - | 当前激活的标签页 key（受控模式） |
+| children | `React.ReactNode` | - | Tab 子组件 |
+| centered | `boolean` | `false` | 标签页是否居中显示 |
+| className | `string` | - | 自定义样式类名 |
+| defaultActiveKey | `string` | - | 默认激活的标签页 key（非受控模式） |
+| onChange | `(key: string) => void` | - | 标签页切换时的回调函数 |
+
+### Tab Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| key | `string` | - | 标签页的唯一标识符（必填） |
+| label | `React.ReactNode` | - | 标签页显示的标签文本或元素 |
+| children | `React.ReactNode` | - | 标签页的内容 |
+
+## 使用示例
+
+### 表单分步骤
+
+```jsx
+function StepForm() {
+  const [currentStep, setCurrentStep] = useState('basic');
+  const [formData, setFormData] = useState({});
+
+  return (
+    <Tabs activeKey={currentStep} onChange={setCurrentStep}>
+      <Tab key="basic" label="基本信息">
+        <BasicInfoForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('contact')}
+        />
+      </Tab>
+      <Tab key="contact" label="联系方式">
+        <ContactForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('confirm')}
+          onPrev={() => setCurrentStep('basic')}
+        />
+      </Tab>
+      <Tab key="confirm" label="确认提交">
+        <ConfirmForm 
+          data={formData}
+          onPrev={() => setCurrentStep('contact')}
+          onSubmit={handleSubmit}
+        />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 内容管理
+
+```jsx
+function ContentManager() {
+  const [activeTab, setActiveTab] = useState('articles');
+
+  return (
+    <Tabs activeKey={activeTab} onChange={setActiveTab}>
+      <Tab key="articles" label="📝 文章管理">
+        <ArticleList />
+      </Tab>
+      <Tab key="media" label="🖼️ 媒体库">
+        <MediaLibrary />
+      </Tab>
+      <Tab key="comments" label="💬 评论管理">
+        <CommentManager />
+      </Tab>
+      <Tab key="settings" label="⚙️ 设置">
+        <ContentSettings />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 数据展示
+
+```jsx
+function DataDashboard() {
+  return (
+    <Tabs defaultActiveKey="overview">
+      <Tab key="overview" label="概览">
+        <OverviewCharts />
+      </Tab>
+      <Tab key="users" label="用户分析">
+        <UserAnalytics />
+      </Tab>
+      <Tab key="sales" label="销售数据">
+        <SalesData />
+      </Tab>
+      <Tab key="performance" label="性能监控">
+        <PerformanceMetrics />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 注意事项
+
+1. **Key 的重要性**: 每个 `Tab` 必须有唯一的 `key` 属性
+2. **受控 vs 非受控**: 使用 `activeKey` 为受控模式，使用 `defaultActiveKey` 为非受控模式
+3. **内容渲染**: 只有当前激活的标签页内容会被渲染
+4. **键盘导航**: 支持左右箭头键在标签间导航
+5. **无障碍访问**: 自动生成正确的 ARIA 属性和角色
+
+## 最佳实践
+
+1. **标签数量**: 建议标签页数量不超过 7 个，过多会影响用户体验
+2. **标签文本**: 保持标签文本简洁明了，避免过长
+3. **内容组织**: 确保标签页之间的内容逻辑清晰
+4. **响应式**: 在移动端考虑标签页的显示方式
+5. **状态管理**: 合理使用受控和非受控模式sidebar_position: 7
+---
+
+# Tabs 标签页
+
+标签页组件，支持受控和非受控两种模式，提供灵活的标签页导航功能。
+
+## 基本用法
+
+```jsx live
+function TabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 1 内容</h3>
+          <p>这是第一个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 2 内容</h3>
+          <p>这是第二个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 3 内容</h3>
+          <p>这是第三个标签页的内容。</p>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+import { Tabs, Tab } from 'sroof-ui';
+
+function Example() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div>标签页 1 的内容</div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div>标签页 2 的内容</div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div>标签页 3 的内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 受控模式
+
+```jsx live
+function ControlledTabsExample() {
+  const [activeKey, setActiveKey] = React.useState('home');
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <p>当前激活标签: <strong>{activeKey}</strong></p>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button 
+            onClick={() => setActiveKey('home')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'home' ? '#3b82f6' : 'white',
+              color: activeKey === 'home' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到首页
+          </button>
+          <button 
+            onClick={() => setActiveKey('profile')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'profile' ? '#3b82f6' : 'white',
+              color: activeKey === 'profile' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到个人资料
+          </button>
+        </div>
+      </div>
+      
+      <Tabs
+        activeKey={activeKey}
+        onChange={(key) => {
+          setActiveKey(key);
+          console.log('标签页切换到:', key);
+        }}
+      >
+        <Tab key="home" label="🏠 首页">
+          <div style={{ padding: '20px' }}>
+            <h3>欢迎来到首页</h3>
+            <p>这里是应用的主页面，展示最重要的信息。</p>
+          </div>
+        </Tab>
+        <Tab key="profile" label="👤 个人资料">
+          <div style={{ padding: '20px' }}>
+            <h3>个人资料</h3>
+            <p>在这里可以查看和编辑您的个人信息。</p>
+          </div>
+        </Tab>
+        <Tab key="settings" label="⚙️ 设置">
+          <div style={{ padding: '20px' }}>
+            <h3>系统设置</h3>
+            <p>配置应用的各种选项和偏好设置。</p>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function ControlledTabs() {
+  const [activeKey, setActiveKey] = useState('home');
+
+  return (
+    <Tabs
+      activeKey={activeKey}---
+      onChange={(key) => {
+        setActiveKey(key);
+        console.log('切换到:', key);
+      }}
+    >
+      <Tab key="home" label="首页">
+        <div>首页内容</div>
+      </Tab>
+      <Tab key="profile" label="个人资料">
+        <div>个人资料内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 带图标的标签页
+
+```jsx live
+function IconTabsExample() {
+  return (
+    <Tabs defaultActiveKey="dashboard">
+      <Tab 
+        key="dashboard" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📊 仪表盘
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>仪表盘</h3>
+          <p>查看系统的整体运行状态和关键指标。</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginTop: '16px' }}>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>用户数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>1,234</p>
+            </div>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>订单数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>567</p>
+            </div>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="analytics" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📈 分析
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>数据分析</h3>
+          <p>深入分析用户行为和业务数据。</p>
+          <div style={{ marginTop: '16px' }}>
+            <h4>热门页面</h4>
+            <ul>
+              <li>首页 - 45%</li>
+              <li>产品页 - 28%</li>
+              <li>关于我们 - 15%</li>
+              <li>联系我们 - 12%</li>
+            </ul>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="reports" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📋 报告
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>报告中心</h3>
+          <p>生成和查看各类业务报告。</p>
+          <div style={{ marginTop: '16px' }}>
+            <button style={{ 
+              padding: '8px 16px', 
+              marginRight: '8px',
+              border: 'none', 
+              borderRadius: '4px', 
+              background: '#3b82f6', 
+              color: 'white',
+              cursor: 'pointer'
+            }}>
+              生成月度报告
+            </button>
+            <button style={{ 
+              padding: '8px 16px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px', 
+              background: 'white',
+              cursor: 'pointer'
+            }}>
+              导出数据
+            </button>
+          </div>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="dashboard">
+  <Tab 
+    key="dashboard" 
+    label={<span><Icon name="dashboard" /> 仪表盘</span>}
+  >
+    <DashboardContent />
+  </Tab>
+  <Tab 
+    key="analytics" 
+    label={<span><Icon name="chart" /> 分析</span>}
+  >
+    <AnalyticsContent />
+  </Tab>
+</Tabs>
+```
+
+## 多标签页示例
+
+```jsx live
+function ManyTabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      {Array.from({ length: 6 }, (_, index) => (
+        <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+          <div style={{ padding: '20px' }}>
+            <h3>标签 {index + 1} 内容</h3>
+            <p>这是第 {index + 1} 个标签页的内容。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>功能特性 {index + 1}</h4>
+              <ul>
+                <li>特性 A - 提供基础功能</li>
+                <li>特性 B - 增强用户体验</li>
+                <li>特性 C - 优化性能表现</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      ))}
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1">
+  {Array.from({ length: 8 }, (_, index) => (
+    <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+      <div>标签 {index + 1} 的内容</div>
+    </Tab>
+  ))}
+</Tabs>
+```
+
+## 自定义样式
+
+```jsx live
+function CustomStyleTabsExample() {
+  return (
+    <div>
+      <style>{`
+        .custom-tabs {
+          border: 2px solid #3b82f6;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
+      <Tabs defaultActiveKey="design" className="custom-tabs">
+        <Tab key="design" label="🎨 设计">
+          <div style={{ padding: '24px' }}>
+            <h3>设计系统</h3>
+            <p>统一的设计语言和组件规范。</p>
+            <div style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              marginTop: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#3b82f6', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                主色
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#10b981', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                成功
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#f59e0b', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                警告
+              </div>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="development" label="💻 开发">
+          <div style={{ padding: '24px' }}>
+            <h3>开发指南</h3>
+            <p>组件开发的最佳实践和规范。</p>
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '16px', 
+              borderRadius: '8px',
+              marginTop: '16px',
+              fontFamily: 'monospace'
+            }}>
+              <code>
+                npm install sroof-ui<br/>
+                import &#123; Tabs, Tab &#125; from 'sroof-ui';
+              </code>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="testing" label="🧪 测试">
+          <div style={{ padding: '24px' }}>
+            <h3>测试策略</h3>
+            <p>确保组件质量的测试方法。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>测试类型</h4>
+              <ul>
+                <li>单元测试 - 测试组件功能</li>
+                <li>集成测试 - 测试组件交互</li>
+                <li>视觉测试 - 测试UI一致性</li>
+                <li>可访问性测试 - 确保无障碍访问</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1" className="custom-tabs">
+  <Tab key="tab1" label="自定义标签 1">
+    <CustomContent1 />
+  </Tab>
+  <Tab key="tab2" label="自定义标签 2">
+    <CustomContent2 />
+  </Tab>
+</Tabs>
+```
+
+## 动态标签页
+
+```jsx live
+function DynamicTabsExample() {
+  const [tabs, setTabs] = React.useState([
+    { key: 'tab1', label: '标签 1', content: '这是标签 1 的内容' },
+    { key: 'tab2', label: '标签 2', content: '这是标签 2 的内容' }
+  ]);
+  const [activeKey, setActiveKey] = React.useState('tab1');
+  const [counter, setCounter] = React.useState(3);
+
+  const addTab = () => {
+    const newTab = {
+      key: `tab${counter}`,
+      label: `标签 ${counter}`,
+      content: `这是动态添加的标签 ${counter} 的内容`
+    };
+    setTabs([...tabs, newTab]);
+    setActiveKey(newTab.key);
+    setCounter(counter + 1);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <button 
+          onClick={addTab}
+          style={{ 
+            padding: '8px 16px', 
+            border: 'none', 
+            borderRadius: '4px', 
+            background: '#10b981', 
+            color: 'white',
+            cursor: 'pointer',
+            marginRight: '8px'
+          }}
+        >
+          ➕ 添加标签页
+        </button>
+        <span style={{ color: '#6b7280' }}>
+          当前有 {tabs.length} 个标签页
+        </span>
+      </div>
+
+      <Tabs
+        activeKey={activeKey}
+        onChange={setActiveKey}
+      >
+        {tabs.map(tab => (
+          <Tab 
+            key={tab.key} 
+            label={
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {tab.label}
+                {tabs.length > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeTab(tab.key);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      padding: '2px',
+                      borderRadius: '2px',
+                      fontSize: '12px'
+                    }}
+                    title="关闭标签页"
+                  >
+                    ✕
+                  </button>
+                )}
+              </span>
+            }
+          >
+            <div style={{ padding: '20px' }}>
+              <h3>{tab.label}</h3>
+              <p>{tab.content}</p>
+              <div style={{ marginTop: '16px', color: '#6b7280', fontSize: '14px' }}>
+                标签页 ID: {tab.key}
+              </div>
+            </div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function DynamicTabs() {
+  const [tabs, setTabs] = useState([
+    { key: 'tab1', label: '标签 1', content: '内容 1' }
+  ]);
+  const [activeKey, setActiveKey] = useState('tab1');
+
+  const addTab = () => {
+    const newKey = `tab${Date.now()}`;
+    setTabs([...tabs, { 
+      key: newKey, 
+      label: `新标签 ${tabs.length + 1}`, 
+      content: `新内容 ${tabs.length + 1}` 
+    }]);
+    setActiveKey(newKey);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={addTab}>添加标签页</button>
+      <Tabs activeKey={activeKey} onChange={setActiveKey}>
+        {tabs.map(tab => (
+          <Tab key={tab.key} label={tab.label}>
+            <div>{tab.content}</div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+## API
+
+### Tabs Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| activeKey | `string` | - | 当前激活的标签页 key（受控模式） |
+| children | `React.ReactNode` | - | Tab 子组件 |
+| centered | `boolean` | `false` | 标签页是否居中显示 |
+| className | `string` | - | 自定义样式类名 |
+| defaultActiveKey | `string` | - | 默认激活的标签页 key（非受控模式） |
+| onChange | `(key: string) => void` | - | 标签页切换时的回调函数 |
+
+### Tab Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| key | `string` | - | 标签页的唯一标识符（必填） |
+| label | `React.ReactNode` | - | 标签页显示的标签文本或元素 |
+| children | `React.ReactNode` | - | 标签页的内容 |
+
+## 使用示例
+
+### 表单分步骤
+
+```jsx
+function StepForm() {
+  const [currentStep, setCurrentStep] = useState('basic');
+  const [formData, setFormData] = useState({});
+
+  return (
+    <Tabs activeKey={currentStep} onChange={setCurrentStep}>
+      <Tab key="basic" label="基本信息">
+        <BasicInfoForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('contact')}
+        />
+      </Tab>
+      <Tab key="contact" label="联系方式">
+        <ContactForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('confirm')}
+          onPrev={() => setCurrentStep('basic')}
+        />
+      </Tab>
+      <Tab key="confirm" label="确认提交">
+        <ConfirmForm 
+          data={formData}
+          onPrev={() => setCurrentStep('contact')}
+          onSubmit={handleSubmit}
+        />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 内容管理
+
+```jsx
+function ContentManager() {
+  const [activeTab, setActiveTab] = useState('articles');
+
+  return (
+    <Tabs activeKey={activeTab} onChange={setActiveTab}>
+      <Tab key="articles" label="📝 文章管理">
+        <ArticleList />
+      </Tab>
+      <Tab key="media" label="🖼️ 媒体库">
+        <MediaLibrary />
+      </Tab>
+      <Tab key="comments" label="💬 评论管理">
+        <CommentManager />
+      </Tab>
+      <Tab key="settings" label="⚙️ 设置">
+        <ContentSettings />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 数据展示
+
+```jsx
+function DataDashboard() {
+  return (
+    <Tabs defaultActiveKey="overview">
+      <Tab key="overview" label="概览">
+        <OverviewCharts />
+      </Tab>
+      <Tab key="users" label="用户分析">
+        <UserAnalytics />
+      </Tab>
+      <Tab key="sales" label="销售数据">
+        <SalesData />
+      </Tab>
+      <Tab key="performance" label="性能监控">
+        <PerformanceMetrics />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 注意事项
+
+1. **Key 的重要性**: 每个 `Tab` 必须有唯一的 `key` 属性
+2. **受控 vs 非受控**: 使用 `activeKey` 为受控模式，使用 `defaultActiveKey` 为非受控模式
+3. **内容渲染**: 只有当前激活的标签页内容会被渲染
+4. **键盘导航**: 支持左右箭头键在标签间导航
+5. **无障碍访问**: 自动生成正确的 ARIA 属性和角色
+
+## 最佳实践
+
+1. **标签数量**: 建议标签页数量不超过 7 个，过多会影响用户体验
+2. **标签文本**: 保持标签文本简洁明了，避免过长
+3. **内容组织**: 确保标签页之间的内容逻辑清晰
+4. **响应式**: 在移动端考虑标签页的显示方式
+5. **状态管理**: 合理使用受控和非受控模式sidebar_position: 7
+---
+
+# Tabs 标签页
+
+标签页组件，支持受控和非受控两种模式，提供灵活的标签页导航功能。
+
+## 基本用法
+
+```jsx live
+function TabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 1 内容</h3>
+          <p>这是第一个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 2 内容</h3>
+          <p>这是第二个标签页的内容。</p>
+        </div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div style={{ padding: '20px' }}>
+          <h3>标签页 3 内容</h3>
+          <p>这是第三个标签页的内容。</p>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+import { Tabs, Tab } from 'sroof-ui';
+
+function Example() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      <Tab key="tab1" label="标签页 1">
+        <div>标签页 1 的内容</div>
+      </Tab>
+      <Tab key="tab2" label="标签页 2">
+        <div>标签页 2 的内容</div>
+      </Tab>
+      <Tab key="tab3" label="标签页 3">
+        <div>标签页 3 的内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 受控模式
+
+```jsx live
+function ControlledTabsExample() {
+  const [activeKey, setActiveKey] = React.useState('home');
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <p>当前激活标签: <strong>{activeKey}</strong></p>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button 
+            onClick={() => setActiveKey('home')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'home' ? '#3b82f6' : 'white',
+              color: activeKey === 'home' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到首页
+          </button>
+          <button 
+            onClick={() => setActiveKey('profile')}
+            style={{ 
+              padding: '4px 8px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px',
+              background: activeKey === 'profile' ? '#3b82f6' : 'white',
+              color: activeKey === 'profile' ? 'white' : 'black',
+              cursor: 'pointer'
+            }}
+          >
+            切换到个人资料
+          </button>
+        </div>
+      </div>
+      
+      <Tabs
+        activeKey={activeKey}
+        onChange={(key) => {
+          setActiveKey(key);
+          console.log('标签页切换到:', key);
+        }}
+      >
+        <Tab key="home" label="🏠 首页">
+          <div style={{ padding: '20px' }}>
+            <h3>欢迎来到首页</h3>
+            <p>这里是应用的主页面，展示最重要的信息。</p>
+          </div>
+        </Tab>
+        <Tab key="profile" label="👤 个人资料">
+          <div style={{ padding: '20px' }}>
+            <h3>个人资料</h3>
+            <p>在这里可以查看和编辑您的个人信息。</p>
+          </div>
+        </Tab>
+        <Tab key="settings" label="⚙️ 设置">
+          <div style={{ padding: '20px' }}>
+            <h3>系统设置</h3>
+            <p>配置应用的各种选项和偏好设置。</p>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function ControlledTabs() {
+  const [activeKey, setActiveKey] = useState('home');
+
+  return (
+    <Tabs
+      activeKey={activeKey}
+      onChange={(key) => {
+        setActiveKey(key);
+        console.log('切换到:', key);
+      }}
+    >
+      <Tab key="home" label="首页">
+        <div>首页内容</div>
+      </Tab>
+      <Tab key="profile" label="个人资料">
+        <div>个人资料内容</div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 带图标的标签页
+
+```jsx live
+function IconTabsExample() {
+  return (
+    <Tabs defaultActiveKey="dashboard">
+      <Tab 
+        key="dashboard" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📊 仪表盘
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>仪表盘</h3>
+          <p>查看系统的整体运行状态和关键指标。</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', marginTop: '16px' }}>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>用户数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>1,234</p>
+            </div>
+            <div style={{ padding: '16px', background: '#f3f4f6', borderRadius: '8px' }}>
+              <h4>订单数量</h4>
+              <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>567</p>
+            </div>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="analytics" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📈 分析
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>数据分析</h3>
+          <p>深入分析用户行为和业务数据。</p>
+          <div style={{ marginTop: '16px' }}>
+            <h4>热门页面</h4>
+            <ul>
+              <li>首页 - 45%</li>
+              <li>产品页 - 28%</li>
+              <li>关于我们 - 15%</li>
+              <li>联系我们 - 12%</li>
+            </ul>
+          </div>
+        </div>
+      </Tab>
+      <Tab 
+        key="reports" 
+        label={
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📋 报告
+          </span>
+        }
+      >
+        <div style={{ padding: '20px' }}>
+          <h3>报告中心</h3>
+          <p>生成和查看各类业务报告。</p>
+          <div style={{ marginTop: '16px' }}>
+            <button style={{ 
+              padding: '8px 16px', 
+              marginRight: '8px',
+              border: 'none', 
+              borderRadius: '4px', 
+              background: '#3b82f6', 
+              color: 'white',
+              cursor: 'pointer'
+            }}>
+              生成月度报告
+            </button>
+            <button style={{ 
+              padding: '8px 16px', 
+              border: '1px solid #d1d5db', 
+              borderRadius: '4px', 
+              background: 'white',
+              cursor: 'pointer'
+            }}>
+              导出数据
+            </button>
+          </div>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="dashboard">
+  <Tab 
+    key="dashboard" 
+    label={<span><Icon name="dashboard" /> 仪表盘</span>}
+  >
+    <DashboardContent />
+  </Tab>
+  <Tab 
+    key="analytics" 
+    label={<span><Icon name="chart" /> 分析</span>}
+  >
+    <AnalyticsContent />
+  </Tab>
+</Tabs>
+```
+
+## 多标签页示例
+
+```jsx live
+function ManyTabsExample() {
+  return (
+    <Tabs defaultActiveKey="tab1">
+      {Array.from({ length: 6 }, (_, index) => (
+        <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+          <div style={{ padding: '20px' }}>
+            <h3>标签 {index + 1} 内容</h3>
+            <p>这是第 {index + 1} 个标签页的内容。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>功能特性 {index + 1}</h4>
+              <ul>
+                <li>特性 A - 提供基础功能</li>
+                <li>特性 B - 增强用户体验</li>
+                <li>特性 C - 优化性能表现</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      ))}
+    </Tabs>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1">
+  {Array.from({ length: 8 }, (_, index) => (
+    <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
+      <div>标签 {index + 1} 的内容</div>
+    </Tab>
+  ))}
+</Tabs>
+```
+
+## 自定义样式
+
+```jsx live
+function CustomStyleTabsExample() {
+  return (
+    <div>
+      <style>{`
+        .custom-tabs {
+          border: 2px solid #3b82f6;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
+      <Tabs defaultActiveKey="design" className="custom-tabs">
+        <Tab key="design" label="🎨 设计">
+          <div style={{ padding: '24px' }}>
+            <h3>设计系统</h3>
+            <p>统一的设计语言和组件规范。</p>
+            <div style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              marginTop: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#3b82f6', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                主色
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#10b981', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                成功
+              </div>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                background: '#f59e0b', 
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: 'bold'
+              }}>
+                警告
+              </div>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="development" label="💻 开发">
+          <div style={{ padding: '24px' }}>
+            <h3>开发指南</h3>
+            <p>组件开发的最佳实践和规范。</p>
+            <div style={{ 
+              background: '#f8fafc', 
+              padding: '16px', 
+              borderRadius: '8px',
+              marginTop: '16px',
+              fontFamily: 'monospace'
+            }}>
+              <code>
+                npm install sroof-ui<br/>
+                import &#123; Tabs, Tab &#125; from 'sroof-ui';
+              </code>
+            </div>
+          </div>
+        </Tab>
+        <Tab key="testing" label="🧪 测试">
+          <div style={{ padding: '24px' }}>
+            <h3>测试策略</h3>
+            <p>确保组件质量的测试方法。</p>
+            <div style={{ marginTop: '16px' }}>
+              <h4>测试类型</h4>
+              <ul>
+                <li>单元测试 - 测试组件功能</li>
+                <li>集成测试 - 测试组件交互</li>
+                <li>视觉测试 - 测试UI一致性</li>
+                <li>可访问性测试 - 确保无障碍访问</li>
+              </ul>
+            </div>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+<Tabs defaultActiveKey="tab1" className="custom-tabs">
+  <Tab key="tab1" label="自定义标签 1">
+    <CustomContent1 />
+  </Tab>
+  <Tab key="tab2" label="自定义标签 2">
+    <CustomContent2 />
+  </Tab>
+</Tabs>
+```
+
+## 动态标签页
+
+```jsx live
+function DynamicTabsExample() {
+  const [tabs, setTabs] = React.useState([
+    { key: 'tab1', label: '标签 1', content: '这是标签 1 的内容' },
+    { key: 'tab2', label: '标签 2', content: '这是标签 2 的内容' }
+  ]);
+  const [activeKey, setActiveKey] = React.useState('tab1');
+  const [counter, setCounter] = React.useState(3);
+
+  const addTab = () => {
+    const newTab = {
+      key: `tab${counter}`,
+      label: `标签 ${counter}`,
+      content: `这是动态添加的标签 ${counter} 的内容`
+    };
+    setTabs([...tabs, newTab]);
+    setActiveKey(newTab.key);
+    setCounter(counter + 1);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>
+        <button 
+          onClick={addTab}
+          style={{ 
+            padding: '8px 16px', 
+            border: 'none', 
+            borderRadius: '4px', 
+            background: '#10b981', 
+            color: 'white',
+            cursor: 'pointer',
+            marginRight: '8px'
+          }}
+        >
+          ➕ 添加标签页
+        </button>
+        <span style={{ color: '#6b7280' }}>
+          当前有 {tabs.length} 个标签页
+        </span>
+      </div>
+
+      <Tabs
+        activeKey={activeKey}
+        onChange={setActiveKey}
+      >
+        {tabs.map(tab => (
+          <Tab 
+            key={tab.key} 
+            label={
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {tab.label}
+                {tabs.length > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeTab(tab.key);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      padding: '2px',
+                      borderRadius: '2px',
+                      fontSize: '12px'
+                    }}
+                    title="关闭标签页"
+                  >
+                    ✕
+                  </button>
+                )}
+              </span>
+            }
+          >
+            <div style={{ padding: '20px' }}>
+              <h3>{tab.label}</h3>
+              <p>{tab.content}</p>
+              <div style={{ marginTop: '16px', color: '#6b7280', fontSize: '14px' }}>
+                标签页 ID: {tab.key}
+              </div>
+            </div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+```jsx
+function DynamicTabs() {
+  const [tabs, setTabs] = useState([
+    { key: 'tab1', label: '标签 1', content: '内容 1' }
+  ]);
+  const [activeKey, setActiveKey] = useState('tab1');
+
+  const addTab = () => {
+    const newKey = `tab${Date.now()}`;
+    setTabs([...tabs, { 
+      key: newKey, 
+      label: `新标签 ${tabs.length + 1}`, 
+      content: `新内容 ${tabs.length + 1}` 
+    }]);
+    setActiveKey(newKey);
+  };
+
+  const removeTab = (targetKey) => {
+    const newTabs = tabs.filter(tab => tab.key !== targetKey);
+    setTabs(newTabs);
+    if (activeKey === targetKey && newTabs.length > 0) {
+      setActiveKey(newTabs[0].key);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={addTab}>添加标签页</button>
+      <Tabs activeKey={activeKey} onChange={setActiveKey}>
+        {tabs.map(tab => (
+          <Tab key={tab.key} label={tab.label}>
+            <div>{tab.content}</div>
+          </Tab>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+```
+
+## API
+
+### Tabs Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| activeKey | `string` | - | 当前激活的标签页 key（受控模式） |
+| children | `React.ReactNode` | - | Tab 子组件 |
+| centered | `boolean` | `false` | 标签页是否居中显示 |
+| className | `string` | - | 自定义样式类名 |
+| defaultActiveKey | `string` | - | 默认激活的标签页 key（非受控模式） |
+| onChange | `(key: string) => void` | - | 标签页切换时的回调函数 |
+
+### Tab Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| key | `string` | - | 标签页的唯一标识符（必填） |
+| label | `React.ReactNode` | - | 标签页显示的标签文本或元素 |
+| children | `React.ReactNode` | - | 标签页的内容 |
+
+## 使用示例
+
+### 表单分步骤
+
+```jsx
+function StepForm() {
+  const [currentStep, setCurrentStep] = useState('basic');
+  const [formData, setFormData] = useState({});
+
+  return (
+    <Tabs activeKey={currentStep} onChange={setCurrentStep}>
+      <Tab key="basic" label="基本信息">
+        <BasicInfoForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('contact')}
+        />
+      </Tab>
+      <Tab key="contact" label="联系方式">
+        <ContactForm 
+          data={formData} 
+          onChange={setFormData}
+          onNext={() => setCurrentStep('confirm')}
+          onPrev={() => setCurrentStep('basic')}
+        />
+      </Tab>
+      <Tab key="confirm" label="确认提交">
+        <ConfirmForm 
+          data={formData}
+          onPrev={() => setCurrentStep('contact')}
+          onSubmit={handleSubmit}
+        />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 内容管理
+
+```jsx
+function ContentManager() {
+  const [activeTab, setActiveTab] = useState('articles');
+
+  return (
+    <Tabs activeKey={activeTab} onChange={setActiveTab}>
+      <Tab key="articles" label="📝 文章管理">
+        <ArticleList />
+      </Tab>
+      <Tab key="media" label="🖼️ 媒体库">
+        <MediaLibrary />
+      </Tab>
+      <Tab key="comments" label="💬 评论管理">
+        <CommentManager />
+      </Tab>
+      <Tab key="settings" label="⚙️ 设置">
+        <ContentSettings />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+### 数据展示
+
+```jsx
+function DataDashboard() {
+  return (
+    <Tabs defaultActiveKey="overview">
+      <Tab key="overview" label="概览">
+        <OverviewCharts />
+      </Tab>
+      <Tab key="users" label="用户分析">
+        <UserAnalytics />
+      </Tab>
+      <Tab key="sales" label="销售数据">
+        <SalesData />
+      </Tab>
+      <Tab key="performance" label="性能监控">
+        <PerformanceMetrics />
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## 注意事项
+
+1. **Key 的重要性**: 每个 `Tab` 必须有唯一的 `key` 属性
+2. **受控 vs 非受控**: 使用 `activeKey` 为受控模式，使用 `defaultActiveKey` 为非受控模式
+3. **内容渲染**: 只有当前激活的标签页内容会被渲染
+4. **键盘导航**: 支持左右箭头键在标签间导航
+5. **无障碍访问**: 自动生成正确的 ARIA 属性和角色
+
+## 最佳实践
+
+1. **标签数量**: 建议标签页数量不超过 7 个，过多会影响用户体验
+2. **标签文本**: 保持标签文本简洁明了，避免过长
+3. **内容组织**: 确保标签页之间的内容逻辑清晰
+4. **响应式**: 在移动端考虑标签页的显示方式
+5. **状态管理**: 合理使用受控和非受控模式
