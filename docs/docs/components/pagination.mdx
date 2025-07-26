@@ -1,0 +1,239 @@
+---
+sidebar_position: 5
+---
+
+# Pagination 分页
+
+分页组件，用于大量数据的分页显示，支持智能省略和完整的导航功能。
+
+## 基本用法
+
+```jsx live
+function PaginationExample() {
+  const [current, setCurrent] = React.useState(1);
+  
+  return (
+    <Pagination
+      total={100}
+      current={current}
+      pageSize={10}
+      onChange={setCurrent}
+    />
+  );
+}
+```
+
+```jsx
+import { Pagination } from 'sroof-ui';
+
+function Example() {
+  const [current, setCurrent] = useState(1);
+  
+  return (
+    <Pagination
+      total={100}
+      current={current}
+      pageSize={10}
+      onChange={setCurrent}
+    />
+  );
+}
+```
+
+## 大量页码
+
+当页码数量较多时，组件会自动显示省略号来简化显示。
+
+```jsx live
+function ManyPagesExample() {
+  const [current, setCurrent] = React.useState(5);
+  
+  return (
+    <Pagination
+      total={1000}
+      current={current}
+      pageSize={20}
+      onChange={setCurrent}
+      siblingCount={1}
+    />
+  );
+}
+```
+
+## 自定义兄弟页码数量
+
+通过 `siblingCount` 属性可以控制当前页两侧显示的页码数量。
+
+```jsx live
+function SiblingCountExample() {
+  const [current, setCurrent] = React.useState(10);
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div>
+        <h4>siblingCount = 1 (默认)</h4>
+        <Pagination
+          total={2000}
+          current={current}
+          pageSize={20}
+          onChange={setCurrent}
+          siblingCount={1}
+        />
+      </div>
+      <div>
+        <h4>siblingCount = 2</h4>
+        <Pagination
+          total={2000}
+          current={current}
+          pageSize={20}
+          onChange={setCurrent}
+          siblingCount={2}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 自定义省略号
+
+可以自定义省略号的显示文本。
+
+```jsx live
+function CustomEllipsisExample() {
+  const [current, setCurrent] = React.useState(5);
+  
+  return (
+    <Pagination
+      total={500}
+      current={current}
+      pageSize={10}
+      onChange={setCurrent}
+      ellipsis="···"
+    />
+  );
+}
+```
+
+## 边界情况
+
+组件会正确处理第一页和最后一页的显示。
+
+```jsx live
+function EdgeCasesExample() {
+  const [current1, setCurrent1] = React.useState(1);
+  const [current2, setCurrent2] = React.useState(20);
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div>
+        <h4>第一页</h4>
+        <Pagination
+          total={400}
+          current={current1}
+          pageSize={20}
+          onChange={setCurrent1}
+        />
+      </div>
+      <div>
+        <h4>最后一页</h4>
+        <Pagination
+          total={400}
+          current={current2}
+          pageSize={20}
+          onChange={setCurrent2}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 少量页码
+
+当总页数较少时，不会显示省略号，直接显示所有页码。
+
+```jsx live
+function FewPagesExample() {
+  const [current, setCurrent] = React.useState(2);
+  
+  return (
+    <Pagination
+      total={50}
+      current={current}
+      pageSize={10}
+      onChange={setCurrent}
+    />
+  );
+}
+```
+
+## API
+
+### Pagination Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| total | `number` | - | 总数据条数 |
+| current | `number` | - | 当前页码 |
+| pageSize | `number` | - | 每页显示条数 |
+| onChange | `(page: number) => void` | - | 页码改变时的回调函数 |
+| siblingCount | `number` | `1` | 当前页两侧显示的页码数量 |
+| ellipsis | `string` | `"..."` | 省略页码的显示文本 |
+| className | `string` | `""` | 自定义类名 |
+
+## 特性
+
+### 🎯 智能省略
+
+- 根据 `siblingCount` 自动计算显示的页码范围
+- 智能显示左侧、右侧或两侧省略号
+- 始终显示首页和末页（当需要时）
+
+### 🚀 完整导航
+
+- 上一页/下一页按钮
+- 直接点击页码跳转
+- 自动禁用边界按钮
+
+### ♿ 无障碍支持
+
+- 完整的 ARIA 标签
+- 语义化的 HTML 结构
+- 键盘导航支持
+- 屏幕阅读器友好
+
+### 📱 响应式设计
+
+- 移动端适配
+- 触摸友好的按钮尺寸
+- 自适应间距
+
+### 🎨 主题支持
+
+- 内置深色模式支持
+- 可自定义样式
+- 一致的设计语言
+
+## 使用场景
+
+- **数据表格分页**：大量数据的分页显示
+- **搜索结果分页**：搜索结果的分页导航
+- **文章列表分页**：博客或新闻列表的分页
+- **商品列表分页**：电商商品列表的分页显示
+
+## 最佳实践
+
+1. **合理设置 pageSize**：根据内容类型选择合适的每页条数
+2. **保持状态同步**：确保 `current` 状态与实际数据同步
+3. **处理边界情况**：正确处理数据为空或只有一页的情况
+4. **提供加载状态**：在数据加载时提供适当的反馈
+5. **URL 同步**：考虑将页码同步到 URL 中以支持书签和分享
+
+## 注意事项
+
+- 当 `current < 1` 或 `totalPageCount < 2` 时，组件不会渲染
+- `onChange` 回调只在页码真正改变时触发
+- 组件会自动计算总页数：`Math.ceil(total / pageSize)`
+- 所有页码都是从 1 开始计算
+
