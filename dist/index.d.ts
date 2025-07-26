@@ -3,7 +3,7 @@ export { Input, type InputProps } from './components/Input';
 export { LanguageSwitcher } from './components/LanguageSwitcher';
 export { Menu, MenuItem, SubMenu, type MenuProps, type MenuItemProps, type SubMenuProps } from './components/Menu';
 export { Tabs, Tab, type TabsProps, type TabProps } from './components/Tabs';
-export { Radio, type RadioProps } from './components/Radio';
+export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './components/Radio';
 export { Switch, type SwitchProps } from './components/Switch';
 export { Form, FormItem, FormActions, type FormProps, type FormItemProps, type FormActionsProps } from './components/Form';
 export { Card, type CardProps } from './components/Card';

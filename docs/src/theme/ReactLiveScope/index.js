@@ -8,6 +8,7 @@ import {
   Input,
   Tabs,
   Radio,
+  RadioGroup,
   Form,
   FormItem,
   FormActions 
@@ -25,6 +26,7 @@ const ReactLiveScope = {
   Input,
   Tabs,
   Radio,
+  RadioGroup,
   Form,
   FormItem,
   FormActions 

@@ -1,0 +1,318 @@
+---
+sidebar_position: 5
+---
+
+# Radio 单选框
+
+单选框组件，支持受控和非受控模式。通常与 RadioGroup 组件配合使用。
+
+## 基本用法 - 垂直布局
+
+```jsx live
+function RadioGroupVerticalExample() {
+  return (
+    <RadioGroup defaultValue="option2" name="vertical-group">
+      <Radio value="option1">选项 1</Radio>
+      <Radio value="option2">选项 2</Radio>
+      <Radio value="option3">选项 3</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+```jsx
+<RadioGroup defaultValue="option2" name="vertical-group">
+  <Radio value="option1">选项 1</Radio>
+  <Radio value="option2">选项 2</Radio>
+  <Radio value="option3">选项 3</Radio>
+</RadioGroup>
+```
+
+## 单选框组 - 水平布局
+
+```jsx live
+function RadioGroupHorizontalExample() {
+  return (
+    <RadioGroup direction="horizontal" defaultValue="small" name="size-group">
+      <Radio value="small">小</Radio>
+      <Radio value="medium">中</Radio>
+      <Radio value="large">大</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+```jsx
+<RadioGroup direction="horizontal" defaultValue="small">
+  <Radio value="small">小</Radio>
+  <Radio value="medium">中</Radio>
+  <Radio value="large">大</Radio>
+</RadioGroup>
+```
+
+## 受控模式
+
+```jsx live
+function RadioControlledExample() {
+  const [value, setValue] = React.useState('react');
+  
+  return (
+    <div>
+      <RadioGroup 
+        value={value} 
+        onChange={setValue}
+        name="framework-group"
+      >
+        <Radio value="react">React</Radio>
+        <Radio value="vue">Vue</Radio>
+        <Radio value="angular">Angular</Radio>
+        <Radio value="svelte">Svelte</Radio>
+      </RadioGroup>
+      <p style={{ marginTop: '16px', color: '#666' }}>
+        当前选择: {value}
+      </p>
+    </div>
+  );
+}
+```
+
+```jsx
+function ControlledRadio() {
+  const [value, setValue] = useState('react');
+  
+  return (
+    <RadioGroup value={value} onChange={setValue}>
+      <Radio value="react">React</Radio>
+      <Radio value="vue">Vue</Radio>
+      <Radio value="angular">Angular</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+## 禁用状态
+
+```jsx live
+function RadioDisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <Radio value="normal">正常状态</Radio>
+      <Radio value="disabled" disabled>
+        禁用状态
+      </Radio>
+      <Radio value="disabled-checked" disabled defaultChecked>
+        禁用且选中
+      </Radio>
+    </div>
+  );
+}
+```
+
+```jsx
+<Radio value="normal">正常状态</Radio>
+<Radio value="disabled" disabled>禁用状态</Radio>
+<Radio value="disabled-checked" disabled defaultChecked>禁用且选中</Radio>
+```
+
+## 单选框组禁用
+
+```jsx live
+function RadioGroupDisabledExample() {
+  return (
+    <RadioGroup disabled defaultValue="option2" name="disabled-group">
+      <Radio value="option1">选项 1</Radio>
+      <Radio value="option2">选项 2</Radio>
+      <Radio value="option3">选项 3</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+```jsx
+<RadioGroup disabled defaultValue="option2">
+  <Radio value="option1">选项 1</Radio>
+  <Radio value="option2">选项 2</Radio>
+  <Radio value="option3">选项 3</Radio>
+</RadioGroup>
+```
+
+## 混合禁用状态
+
+```jsx live
+function RadioMixedDisabledExample() {
+  return (
+    <RadioGroup defaultValue="enabled1" name="mixed-group">
+      <Radio value="enabled1">可用选项 1</Radio>
+      <Radio value="disabled1" disabled>禁用选项</Radio>
+      <Radio value="enabled2">可用选项 2</Radio>
+      <Radio value="disabled2" disabled>另一个禁用选项</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+```jsx
+<RadioGroup defaultValue="enabled1">
+  <Radio value="enabled1">可用选项 1</Radio>
+  <Radio value="disabled1" disabled>禁用选项</Radio>
+  <Radio value="enabled2">可用选项 2</Radio>
+</RadioGroup>
+```
+
+## 自定义样式
+
+```jsx live
+function RadioCustomExample() {
+  return (
+    <RadioGroup 
+      defaultValue="custom1" 
+      name="custom-group"
+      className="custom-radio-group"
+    >
+      <Radio value="custom1" className="custom-radio">
+        自定义样式 1
+      </Radio>
+      <Radio value="custom2" className="custom-radio">
+        自定义样式 2
+      </Radio>
+    </RadioGroup>
+  );
+}
+```
+
+## API
+
+### Radio Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| value | `string` | - | 选项值（必填） |
+| children | `React.ReactNode` | - | 选项内容 |
+| checked | `boolean` | - | 是否选中（受控模式） |
+| defaultChecked | `boolean` | `false` | 默认选中（非受控模式） |
+| disabled | `boolean` | `false` | 是否禁用 |
+| name | `string` | - | 单选框组名称 |
+| onChange | `(value: string) => void` | - | 值变化回调 |
+| className | `string` | - | 自定义类名 |
+
+### RadioGroup Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| value | `string` | - | 单选框组的值（受控模式） |
+| defaultValue | `string` | - | 默认选中的值（非受控模式） |
+| name | `string` | - | 单选框组名称 |
+| onChange | `(value: string) => void` | - | 值变化回调 |
+| disabled | `boolean` | `false` | 是否禁用整个组 |
+| direction | `'horizontal' \| 'vertical'` | `'vertical'` | 布局方向 |
+| className | `string` | - | 自定义类名 |
+| children | `React.ReactNode` | - | 子元素 |
+
+## 使用示例
+
+### 表单中使用
+
+```jsx
+import { Radio, RadioGroup } from 'sroof-ui';
+
+function PreferenceForm() {
+  const [theme, setTheme] = useState('light');
+  const [size, setSize] = useState('medium');
+  
+  return (
+    <form>
+      <div>
+        <label>主题偏好:</label>
+        <RadioGroup value={theme} onChange={setTheme}>
+          <Radio value="light">浅色主题</Radio>
+          <Radio value="dark">深色主题</Radio>
+          <Radio value="auto">跟随系统</Radio>
+        </RadioGroup>
+      </div>
+      
+      <div>
+        <label>字体大小:</label>
+        <RadioGroup 
+          direction="horizontal" 
+          value={size} 
+          onChange={setSize}
+        >
+          <Radio value="small">小</Radio>
+          <Radio value="medium">中</Radio>
+          <Radio value="large">大</Radio>
+        </RadioGroup>
+      </div>
+    </form>
+  );
+}
+```
+
+### 问卷调查
+
+```jsx
+function SurveyQuestion() {
+  const [satisfaction, setSatisfaction] = useState('');
+  
+  return (
+    <div>
+      <h3>您对我们的服务满意度如何？</h3>
+      <RadioGroup value={satisfaction} onChange={setSatisfaction}>
+        <Radio value="very-satisfied">非常满意</Radio>
+        <Radio value="satisfied">满意</Radio>
+        <Radio value="neutral">一般</Radio>
+        <Radio value="dissatisfied">不满意</Radio>
+        <Radio value="very-dissatisfied">非常不满意</Radio>
+      </RadioGroup>
+    </div>
+  );
+}
+```
+
+### 配置选择
+
+```jsx
+function ConfigurationPanel() {
+  const [config, setConfig] = useState({
+    layout: 'grid',
+    sorting: 'name',
+    view: 'card'
+  });
+  
+  return (
+    <div>
+      <div>
+        <h4>布局方式</h4>
+        <RadioGroup 
+          direction="horizontal"
+          value={config.layout}
+          onChange={(value) => setConfig(prev => ({ ...prev, layout: value }))}
+        >
+          <Radio value="list">列表</Radio>
+          <Radio value="grid">网格</Radio>
+          <Radio value="table">表格</Radio>
+        </RadioGroup>
+      </div>
+      
+      <div>
+        <h4>排序方式</h4>
+        <RadioGroup 
+          value={config.sorting}
+          onChange={(value) => setConfig(prev => ({ ...prev, sorting: value }))}
+        >
+          <Radio value="name">按名称</Radio>
+          <Radio value="date">按日期</Radio>
+          <Radio value="size">按大小</Radio>
+        </RadioGroup>
+      </div>
+    </div>
+  );
+}
+```
+
+## 注意事项
+
+1. **受控 vs 非受控**：使用 `checked` 属性时为受控模式，使用 `defaultChecked` 为非受控模式
+2. **RadioGroup 优势**：推荐使用 `RadioGroup` 来管理多个 `Radio`，它会自动处理互斥逻辑
+3. **name 属性**：在 `RadioGroup` 中会自动为所有子 `Radio` 设置相同的 `name`
+4. **键盘导航**：支持方向键在选项间导航
+5. **无障碍访问**：自动生成唯一 ID 和正确的 ARIA 属性

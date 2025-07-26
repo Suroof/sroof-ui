@@ -3862,7 +3862,7 @@ const Tabs = ({ activeKey, children, className, defaultActiveKey, onChange, }) =
     return (jsxRuntimeExports.jsxs("div", { className: `${styles$4['tabs-container']} ${className || ""}`, children: [jsxRuntimeExports.jsx("div", { className: styles$4.tabs, children: tabs.map((tab) => (jsxRuntimeExports.jsx("div", { className: `${styles$4.tab} ${tab.key === currentActiveKey ? styles$4.active : ""}`, onClick: () => handleTabClick(tab.key), children: tab.props.label }, tab.key))) }), jsxRuntimeExports.jsx("div", { className: styles$4.content, children: activeTab && activeTab.props.children })] }));
 };
 
-var styles$3 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP"};
+var styles$3 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP","radioGroup":"Radio-module_radioGroup__W9xve","vertical":"Radio-module_vertical__WksGU","horizontal":"Radio-module_horizontal__1Ovgu"};
 
 const Radio = ({ children, value, disabled = false, checked, defaultChecked = false, name, onChange, className, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3881,6 +3881,32 @@ const Radio = ({ children, value, disabled = false, checked, defaultChecked = fa
     };
     const radioId = React.useId();
     return (jsxRuntimeExports.jsxs("label", { className: `${styles$3.radio} ${disabled ? styles$3.disabled : ""} ${className || ""}`, htmlFor: radioId, children: [jsxRuntimeExports.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntimeExports.jsx("span", { className: styles$3.label, children: children })] }));
+};
+const RadioGroup = ({ value, defaultValue, name, onChange, disabled = false, className, children, direction = "vertical", }) => {
+    const [internalValue, setInternalValue] = React.useState(defaultValue || "");
+    const groupName = name || React.useId();
+    // 受控或非受控模式
+    const currentValue = value !== undefined ? value : internalValue;
+    const handleChange = (newValue) => {
+        // 非受控模式下更新内部状态
+        if (value === undefined) {
+            setInternalValue(newValue);
+        }
+        // 调用外部回调
+        if (onChange) {
+            onChange(newValue);
+        }
+    };
+    const renderChildren = () => {
+        return React.Children.map(children, (child) => {
+            if (React.isValidElement(child) && child.type === Radio) {
+                const radioProps = child.props;
+                return React.cloneElement(child, Object.assign(Object.assign({}, radioProps), { name: groupName, checked: currentValue !== "" && radioProps.value === currentValue, disabled: disabled || radioProps.disabled, onChange: handleChange }));
+            }
+            return child;
+        });
+    };
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$3.radioGroup} ${styles$3[direction]} ${className || ""}`, role: "radiogroup", children: renderChildren() }));
 };
 
 var styles$2 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
@@ -4030,6 +4056,7 @@ exports.Menu = Menu;
 exports.MenuItem = MenuItem;
 exports.Radio = Radio;
 exports.RadioDefault = Radio;
+exports.RadioGroup = RadioGroup;
 exports.SubMenu = SubMenu;
 exports.Switch = Switch;
 exports.SwitchDefault = Switch;
