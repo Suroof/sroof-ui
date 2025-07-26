@@ -18,17 +18,35 @@ const sidebars: SidebarsConfig = {
     'intro',
     {
       type: 'category',
-      label: '组件',
+      label: '基础组件',
       items: [
         'components/button',
-        'components/menu',
-        'components/card',
-        'components/form',
         'components/input',
-        'components/radio',
+        'components/card',
+      ],
+    },
+    {
+      type: 'category',
+      label: '导航组件',
+      items: [
+        'components/menu',
         'components/tabs',
-        'components/language',
         'components/pagination',
+      ],
+    },
+    {
+      type: 'category',
+      label: '表单组件',
+      items: [
+        'components/form',
+        'components/radio',
+      ],
+    },
+    {
+      type: 'category',
+      label: '功能组件',
+      items: [
+        'components/language',
       ],
     },
   ],
