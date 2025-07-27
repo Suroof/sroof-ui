@@ -23,7 +23,7 @@ function HomepageHeader() {
         </Heading>
         <p className={styles.hero__subtitle}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Button variant="outline" rounded="large" height="large" onClick={handleTo}>
+          <Button variant="outline" rounded="large" size="large" onClick={handleTo}>
             Browse Components
           </Button>
         </div>
