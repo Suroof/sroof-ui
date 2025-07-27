@@ -77,11 +77,11 @@ import TabItem from '@theme/TabItem';
   
   <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '1rem' }}>
     <Button variant="primary">主要按钮</Button>
-    <Button variant="secondary">次要按钮</Button>
+    <Button variant="secondary">信息按钮</Button>
     <Button variant="outline">边框按钮</Button>
     <Button variant="danger">危险按钮</Button>
     <Button size="small">小按钮</Button>
-    <Button size="large">大按钮</Button>
+    <Button size="large">大按钮</Button> 
   </div>
 
 </div>
@@ -110,10 +110,10 @@ import TabItem from '@theme/TabItem';
   </h4>
   
   <div style={{ display: 'flex', gap: '12px', flexDirection: 'column', maxWidth: '300px', marginBottom: '1rem' }}>
-    <Input placeholder="默认输入框" />
     <Input placeholder="小尺寸输入框" size="small" />
+    <Input placeholder="中等尺寸输入框" size="medium" />
     <Input placeholder="大尺寸输入框" size="large" />
-    <Input placeholder="禁用状态" disabled />
+    <Input placeholder="禁用状态" disabled size="medium" />
   </div>
 
 </div>

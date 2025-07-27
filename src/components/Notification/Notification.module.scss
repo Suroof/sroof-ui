@@ -1,0 +1,59 @@
+.notification {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: opacity 0.3s, transform 0.3s;
+
+  &.top-left {
+    top: 20px;
+    left: 20px;
+  }
+
+  &.top-right {
+    top: 20px;
+    right: 20px;
+  }
+
+  &.bottom-left {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  &.bottom-right {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+.content {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 16px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 16px;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #333;
+  }
+}
