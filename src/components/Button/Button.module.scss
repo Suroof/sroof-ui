@@ -150,7 +150,7 @@
 .button-large {
   padding: var(--spacing-md) var(--spacing-lg);
   font-size: var(--font-size-lg, 1.125rem);
-  min-height: 48px;
+  min-height:63px;
 }
 
 /* 圆角样式 */
@@ -168,25 +168,6 @@
 
 .button-rounded-large {
   border-radius: 200px;
-}
-
-/* 高度样式 */
-.button-height-small {
-  height: 14px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.button-height-medium {
-  height: 36px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.button-height-large {
-  height: 56px;
-  padding-top: 0;
-  padding-bottom: 0;
 }
 
 /* 禁用状态 */

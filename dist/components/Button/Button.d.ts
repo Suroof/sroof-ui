@@ -14,8 +14,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     type?: "button" | "submit" | "reset";
     /** 圆角控制 */
     rounded?: "none" | "small" | "medium" | "large";
-    /** 按钮高度 */
-    height?: "small" | "medium" | "large";
 }
 export declare const Button: React.FC<ButtonProps>;
 export default Button;

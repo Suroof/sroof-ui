@@ -430,18 +430,17 @@ function requireJsxRuntime () {
 
 var jsxRuntimeExports = requireJsxRuntime();
 
-var styles$b = {"button":"Button-module_button__18Bed","button-primary":"Button-module_button-primary__wEPNt","disabled":"Button-module_disabled__UzdWL","button-secondary":"Button-module_button-secondary__nRFiY","button-outline":"Button-module_button-outline__zKhUk","button-text":"Button-module_button-text__8GFeA","button-danger":"Button-module_button-danger__MRboG","button-link":"Button-module_button-link__44NZ0","button-small":"Button-module_button-small__btpZ4","button-medium":"Button-module_button-medium__6yd9j","button-large":"Button-module_button-large__zNlxT","button-success":"Button-module_button-success__cb-Id","button-warning":"Button-module_button-warning__ixyGP","button-rounded-none":"Button-module_button-rounded-none__LkA4g","button-rounded-small":"Button-module_button-rounded-small__9jSqP","button-rounded-medium":"Button-module_button-rounded-medium__YB0g4","button-rounded-large":"Button-module_button-rounded-large__-RAYn","button-height-small":"Button-module_button-height-small__jNohx","button-height-medium":"Button-module_button-height-medium__crPgl","button-height-large":"Button-module_button-height-large__IydXG","loading":"Button-module_loading__QfItr","button-spin":"Button-module_button-spin__mQSue","button-icon":"Button-module_button-icon__5ByEL","button-block":"Button-module_button-block__GO1c1","button-group":"Button-module_button-group__emwZY"};
+var styles$b = {"button":"Button-module_button__18Bed","button-primary":"Button-module_button-primary__wEPNt","disabled":"Button-module_disabled__UzdWL","button-secondary":"Button-module_button-secondary__nRFiY","button-outline":"Button-module_button-outline__zKhUk","button-text":"Button-module_button-text__8GFeA","button-danger":"Button-module_button-danger__MRboG","button-link":"Button-module_button-link__44NZ0","button-small":"Button-module_button-small__btpZ4","button-medium":"Button-module_button-medium__6yd9j","button-large":"Button-module_button-large__zNlxT","button-success":"Button-module_button-success__cb-Id","button-warning":"Button-module_button-warning__ixyGP","button-rounded-none":"Button-module_button-rounded-none__LkA4g","button-rounded-small":"Button-module_button-rounded-small__9jSqP","button-rounded-medium":"Button-module_button-rounded-medium__YB0g4","button-rounded-large":"Button-module_button-rounded-large__-RAYn","loading":"Button-module_loading__QfItr","button-spin":"Button-module_button-spin__mQSue","button-icon":"Button-module_button-icon__5ByEL","button-block":"Button-module_button-block__GO1c1","button-group":"Button-module_button-group__emwZY"};
 
 /*
 基础按钮组件
 */
-const Button = ({ children, variant = "primary", size = "medium", rounded = "medium", height = "medium", onClick, disabled = false, className = "", }) => {
+const Button = ({ children, variant = "primary", size = "medium", rounded = "medium", onClick, disabled = false, className = "", }) => {
     const buttonClasses = [
         styles$b.button,
         styles$b[`button-${variant}`],
         styles$b[`button-${size}`],
         styles$b[`button-rounded-${rounded}`],
-        styles$b[`button-height${height}`],
         disabled ? styles$b.disabled : "",
         className,
     ]

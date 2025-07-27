@@ -25,8 +25,6 @@ export interface ButtonProps
   type?: "button" | "submit" | "reset";
   /** 圆角控制 */
   rounded?: "none" | "small" | "medium" | "large";
-  /** 按钮高度 */
-  height?: "small" | "medium" | "large";
 }
 
 /* 
@@ -37,7 +35,6 @@ export const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   size = "medium",
   rounded="medium",
-  height = "medium",
   onClick,
   disabled = false,
   className = "",
@@ -47,7 +44,6 @@ export const Button: React.FC<ButtonProps> = ({
     styles[`button-${variant}`],
     styles[`button-${size}`],
     styles[`button-rounded-${rounded}`],
-    styles[`button-height${height}`],
     disabled ? styles.disabled : "",
     className,
   ]
