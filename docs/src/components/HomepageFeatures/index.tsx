@@ -2,6 +2,10 @@ import type { ReactNode } from "react";
 import clsx from "clsx";
 import Heading from "@theme/Heading";
 import styles from "./styles.module.css";
+import React from 'react'
+import MountainSvg from "@site/static/img/undraw_docusaurus_mountain.svg";
+import TreeSvg from "@site/static/img/undraw_docusaurus_tree.svg";
+import ReactSvg from "@site/static/img/undraw_docusaurus_react.svg";
 
 type FeatureItem = {
   title: string;
@@ -12,7 +16,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "简单易用",
-    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    Svg:MountainSvg,
     description: (
       <>
         Sroof UI 从设计之初就注重易用性，提供简洁的 API 和完善的文档，
@@ -22,7 +26,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "专注核心",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    Svg:TreeSvg,
     description: (
       <>
         专注于提供高质量的 UI 组件，让您将更多精力投入到业务逻辑中。
@@ -32,7 +36,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "React 驱动",
-    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    Svg: ReactSvg,
     description: (
       <>
         基于现代 React 技术栈构建，支持 TypeScript，提供完整的类型定义。
