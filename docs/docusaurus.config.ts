@@ -5,32 +5,23 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Sroof UI',
-  tagline: '现代化的 React UI 组件库',
-  favicon: 'img/favicon.ico',
+  title: 'SROOF UI',
+  tagline: 'Smooth to use like flowing water,build with React',
+  favicon: 'img/logo.svg',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
   url: 'https://suroof.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/sroof-ui/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Suroof', // Usually your GitHub org/user name.
-  projectName: 'sroof-ui', // Usually your repo name.
+  organizationName: 'Suroof', 
+  projectName: 'sroof-ui', 
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans'],
@@ -43,10 +34,8 @@ const config: Config = {
         docs: {
           path: 'docs',
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Suroof/sroof-ui/tree/main/docs-new/',
+            'https://github.com/Suroof/sroof-ui/docs/',
         },
         blog: false, // 禁用博客功能
         theme: {

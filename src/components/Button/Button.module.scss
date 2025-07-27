@@ -1,77 +1,9 @@
-.button {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
-  border: none;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button-primary {
-  background-color: var(--color-primary-500);
-  color: white;
-}
-
-.button-primary:hover:not(.disabled) {
-  background-color: var(--color-primary-600);
-}
-
-.button-secondary {
-  background-color: var(--color-neutral-500, #6C757D);
-  color: white;
-}
-
-.button-secondary:hover:not(.disabled) {
-  background-color: var(--color-neutral-600, #5a6268);
-}
-
-.button-outline {
-  background-color: transparent;
-  color: var(--color-primary-500);
-  border: 1px solid var(--color-primary-500);
-}
-
-.button-outline:hover:not(.disabled) {
-  background-color: var(--color-primary-50);
-}
-
-.button-text {
-  background-color: transparent;
-  color: var(--color-primary-500);
-}
-
-.button-text:hover:not(.disabled) {
-  background-color: var(--color-primary-50);
-}
-
-.button-small {
-  padding: var(--spacing-xs, 0.25rem) var(--spacing-sm);
-  font-size: var(--font-size-sm, 0.875rem);
-}
-
-.button-medium {
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-base);
-}
-
-.button-large {
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-size: var(--font-size-lg, 1.125rem);
-}
-
-.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Italiana&family=Kumbh+Sans:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 .button {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
+  font-family:"DM Serif Text", serif;
+  font-weight: var(--font-family-ita);
   border: none;
-  border-radius: var(--border-radius-md);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   display: inline-flex;
@@ -80,22 +12,22 @@
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(var(--color-primary-500-rgb, 81, 133, 112), 0.2);
   }
-  
+
   &:active {
     transform: translateY(1px);
   }
 }
 
-
+/* 按钮变体 */
 .button-primary {
   background-color: var(--color-primary-500);
   color: white;
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-primary-600);
     transform: translateY(-1px);
@@ -104,9 +36,9 @@
 }
 
 .button-secondary {
-  background-color: var(--color-neutral-500, #6C757D);
+  background-color: var(--color-neutral-500, #6c757d);
   color: white;
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-neutral-600, #5a6268);
     transform: translateY(-1px);
@@ -118,18 +50,19 @@
   background-color: transparent;
   color: var(--color-primary-500);
   border: 1px solid var(--color-primary-500);
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-primary-50);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(var(--color-primary-500-rgb, 81, 133, 112), 0.15);
+    box-shadow: 0 4px 12px
+      rgba(var(--color-primary-500-rgb, 81, 133, 112), 0.15);
   }
 }
 
 .button-text {
   background-color: transparent;
   color: var(--color-primary-500);
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-primary-50);
     transform: translateY(-1px);
@@ -139,7 +72,7 @@
 .button-danger {
   background-color: var(--color-danger-500, #dc3545);
   color: white;
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-danger-600, #c82333);
     transform: translateY(-1px);
@@ -152,24 +85,37 @@
   color: var(--color-primary-500);
   text-decoration: underline;
   border: none;
-  
+  padding: var(--spacing-sm) 0;
+
   &:hover:not(.disabled) {
     color: var(--color-primary-600);
     text-decoration-color: var(--color-primary-600);
     background-color: transparent;
   }
-  
+
   &:focus {
     box-shadow: none;
     outline: 2px solid var(--color-primary-500);
     outline-offset: 2px;
+  }
+
+  &.button-small {
+    padding: var(--spacing-xs, 0.25rem) 0;
+  }
+
+  &.button-medium {
+    padding: var(--spacing-sm) 0;
+  }
+
+  &.button-large {
+    padding: var(--spacing-md) 0;
   }
 }
 
 .button-success {
   background-color: var(--color-success-500, #28a745);
   color: white;
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-success-600, #218838);
     transform: translateY(-1px);
@@ -180,7 +126,7 @@
 .button-warning {
   background-color: var(--color-warning-500, #ffc107);
   color: var(--color-neutral-900, #212529);
-  
+
   &:hover:not(.disabled) {
     background-color: var(--color-warning-600, #e0a800);
     transform: translateY(-1px);
@@ -188,56 +134,83 @@
   }
 }
 
+/* 按钮尺寸 */
 .button-small {
   padding: var(--spacing-xs, 0.25rem) var(--spacing-sm);
   font-size: var(--font-size-sm, 0.875rem);
   min-height: 32px;
-  
-  &.button-link {
-    padding: var(--spacing-xs, 0.25rem) 0;
-  }
 }
 
 .button-medium {
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: var(--font-size-base);
-  min-height: 40px;
-  
-  &.button-link {
-    padding: var(--spacing-sm) 0;
-  }
+  min-height: 24px;
 }
 
 .button-large {
   padding: var(--spacing-md) var(--spacing-lg);
   font-size: var(--font-size-lg, 1.125rem);
   min-height: 48px;
-  
-  &.button-link {
-    padding: var(--spacing-md) 0;
-  }
 }
 
+/* 圆角样式 */
+.button-rounded-none {
+  border-radius: 0;
+}
+
+.button-rounded-small {
+  border-radius: 8px;
+}
+
+.button-rounded-medium {
+  border-radius: 16px;
+}
+
+.button-rounded-large {
+  border-radius: 200px;
+}
+
+/* 高度样式 */
+.button-height-small {
+  height: 14px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.button-height-medium {
+  height: 36px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.button-height-large {
+  height: 56px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* 禁用状态 */
 .disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  
+
   &:hover {
     transform: none !important;
     box-shadow: none !important;
   }
-  
+
   &:active {
     transform: none !important;
   }
 }
 
+/* 加载状态 */
 .loading {
   position: relative;
   color: transparent !important;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -249,13 +222,13 @@
     border-top-color: transparent;
     animation: button-spin 0.8s linear infinite;
   }
-  
+
   &.button-small::after {
     width: 14px;
     height: 14px;
     margin: -7px 0 0 -7px;
   }
-  
+
   &.button-large::after {
     width: 18px;
     height: 18px;
@@ -272,121 +245,126 @@
   }
 }
 
+/* 图标按钮 */
 .button-icon {
   padding: var(--spacing-sm);
   min-width: 40px;
-  
+
   &.button-small {
     padding: var(--spacing-xs);
     min-width: 32px;
   }
-  
+
   &.button-large {
     padding: var(--spacing-md);
     min-width: 48px;
   }
 }
 
+/* 块级按钮 */
 .button-block {
   width: 100%;
   display: flex;
 }
 
+/* 按钮组 */
 .button-group {
   display: inline-flex;
-  
+
   .button {
     border-radius: 0;
-    
+
     &:first-child {
       border-top-left-radius: var(--border-radius-md);
       border-bottom-left-radius: var(--border-radius-md);
     }
-    
+
     &:last-child {
       border-top-right-radius: var(--border-radius-md);
       border-bottom-right-radius: var(--border-radius-md);
     }
-    
+
     &:not(:first-child) {
       margin-left: -1px;
     }
-    
+
     &:hover {
       z-index: 1;
     }
   }
 }
 
+/* 暗色主题 */
 [data-theme="dark"] {
   .button-secondary {
     background-color: var(--color-neutral-600, #495057);
-    
+
     &:hover:not(.disabled) {
       background-color: var(--color-neutral-700, #343a40);
     }
   }
-  
+
   .button-outline {
     border-color: var(--color-primary-400);
     color: var(--color-primary-400);
-    
+
     &:hover:not(.disabled) {
       background-color: var(--color-primary-900);
     }
   }
-  
+
   .button-text {
     color: var(--color-primary-400);
-    
+
     &:hover:not(.disabled) {
       background-color: var(--color-primary-900);
     }
   }
-  
+
   .button-link {
     color: var(--color-primary-400);
-    
+
     &:hover:not(.disabled) {
       color: var(--color-primary-300);
     }
   }
-  
+
   .button-warning {
     color: var(--color-neutral-900);
   }
 }
 
-
+/* 高对比度 */
 @media (prefers-contrast: high) {
   .button {
     border: 2px solid currentColor;
   }
-  
+
   .button-outline {
     border-width: 2px;
   }
-  
+
   .button-text,
   .button-link {
     border: 2px solid transparent;
-    
+
     &:focus {
       border-color: currentColor;
     }
   }
 }
 
+/* 减少动画 */
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
-    
+
     &:hover,
     &:active {
       transform: none;
     }
   }
-  
+
   .loading::after {
     animation: none;
   }
