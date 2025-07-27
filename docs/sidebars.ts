@@ -24,6 +24,7 @@ const sidebars: SidebarsConfig = {
         'components/input',
         'components/card',
         'components/drawer',
+        'components/notification',
       ],
     },
     {

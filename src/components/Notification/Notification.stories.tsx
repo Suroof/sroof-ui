@@ -62,7 +62,7 @@ export const Default: Story = {
         <Notification
           {...args}
           show={open}
-          onClose={handleClose} // 重写 onClose，确保状态同步
+          onClose={handleClose} 
         />
       </div>
     );

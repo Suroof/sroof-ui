@@ -4,15 +4,37 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(to bottom, #ffffff 0%, #518570 50%, #ffffff 100%);
+  color: white;
+}
+
+.heroBanner h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.heroBanner .hero__subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 3rem 1rem;
+  }
+  
+  .heroBanner h1 {
+    font-size: 2rem;
+  }
+  
+  .heroBanner .hero__subtitle {
+    font-size: 1.2rem;
   }
 }
 
@@ -20,4 +42,127 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.buttons a {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.buttons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.introduction {
+  padding: 4rem 0;
+  background-color: var(--ifm-background-surface-color);
+}
+
+.introTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--ifm-heading-color);
+}
+
+.introText {
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ifm-font-color-base);
+}
+
+.ctaSection {
+  padding: 5rem 0;
+  background:linear-gradient(to bottom, #667eea 0%, #764ba2 50%, #667eea 100%);
+  color: white;
+  text-align: center;
+}
+
+.ctaBox h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.ctaBox p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ctaButtons a {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.ctaButtons a:first-child {
+  background-color: white;
+  color: #667eea;
+}
+
+.ctaButtons a:first-child:hover {
+  background-color: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ctaButtons a:last-child {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.ctaButtons a:last-child:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 996px) {
+  .introduction {
+    padding: 2rem 0;
+  }
+  
+  .introTitle {
+    font-size: 1.5rem;
+  }
+  
+  .ctaSection {
+    padding: 3rem 1rem;
+  }
+  
+  .ctaBox h2 {
+    font-size: 1.5rem;
+  }
+  
+  .ctaBox p {
+    font-size: 1rem;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ctaButtons a {
+    width: 80%;
+    max-width: 250px;
+  }
 }

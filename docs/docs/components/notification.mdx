@@ -1,0 +1,199 @@
+---
+sidebar_position: 12
+---
+
+# Notification 通知框
+
+通知框组件，支持多种样式和状态。
+
+## 基本用法
+
+```jsx live
+function NotificationExample() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    if (!open) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      {/* 按钮控制打开 */}
+      <Button onClick={handleOpen}>显示通知</Button>
+
+      {/* 传递 open 状态给 Notification */}
+      <Notification message="这是通知弹框" show={open} />
+    </div>
+  );
+}
+```
+
+```jsx
+import { Notification } from "sroof-ui";
+
+function Example() {
+  return (
+    <div>
+      <Button>默认按钮</Button>
+      <Button variant="primary">主要按钮</Button>
+      <Button variant="secondary">信息按钮</Button>
+      <Button variant="danger">危险按钮</Button>
+    </div>
+  );
+}
+```
+
+## 通知位置
+
+```jsx live
+function NotificationPositionExample() {
+  const [notifications, setNotifications] = React.useState({
+    "top-left": false,
+    "top-right": false,
+    "bottom-left": false,
+    "bottom-right": false,
+  });
+
+  const showNotification = (position) => {
+    setNotifications((prev) => ({ ...prev, [position]: true }));
+
+    // 3秒后自动关闭
+    setTimeout(() => {
+      setNotifications((prev) => ({ ...prev, [position]: false }));
+    }, 3000);
+  };
+
+  const closeNotification = (position) => {
+    setNotifications((prev) => ({ ...prev, [position]: false }));
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <div style={{ display: "flex", marginBottom: "20px", gap: "15px" }}>
+        <Button
+          onClick={() => showNotification("top-left")}
+          style={{ margin: "5px" }}
+        >
+          左上角通知
+        </Button>
+        <Button
+          onClick={() => showNotification("top-right")}
+          style={{ margin: "5px" }}
+        >
+          右上角通知
+        </Button>
+        <Button
+          onClick={() => showNotification("bottom-left")}
+          style={{ margin: "5px" }}
+        >
+          左下角通知
+        </Button>
+        <Button
+          onClick={() => showNotification("bottom-right")}
+          style={{ margin: "5px" }}
+        >
+          右下角通知
+        </Button>
+      </div>
+
+      <Notification
+        message="左上角通知消息"
+        show={notifications["top-left"]}
+        position="top-left"
+        onClose={() => closeNotification("top-left")}
+      />
+
+      <Notification
+        message="右上角通知消息"
+        show={notifications["top-right"]}
+        position="top-right"
+        onClose={() => closeNotification("top-right")}
+      />
+
+      <Notification
+        message="左下角通知消息"
+        show={notifications["bottom-left"]}
+        position="bottom-left"
+        onClose={() => closeNotification("bottom-left")}
+      />
+
+      <Notification
+        message="右下角通知消息"
+        show={notifications["bottom-right"]}
+        position="bottom-right"
+        onClose={() => closeNotification("bottom-right")}
+      />
+    </div>
+  );
+}
+```
+
+## 自定义关闭图标
+
+```jsx live
+function CustomCloseIconExample() {
+  const [open1, setOpen1] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <div style={{display:"flex", marginBottom: "20px",gap:"20px" }}>
+        <Button onClick={() => setOpen1(true)} style={{ margin: "5px" }}>
+          文字关闭图标
+        </Button>
+        <Button onClick={() => setOpen2(true)} style={{ margin: "5px" }}>
+          自定义图标
+        </Button>
+      </div>
+
+      <Notification
+        message="使用文字作为关闭图标"
+        show={open1}
+        closeIcon="关闭"
+        onClose={() => setOpen1(false)}
+      />
+
+      <Notification
+        message="使用自定义图标"
+        show={open2}
+        closeIcon={
+          <span style={{ fontSize: "18px", fontWeight: "bold" }}>✖</span>
+        }
+        onClose={() => setOpen2(false)}
+      />
+    </div>
+  );
+}
+```
+
+## API
+
+### Props
+
+| 属性           | 类型                              | 默认值    | 说明                           |
+|----------------|-----------------------------------|-----------|--------------------------------|
+| children       | `ReactNode`                       | -         | 菜单项内容                     |
+| mode           | `'horizontal' \| 'vertical' \| 'inline'` | `'horizontal'` | 菜单模式                       |
+| theme          | `'light' \| 'dark' \| 'glass'`    | `'light'` | 菜单主题                       |
+| className      | `string`                          | -         | 自定义类名                     |
+| defaultSelectedKey | `string`                         | -         | 默认选中的菜单项               |
+| selectedKey    | `string`                          | -         | 受控选中的菜单项               |
+| onSelect       | `(key: string) => void`           | -         | 选择菜单项时的回调             |
+| expandIcon     | `ReactNode`                       | -         | 自定义展开图标                 |
+| collapsible    | `boolean`                         | `false`   | 是否可折叠                     |
+
+### Notification Props
+
+| 属性      | 类型                        | 默认值 | 说明                           |
+|-----------|-----------------------------|--------|--------------------------------|
+| message   | `string`                    | -      | 通知内容                       |
+| show      | `boolean`                   | `false`| 是否显示通知                   |
+| position  | `'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right'` | `'top-left'` | 通知位置                       |
+| duration  | `number`                    | -      | 自动关闭时间（毫秒）           |
+| closeIcon | `ReactNode`                 | `'×'`  | 自定义关闭图标                 |
+| onClose   | `() => void`                | -      | 关闭通知时的回调               |
+| className | `string`                    | -      | 自定义类名                     |
