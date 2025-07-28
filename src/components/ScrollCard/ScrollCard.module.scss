@@ -12,17 +12,16 @@
 .componentRoot {
   width: 100%;
   overflow: hidden; // 在这里捕获超宽内容，防止页面滚动
-  padding-top: 16px;   
+  padding-top: 16px;
   padding-bottom: 16px;
 }
-
 
 // 外层容器，作为可视区域
 .scrollContainer {
   width: 100%;
   overflow: hidden;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 34px;
+  padding-bottom: 42px;
   // 使用 mask-image 实现优雅的左右渐变消失效果
   -webkit-mask-image: linear-gradient(
     to right,
@@ -64,10 +63,10 @@
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, scale 0.6s ease-in-out;
 
   &:hover {
-    transform: translateY(-5px);
+    scale: 1.1;
   }
 }
 
