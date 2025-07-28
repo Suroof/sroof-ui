@@ -12,57 +12,9 @@ import { Drawer } from 'sroof-ui';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 🚀 Sroof UI
+# Sroof UI
 
 欢迎使用 **Sroof UI** - 现代化的 React UI 组件库，为开发者提供高质量、易用的 UI 组件。
-
-## ✨ 核心特性
-
-<div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', margin: '2rem 0'}}>
-
-<div style={{padding: '1.5rem', border: '1px solid #e1e5e9', borderRadius: '8px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white'}}>
-  <h3 style={{margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-    🎨 现代设计
-  </h3>
-  <p style={{margin: 0, opacity: 0.9}}>简洁美观的设计风格，遵循现代 UI/UX 设计原则，提供一致的视觉体验</p>
-</div>
-
-<div style={{padding: '1.5rem', border: '1px solid #e1e5e9', borderRadius: '8px', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', color: 'white'}}>
-  <h3 style={{margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-    🔧 TypeScript
-  </h3>
-  <p style={{margin: 0, opacity: 0.9}}>完整的 TypeScript 支持，提供类型安全和更好的开发体验</p>
-</div>
-
-<div style={{padding: '1.5rem', border: '1px solid #e1e5e9', borderRadius: '8px', background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', color: 'white'}}>
-  <h3 style={{margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-    📱 响应式
-  </h3>
-  <p style={{margin: 0, opacity: 0.9}}>支持各种屏幕尺寸，从移动端到桌面端都有完美的适配</p>
-</div>
-
-<div style={{padding: '1.5rem', border: '1px solid #e1e5e9', borderRadius: '8px', background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', color: 'white'}}>
-  <h3 style={{margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-    🎯 易于使用
-  </h3>
-  <p style={{margin: 0, opacity: 0.9}}>简单直观的 API 设计，开箱即用，快速上手</p>
-</div>
-
-<div style={{padding: '1.5rem', border: '1px solid #e1e5e9', borderRadius: '8px', background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)', color: 'white'}}>
-  <h3 style={{margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-    🔄 可定制
-  </h3>
-  <p style={{margin: 0, opacity: 0.9}}>灵活的主题和样式定制，支持多种主题切换</p>
-</div>
-
-<div style={{padding: '1.5rem', border: '1px solid #e1e5e9', borderRadius: '8px', background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', color: '#333'}}>
-  <h3 style={{margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-    🌍 国际化
-  </h3>
-  <p style={{margin: 0, opacity: 0.8}}>内置国际化支持，轻松构建多语言应用</p>
-</div>
-
-</div>
 
 ## 🎮 组件预览
 
@@ -191,6 +143,10 @@ export default App;
 - [**Button 按钮**](/docs/components/button) - 多种样式的按钮组件
 - [**Input 输入框**](/docs/components/input) - 表单输入组件
 - [**Card 卡片**](/docs/components/card) - 内容容器组件
+- [**Carousel 轮播图**](/docs/components/carousel) - 数据展示组件
+- [**Collapse 折叠面板**](/docs/components/collapse) - 内容容器组件
+- [**Notification 通知**](/docs/components/notification) - 弹窗组件
+- [**ScrollCard 滑动卡片**](/docs/components/scrollcard) - 数据展示组件
 
 ### 🧭 导航组件
 - [**Menu 菜单**](/docs/components/menu) - 导航菜单组件
@@ -201,7 +157,7 @@ export default App;
 ### 📝 表单组件
 - [**Form 表单**](/docs/components/form) - 表单容器组件
 - [**Radio 单选框**](/docs/components/radio) - 单选按钮组件
-- **Switch 开关** - 开关切换组件
+- [**Switch 开关**](/docs/components/switch) - 开关切换组件
 
 ### 🔧 功能组件
 - [**LanguageSwitcher 语言切换**](/docs/components/language) - 国际化语言切换器
@@ -257,7 +213,7 @@ export default App;
   <h2 style={{margin: '0 0 1rem 0'}}>🎉 开始你的 Sroof UI 之旅</h2>
   <p style={{margin: '0 0 1.5rem 0', opacity: 0.9}}>现在就开始使用 Sroof UI，构建出色的用户界面！</p>
   <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
-    <a href="/docs/components/button" style={{background: 'rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: '6px', textDecoration: 'none', fontWeight: '500'}}>
+    <a href="/sroof-ui/docs/components/button" style={{background: 'rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: '6px', textDecoration: 'none', fontWeight: '500'}}>
       查看组件 →
     </a>
     <a href="https://github.com/Suroof/sroof-ui" style={{background: 'rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: '6px', textDecoration: 'none', fontWeight: '500'}}>

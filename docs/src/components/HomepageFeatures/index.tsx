@@ -7,11 +7,11 @@ import { ScrollCard } from "sroof-ui";
 function ScrollCardCustomExample() {
   const cardData = [
     { id: 1, imageUrl: 'https://pic1.imgdb.cn/item/688755f858cb8da5c8e90992.png', title: 'Button', description: 'Easy to use' },
-    { id: 2, imageUrl: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg', title: '笔记本电脑', description: '代码与咖啡的完美结合。' },
-    { id: 3, imageUrl: 'https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg', title: '城市夜景', description: '繁华都市的夜晚灯火辉煌。' },
-    { id: 4, imageUrl: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg', title: '山间清晨', description: '云雾缭绕的山峰迎接第一缕阳光。' },
-    { id: 5, imageUrl: 'https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg', title: '绿意盎然', description: '阳光普照的绿色森林。' },
-    { id: 6, imageUrl: 'https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg', title: '瀑布奇观', description: '水流从高处倾泻而下，气势磅礴。' },
+    { id: 2, imageUrl: 'https://pic1.imgdb.cn/item/688769bc58cb8da5c8e956a4.png', title: 'Card', description: 'Easy to use' },
+    { id: 3, imageUrl: 'https://pic1.imgdb.cn/item/68876a0358cb8da5c8e95814.png', title: 'Collapse', description: 'Easy to use' },
+    { id: 4, imageUrl: 'https://pic1.imgdb.cn/item/68876a2a58cb8da5c8e9591d.png', title: 'Form', description: 'Easy to use' },
+    { id: 5, imageUrl: 'https://pic1.imgdb.cn/item/68876a6658cb8da5c8e95b41.png', title: 'Switch', description: 'Easy to use' },
+    { id: 6, imageUrl: 'https://pic1.imgdb.cn/item/68876a8758cb8da5c8e95c30.png', title: 'Pagination', description: 'Easy to use' },
   ];
   return (
     <div style={{ padding: '20px 0',overflow: 'hidden'}}>
