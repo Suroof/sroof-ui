@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
         'components/drawer',
         'components/notification',
         'components/carousel',
+        'components/collapse',
       ],
     },
     {

@@ -1,0 +1,104 @@
+---
+sidebar_position: 14
+---
+
+import { Collapse } from 'sroof-ui';
+
+# Collapse 折叠面板
+
+可以折叠/展开内容区域的容器，用于分组和收纳复杂的内容。
+
+## 基本用法
+
+最基础的用法,默认可以同时展开多个面板。
+
+:::info 提示
+请务必为每一个 `Collapse.Panel` 提供一个**唯一**的 `key` (React 列表渲染所需) 和 `panelKey` (组件内部逻辑所需)！
+:::
+
+```jsx live
+function CollapseBasicExample() {
+  return (
+    <Collapse defaultActiveKey={["1"]}>
+      <Collapse.Panel
+        header="这是面板标题 1"
+        key="1"
+        panelKey="1"
+      >
+        <p>这是面板内容 1。</p>
+        <p>内容可以是任意 React 节点。</p>
+      </Collapse.Panel>
+      <Collapse.Panel
+        header="这是面板标题 2"
+        key="2"
+        panelKey="2"
+      >
+        <p>这是面板内容 2</p>
+      </Collapse.Panel>
+      <Collapse.Panel
+        header="这是被禁用的面板 3"
+        key="3"
+        panelKey="3"
+        disabled
+      >
+        <p>这部分内容无法被用户看到</p>
+      </Collapse.Panel>
+    </Collapse>
+  );
+}
+```
+
+## 手风琴模式
+```jsx live
+function CollapseAccordionExample() {
+  return (
+    <Collapse accordion defaultActiveKey="panel-2">
+      <Collapse.Panel
+        header="手风琴项 A"
+        key="panel-1"
+        panelKey="panel-1"
+      >
+        <p>当您打开其他项时，这一项会自动关闭</p>
+      </Collapse.Panel>
+      <Collapse.Panel
+        header="手风琴项 B (默认展开)"
+        key="panel-2"
+        panelKey="panel-2"
+      >
+        <p>这是手风琴模式的第二项</p>
+      </Collapse.Panel>
+      <Collapse.Panel
+        header="手风琴项 C"
+        key="panel-3"
+        panelKey="panel-3"
+      >
+        <p>这是手风琴模式的第三项</p>
+      </Collapse.Panel>
+    </Collapse>
+  );
+}
+```
+
+## API
+
+### Collapse Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| accordion | 是否开启手风琴模式（一次只能展开一个） | boolean | false |
+| defaultActiveKey | 初始激活的面板的 panelKey 集合 | string \| string[] | - |
+| children | 内容，必须是 Collapse.Panel 组件 | React.ReactElement&lt;CollapsePanelProps&gt;[] | - |
+
+### Collapse.Panel Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| panelKey | 必需，面板的唯一标识符，用于组件逻辑 | string | - |
+| header | 必需，面板的头部标题内容 | ReactNode | - |
+| disabled | 是否禁用该面板 | boolean | false |
+| children | 必需，面板的内容 | ReactNode | - |
+
+### 关于 key 和 panelKey
+
+- **key**: 这是 React 保留的 prop，用于在渲染列表时识别每个元素，是性能优化的关键。
+- **panelKey**: 这是我们在组件中自定义的 prop，用于控制哪个面板是激活状态。

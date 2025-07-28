@@ -32,6 +32,7 @@ export default [
     },
     rules: {
       ...storybook.configs.recommended.rules,
+      "react/prop-types": "off",
     },
   },
 ];

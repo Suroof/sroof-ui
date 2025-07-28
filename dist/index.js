@@ -1,7 +1,11 @@
 'use strict';
 
 var React = require('react');
-var reactDom = require('react-dom');
+var ReactDOM = require('react-dom');
+
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
 
 var jsxRuntime = {exports: {}};
 
@@ -430,18 +434,18 @@ function requireJsxRuntime () {
 
 var jsxRuntimeExports = requireJsxRuntime();
 
-var styles$c = {"button":"Button-module_button__18Bed","button-primary":"Button-module_button-primary__wEPNt","disabled":"Button-module_disabled__UzdWL","button-secondary":"Button-module_button-secondary__nRFiY","button-outline":"Button-module_button-outline__zKhUk","button-text":"Button-module_button-text__8GFeA","button-danger":"Button-module_button-danger__MRboG","button-link":"Button-module_button-link__44NZ0","button-small":"Button-module_button-small__btpZ4","button-medium":"Button-module_button-medium__6yd9j","button-large":"Button-module_button-large__zNlxT","button-success":"Button-module_button-success__cb-Id","button-warning":"Button-module_button-warning__ixyGP","button-rounded-none":"Button-module_button-rounded-none__LkA4g","button-rounded-small":"Button-module_button-rounded-small__9jSqP","button-rounded-medium":"Button-module_button-rounded-medium__YB0g4","button-rounded-large":"Button-module_button-rounded-large__-RAYn","loading":"Button-module_loading__QfItr","button-spin":"Button-module_button-spin__mQSue","button-icon":"Button-module_button-icon__5ByEL","button-block":"Button-module_button-block__GO1c1","button-group":"Button-module_button-group__emwZY"};
+var styles$d = {"button":"Button-module_button__18Bed","button-primary":"Button-module_button-primary__wEPNt","disabled":"Button-module_disabled__UzdWL","button-secondary":"Button-module_button-secondary__nRFiY","button-outline":"Button-module_button-outline__zKhUk","button-text":"Button-module_button-text__8GFeA","button-danger":"Button-module_button-danger__MRboG","button-link":"Button-module_button-link__44NZ0","button-small":"Button-module_button-small__btpZ4","button-medium":"Button-module_button-medium__6yd9j","button-large":"Button-module_button-large__zNlxT","button-success":"Button-module_button-success__cb-Id","button-warning":"Button-module_button-warning__ixyGP","button-rounded-none":"Button-module_button-rounded-none__LkA4g","button-rounded-small":"Button-module_button-rounded-small__9jSqP","button-rounded-medium":"Button-module_button-rounded-medium__YB0g4","button-rounded-large":"Button-module_button-rounded-large__-RAYn","loading":"Button-module_loading__QfItr","button-spin":"Button-module_button-spin__mQSue","button-icon":"Button-module_button-icon__5ByEL","button-block":"Button-module_button-block__GO1c1","button-group":"Button-module_button-group__emwZY"};
 
 /*
 基础按钮组件
 */
 const Button = ({ children, variant = "primary", size = "medium", rounded = "medium", onClick, disabled = false, className = "", }) => {
     const buttonClasses = [
-        styles$c.button,
-        styles$c[`button-${variant}`],
-        styles$c[`button-${size}`],
-        styles$c[`button-rounded-${rounded}`],
-        disabled ? styles$c.disabled : "",
+        styles$d.button,
+        styles$d[`button-${variant}`],
+        styles$d[`button-${size}`],
+        styles$d[`button-rounded-${rounded}`],
+        disabled ? styles$d.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -449,14 +453,14 @@ const Button = ({ children, variant = "primary", size = "medium", rounded = "med
     return (jsxRuntimeExports.jsx("button", { className: buttonClasses, onClick: onClick, disabled: disabled, type: "button", children: children }));
 };
 
-var styles$b = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
+var styles$c = {"input-text":"Input-module_input-text__XcNOB","disabled":"Input-module_disabled__nzcnQ","input-small":"Input-module_input-small__9GUx7","input-medium":"Input-module_input-medium__l3uKK","input-large":"Input-module_input-large__cGDd5"};
 
 const Input = ({ type, placeholder, value, size, disabled, className = "", onChange, }) => {
     const inputClasses = [
-        styles$b.input,
-        styles$b[`input-${type}`],
-        styles$b[`input-${size}`],
-        disabled ? styles$b.disabled : "",
+        styles$c.input,
+        styles$c[`input-${type}`],
+        styles$c[`input-${size}`],
+        disabled ? styles$c.disabled : "",
         className,
     ]
         .filter(Boolean)
@@ -2409,7 +2413,7 @@ const transformOptions = options => {
   return options;
 };
 
-const noop = () => {};
+const noop$1 = () => {};
 const bindMemberFunctions = inst => {
   const mems = Object.getOwnPropertyNames(Object.getPrototypeOf(inst));
   mems.forEach(mem => {
@@ -2528,7 +2532,7 @@ class I18n extends EventEmitter {
       });
     }
     this.format = this.options.interpolation.format;
-    if (!callback) callback = noop;
+    if (!callback) callback = noop$1;
     if (this.options.fallbackLng && !this.services.languageDetector && !this.options.lng) {
       const codes = this.services.languageUtils.getFallbackCodes(this.options.fallbackLng);
       if (codes.length > 0 && codes[0] !== 'dev') this.options.lng = codes[0];
@@ -2568,7 +2572,7 @@ class I18n extends EventEmitter {
     }
     return deferred;
   }
-  loadResources(language, callback = noop) {
+  loadResources(language, callback = noop$1) {
     let usedCallback = callback;
     const usedLng = isString(language) ? language : this.language;
     if (typeof language === 'function') usedCallback = language;
@@ -2611,7 +2615,7 @@ class I18n extends EventEmitter {
     }
     if (!lngs) lngs = this.languages;
     if (!ns) ns = this.options.ns;
-    if (!callback) callback = noop;
+    if (!callback) callback = noop$1;
     this.services.backendConnector.reload(lngs, ns, err => {
       deferred.resolve();
       callback(err);
@@ -2830,7 +2834,7 @@ class I18n extends EventEmitter {
   static createInstance(options = {}, callback) {
     return new I18n(options, callback);
   }
-  cloneInstance(options = {}, callback = noop) {
+  cloneInstance(options = {}, callback = noop$1) {
     const forkResourceStore = options.forkResourceStore;
     if (forkResourceStore) delete options.forkResourceStore;
     const mergedOptions = {
@@ -3594,7 +3598,7 @@ const getLanguageNativeName = (language) => {
     return names[language];
 };
 
-var styles$a = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
+var styles$b = {"dropdown":"LanguageSwitcher-module_dropdown__LT1O-","select":"LanguageSwitcher-module_select__LL4YO","buttonGroup":"LanguageSwitcher-module_buttonGroup__YWhtE","indicator":"LanguageSwitcher-module_indicator__RN9Va","languageButton":"LanguageSwitcher-module_languageButton__ZUCZN","active":"LanguageSwitcher-module_active__7Npr-"};
 
 const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
     const { switchLanguage, currentLanguage } = useLanguageSwitch();
@@ -3620,12 +3624,12 @@ const LanguageSwitcher = ({ className, variant = 'dropdown', }) => {
         }
     }, [currentLanguage, variant, currentIndex]);
     if (variant === 'buttons') {
-        return (jsxRuntimeExports.jsxs("div", { ref: containerRef, className: `${styles$a.buttonGroup} ${className || ''}`, children: [jsxRuntimeExports.jsx("div", { className: styles$a.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsxRuntimeExports.jsx("button", { className: `${styles$a.languageButton} ${currentLanguage === code ? styles$a.active : ''}`, onClick: () => handleLanguageChange(code), type: "button", children: name }, code)))] }));
+        return (jsxRuntimeExports.jsxs("div", { ref: containerRef, className: `${styles$b.buttonGroup} ${className || ''}`, children: [jsxRuntimeExports.jsx("div", { className: styles$b.indicator, style: indicatorStyle }), languageEntries.map(([code, name]) => (jsxRuntimeExports.jsx("button", { className: `${styles$b.languageButton} ${currentLanguage === code ? styles$b.active : ''}`, onClick: () => handleLanguageChange(code), type: "button", children: name }, code)))] }));
     }
-    return (jsxRuntimeExports.jsx("div", { className: `${styles$a.dropdown} ${className || ''}`, children: jsxRuntimeExports.jsx("select", { value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$a.select, children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntimeExports.jsx("option", { value: code, children: name }, code))) }) }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$b.dropdown} ${className || ''}`, children: jsxRuntimeExports.jsx("select", { value: currentLanguage, onChange: (e) => handleLanguageChange(e.target.value), className: styles$b.select, children: Object.entries(supportedLanguages).map(([code, name]) => (jsxRuntimeExports.jsx("option", { value: code, children: name }, code))) }) }));
 };
 
-var styles$9 = {"menu":"Menu-module_menu__ZGJ--","menu-horizontal":"Menu-module_menu-horizontal__sepgv","menuItem":"Menu-module_menuItem__vKvih","active":"Menu-module_active__8g-22","menu-vertical":"Menu-module_menu-vertical__ZU7Yf","theme-light":"Menu-module_theme-light__CMlGr","theme-dark":"Menu-module_theme-dark__GN4M-","theme-glass":"Menu-module_theme-glass__AJYYa","disabled":"Menu-module_disabled__IXs87","danger":"Menu-module_danger__t-0VF","item":"Menu-module_item__S3HKY","item-vertical":"Menu-module_item-vertical__bDGRE","item-dark":"Menu-module_item-dark__mG-BW","item-glass":"Menu-module_item-glass__vvOgm","icon":"Menu-module_icon__XtO-r","label":"Menu-module_label__QMf-9","subMenu":"Menu-module_subMenu__RrWRN","subMenuTitle":"Menu-module_subMenuTitle__MR5Qj","open":"Menu-module_open__iHB1t","arrow":"Menu-module_arrow__ZE4Ag","subMenuList":"Menu-module_subMenuList__oqGX8","subMenuList-light":"Menu-module_subMenuList-light__jYaq0","subMenuList-dark":"Menu-module_subMenuList-dark__eMP7C","subMenuList-glass":"Menu-module_subMenuList-glass__pjNDg","submenu":"Menu-module_submenu__1p11G","submenu-horizontal":"Menu-module_submenu-horizontal__4EWDI","slideDown":"Menu-module_slideDown__k-cSj","submenu-vertical":"Menu-module_submenu-vertical__Od2LN","submenu-inline":"Menu-module_submenu-inline__xaW3E","submenu-dark":"Menu-module_submenu-dark__qCv5P","submenu-glass":"Menu-module_submenu-glass__znOmd","slideUp":"Menu-module_slideUp__fRfHr"};
+var styles$a = {"menu":"Menu-module_menu__ZGJ--","menu-horizontal":"Menu-module_menu-horizontal__sepgv","menuItem":"Menu-module_menuItem__vKvih","active":"Menu-module_active__8g-22","menu-vertical":"Menu-module_menu-vertical__ZU7Yf","theme-light":"Menu-module_theme-light__CMlGr","theme-dark":"Menu-module_theme-dark__GN4M-","theme-glass":"Menu-module_theme-glass__AJYYa","disabled":"Menu-module_disabled__IXs87","danger":"Menu-module_danger__t-0VF","item":"Menu-module_item__S3HKY","item-vertical":"Menu-module_item-vertical__bDGRE","item-dark":"Menu-module_item-dark__mG-BW","item-glass":"Menu-module_item-glass__vvOgm","icon":"Menu-module_icon__XtO-r","label":"Menu-module_label__QMf-9","subMenu":"Menu-module_subMenu__RrWRN","subMenuTitle":"Menu-module_subMenuTitle__MR5Qj","open":"Menu-module_open__iHB1t","arrow":"Menu-module_arrow__ZE4Ag","subMenuList":"Menu-module_subMenuList__oqGX8","subMenuList-light":"Menu-module_subMenuList-light__jYaq0","subMenuList-dark":"Menu-module_subMenuList-dark__eMP7C","subMenuList-glass":"Menu-module_subMenuList-glass__pjNDg","submenu":"Menu-module_submenu__1p11G","submenu-horizontal":"Menu-module_submenu-horizontal__4EWDI","slideDown":"Menu-module_slideDown__k-cSj","submenu-vertical":"Menu-module_submenu-vertical__Od2LN","submenu-inline":"Menu-module_submenu-inline__xaW3E","submenu-dark":"Menu-module_submenu-dark__qCv5P","submenu-glass":"Menu-module_submenu-glass__znOmd","slideUp":"Menu-module_slideUp__fRfHr"};
 
 // 主菜单组件
 const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKey = "", selectedKey: controlledSelectedKey, onSelect, theme = "light", expandIcon, }) => {
@@ -3634,9 +3638,9 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
     const menuRef = React.useRef(null);
     const selectedKey = controlledSelectedKey !== null && controlledSelectedKey !== void 0 ? controlledSelectedKey : internalSelectedKey;
     const menuClasses = [
-        styles$9.menu,
-        styles$9[`menu-${mode}`],
-        styles$9[`theme-${theme}`],
+        styles$a.menu,
+        styles$a[`menu-${mode}`],
+        styles$a[`theme-${theme}`],
         className
     ].filter(Boolean).join(" ");
     const handleItemClick = React.useCallback((key, onClick) => {
@@ -3748,12 +3752,12 @@ const Menu = ({ children, className = "", mode = "horizontal", defaultSelectedKe
 // 菜单项组件
 const MenuItem = ({ children, className = "", onClick, disabled = false, icon, isActive = false, mode = "horizontal", theme = "light", danger = false, }) => {
     const itemClasses = [
-        styles$9.menuItem,
-        isActive && styles$9.active,
-        disabled && styles$9.disabled,
-        danger && styles$9.danger,
-        styles$9[`item-${mode}`],
-        styles$9[`item-${theme}`],
+        styles$a.menuItem,
+        isActive && styles$a.active,
+        disabled && styles$a.disabled,
+        danger && styles$a.danger,
+        styles$a[`item-${mode}`],
+        styles$a[`item-${theme}`],
         className
     ].filter(Boolean).join(" ");
     const handleClick = () => {
@@ -3767,19 +3771,19 @@ const MenuItem = ({ children, className = "", onClick, disabled = false, icon, i
             handleClick();
         }
     };
-    return (jsxRuntimeExports.jsxs("li", { className: itemClasses, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-current": isActive ? 'page' : undefined, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$9.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$9.label, children: children })] }));
+    return (jsxRuntimeExports.jsxs("li", { className: itemClasses, onClick: handleClick, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-current": isActive ? 'page' : undefined, children: [icon && jsxRuntimeExports.jsx("span", { className: styles$a.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$a.label, children: children })] }));
 };
 // 子菜单组件
 const SubMenu = ({ children, title, className = "", itemKey, icon, disabled = false, isActive = false, isOpen = false, onItemSelect, onToggle, mode = "horizontal", theme = "light", expandIcon, }) => {
     const subMenuRef = React.useRef(null);
     const [maxHeight, setMaxHeight] = React.useState('0px');
     const subMenuClasses = [
-        styles$9.subMenu,
-        isOpen && styles$9.open,
-        isActive && styles$9.active,
-        disabled && styles$9.disabled,
-        styles$9[`submenu-${mode}`],
-        styles$9[`submenu-${theme}`],
+        styles$a.subMenu,
+        isOpen && styles$a.open,
+        isActive && styles$a.active,
+        disabled && styles$a.disabled,
+        styles$a[`submenu-${mode}`],
+        styles$a[`submenu-${theme}`],
         className
     ].filter(Boolean).join(" ");
     const handleToggle = () => {
@@ -3816,10 +3820,10 @@ const SubMenu = ({ children, title, className = "", itemKey, icon, disabled = fa
         });
     };
     const defaultExpandIcon = isOpen ? (jsxRuntimeExports.jsx("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M2 4l4 4 4-4", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) })) : (jsxRuntimeExports.jsx("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M4 2l4 4-4 4", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }) }));
-    return (jsxRuntimeExports.jsxs("li", { className: subMenuClasses, children: [jsxRuntimeExports.jsxs("div", { className: styles$9.subMenuTitle, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "menu", children: [icon && jsxRuntimeExports.jsx("span", { className: styles$9.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$9.label, children: title }), jsxRuntimeExports.jsx("span", { className: styles$9.arrow, children: expandIcon || defaultExpandIcon })] }), jsxRuntimeExports.jsx("ul", { ref: subMenuRef, className: styles$9.subMenuList, style: { maxHeight }, role: "menu", "aria-hidden": !isOpen, children: renderSubMenuItems() })] }));
+    return (jsxRuntimeExports.jsxs("li", { className: subMenuClasses, children: [jsxRuntimeExports.jsxs("div", { className: styles$a.subMenuTitle, onClick: handleToggle, onKeyDown: handleKeyDown, role: "menuitem", tabIndex: disabled ? -1 : 0, "aria-disabled": disabled, "aria-expanded": isOpen, "aria-haspopup": "menu", children: [icon && jsxRuntimeExports.jsx("span", { className: styles$a.icon, children: icon }), jsxRuntimeExports.jsx("span", { className: styles$a.label, children: title }), jsxRuntimeExports.jsx("span", { className: styles$a.arrow, children: expandIcon || defaultExpandIcon })] }), jsxRuntimeExports.jsx("ul", { ref: subMenuRef, className: styles$a.subMenuList, style: { maxHeight }, role: "menu", "aria-hidden": !isOpen, children: renderSubMenuItems() })] }));
 };
 
-var styles$8 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
+var styles$9 = {"tabs-container":"Tabs-module_tabs-container__U9u1K","tabs":"Tabs-module_tabs__QzIkz","tab":"Tabs-module_tab__IdDYc","active":"Tabs-module_active__PTNtG","content":"Tabs-module_content__A4evF"};
 
 /**
  * Tab 组件 - 单个标签页
@@ -3861,10 +3865,10 @@ const Tabs = ({ activeKey, children, className, defaultActiveKey, onChange, }) =
     };
     const currentActiveKey = activeKey !== null && activeKey !== void 0 ? activeKey : internalActiveKey;
     const activeTab = tabs.find((tab) => tab.key === currentActiveKey);
-    return (jsxRuntimeExports.jsxs("div", { className: `${styles$8['tabs-container']} ${className || ""}`, children: [jsxRuntimeExports.jsx("div", { className: styles$8.tabs, children: tabs.map((tab) => (jsxRuntimeExports.jsx("div", { className: `${styles$8.tab} ${tab.key === currentActiveKey ? styles$8.active : ""}`, onClick: () => handleTabClick(tab.key), children: tab.props.label }, tab.key))) }), jsxRuntimeExports.jsx("div", { className: styles$8.content, children: activeTab && activeTab.props.children })] }));
+    return (jsxRuntimeExports.jsxs("div", { className: `${styles$9['tabs-container']} ${className || ""}`, children: [jsxRuntimeExports.jsx("div", { className: styles$9.tabs, children: tabs.map((tab) => (jsxRuntimeExports.jsx("div", { className: `${styles$9.tab} ${tab.key === currentActiveKey ? styles$9.active : ""}`, onClick: () => handleTabClick(tab.key), children: tab.props.label }, tab.key))) }), jsxRuntimeExports.jsx("div", { className: styles$9.content, children: activeTab && activeTab.props.children })] }));
 };
 
-var styles$7 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP","radioGroup":"Radio-module_radioGroup__W9xve","vertical":"Radio-module_vertical__WksGU","horizontal":"Radio-module_horizontal__1Ovgu"};
+var styles$8 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP","radioGroup":"Radio-module_radioGroup__W9xve","vertical":"Radio-module_vertical__WksGU","horizontal":"Radio-module_horizontal__1Ovgu"};
 
 const Radio = ({ children, value, disabled = false, checked, defaultChecked = false, name, onChange, className, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3882,7 +3886,7 @@ const Radio = ({ children, value, disabled = false, checked, defaultChecked = fa
         }
     };
     const radioId = React.useId();
-    return (jsxRuntimeExports.jsxs("label", { className: `${styles$7.radio} ${disabled ? styles$7.disabled : ""} ${className || ""}`, htmlFor: radioId, children: [jsxRuntimeExports.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntimeExports.jsx("span", { className: styles$7.label, children: children })] }));
+    return (jsxRuntimeExports.jsxs("label", { className: `${styles$8.radio} ${disabled ? styles$8.disabled : ""} ${className || ""}`, htmlFor: radioId, children: [jsxRuntimeExports.jsx("input", { id: radioId, type: "radio", value: value, checked: isChecked, disabled: disabled, name: name, onChange: handleChange }), jsxRuntimeExports.jsx("span", { className: styles$8.label, children: children })] }));
 };
 const RadioGroup = ({ value, defaultValue, name, onChange, disabled = false, className, children, direction = "vertical", }) => {
     const [internalValue, setInternalValue] = React.useState(defaultValue || "");
@@ -3908,10 +3912,10 @@ const RadioGroup = ({ value, defaultValue, name, onChange, disabled = false, cla
             return child;
         });
     };
-    return (jsxRuntimeExports.jsx("div", { className: `${styles$7.radioGroup} ${styles$7[direction]} ${className || ""}`, role: "radiogroup", children: renderChildren() }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$8.radioGroup} ${styles$8[direction]} ${className || ""}`, role: "radiogroup", children: renderChildren() }));
 };
 
-var styles$6 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
+var styles$7 = {"switch":"Switch-module_switch__hgdMu","disabled":"Switch-module_disabled__2aZ0V","loading":"Switch-module_loading__9JppX","input":"Switch-module_input__5BPNu","slider":"Switch-module_slider__5suBx","spinner":"Switch-module_spinner__sMDyM","spin":"Switch-module_spin__r-2lA","small":"Switch-module_small__BI6-m","medium":"Switch-module_medium__22u-1","large":"Switch-module_large__Nv-ed","switchWrapper":"Switch-module_switchWrapper__q7qsQ","label-left":"Switch-module_label-left__da-Ux","label-right":"Switch-module_label-right__9wrC2","label":"Switch-module_label__LrH7V"};
 
 const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, className, size = 'medium', children, labelPosition = 'right', loading = false, color, }) => {
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
@@ -3931,18 +3935,18 @@ const Switch = ({ checked, defaultChecked = false, disabled = false, onChange, c
         }
     };
     const switchId = React.useId();
-    const switchElement = (jsxRuntimeExports.jsxs("label", { className: `${styles$6.switch} ${styles$6[size]} ${disabled ? styles$6.disabled : ''} ${loading ? styles$6.loading : ''} ${className || ''}`, htmlFor: switchId, children: [jsxRuntimeExports.jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$6.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsxRuntimeExports.jsx("span", { className: styles$6.slider, style: color && isChecked ? { backgroundColor: color } : undefined, children: loading && jsxRuntimeExports.jsx("span", { className: styles$6.spinner }) })] }));
+    const switchElement = (jsxRuntimeExports.jsxs("label", { className: `${styles$7.switch} ${styles$7[size]} ${disabled ? styles$7.disabled : ''} ${loading ? styles$7.loading : ''} ${className || ''}`, htmlFor: switchId, children: [jsxRuntimeExports.jsx("input", { id: switchId, type: "checkbox", checked: isChecked, disabled: disabled || loading, onChange: handleChange, className: styles$7.input, role: "switch", "aria-checked": isChecked ? "true" : "false", "aria-disabled": disabled || loading ? "true" : "false" }), jsxRuntimeExports.jsx("span", { className: styles$7.slider, style: color && isChecked ? { backgroundColor: color } : undefined, children: loading && jsxRuntimeExports.jsx("span", { className: styles$7.spinner }) })] }));
     if (children) {
-        return (jsxRuntimeExports.jsxs("div", { className: `${styles$6.switchWrapper} ${styles$6[`label-${labelPosition}`]}`, children: [labelPosition === 'left' && (jsxRuntimeExports.jsx("span", { className: styles$6.label, children: children })), switchElement, labelPosition === 'right' && (jsxRuntimeExports.jsx("span", { className: styles$6.label, children: children }))] }));
+        return (jsxRuntimeExports.jsxs("div", { className: `${styles$7.switchWrapper} ${styles$7[`label-${labelPosition}`]}`, children: [labelPosition === 'left' && (jsxRuntimeExports.jsx("span", { className: styles$7.label, children: children })), switchElement, labelPosition === 'right' && (jsxRuntimeExports.jsx("span", { className: styles$7.label, children: children }))] }));
     }
     return switchElement;
 };
 
-var styles$5 = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
+var styles$6 = {"form":"Form-module_form__jNBDR","bordered":"Form-module_bordered__kBopT","vertical":"Form-module_vertical__kme69","formItem":"Form-module_formItem__R7Y1M","horizontal":"Form-module_horizontal__obPd4","label":"Form-module_label__eeQ-m","inline":"Form-module_inline__LBQAv","small":"Form-module_small__AYGfB","medium":"Form-module_medium__10nxr","large":"Form-module_large__mbQ50","error":"Form-module_error__tGSoc","control":"Form-module_control__SeA--","required":"Form-module_required__V5rxn","errorMessage":"Form-module_errorMessage__iI97c","slideInDown":"Form-module_slideInDown__cmiaE","pulse":"Form-module_pulse__qE0es","helpText":"Form-module_helpText__fIhhQ","formActions":"Form-module_formActions__bHjHX","align-left":"Form-module_align-left__kIYC7","align-center":"Form-module_align-center__xH6DF","align-right":"Form-module_align-right__3CC5U","fadeInUp":"Form-module_fadeInUp__O640y"};
 
 const FormItem = ({ label, required = false, error, help, className, children, labelPosition = 'top', }) => {
     const itemId = React.useId();
-    return (jsxRuntimeExports.jsxs("div", { className: `${styles$5.formItem} ${styles$5[`label-${labelPosition}`]} ${error ? styles$5.error : ''} ${className || ''}`, children: [label && (jsxRuntimeExports.jsxs("label", { htmlFor: itemId, className: styles$5.label, children: [label, required && jsxRuntimeExports.jsx("span", { className: styles$5.required, children: "*" })] })), jsxRuntimeExports.jsx("div", { className: styles$5.control, children: React.Children.map(children, (child) => {
+    return (jsxRuntimeExports.jsxs("div", { className: `${styles$6.formItem} ${styles$6[`label-${labelPosition}`]} ${error ? styles$6.error : ''} ${className || ''}`, children: [label && (jsxRuntimeExports.jsxs("label", { htmlFor: itemId, className: styles$6.label, children: [label, required && jsxRuntimeExports.jsx("span", { className: styles$6.required, children: "*" })] })), jsxRuntimeExports.jsx("div", { className: styles$6.control, children: React.Children.map(children, (child) => {
                     if (React.isValidElement(child)) {
                         const additionalProps = {
                             id: itemId,
@@ -3957,7 +3961,7 @@ const FormItem = ({ label, required = false, error, help, className, children, l
                         return React.cloneElement(child, additionalProps);
                     }
                     return child;
-                }) }), error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-error`, className: styles$5.errorMessage, role: "alert", children: error })), help && !error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-help`, className: styles$5.helpText, children: help }))] }));
+                }) }), error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-error`, className: styles$6.errorMessage, role: "alert", children: error })), help && !error && (jsxRuntimeExports.jsx("div", { id: `${itemId}-help`, className: styles$6.helpText, children: help }))] }));
 };
 const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medium', bordered = true, }) => {
     const handleSubmit = (e) => {
@@ -3966,29 +3970,29 @@ const Form = ({ onSubmit, layout = 'vertical', className, children, size = 'medi
             onSubmit(e);
         }
     };
-    return (jsxRuntimeExports.jsx("form", { className: `${styles$5.form} ${styles$5[layout]} ${styles$5[size]} ${bordered ? styles$5.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true, children: children }));
+    return (jsxRuntimeExports.jsx("form", { className: `${styles$6.form} ${styles$6[layout]} ${styles$6[size]} ${bordered ? styles$6.bordered : ''} ${className || ''}`, onSubmit: handleSubmit, noValidate: true, children: children }));
 };
 const FormActions = ({ align = 'left', className, children, }) => {
-    return (jsxRuntimeExports.jsx("div", { className: `${styles$5.formActions} ${styles$5[`align-${align}`]} ${className || ''}`, children: children }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles$6.formActions} ${styles$6[`align-${align}`]} ${className || ''}`, children: children }));
 };
 
-var styles$4 = {"card":"Card-module_card__Cb1o4","bordered":"Card-module_bordered__fBy0-","borderless":"Card-module_borderless__YB3u0","shadow-none":"Card-module_shadow-none__z6-54","shadow-sm":"Card-module_shadow-sm__wDVK9","shadow-md":"Card-module_shadow-md__67vf0","shadow-lg":"Card-module_shadow-lg__64Kwt","shadow-xl":"Card-module_shadow-xl__QOvW4","clickable":"Card-module_clickable__qbwhm","header":"Card-module_header__PTXf2","titleSection":"Card-module_titleSection__sNCOq","icon":"Card-module_icon__jzes9","title":"Card-module_title__mSgoo","actions":"Card-module_actions__AUI-1","content":"Card-module_content__oFIQa","small":"Card-module_small__n-USZ","medium":"Card-module_medium__6Gszi","large":"Card-module_large__CSDTa","default":"Card-module_default__qq3ax","primary":"Card-module_primary__dDgYl","success":"Card-module_success__Numc6","warning":"Card-module_warning__20v4Q","danger":"Card-module_danger__cv1fT","glass":"Card-module_glass__YcnwR","gradient":"Card-module_gradient__oGNK8","loading":"Card-module_loading__pF1ro","loadingOverlay":"Card-module_loadingOverlay__D0ZLN","spinner":"Card-module_spinner__eUbE8","spin":"Card-module_spin__iMQ71","fadeInUp":"Card-module_fadeInUp__hR-uu"};
+var styles$5 = {"card":"Card-module_card__Cb1o4","bordered":"Card-module_bordered__fBy0-","borderless":"Card-module_borderless__YB3u0","shadow-none":"Card-module_shadow-none__z6-54","shadow-sm":"Card-module_shadow-sm__wDVK9","shadow-md":"Card-module_shadow-md__67vf0","shadow-lg":"Card-module_shadow-lg__64Kwt","shadow-xl":"Card-module_shadow-xl__QOvW4","clickable":"Card-module_clickable__qbwhm","header":"Card-module_header__PTXf2","titleSection":"Card-module_titleSection__sNCOq","icon":"Card-module_icon__jzes9","title":"Card-module_title__mSgoo","actions":"Card-module_actions__AUI-1","content":"Card-module_content__oFIQa","small":"Card-module_small__n-USZ","medium":"Card-module_medium__6Gszi","large":"Card-module_large__CSDTa","default":"Card-module_default__qq3ax","primary":"Card-module_primary__dDgYl","success":"Card-module_success__Numc6","warning":"Card-module_warning__20v4Q","danger":"Card-module_danger__cv1fT","glass":"Card-module_glass__YcnwR","gradient":"Card-module_gradient__oGNK8","loading":"Card-module_loading__pF1ro","loadingOverlay":"Card-module_loadingOverlay__D0ZLN","spinner":"Card-module_spinner__eUbE8","spin":"Card-module_spin__iMQ71","fadeInUp":"Card-module_fadeInUp__hR-uu"};
 
 const Card = ({ title, children, className, size = "medium", type = "default", clickable = false, onClick, bordered = true, shadow = "md", icon, actions, loading = false, }) => {
     const cardClasses = [
-        styles$4.card,
-        styles$4[size],
-        styles$4[type],
-        bordered ? styles$4.bordered : styles$4.borderless,
-        styles$4[`shadow-${shadow}`],
-        clickable ? styles$4.clickable : '',
-        loading ? styles$4.loading : '',
+        styles$5.card,
+        styles$5[size],
+        styles$5[type],
+        bordered ? styles$5.bordered : styles$5.borderless,
+        styles$5[`shadow-${shadow}`],
+        clickable ? styles$5.clickable : '',
+        loading ? styles$5.loading : '',
         className || ''
     ].filter(Boolean).join(' ');
-    return (jsxRuntimeExports.jsxs("div", { className: cardClasses, onClick: clickable ? onClick : undefined, role: clickable ? "button" : undefined, tabIndex: clickable ? 0 : undefined, children: [loading && jsxRuntimeExports.jsx("div", { className: styles$4.loadingOverlay, children: jsxRuntimeExports.jsx("div", { className: styles$4.spinner }) }), (title || icon || actions) && (jsxRuntimeExports.jsxs("div", { className: styles$4.header, children: [jsxRuntimeExports.jsxs("div", { className: styles$4.titleSection, children: [icon && jsxRuntimeExports.jsx("div", { className: styles$4.icon, children: icon }), title && jsxRuntimeExports.jsx("div", { className: styles$4.title, children: title })] }), actions && jsxRuntimeExports.jsx("div", { className: styles$4.actions, children: actions })] })), jsxRuntimeExports.jsx("div", { className: styles$4.content, children: children })] }));
+    return (jsxRuntimeExports.jsxs("div", { className: cardClasses, onClick: clickable ? onClick : undefined, role: clickable ? "button" : undefined, tabIndex: clickable ? 0 : undefined, children: [loading && jsxRuntimeExports.jsx("div", { className: styles$5.loadingOverlay, children: jsxRuntimeExports.jsx("div", { className: styles$5.spinner }) }), (title || icon || actions) && (jsxRuntimeExports.jsxs("div", { className: styles$5.header, children: [jsxRuntimeExports.jsxs("div", { className: styles$5.titleSection, children: [icon && jsxRuntimeExports.jsx("div", { className: styles$5.icon, children: icon }), title && jsxRuntimeExports.jsx("div", { className: styles$5.title, children: title })] }), actions && jsxRuntimeExports.jsx("div", { className: styles$5.actions, children: actions })] })), jsxRuntimeExports.jsx("div", { className: styles$5.content, children: children })] }));
 };
 
-var styles$3 = {"pagination":"Pagination-module_pagination__icb-v","pageButton":"Pagination-module_pageButton__AL1wT","disabled":"Pagination-module_disabled__x47WD","active":"Pagination-module_active__1kqsJ","prevButton":"Pagination-module_prevButton__MAF64","nextButton":"Pagination-module_nextButton__-k5WS","dots":"Pagination-module_dots__Yl9da"};
+var styles$4 = {"pagination":"Pagination-module_pagination__icb-v","pageButton":"Pagination-module_pageButton__AL1wT","disabled":"Pagination-module_disabled__x47WD","active":"Pagination-module_active__1kqsJ","prevButton":"Pagination-module_prevButton__MAF64","nextButton":"Pagination-module_nextButton__-k5WS","dots":"Pagination-module_dots__Yl9da"};
 
 // 生成页码范围的工具函数
 const range = (start, end) => {
@@ -4046,15 +4050,15 @@ const Pagination = ({ total, current, pageSize, onChange, siblingCount = 1, elli
     const handleNext = () => {
         handlePageChange(current + 1);
     };
-    return (jsxRuntimeExports.jsxs("nav", { className: `${styles$3.pagination} ${className}`, "aria-label": "\u5206\u9875\u5BFC\u822A", children: [jsxRuntimeExports.jsx("button", { className: `${styles$3.pageButton} ${styles$3.prevButton} ${current === 1 ? styles$3.disabled : ''}`, onClick: handlePrevious, disabled: current === 1, "aria-label": "\u4E0A\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M10 12l-4-4 4-4v8z" }) }) }), paginationRange.map((pageNumber, index) => {
+    return (jsxRuntimeExports.jsxs("nav", { className: `${styles$4.pagination} ${className}`, "aria-label": "\u5206\u9875\u5BFC\u822A", children: [jsxRuntimeExports.jsx("button", { className: `${styles$4.pageButton} ${styles$4.prevButton} ${current === 1 ? styles$4.disabled : ''}`, onClick: handlePrevious, disabled: current === 1, "aria-label": "\u4E0A\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M10 12l-4-4 4-4v8z" }) }) }), paginationRange.map((pageNumber, index) => {
                 if (pageNumber === DOTS) {
-                    return (jsxRuntimeExports.jsx("span", { className: styles$3.dots, children: ellipsis }, `dots-${index}`));
+                    return (jsxRuntimeExports.jsx("span", { className: styles$4.dots, children: ellipsis }, `dots-${index}`));
                 }
-                return (jsxRuntimeExports.jsx("button", { className: `${styles$3.pageButton} ${pageNumber === current ? styles$3.active : ''}`, onClick: () => handlePageChange(pageNumber), "aria-label": `第 ${pageNumber} 页`, "aria-current": pageNumber === current ? 'page' : undefined, children: pageNumber }, pageNumber));
-            }), jsxRuntimeExports.jsx("button", { className: `${styles$3.pageButton} ${styles$3.nextButton} ${current === totalPageCount ? styles$3.disabled : ''}`, onClick: handleNext, disabled: current === totalPageCount, "aria-label": "\u4E0B\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M6 4l4 4-4 4V4z" }) }) })] }));
+                return (jsxRuntimeExports.jsx("button", { className: `${styles$4.pageButton} ${pageNumber === current ? styles$4.active : ''}`, onClick: () => handlePageChange(pageNumber), "aria-label": `第 ${pageNumber} 页`, "aria-current": pageNumber === current ? 'page' : undefined, children: pageNumber }, pageNumber));
+            }), jsxRuntimeExports.jsx("button", { className: `${styles$4.pageButton} ${styles$4.nextButton} ${current === totalPageCount ? styles$4.disabled : ''}`, onClick: handleNext, disabled: current === totalPageCount, "aria-label": "\u4E0B\u4E00\u9875", children: jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M6 4l4 4-4 4V4z" }) }) })] }));
 };
 
-var styles$2 = {"overlay":"Drawer-module_overlay__YWL02","entering":"Drawer-module_entering__ia4Cx","entered":"Drawer-module_entered__-f3NF","exiting":"Drawer-module_exiting__Co1mt","exited":"Drawer-module_exited__8rCfM","drawer":"Drawer-module_drawer__IKoOm","drawer-left":"Drawer-module_drawer-left__xanOl","drawer-right":"Drawer-module_drawer-right__Xah9j","drawer-top":"Drawer-module_drawer-top__NhSXJ","drawer-bottom":"Drawer-module_drawer-bottom__YyFIt","drawer-small":"Drawer-module_drawer-small__fH0k3","drawer-large":"Drawer-module_drawer-large__6NnLl","drawer-light":"Drawer-module_drawer-light__w-QlZ","drawer-dark":"Drawer-module_drawer-dark__eUw-z","drawer-glass":"Drawer-module_drawer-glass__3ihP2","header":"Drawer-module_header__-OScS","title":"Drawer-module_title__-yf3P","closeButton":"Drawer-module_closeButton__WdXyR","content":"Drawer-module_content__L0Scr","footer":"Drawer-module_footer__0kQ83"};
+var styles$3 = {"overlay":"Drawer-module_overlay__YWL02","entering":"Drawer-module_entering__ia4Cx","entered":"Drawer-module_entered__-f3NF","exiting":"Drawer-module_exiting__Co1mt","exited":"Drawer-module_exited__8rCfM","drawer":"Drawer-module_drawer__IKoOm","drawer-left":"Drawer-module_drawer-left__xanOl","drawer-right":"Drawer-module_drawer-right__Xah9j","drawer-top":"Drawer-module_drawer-top__NhSXJ","drawer-bottom":"Drawer-module_drawer-bottom__YyFIt","drawer-small":"Drawer-module_drawer-small__fH0k3","drawer-large":"Drawer-module_drawer-large__6NnLl","drawer-light":"Drawer-module_drawer-light__w-QlZ","drawer-dark":"Drawer-module_drawer-dark__eUw-z","drawer-glass":"Drawer-module_drawer-glass__3ihP2","header":"Drawer-module_header__-OScS","title":"Drawer-module_title__-yf3P","closeButton":"Drawer-module_closeButton__WdXyR","content":"Drawer-module_content__L0Scr","footer":"Drawer-module_footer__0kQ83"};
 
 const Drawer = ({ open, onClose, title, children, placement = 'right', size = 'default', theme = 'light', closable = true, maskClosable = true, footer, className, closeIcon, afterOpenChange, }) => {
     const drawerRef = React.useRef(null);
@@ -4112,25 +4116,25 @@ const Drawer = ({ open, onClose, title, children, placement = 'right', size = 'd
         e.stopPropagation();
     };
     const drawerClasses = [
-        styles$2.drawer,
-        styles$2[`drawer-${placement}`],
-        styles$2[`drawer-${theme}`],
-        size !== 'default' && styles$2[`drawer-${size}`],
-        styles$2[animationState],
+        styles$3.drawer,
+        styles$3[`drawer-${placement}`],
+        styles$3[`drawer-${theme}`],
+        size !== 'default' && styles$3[`drawer-${size}`],
+        styles$3[animationState],
         className
     ].filter(Boolean).join(' ');
     const overlayClasses = [
-        styles$2.overlay,
-        styles$2[animationState]
+        styles$3.overlay,
+        styles$3[animationState]
     ].join(' ');
     if (!open && animationState === 'exited') {
         return null;
     }
-    const drawerContent = (jsxRuntimeExports.jsx("div", { className: overlayClasses, onClick: handleMaskClick, children: jsxRuntimeExports.jsxs("div", { ref: drawerRef, className: drawerClasses, onClick: handleDrawerClick, role: "dialog", "aria-modal": "true", "aria-labelledby": title ? 'drawer-title' : undefined, children: [(title || closable) && (jsxRuntimeExports.jsxs("div", { className: styles$2.header, children: [title && (jsxRuntimeExports.jsx("h3", { id: "drawer-title", className: styles$2.title, children: title })), closable && (jsxRuntimeExports.jsx("button", { className: styles$2.closeButton, onClick: onClose, "aria-label": "\u5173\u95ED\u62BD\u5C49", children: closeIcon || (jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M8 7.293l2.146-2.147a.5.5 0 01.708.708L8.707 8l2.147 2.146a.5.5 0 01-.708.708L8 8.707l-2.146 2.147a.5.5 0 01-.708-.708L7.293 8 5.146 5.854a.5.5 0 01.708-.708L8 7.293z" }) })) }))] })), jsxRuntimeExports.jsx("div", { className: styles$2.content, children: children }), footer && (jsxRuntimeExports.jsx("div", { className: styles$2.footer, children: footer }))] }) }));
-    return reactDom.createPortal(drawerContent, document.body);
+    const drawerContent = (jsxRuntimeExports.jsx("div", { className: overlayClasses, onClick: handleMaskClick, children: jsxRuntimeExports.jsxs("div", { ref: drawerRef, className: drawerClasses, onClick: handleDrawerClick, role: "dialog", "aria-modal": "true", "aria-labelledby": title ? 'drawer-title' : undefined, children: [(title || closable) && (jsxRuntimeExports.jsxs("div", { className: styles$3.header, children: [title && (jsxRuntimeExports.jsx("h3", { id: "drawer-title", className: styles$3.title, children: title })), closable && (jsxRuntimeExports.jsx("button", { className: styles$3.closeButton, onClick: onClose, "aria-label": "\u5173\u95ED\u62BD\u5C49", children: closeIcon || (jsxRuntimeExports.jsx("svg", { width: "16", height: "16", viewBox: "0 0 16 16", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M8 7.293l2.146-2.147a.5.5 0 01.708.708L8.707 8l2.147 2.146a.5.5 0 01-.708.708L8 8.707l-2.146 2.147a.5.5 0 01-.708-.708L7.293 8 5.146 5.854a.5.5 0 01.708-.708L8 7.293z" }) })) }))] })), jsxRuntimeExports.jsx("div", { className: styles$3.content, children: children }), footer && (jsxRuntimeExports.jsx("div", { className: styles$3.footer, children: footer }))] }) }));
+    return ReactDOM.createPortal(drawerContent, document.body);
 };
 
-var styles$1 = {"notification":"Notification-module_notification__WfYqO","top-left":"Notification-module_top-left__-uozQ","top-right":"Notification-module_top-right__S3dv9","bottom-left":"Notification-module_bottom-left__kstSy","bottom-right":"Notification-module_bottom-right__4cvNX","content":"Notification-module_content__xt6uE","close":"Notification-module_close__FllIm"};
+var styles$2 = {"notification":"Notification-module_notification__WfYqO","top-left":"Notification-module_top-left__-uozQ","top-right":"Notification-module_top-right__S3dv9","bottom-left":"Notification-module_bottom-left__kstSy","bottom-right":"Notification-module_bottom-right__4cvNX","content":"Notification-module_content__xt6uE","close":"Notification-module_close__FllIm"};
 
 const Notification = ({ closeIcon, duration = 3000, // 默认 3 秒自动关闭
 message = "", onClick, onClose, position = "top-right", className, show, }) => {
@@ -4159,13 +4163,13 @@ message = "", onClick, onClose, position = "top-right", className, show, }) => {
     if (!internalShow) {
         return null;
     }
-    const notificationClass = [styles$1.notification, styles$1[position], className]
+    const notificationClass = [styles$2.notification, styles$2[position], className]
         .filter(Boolean)
         .join(" ");
-    return (jsxRuntimeExports.jsxs("div", { className: notificationClass, children: [jsxRuntimeExports.jsx("div", { className: styles$1.content, onClick: onClick, children: message }), jsxRuntimeExports.jsx("button", { className: styles$1.close, onClick: handleClose, "aria-label": "\u5173\u95ED\u901A\u77E5", children: closeIcon || "×" })] }));
+    return (jsxRuntimeExports.jsxs("div", { className: notificationClass, children: [jsxRuntimeExports.jsx("div", { className: styles$2.content, onClick: onClick, children: message }), jsxRuntimeExports.jsx("button", { className: styles$2.close, onClick: handleClose, "aria-label": "\u5173\u95ED\u901A\u77E5", children: closeIcon || "×" })] }));
 };
 
-var styles = {"carouselContainer":"Carousel-module_carouselContainer__U7uvv","carouselWrapper":"Carousel-module_carouselWrapper__mbMz6","carouselItem":"Carousel-module_carouselItem__azNhm","navButton":"Carousel-module_navButton__MF8Tr","prevButton":"Carousel-module_prevButton__GnvyX","nextButton":"Carousel-module_nextButton__2O6P1","dotsContainer":"Carousel-module_dotsContainer__GSKvc","dot":"Carousel-module_dot__9O4Is","active":"Carousel-module_active__3sD6-"};
+var styles$1 = {"carouselContainer":"Carousel-module_carouselContainer__U7uvv","carouselWrapper":"Carousel-module_carouselWrapper__mbMz6","carouselItem":"Carousel-module_carouselItem__azNhm","navButton":"Carousel-module_navButton__MF8Tr","prevButton":"Carousel-module_prevButton__GnvyX","nextButton":"Carousel-module_nextButton__2O6P1","dotsContainer":"Carousel-module_dotsContainer__GSKvc","dot":"Carousel-module_dot__9O4Is","active":"Carousel-module_active__3sD6-"};
 
 const Carousel = ({ items, autoplayInterval = 3000, }) => {
     // 如果没有项目或项目少于1个，则不渲染
@@ -4218,7 +4222,7 @@ const Carousel = ({ items, autoplayInterval = 3000, }) => {
             }
         };
         // 监听过渡结束事件
-        const carouselWrapper = document.querySelector(`.${styles.carouselWrapper}`);
+        const carouselWrapper = document.querySelector(`.${styles$1.carouselWrapper}`);
         carouselWrapper === null || carouselWrapper === void 0 ? void 0 : carouselWrapper.addEventListener("transitionend", handleTransitionEnd);
         return () => {
             carouselWrapper === null || carouselWrapper === void 0 ? void 0 : carouselWrapper.removeEventListener("transitionend", handleTransitionEnd);
@@ -4234,19 +4238,2375 @@ const Carousel = ({ items, autoplayInterval = 3000, }) => {
             return () => clearTimeout(timeout);
         }
     }, [isTransitioning]);
-    return (jsxRuntimeExports.jsxs("div", { className: styles.carouselContainer, onMouseEnter: stopAutoplay, onMouseLeave: startAutoplay, children: [jsxRuntimeExports.jsx("div", { ref: carouselWrapperRef, className: styles.carouselWrapper, style: {
+    return (jsxRuntimeExports.jsxs("div", { className: styles$1.carouselContainer, onMouseEnter: stopAutoplay, onMouseLeave: startAutoplay, children: [jsxRuntimeExports.jsx("div", { ref: carouselWrapperRef, className: styles$1.carouselWrapper, style: {
                     transform: `translateX(-${currentIndex * 100}%)`,
                     transition: isTransitioning ? "transform 0.5s ease-in-out" : "none",
-                }, children: displayItems.map((item, index) => (jsxRuntimeExports.jsx("div", { className: styles.carouselItem, children: jsxRuntimeExports.jsx("img", { src: item.imageUrl, alt: item.altText }) }, index))) }), jsxRuntimeExports.jsx("button", { onClick: prevSlide, className: `${styles.navButton} ${styles.prevButton}`, children: "\u276E" }), jsxRuntimeExports.jsx("button", { onClick: nextSlide, className: `${styles.navButton} ${styles.nextButton}`, children: "\u276F" }), jsxRuntimeExports.jsx("div", { className: styles.dotsContainer, children: items.map((_, index) => {
+                }, children: displayItems.map((item, index) => (jsxRuntimeExports.jsx("div", { className: styles$1.carouselItem, children: jsxRuntimeExports.jsx("img", { src: item.imageUrl, alt: item.altText }) }, index))) }), jsxRuntimeExports.jsx("button", { onClick: prevSlide, className: `${styles$1.navButton} ${styles$1.prevButton}`, children: "\u276E" }), jsxRuntimeExports.jsx("button", { onClick: nextSlide, className: `${styles$1.navButton} ${styles$1.nextButton}`, children: "\u276F" }), jsxRuntimeExports.jsx("div", { className: styles$1.dotsContainer, children: items.map((_, index) => {
                     // 计算当前激活的指示点
                     let activeIndex = currentIndex - 1;
                     if (currentIndex === 0)
                         activeIndex = items.length - 1;
                     if (currentIndex === displayItems.length - 1)
                         activeIndex = 0;
-                    return (jsxRuntimeExports.jsx("span", { className: `${styles.dot} ${index === activeIndex ? styles.active : ""}`, onClick: () => setCurrentIndex(index + 1) }, index));
+                    return (jsxRuntimeExports.jsx("span", { className: `${styles$1.dot} ${index === activeIndex ? styles$1.active : ""}`, onClick: () => setCurrentIndex(index + 1) }, index));
                 }) })] }));
 };
+
+var styles = {"collapse":"Collapse-module_collapse__Y5Z0-","panel":"Collapse-module_panel__Cnkt2","panelHeader":"Collapse-module_panelHeader__SrY-h","disabled":"Collapse-module_disabled__rJXNh","headerText":"Collapse-module_headerText__UjUGH","panelIcon":"Collapse-module_panelIcon__EaG7O","active":"Collapse-module_active__4ckAf","panelContent":"Collapse-module_panelContent__sgsTH","contentBox":"Collapse-module_contentBox__a-w2g","contentEnter":"Collapse-module_contentEnter__3yfeM","contentEnterActive":"Collapse-module_contentEnterActive__RsLBp","contentExit":"Collapse-module_contentExit__K3wJY","contentExitActive":"Collapse-module_contentExitActive__wMxKn"};
+
+function _extends() {
+  return _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
+    }
+    return n;
+  }, _extends.apply(null, arguments);
+}
+
+function _objectWithoutPropertiesLoose(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+    if (-1 !== e.indexOf(n)) continue;
+    t[n] = r[n];
+  }
+  return t;
+}
+
+function _setPrototypeOf(t, e) {
+  return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) {
+    return t.__proto__ = e, t;
+  }, _setPrototypeOf(t, e);
+}
+
+function _inheritsLoose(t, o) {
+  t.prototype = Object.create(o.prototype), t.prototype.constructor = t, _setPrototypeOf(t, o);
+}
+
+var propTypes = {exports: {}};
+
+var reactIs = {exports: {}};
+
+var reactIs_production_min = {};
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var hasRequiredReactIs_production_min;
+
+function requireReactIs_production_min () {
+	if (hasRequiredReactIs_production_min) return reactIs_production_min;
+	hasRequiredReactIs_production_min = 1;
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+	Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+	function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min.AsyncMode=l;reactIs_production_min.ConcurrentMode=m;reactIs_production_min.ContextConsumer=k;reactIs_production_min.ContextProvider=h;reactIs_production_min.Element=c;reactIs_production_min.ForwardRef=n;reactIs_production_min.Fragment=e;reactIs_production_min.Lazy=t;reactIs_production_min.Memo=r;reactIs_production_min.Portal=d;
+	reactIs_production_min.Profiler=g;reactIs_production_min.StrictMode=f;reactIs_production_min.Suspense=p;reactIs_production_min.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min.isConcurrentMode=A;reactIs_production_min.isContextConsumer=function(a){return z(a)===k};reactIs_production_min.isContextProvider=function(a){return z(a)===h};reactIs_production_min.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min.isForwardRef=function(a){return z(a)===n};reactIs_production_min.isFragment=function(a){return z(a)===e};reactIs_production_min.isLazy=function(a){return z(a)===t};
+	reactIs_production_min.isMemo=function(a){return z(a)===r};reactIs_production_min.isPortal=function(a){return z(a)===d};reactIs_production_min.isProfiler=function(a){return z(a)===g};reactIs_production_min.isStrictMode=function(a){return z(a)===f};reactIs_production_min.isSuspense=function(a){return z(a)===p};
+	reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min.typeOf=z;
+	return reactIs_production_min;
+}
+
+var reactIs_development = {};
+
+/** @license React v16.13.1
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var hasRequiredReactIs_development;
+
+function requireReactIs_development () {
+	if (hasRequiredReactIs_development) return reactIs_development;
+	hasRequiredReactIs_development = 1;
+
+
+
+	if (process.env.NODE_ENV !== "production") {
+	  (function() {
+
+	// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+	// nor polyfill, then a plain number is used for performance.
+	var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+	var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+	var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+	var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+	var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+	var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+	var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+	var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+	// (unstable) APIs that have been removed. Can we remove the symbols?
+
+	var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+	var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+	var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+	var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+	var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+	var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+	var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+	var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+	var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+	var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+	var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+	function isValidElementType(type) {
+	  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+	  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+	}
+
+	function typeOf(object) {
+	  if (typeof object === 'object' && object !== null) {
+	    var $$typeof = object.$$typeof;
+
+	    switch ($$typeof) {
+	      case REACT_ELEMENT_TYPE:
+	        var type = object.type;
+
+	        switch (type) {
+	          case REACT_ASYNC_MODE_TYPE:
+	          case REACT_CONCURRENT_MODE_TYPE:
+	          case REACT_FRAGMENT_TYPE:
+	          case REACT_PROFILER_TYPE:
+	          case REACT_STRICT_MODE_TYPE:
+	          case REACT_SUSPENSE_TYPE:
+	            return type;
+
+	          default:
+	            var $$typeofType = type && type.$$typeof;
+
+	            switch ($$typeofType) {
+	              case REACT_CONTEXT_TYPE:
+	              case REACT_FORWARD_REF_TYPE:
+	              case REACT_LAZY_TYPE:
+	              case REACT_MEMO_TYPE:
+	              case REACT_PROVIDER_TYPE:
+	                return $$typeofType;
+
+	              default:
+	                return $$typeof;
+	            }
+
+	        }
+
+	      case REACT_PORTAL_TYPE:
+	        return $$typeof;
+	    }
+	  }
+
+	  return undefined;
+	} // AsyncMode is deprecated along with isAsyncMode
+
+	var AsyncMode = REACT_ASYNC_MODE_TYPE;
+	var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+	var ContextConsumer = REACT_CONTEXT_TYPE;
+	var ContextProvider = REACT_PROVIDER_TYPE;
+	var Element = REACT_ELEMENT_TYPE;
+	var ForwardRef = REACT_FORWARD_REF_TYPE;
+	var Fragment = REACT_FRAGMENT_TYPE;
+	var Lazy = REACT_LAZY_TYPE;
+	var Memo = REACT_MEMO_TYPE;
+	var Portal = REACT_PORTAL_TYPE;
+	var Profiler = REACT_PROFILER_TYPE;
+	var StrictMode = REACT_STRICT_MODE_TYPE;
+	var Suspense = REACT_SUSPENSE_TYPE;
+	var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+	function isAsyncMode(object) {
+	  {
+	    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+	      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+	      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+	    }
+	  }
+
+	  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+	}
+	function isConcurrentMode(object) {
+	  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+	}
+	function isContextConsumer(object) {
+	  return typeOf(object) === REACT_CONTEXT_TYPE;
+	}
+	function isContextProvider(object) {
+	  return typeOf(object) === REACT_PROVIDER_TYPE;
+	}
+	function isElement(object) {
+	  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+	}
+	function isForwardRef(object) {
+	  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+	}
+	function isFragment(object) {
+	  return typeOf(object) === REACT_FRAGMENT_TYPE;
+	}
+	function isLazy(object) {
+	  return typeOf(object) === REACT_LAZY_TYPE;
+	}
+	function isMemo(object) {
+	  return typeOf(object) === REACT_MEMO_TYPE;
+	}
+	function isPortal(object) {
+	  return typeOf(object) === REACT_PORTAL_TYPE;
+	}
+	function isProfiler(object) {
+	  return typeOf(object) === REACT_PROFILER_TYPE;
+	}
+	function isStrictMode(object) {
+	  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+	}
+	function isSuspense(object) {
+	  return typeOf(object) === REACT_SUSPENSE_TYPE;
+	}
+
+	reactIs_development.AsyncMode = AsyncMode;
+	reactIs_development.ConcurrentMode = ConcurrentMode;
+	reactIs_development.ContextConsumer = ContextConsumer;
+	reactIs_development.ContextProvider = ContextProvider;
+	reactIs_development.Element = Element;
+	reactIs_development.ForwardRef = ForwardRef;
+	reactIs_development.Fragment = Fragment;
+	reactIs_development.Lazy = Lazy;
+	reactIs_development.Memo = Memo;
+	reactIs_development.Portal = Portal;
+	reactIs_development.Profiler = Profiler;
+	reactIs_development.StrictMode = StrictMode;
+	reactIs_development.Suspense = Suspense;
+	reactIs_development.isAsyncMode = isAsyncMode;
+	reactIs_development.isConcurrentMode = isConcurrentMode;
+	reactIs_development.isContextConsumer = isContextConsumer;
+	reactIs_development.isContextProvider = isContextProvider;
+	reactIs_development.isElement = isElement;
+	reactIs_development.isForwardRef = isForwardRef;
+	reactIs_development.isFragment = isFragment;
+	reactIs_development.isLazy = isLazy;
+	reactIs_development.isMemo = isMemo;
+	reactIs_development.isPortal = isPortal;
+	reactIs_development.isProfiler = isProfiler;
+	reactIs_development.isStrictMode = isStrictMode;
+	reactIs_development.isSuspense = isSuspense;
+	reactIs_development.isValidElementType = isValidElementType;
+	reactIs_development.typeOf = typeOf;
+	  })();
+	}
+	return reactIs_development;
+}
+
+var hasRequiredReactIs;
+
+function requireReactIs () {
+	if (hasRequiredReactIs) return reactIs.exports;
+	hasRequiredReactIs = 1;
+
+	if (process.env.NODE_ENV === 'production') {
+	  reactIs.exports = requireReactIs_production_min();
+	} else {
+	  reactIs.exports = requireReactIs_development();
+	}
+	return reactIs.exports;
+}
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+var objectAssign;
+var hasRequiredObjectAssign;
+
+function requireObjectAssign () {
+	if (hasRequiredObjectAssign) return objectAssign;
+	hasRequiredObjectAssign = 1;
+	/* eslint-disable no-unused-vars */
+	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (err) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (getOwnPropertySymbols) {
+				symbols = getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+	return objectAssign;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var ReactPropTypesSecret_1;
+var hasRequiredReactPropTypesSecret;
+
+function requireReactPropTypesSecret () {
+	if (hasRequiredReactPropTypesSecret) return ReactPropTypesSecret_1;
+	hasRequiredReactPropTypesSecret = 1;
+
+	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+	ReactPropTypesSecret_1 = ReactPropTypesSecret;
+	return ReactPropTypesSecret_1;
+}
+
+var has;
+var hasRequiredHas;
+
+function requireHas () {
+	if (hasRequiredHas) return has;
+	hasRequiredHas = 1;
+	has = Function.call.bind(Object.prototype.hasOwnProperty);
+	return has;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var checkPropTypes_1;
+var hasRequiredCheckPropTypes;
+
+function requireCheckPropTypes () {
+	if (hasRequiredCheckPropTypes) return checkPropTypes_1;
+	hasRequiredCheckPropTypes = 1;
+
+	var printWarning = function() {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var ReactPropTypesSecret = /*@__PURE__*/ requireReactPropTypesSecret();
+	  var loggedTypeFailures = {};
+	  var has = /*@__PURE__*/ requireHas();
+
+	  printWarning = function(text) {
+	    var message = 'Warning: ' + text;
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) { /**/ }
+	  };
+	}
+
+	/**
+	 * Assert that the values match with the type specs.
+	 * Error messages are memorized and will only be shown once.
+	 *
+	 * @param {object} typeSpecs Map of name to a ReactPropType
+	 * @param {object} values Runtime values that need to be type-checked
+	 * @param {string} location e.g. "prop", "context", "child context"
+	 * @param {string} componentName Name of the component for error messages.
+	 * @param {?Function} getStack Returns the component stack.
+	 * @private
+	 */
+	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    for (var typeSpecName in typeSpecs) {
+	      if (has(typeSpecs, typeSpecName)) {
+	        var error;
+	        // Prop type validation may throw. In case they do, we don't want to
+	        // fail the render phase where it didn't fail before. So we log it.
+	        // After these have been cleaned up, we'll let them throw.
+	        try {
+	          // This is intentionally an invariant that gets caught. It's the same
+	          // behavior as without this statement except with a better message.
+	          if (typeof typeSpecs[typeSpecName] !== 'function') {
+	            var err = Error(
+	              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+	              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' +
+	              'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.'
+	            );
+	            err.name = 'Invariant Violation';
+	            throw err;
+	          }
+	          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+	        } catch (ex) {
+	          error = ex;
+	        }
+	        if (error && !(error instanceof Error)) {
+	          printWarning(
+	            (componentName || 'React class') + ': type specification of ' +
+	            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+	            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+	            'You may have forgotten to pass an argument to the type checker ' +
+	            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+	            'shape all require an argument).'
+	          );
+	        }
+	        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+	          // Only monitor this failure once because there tends to be a lot of the
+	          // same error.
+	          loggedTypeFailures[error.message] = true;
+
+	          var stack = getStack ? getStack() : '';
+
+	          printWarning(
+	            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+	          );
+	        }
+	      }
+	    }
+	  }
+	}
+
+	/**
+	 * Resets warning cache when testing.
+	 *
+	 * @private
+	 */
+	checkPropTypes.resetWarningCache = function() {
+	  if (process.env.NODE_ENV !== 'production') {
+	    loggedTypeFailures = {};
+	  }
+	};
+
+	checkPropTypes_1 = checkPropTypes;
+	return checkPropTypes_1;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var factoryWithTypeCheckers;
+var hasRequiredFactoryWithTypeCheckers;
+
+function requireFactoryWithTypeCheckers () {
+	if (hasRequiredFactoryWithTypeCheckers) return factoryWithTypeCheckers;
+	hasRequiredFactoryWithTypeCheckers = 1;
+
+	var ReactIs = requireReactIs();
+	var assign = requireObjectAssign();
+
+	var ReactPropTypesSecret = /*@__PURE__*/ requireReactPropTypesSecret();
+	var has = /*@__PURE__*/ requireHas();
+	var checkPropTypes = /*@__PURE__*/ requireCheckPropTypes();
+
+	var printWarning = function() {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  printWarning = function(text) {
+	    var message = 'Warning: ' + text;
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+	}
+
+	function emptyFunctionThatReturnsNull() {
+	  return null;
+	}
+
+	factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
+	  /* global Symbol */
+	  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+	  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+	  /**
+	   * Returns the iterator method function contained on the iterable object.
+	   *
+	   * Be sure to invoke the function with the iterable as context:
+	   *
+	   *     var iteratorFn = getIteratorFn(myIterable);
+	   *     if (iteratorFn) {
+	   *       var iterator = iteratorFn.call(myIterable);
+	   *       ...
+	   *     }
+	   *
+	   * @param {?object} maybeIterable
+	   * @return {?function}
+	   */
+	  function getIteratorFn(maybeIterable) {
+	    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+	    if (typeof iteratorFn === 'function') {
+	      return iteratorFn;
+	    }
+	  }
+
+	  /**
+	   * Collection of methods that allow declaration and validation of props that are
+	   * supplied to React components. Example usage:
+	   *
+	   *   var Props = require('ReactPropTypes');
+	   *   var MyArticle = React.createClass({
+	   *     propTypes: {
+	   *       // An optional string prop named "description".
+	   *       description: Props.string,
+	   *
+	   *       // A required enum prop named "category".
+	   *       category: Props.oneOf(['News','Photos']).isRequired,
+	   *
+	   *       // A prop named "dialog" that requires an instance of Dialog.
+	   *       dialog: Props.instanceOf(Dialog).isRequired
+	   *     },
+	   *     render: function() { ... }
+	   *   });
+	   *
+	   * A more formal specification of how these methods are used:
+	   *
+	   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+	   *   decl := ReactPropTypes.{type}(.isRequired)?
+	   *
+	   * Each and every declaration produces a function with the same signature. This
+	   * allows the creation of custom validation functions. For example:
+	   *
+	   *  var MyLink = React.createClass({
+	   *    propTypes: {
+	   *      // An optional string or URI prop named "href".
+	   *      href: function(props, propName, componentName) {
+	   *        var propValue = props[propName];
+	   *        if (propValue != null && typeof propValue !== 'string' &&
+	   *            !(propValue instanceof URI)) {
+	   *          return new Error(
+	   *            'Expected a string or an URI for ' + propName + ' in ' +
+	   *            componentName
+	   *          );
+	   *        }
+	   *      }
+	   *    },
+	   *    render: function() {...}
+	   *  });
+	   *
+	   * @internal
+	   */
+
+	  var ANONYMOUS = '<<anonymous>>';
+
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+	  var ReactPropTypes = {
+	    array: createPrimitiveTypeChecker('array'),
+	    bigint: createPrimitiveTypeChecker('bigint'),
+	    bool: createPrimitiveTypeChecker('boolean'),
+	    func: createPrimitiveTypeChecker('function'),
+	    number: createPrimitiveTypeChecker('number'),
+	    object: createPrimitiveTypeChecker('object'),
+	    string: createPrimitiveTypeChecker('string'),
+	    symbol: createPrimitiveTypeChecker('symbol'),
+
+	    any: createAnyTypeChecker(),
+	    arrayOf: createArrayOfTypeChecker,
+	    element: createElementTypeChecker(),
+	    elementType: createElementTypeTypeChecker(),
+	    instanceOf: createInstanceTypeChecker,
+	    node: createNodeChecker(),
+	    objectOf: createObjectOfTypeChecker,
+	    oneOf: createEnumTypeChecker,
+	    oneOfType: createUnionTypeChecker,
+	    shape: createShapeTypeChecker,
+	    exact: createStrictShapeTypeChecker,
+	  };
+
+	  /**
+	   * inlined Object.is polyfill to avoid requiring consumers ship their own
+	   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	   */
+	  /*eslint-disable no-self-compare*/
+	  function is(x, y) {
+	    // SameValue algorithm
+	    if (x === y) {
+	      // Steps 1-5, 7-10
+	      // Steps 6.b-6.e: +0 != -0
+	      return x !== 0 || 1 / x === 1 / y;
+	    } else {
+	      // Step 6.a: NaN == NaN
+	      return x !== x && y !== y;
+	    }
+	  }
+	  /*eslint-enable no-self-compare*/
+
+	  /**
+	   * We use an Error-like object for backward compatibility as people may call
+	   * PropTypes directly and inspect their output. However, we don't use real
+	   * Errors anymore. We don't inspect their stack anyway, and creating them
+	   * is prohibitively expensive if they are created too often, such as what
+	   * happens in oneOfType() for any type before the one that matched.
+	   */
+	  function PropTypeError(message, data) {
+	    this.message = message;
+	    this.data = data && typeof data === 'object' ? data: {};
+	    this.stack = '';
+	  }
+	  // Make `instanceof Error` still work for returned errors.
+	  PropTypeError.prototype = Error.prototype;
+
+	  function createChainableTypeChecker(validate) {
+	    if (process.env.NODE_ENV !== 'production') {
+	      var manualPropTypeCallCache = {};
+	      var manualPropTypeWarningCount = 0;
+	    }
+	    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+	      componentName = componentName || ANONYMOUS;
+	      propFullName = propFullName || propName;
+
+	      if (secret !== ReactPropTypesSecret) {
+	        if (throwOnDirectAccess) {
+	          // New behavior only for users of `prop-types` package
+	          var err = new Error(
+	            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	            'Use `PropTypes.checkPropTypes()` to call them. ' +
+	            'Read more at http://fb.me/use-check-prop-types'
+	          );
+	          err.name = 'Invariant Violation';
+	          throw err;
+	        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+	          // Old behavior for people using React.PropTypes
+	          var cacheKey = componentName + ':' + propName;
+	          if (
+	            !manualPropTypeCallCache[cacheKey] &&
+	            // Avoid spamming the console because they are often not actionable except for lib authors
+	            manualPropTypeWarningCount < 3
+	          ) {
+	            printWarning(
+	              'You are manually calling a React.PropTypes validation ' +
+	              'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' +
+	              'and will throw in the standalone `prop-types` package. ' +
+	              'You may be seeing this warning due to a third-party PropTypes ' +
+	              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
+	            );
+	            manualPropTypeCallCache[cacheKey] = true;
+	            manualPropTypeWarningCount++;
+	          }
+	        }
+	      }
+	      if (props[propName] == null) {
+	        if (isRequired) {
+	          if (props[propName] === null) {
+	            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+	          }
+	          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+	        }
+	        return null;
+	      } else {
+	        return validate(props, propName, componentName, location, propFullName);
+	      }
+	    }
+
+	    var chainedCheckType = checkType.bind(null, false);
+	    chainedCheckType.isRequired = checkType.bind(null, true);
+
+	    return chainedCheckType;
+	  }
+
+	  function createPrimitiveTypeChecker(expectedType) {
+	    function validate(props, propName, componentName, location, propFullName, secret) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== expectedType) {
+	        // `propValue` being instance of, say, date/regexp, pass the 'object'
+	        // check, but we can offer a more precise error message here rather than
+	        // 'of type `object`'.
+	        var preciseType = getPreciseType(propValue);
+
+	        return new PropTypeError(
+	          'Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'),
+	          {expectedType: expectedType}
+	        );
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createAnyTypeChecker() {
+	    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+	  }
+
+	  function createArrayOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+	      }
+	      var propValue = props[propName];
+	      if (!Array.isArray(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+	      }
+	      for (var i = 0; i < propValue.length; i++) {
+	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+	        if (error instanceof Error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createElementTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!isValidElement(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createElementTypeTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!ReactIs.isValidElementType(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createInstanceTypeChecker(expectedClass) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!(props[propName] instanceof expectedClass)) {
+	        var expectedClassName = expectedClass.name || ANONYMOUS;
+	        var actualClassName = getClassName(props[propName]);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createEnumTypeChecker(expectedValues) {
+	    if (!Array.isArray(expectedValues)) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        if (arguments.length > 1) {
+	          printWarning(
+	            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
+	            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
+	          );
+	        } else {
+	          printWarning('Invalid argument supplied to oneOf, expected an array.');
+	        }
+	      }
+	      return emptyFunctionThatReturnsNull;
+	    }
+
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      for (var i = 0; i < expectedValues.length; i++) {
+	        if (is(propValue, expectedValues[i])) {
+	          return null;
+	        }
+	      }
+
+	      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
+	        var type = getPreciseType(value);
+	        if (type === 'symbol') {
+	          return String(value);
+	        }
+	        return value;
+	      });
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createObjectOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+	      }
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+	      }
+	      for (var key in propValue) {
+	        if (has(propValue, key)) {
+	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	          if (error instanceof Error) {
+	            return error;
+	          }
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createUnionTypeChecker(arrayOfTypeCheckers) {
+	    if (!Array.isArray(arrayOfTypeCheckers)) {
+	      process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+	      return emptyFunctionThatReturnsNull;
+	    }
+
+	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	      var checker = arrayOfTypeCheckers[i];
+	      if (typeof checker !== 'function') {
+	        printWarning(
+	          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+	          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
+	        );
+	        return emptyFunctionThatReturnsNull;
+	      }
+	    }
+
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var expectedTypes = [];
+	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	        var checker = arrayOfTypeCheckers[i];
+	        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
+	        if (checkerResult == null) {
+	          return null;
+	        }
+	        if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
+	          expectedTypes.push(checkerResult.data.expectedType);
+	        }
+	      }
+	      var expectedTypesMessage = (expectedTypes.length > 0) ? ', expected one of type [' + expectedTypes.join(', ') + ']': '';
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createNodeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!isNode(props[propName])) {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function invalidValidatorError(componentName, location, propFullName, key, type) {
+	    return new PropTypeError(
+	      (componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' +
+	      'it must be a function, usually from the `prop-types` package, but received `' + type + '`.'
+	    );
+	  }
+
+	  function createShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      for (var key in shapeTypes) {
+	        var checker = shapeTypes[key];
+	        if (typeof checker !== 'function') {
+	          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createStrictShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      // We need to check all keys in case some are required but missing from props.
+	      var allKeys = assign({}, props[propName], shapeTypes);
+	      for (var key in allKeys) {
+	        var checker = shapeTypes[key];
+	        if (has(shapeTypes, key) && typeof checker !== 'function') {
+	          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+	        }
+	        if (!checker) {
+	          return new PropTypeError(
+	            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+	            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+	            '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  ')
+	          );
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function isNode(propValue) {
+	    switch (typeof propValue) {
+	      case 'number':
+	      case 'string':
+	      case 'undefined':
+	        return true;
+	      case 'boolean':
+	        return !propValue;
+	      case 'object':
+	        if (Array.isArray(propValue)) {
+	          return propValue.every(isNode);
+	        }
+	        if (propValue === null || isValidElement(propValue)) {
+	          return true;
+	        }
+
+	        var iteratorFn = getIteratorFn(propValue);
+	        if (iteratorFn) {
+	          var iterator = iteratorFn.call(propValue);
+	          var step;
+	          if (iteratorFn !== propValue.entries) {
+	            while (!(step = iterator.next()).done) {
+	              if (!isNode(step.value)) {
+	                return false;
+	              }
+	            }
+	          } else {
+	            // Iterator will provide entry [k,v] tuples rather than values.
+	            while (!(step = iterator.next()).done) {
+	              var entry = step.value;
+	              if (entry) {
+	                if (!isNode(entry[1])) {
+	                  return false;
+	                }
+	              }
+	            }
+	          }
+	        } else {
+	          return false;
+	        }
+
+	        return true;
+	      default:
+	        return false;
+	    }
+	  }
+
+	  function isSymbol(propType, propValue) {
+	    // Native Symbol.
+	    if (propType === 'symbol') {
+	      return true;
+	    }
+
+	    // falsy value can't be a Symbol
+	    if (!propValue) {
+	      return false;
+	    }
+
+	    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+	    if (propValue['@@toStringTag'] === 'Symbol') {
+	      return true;
+	    }
+
+	    // Fallback for non-spec compliant Symbols which are polyfilled.
+	    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+	      return true;
+	    }
+
+	    return false;
+	  }
+
+	  // Equivalent of `typeof` but with special handling for array and regexp.
+	  function getPropType(propValue) {
+	    var propType = typeof propValue;
+	    if (Array.isArray(propValue)) {
+	      return 'array';
+	    }
+	    if (propValue instanceof RegExp) {
+	      // Old webkits (at least until Android 4.0) return 'function' rather than
+	      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+	      // passes PropTypes.object.
+	      return 'object';
+	    }
+	    if (isSymbol(propType, propValue)) {
+	      return 'symbol';
+	    }
+	    return propType;
+	  }
+
+	  // This handles more types than `getPropType`. Only used for error messages.
+	  // See `createPrimitiveTypeChecker`.
+	  function getPreciseType(propValue) {
+	    if (typeof propValue === 'undefined' || propValue === null) {
+	      return '' + propValue;
+	    }
+	    var propType = getPropType(propValue);
+	    if (propType === 'object') {
+	      if (propValue instanceof Date) {
+	        return 'date';
+	      } else if (propValue instanceof RegExp) {
+	        return 'regexp';
+	      }
+	    }
+	    return propType;
+	  }
+
+	  // Returns a string that is postfixed to a warning about an invalid type.
+	  // For example, "undefined" or "of type array"
+	  function getPostfixForTypeWarning(value) {
+	    var type = getPreciseType(value);
+	    switch (type) {
+	      case 'array':
+	      case 'object':
+	        return 'an ' + type;
+	      case 'boolean':
+	      case 'date':
+	      case 'regexp':
+	        return 'a ' + type;
+	      default:
+	        return type;
+	    }
+	  }
+
+	  // Returns class name of the object, if any.
+	  function getClassName(propValue) {
+	    if (!propValue.constructor || !propValue.constructor.name) {
+	      return ANONYMOUS;
+	    }
+	    return propValue.constructor.name;
+	  }
+
+	  ReactPropTypes.checkPropTypes = checkPropTypes;
+	  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+	return factoryWithTypeCheckers;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var factoryWithThrowingShims;
+var hasRequiredFactoryWithThrowingShims;
+
+function requireFactoryWithThrowingShims () {
+	if (hasRequiredFactoryWithThrowingShims) return factoryWithThrowingShims;
+	hasRequiredFactoryWithThrowingShims = 1;
+
+	var ReactPropTypesSecret = /*@__PURE__*/ requireReactPropTypesSecret();
+
+	function emptyFunction() {}
+	function emptyFunctionWithReset() {}
+	emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+	factoryWithThrowingShims = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    var err = new Error(
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	    err.name = 'Invariant Violation';
+	    throw err;
+	  }	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  }	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bigint: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    elementType: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim,
+	    exact: getShim,
+
+	    checkPropTypes: emptyFunctionWithReset,
+	    resetWarningCache: emptyFunction
+	  };
+
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+	return factoryWithThrowingShims;
+}
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var hasRequiredPropTypes;
+
+function requirePropTypes () {
+	if (hasRequiredPropTypes) return propTypes.exports;
+	hasRequiredPropTypes = 1;
+	if (process.env.NODE_ENV !== 'production') {
+	  var ReactIs = requireReactIs();
+
+	  // By explicitly using `prop-types` you are opting into new development behavior.
+	  // http://fb.me/prop-types-in-prod
+	  var throwOnDirectAccess = true;
+	  propTypes.exports = /*@__PURE__*/ requireFactoryWithTypeCheckers()(ReactIs.isElement, throwOnDirectAccess);
+	} else {
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  propTypes.exports = /*@__PURE__*/ requireFactoryWithThrowingShims()();
+	}
+	return propTypes.exports;
+}
+
+var propTypesExports = /*@__PURE__*/ requirePropTypes();
+var PropTypes = /*@__PURE__*/getDefaultExportFromCjs(propTypesExports);
+
+/**
+ * Checks if a given element has a CSS class.
+ * 
+ * @param element the element
+ * @param className the CSS class name
+ */
+function hasClass(element, className) {
+  if (element.classList) return !!className && element.classList.contains(className);
+  return (" " + (element.className.baseVal || element.className) + " ").indexOf(" " + className + " ") !== -1;
+}
+
+/**
+ * Adds a CSS class to a given element.
+ * 
+ * @param element the element
+ * @param className the CSS class name
+ */
+
+function addClass(element, className) {
+  if (element.classList) element.classList.add(className);else if (!hasClass(element, className)) if (typeof element.className === 'string') element.className = element.className + " " + className;else element.setAttribute('class', (element.className && element.className.baseVal || '') + " " + className);
+}
+
+function replaceClassName(origClass, classToRemove) {
+  return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
+}
+/**
+ * Removes a CSS class from a given element.
+ * 
+ * @param element the element
+ * @param className the CSS class name
+ */
+
+
+function removeClass$1(element, className) {
+  if (element.classList) {
+    element.classList.remove(className);
+  } else if (typeof element.className === 'string') {
+    element.className = replaceClassName(element.className, className);
+  } else {
+    element.setAttribute('class', replaceClassName(element.className && element.className.baseVal || '', className));
+  }
+}
+
+var config = {
+  disabled: false
+};
+
+var timeoutsShape = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
+  enter: PropTypes.number,
+  exit: PropTypes.number,
+  appear: PropTypes.number
+}).isRequired]) : null;
+var classNamesShape = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
+  enter: PropTypes.string,
+  exit: PropTypes.string,
+  active: PropTypes.string
+}), PropTypes.shape({
+  enter: PropTypes.string,
+  enterDone: PropTypes.string,
+  enterActive: PropTypes.string,
+  exit: PropTypes.string,
+  exitDone: PropTypes.string,
+  exitActive: PropTypes.string
+})]) : null;
+
+var TransitionGroupContext = React.createContext(null);
+
+var forceReflow = function forceReflow(node) {
+  return node.scrollTop;
+};
+
+var UNMOUNTED = 'unmounted';
+var EXITED = 'exited';
+var ENTERING = 'entering';
+var ENTERED = 'entered';
+var EXITING = 'exiting';
+/**
+ * The Transition component lets you describe a transition from one component
+ * state to another _over time_ with a simple declarative API. Most commonly
+ * it's used to animate the mounting and unmounting of a component, but can also
+ * be used to describe in-place transition states as well.
+ *
+ * ---
+ *
+ * **Note**: `Transition` is a platform-agnostic base component. If you're using
+ * transitions in CSS, you'll probably want to use
+ * [`CSSTransition`](https://reactcommunity.org/react-transition-group/css-transition)
+ * instead. It inherits all the features of `Transition`, but contains
+ * additional features necessary to play nice with CSS transitions (hence the
+ * name of the component).
+ *
+ * ---
+ *
+ * By default the `Transition` component does not alter the behavior of the
+ * component it renders, it only tracks "enter" and "exit" states for the
+ * components. It's up to you to give meaning and effect to those states. For
+ * example we can add styles to a component when it enters or exits:
+ *
+ * ```jsx
+ * import { Transition } from 'react-transition-group';
+ *
+ * const duration = 300;
+ *
+ * const defaultStyle = {
+ *   transition: `opacity ${duration}ms ease-in-out`,
+ *   opacity: 0,
+ * }
+ *
+ * const transitionStyles = {
+ *   entering: { opacity: 1 },
+ *   entered:  { opacity: 1 },
+ *   exiting:  { opacity: 0 },
+ *   exited:  { opacity: 0 },
+ * };
+ *
+ * const Fade = ({ in: inProp }) => (
+ *   <Transition in={inProp} timeout={duration}>
+ *     {state => (
+ *       <div style={{
+ *         ...defaultStyle,
+ *         ...transitionStyles[state]
+ *       }}>
+ *         I'm a fade Transition!
+ *       </div>
+ *     )}
+ *   </Transition>
+ * );
+ * ```
+ *
+ * There are 4 main states a Transition can be in:
+ *  - `'entering'`
+ *  - `'entered'`
+ *  - `'exiting'`
+ *  - `'exited'`
+ *
+ * Transition state is toggled via the `in` prop. When `true` the component
+ * begins the "Enter" stage. During this stage, the component will shift from
+ * its current transition state, to `'entering'` for the duration of the
+ * transition and then to the `'entered'` stage once it's complete. Let's take
+ * the following example (we'll use the
+ * [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook):
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <Transition in={inProp} timeout={500}>
+ *         {state => (
+ *           // ...
+ *         )}
+ *       </Transition>
+ *       <button onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the button is clicked the component will shift to the `'entering'` state
+ * and stay there for 500ms (the value of `timeout`) before it finally switches
+ * to `'entered'`.
+ *
+ * When `in` is `false` the same thing happens except the state moves from
+ * `'exiting'` to `'exited'`.
+ */
+
+var Transition = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(Transition, _React$Component);
+
+  function Transition(props, context) {
+    var _this;
+
+    _this = _React$Component.call(this, props, context) || this;
+    var parentGroup = context; // In the context of a TransitionGroup all enters are really appears
+
+    var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+    var initialStatus;
+    _this.appearStatus = null;
+
+    if (props.in) {
+      if (appear) {
+        initialStatus = EXITED;
+        _this.appearStatus = ENTERING;
+      } else {
+        initialStatus = ENTERED;
+      }
+    } else {
+      if (props.unmountOnExit || props.mountOnEnter) {
+        initialStatus = UNMOUNTED;
+      } else {
+        initialStatus = EXITED;
+      }
+    }
+
+    _this.state = {
+      status: initialStatus
+    };
+    _this.nextCallback = null;
+    return _this;
+  }
+
+  Transition.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
+    var nextIn = _ref.in;
+
+    if (nextIn && prevState.status === UNMOUNTED) {
+      return {
+        status: EXITED
+      };
+    }
+
+    return null;
+  } // getSnapshotBeforeUpdate(prevProps) {
+  //   let nextStatus = null
+  //   if (prevProps !== this.props) {
+  //     const { status } = this.state
+  //     if (this.props.in) {
+  //       if (status !== ENTERING && status !== ENTERED) {
+  //         nextStatus = ENTERING
+  //       }
+  //     } else {
+  //       if (status === ENTERING || status === ENTERED) {
+  //         nextStatus = EXITING
+  //       }
+  //     }
+  //   }
+  //   return { nextStatus }
+  // }
+  ;
+
+  var _proto = Transition.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.updateStatus(true, this.appearStatus);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var nextStatus = null;
+
+    if (prevProps !== this.props) {
+      var status = this.state.status;
+
+      if (this.props.in) {
+        if (status !== ENTERING && status !== ENTERED) {
+          nextStatus = ENTERING;
+        }
+      } else {
+        if (status === ENTERING || status === ENTERED) {
+          nextStatus = EXITING;
+        }
+      }
+    }
+
+    this.updateStatus(false, nextStatus);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.cancelNextCallback();
+  };
+
+  _proto.getTimeouts = function getTimeouts() {
+    var timeout = this.props.timeout;
+    var exit, enter, appear;
+    exit = enter = appear = timeout;
+
+    if (timeout != null && typeof timeout !== 'number') {
+      exit = timeout.exit;
+      enter = timeout.enter; // TODO: remove fallback for next major
+
+      appear = timeout.appear !== undefined ? timeout.appear : enter;
+    }
+
+    return {
+      exit: exit,
+      enter: enter,
+      appear: appear
+    };
+  };
+
+  _proto.updateStatus = function updateStatus(mounting, nextStatus) {
+    if (mounting === void 0) {
+      mounting = false;
+    }
+
+    if (nextStatus !== null) {
+      // nextStatus will always be ENTERING or EXITING.
+      this.cancelNextCallback();
+
+      if (nextStatus === ENTERING) {
+        if (this.props.unmountOnExit || this.props.mountOnEnter) {
+          var node = this.props.nodeRef ? this.props.nodeRef.current : ReactDOM.findDOMNode(this); // https://github.com/reactjs/react-transition-group/pull/749
+          // With unmountOnExit or mountOnEnter, the enter animation should happen at the transition between `exited` and `entering`.
+          // To make the animation happen,  we have to separate each rendering and avoid being processed as batched.
+
+          if (node) forceReflow(node);
+        }
+
+        this.performEnter(mounting);
+      } else {
+        this.performExit();
+      }
+    } else if (this.props.unmountOnExit && this.state.status === EXITED) {
+      this.setState({
+        status: UNMOUNTED
+      });
+    }
+  };
+
+  _proto.performEnter = function performEnter(mounting) {
+    var _this2 = this;
+
+    var enter = this.props.enter;
+    var appearing = this.context ? this.context.isMounting : mounting;
+
+    var _ref2 = this.props.nodeRef ? [appearing] : [ReactDOM.findDOMNode(this), appearing],
+        maybeNode = _ref2[0],
+        maybeAppearing = _ref2[1];
+
+    var timeouts = this.getTimeouts();
+    var enterTimeout = appearing ? timeouts.appear : timeouts.enter; // no enter animation skip right to ENTERED
+    // if we are mounting and running this it means appear _must_ be set
+
+    if (!mounting && !enter || config.disabled) {
+      this.safeSetState({
+        status: ENTERED
+      }, function () {
+        _this2.props.onEntered(maybeNode);
+      });
+      return;
+    }
+
+    this.props.onEnter(maybeNode, maybeAppearing);
+    this.safeSetState({
+      status: ENTERING
+    }, function () {
+      _this2.props.onEntering(maybeNode, maybeAppearing);
+
+      _this2.onTransitionEnd(enterTimeout, function () {
+        _this2.safeSetState({
+          status: ENTERED
+        }, function () {
+          _this2.props.onEntered(maybeNode, maybeAppearing);
+        });
+      });
+    });
+  };
+
+  _proto.performExit = function performExit() {
+    var _this3 = this;
+
+    var exit = this.props.exit;
+    var timeouts = this.getTimeouts();
+    var maybeNode = this.props.nodeRef ? undefined : ReactDOM.findDOMNode(this); // no exit animation skip right to EXITED
+
+    if (!exit || config.disabled) {
+      this.safeSetState({
+        status: EXITED
+      }, function () {
+        _this3.props.onExited(maybeNode);
+      });
+      return;
+    }
+
+    this.props.onExit(maybeNode);
+    this.safeSetState({
+      status: EXITING
+    }, function () {
+      _this3.props.onExiting(maybeNode);
+
+      _this3.onTransitionEnd(timeouts.exit, function () {
+        _this3.safeSetState({
+          status: EXITED
+        }, function () {
+          _this3.props.onExited(maybeNode);
+        });
+      });
+    });
+  };
+
+  _proto.cancelNextCallback = function cancelNextCallback() {
+    if (this.nextCallback !== null) {
+      this.nextCallback.cancel();
+      this.nextCallback = null;
+    }
+  };
+
+  _proto.safeSetState = function safeSetState(nextState, callback) {
+    // This shouldn't be necessary, but there are weird race conditions with
+    // setState callbacks and unmounting in testing, so always make sure that
+    // we can cancel any pending setState callbacks after we unmount.
+    callback = this.setNextCallback(callback);
+    this.setState(nextState, callback);
+  };
+
+  _proto.setNextCallback = function setNextCallback(callback) {
+    var _this4 = this;
+
+    var active = true;
+
+    this.nextCallback = function (event) {
+      if (active) {
+        active = false;
+        _this4.nextCallback = null;
+        callback(event);
+      }
+    };
+
+    this.nextCallback.cancel = function () {
+      active = false;
+    };
+
+    return this.nextCallback;
+  };
+
+  _proto.onTransitionEnd = function onTransitionEnd(timeout, handler) {
+    this.setNextCallback(handler);
+    var node = this.props.nodeRef ? this.props.nodeRef.current : ReactDOM.findDOMNode(this);
+    var doesNotHaveTimeoutOrListener = timeout == null && !this.props.addEndListener;
+
+    if (!node || doesNotHaveTimeoutOrListener) {
+      setTimeout(this.nextCallback, 0);
+      return;
+    }
+
+    if (this.props.addEndListener) {
+      var _ref3 = this.props.nodeRef ? [this.nextCallback] : [node, this.nextCallback],
+          maybeNode = _ref3[0],
+          maybeNextCallback = _ref3[1];
+
+      this.props.addEndListener(maybeNode, maybeNextCallback);
+    }
+
+    if (timeout != null) {
+      setTimeout(this.nextCallback, timeout);
+    }
+  };
+
+  _proto.render = function render() {
+    var status = this.state.status;
+
+    if (status === UNMOUNTED) {
+      return null;
+    }
+
+    var _this$props = this.props,
+        children = _this$props.children;
+        _this$props.in;
+        _this$props.mountOnEnter;
+        _this$props.unmountOnExit;
+        _this$props.appear;
+        _this$props.enter;
+        _this$props.exit;
+        _this$props.timeout;
+        _this$props.addEndListener;
+        _this$props.onEnter;
+        _this$props.onEntering;
+        _this$props.onEntered;
+        _this$props.onExit;
+        _this$props.onExiting;
+        _this$props.onExited;
+        _this$props.nodeRef;
+        var childProps = _objectWithoutPropertiesLoose(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+
+    return (
+      /*#__PURE__*/
+      // allows for nested Transitions
+      React.createElement(TransitionGroupContext.Provider, {
+        value: null
+      }, typeof children === 'function' ? children(status, childProps) : React.cloneElement(React.Children.only(children), childProps))
+    );
+  };
+
+  return Transition;
+}(React.Component);
+
+Transition.contextType = TransitionGroupContext;
+Transition.propTypes = process.env.NODE_ENV !== "production" ? {
+  /**
+   * A React reference to DOM element that need to transition:
+   * https://stackoverflow.com/a/51127130/4671932
+   *
+   *   - When `nodeRef` prop is used, `node` is not passed to callback functions
+   *      (e.g. `onEnter`) because user already has direct access to the node.
+   *   - When changing `key` prop of `Transition` in a `TransitionGroup` a new
+   *     `nodeRef` need to be provided to `Transition` with changed `key` prop
+   *     (see
+   *     [test/CSSTransition-test.js](https://github.com/reactjs/react-transition-group/blob/13435f897b3ab71f6e19d724f145596f5910581c/test/CSSTransition-test.js#L362-L437)).
+   */
+  nodeRef: PropTypes.shape({
+    current: typeof Element === 'undefined' ? PropTypes.any : function (propValue, key, componentName, location, propFullName, secret) {
+      var value = propValue[key];
+      return PropTypes.instanceOf(value && 'ownerDocument' in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
+    }
+  }),
+
+  /**
+   * A `function` child can be used instead of a React element. This function is
+   * called with the current transition status (`'entering'`, `'entered'`,
+   * `'exiting'`, `'exited'`), which can be used to apply context
+   * specific props to a component.
+   *
+   * ```jsx
+   * <Transition in={this.state.in} timeout={150}>
+   *   {state => (
+   *     <MyComponent className={`fade fade-${state}`} />
+   *   )}
+   * </Transition>
+   * ```
+   */
+  children: PropTypes.oneOfType([PropTypes.func.isRequired, PropTypes.element.isRequired]).isRequired,
+
+  /**
+   * Show the component; triggers the enter or exit states
+   */
+  in: PropTypes.bool,
+
+  /**
+   * By default the child component is mounted immediately along with
+   * the parent `Transition` component. If you want to "lazy mount" the component on the
+   * first `in={true}` you can set `mountOnEnter`. After the first enter transition the component will stay
+   * mounted, even on "exited", unless you also specify `unmountOnExit`.
+   */
+  mountOnEnter: PropTypes.bool,
+
+  /**
+   * By default the child component stays mounted after it reaches the `'exited'` state.
+   * Set `unmountOnExit` if you'd prefer to unmount the component after it finishes exiting.
+   */
+  unmountOnExit: PropTypes.bool,
+
+  /**
+   * By default the child component does not perform the enter transition when
+   * it first mounts, regardless of the value of `in`. If you want this
+   * behavior, set both `appear` and `in` to `true`.
+   *
+   * > **Note**: there are no special appear states like `appearing`/`appeared`, this prop
+   * > only adds an additional enter transition. However, in the
+   * > `<CSSTransition>` component that first enter transition does result in
+   * > additional `.appear-*` classes, that way you can choose to style it
+   * > differently.
+   */
+  appear: PropTypes.bool,
+
+  /**
+   * Enable or disable enter transitions.
+   */
+  enter: PropTypes.bool,
+
+  /**
+   * Enable or disable exit transitions.
+   */
+  exit: PropTypes.bool,
+
+  /**
+   * The duration of the transition, in milliseconds.
+   * Required unless `addEndListener` is provided.
+   *
+   * You may specify a single timeout for all transitions:
+   *
+   * ```jsx
+   * timeout={500}
+   * ```
+   *
+   * or individually:
+   *
+   * ```jsx
+   * timeout={{
+   *  appear: 500,
+   *  enter: 300,
+   *  exit: 500,
+   * }}
+   * ```
+   *
+   * - `appear` defaults to the value of `enter`
+   * - `enter` defaults to `0`
+   * - `exit` defaults to `0`
+   *
+   * @type {number | { enter?: number, exit?: number, appear?: number }}
+   */
+  timeout: function timeout(props) {
+    var pt = timeoutsShape;
+    if (!props.addEndListener) pt = pt.isRequired;
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return pt.apply(void 0, [props].concat(args));
+  },
+
+  /**
+   * Add a custom transition end trigger. Called with the transitioning
+   * DOM node and a `done` callback. Allows for more fine grained transition end
+   * logic. Timeouts are still used as a fallback if provided.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * ```jsx
+   * addEndListener={(node, done) => {
+   *   // use the css transitionend event to mark the finish of a transition
+   *   node.addEventListener('transitionend', done, false);
+   * }}
+   * ```
+   */
+  addEndListener: PropTypes.func,
+
+  /**
+   * Callback fired before the "entering" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool) -> void
+   */
+  onEnter: PropTypes.func,
+
+  /**
+   * Callback fired after the "entering" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntering: PropTypes.func,
+
+  /**
+   * Callback fired after the "entered" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool) -> void
+   */
+  onEntered: PropTypes.func,
+
+  /**
+   * Callback fired before the "exiting" status is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExit: PropTypes.func,
+
+  /**
+   * Callback fired after the "exiting" status is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExiting: PropTypes.func,
+
+  /**
+   * Callback fired after the "exited" status is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExited: PropTypes.func
+} : {}; // Name the function so it is clearer in the documentation
+
+function noop() {}
+
+Transition.defaultProps = {
+  in: false,
+  mountOnEnter: false,
+  unmountOnExit: false,
+  appear: false,
+  enter: true,
+  exit: true,
+  onEnter: noop,
+  onEntering: noop,
+  onEntered: noop,
+  onExit: noop,
+  onExiting: noop,
+  onExited: noop
+};
+Transition.UNMOUNTED = UNMOUNTED;
+Transition.EXITED = EXITED;
+Transition.ENTERING = ENTERING;
+Transition.ENTERED = ENTERED;
+Transition.EXITING = EXITING;
+
+var _addClass = function addClass$1(node, classes) {
+  return node && classes && classes.split(' ').forEach(function (c) {
+    return addClass(node, c);
+  });
+};
+
+var removeClass = function removeClass(node, classes) {
+  return node && classes && classes.split(' ').forEach(function (c) {
+    return removeClass$1(node, c);
+  });
+};
+/**
+ * A transition component inspired by the excellent
+ * [ng-animate](https://docs.angularjs.org/api/ngAnimate) library, you should
+ * use it if you're using CSS transitions or animations. It's built upon the
+ * [`Transition`](https://reactcommunity.org/react-transition-group/transition)
+ * component, so it inherits all of its props.
+ *
+ * `CSSTransition` applies a pair of class names during the `appear`, `enter`,
+ * and `exit` states of the transition. The first class is applied and then a
+ * second `*-active` class in order to activate the CSS transition. After the
+ * transition, matching `*-done` class names are applied to persist the
+ * transition state.
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <CSSTransition in={inProp} timeout={200} classNames="my-node">
+ *         <div>
+ *           {"I'll receive my-node-* classes"}
+ *         </div>
+ *       </CSSTransition>
+ *       <button type="button" onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the `in` prop is set to `true`, the child component will first receive
+ * the class `example-enter`, then the `example-enter-active` will be added in
+ * the next tick. `CSSTransition` [forces a
+ * reflow](https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215)
+ * between before adding the `example-enter-active`. This is an important trick
+ * because it allows us to transition between `example-enter` and
+ * `example-enter-active` even though they were added immediately one after
+ * another. Most notably, this is what makes it possible for us to animate
+ * _appearance_.
+ *
+ * ```css
+ * .my-node-enter {
+ *   opacity: 0;
+ * }
+ * .my-node-enter-active {
+ *   opacity: 1;
+ *   transition: opacity 200ms;
+ * }
+ * .my-node-exit {
+ *   opacity: 1;
+ * }
+ * .my-node-exit-active {
+ *   opacity: 0;
+ *   transition: opacity 200ms;
+ * }
+ * ```
+ *
+ * `*-active` classes represent which styles you want to animate **to**, so it's
+ * important to add `transition` declaration only to them, otherwise transitions
+ * might not behave as intended! This might not be obvious when the transitions
+ * are symmetrical, i.e. when `*-enter-active` is the same as `*-exit`, like in
+ * the example above (minus `transition`), but it becomes apparent in more
+ * complex transitions.
+ *
+ * **Note**: If you're using the
+ * [`appear`](http://reactcommunity.org/react-transition-group/transition#Transition-prop-appear)
+ * prop, make sure to define styles for `.appear-*` classes as well.
+ */
+
+
+var CSSTransition = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(CSSTransition, _React$Component);
+
+  function CSSTransition() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.appliedClasses = {
+      appear: {},
+      enter: {},
+      exit: {}
+    };
+
+    _this.onEnter = function (maybeNode, maybeAppearing) {
+      var _this$resolveArgument = _this.resolveArguments(maybeNode, maybeAppearing),
+          node = _this$resolveArgument[0],
+          appearing = _this$resolveArgument[1];
+
+      _this.removeClasses(node, 'exit');
+
+      _this.addClass(node, appearing ? 'appear' : 'enter', 'base');
+
+      if (_this.props.onEnter) {
+        _this.props.onEnter(maybeNode, maybeAppearing);
+      }
+    };
+
+    _this.onEntering = function (maybeNode, maybeAppearing) {
+      var _this$resolveArgument2 = _this.resolveArguments(maybeNode, maybeAppearing),
+          node = _this$resolveArgument2[0],
+          appearing = _this$resolveArgument2[1];
+
+      var type = appearing ? 'appear' : 'enter';
+
+      _this.addClass(node, type, 'active');
+
+      if (_this.props.onEntering) {
+        _this.props.onEntering(maybeNode, maybeAppearing);
+      }
+    };
+
+    _this.onEntered = function (maybeNode, maybeAppearing) {
+      var _this$resolveArgument3 = _this.resolveArguments(maybeNode, maybeAppearing),
+          node = _this$resolveArgument3[0],
+          appearing = _this$resolveArgument3[1];
+
+      var type = appearing ? 'appear' : 'enter';
+
+      _this.removeClasses(node, type);
+
+      _this.addClass(node, type, 'done');
+
+      if (_this.props.onEntered) {
+        _this.props.onEntered(maybeNode, maybeAppearing);
+      }
+    };
+
+    _this.onExit = function (maybeNode) {
+      var _this$resolveArgument4 = _this.resolveArguments(maybeNode),
+          node = _this$resolveArgument4[0];
+
+      _this.removeClasses(node, 'appear');
+
+      _this.removeClasses(node, 'enter');
+
+      _this.addClass(node, 'exit', 'base');
+
+      if (_this.props.onExit) {
+        _this.props.onExit(maybeNode);
+      }
+    };
+
+    _this.onExiting = function (maybeNode) {
+      var _this$resolveArgument5 = _this.resolveArguments(maybeNode),
+          node = _this$resolveArgument5[0];
+
+      _this.addClass(node, 'exit', 'active');
+
+      if (_this.props.onExiting) {
+        _this.props.onExiting(maybeNode);
+      }
+    };
+
+    _this.onExited = function (maybeNode) {
+      var _this$resolveArgument6 = _this.resolveArguments(maybeNode),
+          node = _this$resolveArgument6[0];
+
+      _this.removeClasses(node, 'exit');
+
+      _this.addClass(node, 'exit', 'done');
+
+      if (_this.props.onExited) {
+        _this.props.onExited(maybeNode);
+      }
+    };
+
+    _this.resolveArguments = function (maybeNode, maybeAppearing) {
+      return _this.props.nodeRef ? [_this.props.nodeRef.current, maybeNode] // here `maybeNode` is actually `appearing`
+      : [maybeNode, maybeAppearing];
+    };
+
+    _this.getClassNames = function (type) {
+      var classNames = _this.props.classNames;
+      var isStringClassNames = typeof classNames === 'string';
+      var prefix = isStringClassNames && classNames ? classNames + "-" : '';
+      var baseClassName = isStringClassNames ? "" + prefix + type : classNames[type];
+      var activeClassName = isStringClassNames ? baseClassName + "-active" : classNames[type + "Active"];
+      var doneClassName = isStringClassNames ? baseClassName + "-done" : classNames[type + "Done"];
+      return {
+        baseClassName: baseClassName,
+        activeClassName: activeClassName,
+        doneClassName: doneClassName
+      };
+    };
+
+    return _this;
+  }
+
+  var _proto = CSSTransition.prototype;
+
+  _proto.addClass = function addClass(node, type, phase) {
+    var className = this.getClassNames(type)[phase + "ClassName"];
+
+    var _this$getClassNames = this.getClassNames('enter'),
+        doneClassName = _this$getClassNames.doneClassName;
+
+    if (type === 'appear' && phase === 'done' && doneClassName) {
+      className += " " + doneClassName;
+    } // This is to force a repaint,
+    // which is necessary in order to transition styles when adding a class name.
+
+
+    if (phase === 'active') {
+      if (node) forceReflow(node);
+    }
+
+    if (className) {
+      this.appliedClasses[type][phase] = className;
+
+      _addClass(node, className);
+    }
+  };
+
+  _proto.removeClasses = function removeClasses(node, type) {
+    var _this$appliedClasses$ = this.appliedClasses[type],
+        baseClassName = _this$appliedClasses$.base,
+        activeClassName = _this$appliedClasses$.active,
+        doneClassName = _this$appliedClasses$.done;
+    this.appliedClasses[type] = {};
+
+    if (baseClassName) {
+      removeClass(node, baseClassName);
+    }
+
+    if (activeClassName) {
+      removeClass(node, activeClassName);
+    }
+
+    if (doneClassName) {
+      removeClass(node, doneClassName);
+    }
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props;
+        _this$props.classNames;
+        var props = _objectWithoutPropertiesLoose(_this$props, ["classNames"]);
+
+    return /*#__PURE__*/React.createElement(Transition, _extends({}, props, {
+      onEnter: this.onEnter,
+      onEntered: this.onEntered,
+      onEntering: this.onEntering,
+      onExit: this.onExit,
+      onExiting: this.onExiting,
+      onExited: this.onExited
+    }));
+  };
+
+  return CSSTransition;
+}(React.Component);
+
+CSSTransition.defaultProps = {
+  classNames: ''
+};
+CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, Transition.propTypes, {
+  /**
+   * The animation classNames applied to the component as it appears, enters,
+   * exits or has finished the transition. A single name can be provided, which
+   * will be suffixed for each stage, e.g. `classNames="fade"` applies:
+   *
+   * - `fade-appear`, `fade-appear-active`, `fade-appear-done`
+   * - `fade-enter`, `fade-enter-active`, `fade-enter-done`
+   * - `fade-exit`, `fade-exit-active`, `fade-exit-done`
+   *
+   * A few details to note about how these classes are applied:
+   *
+   * 1. They are _joined_ with the ones that are already defined on the child
+   *    component, so if you want to add some base styles, you can use
+   *    `className` without worrying that it will be overridden.
+   *
+   * 2. If the transition component mounts with `in={false}`, no classes are
+   *    applied yet. You might be expecting `*-exit-done`, but if you think
+   *    about it, a component cannot finish exiting if it hasn't entered yet.
+   *
+   * 2. `fade-appear-done` and `fade-enter-done` will _both_ be applied. This
+   *    allows you to define different behavior for when appearing is done and
+   *    when regular entering is done, using selectors like
+   *    `.fade-enter-done:not(.fade-appear-done)`. For example, you could apply
+   *    an epic entrance animation when element first appears in the DOM using
+   *    [Animate.css](https://daneden.github.io/animate.css/). Otherwise you can
+   *    simply use `fade-enter-done` for defining both cases.
+   *
+   * Each individual classNames can also be specified independently like:
+   *
+   * ```js
+   * classNames={{
+   *  appear: 'my-appear',
+   *  appearActive: 'my-active-appear',
+   *  appearDone: 'my-done-appear',
+   *  enter: 'my-enter',
+   *  enterActive: 'my-active-enter',
+   *  enterDone: 'my-done-enter',
+   *  exit: 'my-exit',
+   *  exitActive: 'my-active-exit',
+   *  exitDone: 'my-done-exit',
+   * }}
+   * ```
+   *
+   * If you want to set these classes using CSS Modules:
+   *
+   * ```js
+   * import styles from './styles.css';
+   * ```
+   *
+   * you might want to use camelCase in your CSS file, that way could simply
+   * spread them instead of listing them one by one:
+   *
+   * ```js
+   * classNames={{ ...styles }}
+   * ```
+   *
+   * @type {string | {
+   *  appear?: string,
+   *  appearActive?: string,
+   *  appearDone?: string,
+   *  enter?: string,
+   *  enterActive?: string,
+   *  enterDone?: string,
+   *  exit?: string,
+   *  exitActive?: string,
+   *  exitDone?: string,
+   * }}
+   */
+  classNames: classNamesShape,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'enter' or 'appear' class is
+   * applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEnter: PropTypes.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'enter-active' or
+   * 'appear-active' class is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntering: PropTypes.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'enter' or
+   * 'appear' classes are **removed** and the `done` class is added to the DOM node.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntered: PropTypes.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'exit' class is
+   * applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed
+   *
+   * @type Function(node: HtmlElement)
+   */
+  onExit: PropTypes.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'exit-active' is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed
+   *
+   * @type Function(node: HtmlElement)
+   */
+  onExiting: PropTypes.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'exit' classes
+   * are **removed** and the `exit-done` class is added to the DOM node.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed
+   *
+   * @type Function(node: HtmlElement)
+   */
+  onExited: PropTypes.func
+}) : {};
+
+const CollapseContext = React.createContext(null);
+// --- 内部 Panel 组件 ---
+const InternalPanel = ({ panelKey, header, disabled, children }) => {
+    const context = React.useContext(CollapseContext);
+    const contentRef = React.useRef(null);
+    if (!context) {
+        throw new Error('Collapse.Panel 必须在 Collapse 组件内部使用');
+    }
+    const { activeKeys, onToggle } = context;
+    const isActive = !disabled && activeKeys.includes(panelKey);
+    const headerClasses = `${styles.panelHeader} ${disabled ? styles.disabled : ''}`;
+    const iconClasses = `${styles.panelIcon} ${isActive ? styles.active : ''}`;
+    return (jsxRuntimeExports.jsxs("div", { className: styles.panel, children: [jsxRuntimeExports.jsxs("button", { className: headerClasses, onClick: () => !disabled && onToggle(panelKey), "aria-expanded": isActive, children: [jsxRuntimeExports.jsx("span", { className: styles.headerText, children: header }), jsxRuntimeExports.jsx("span", { className: iconClasses, children: jsxRuntimeExports.jsx("svg", { viewBox: "0 0 1024 1024", width: "1em", height: "1em", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z" }) }) })] }), jsxRuntimeExports.jsx(CSSTransition, { nodeRef: contentRef, in: isActive, timeout: 300, classNames: {
+                    enter: styles.contentEnter,
+                    enterActive: styles.contentEnterActive,
+                    exit: styles.contentExit,
+                    exitActive: styles.contentExitActive,
+                }, unmountOnExit: true, children: jsxRuntimeExports.jsx("div", { ref: contentRef, className: styles.panelContent, children: jsxRuntimeExports.jsx("div", { className: styles.contentBox, children: children }) }) })] }));
+};
+// --- 主 Collapse 组件 ---
+const Collapse = ({ accordion = false, defaultActiveKey, children, }) => {
+    const [activeKeys, setActiveKeys] = React.useState(() => {
+        if (!defaultActiveKey)
+            return [];
+        return Array.isArray(defaultActiveKey) ? defaultActiveKey : [defaultActiveKey];
+    });
+    const handleToggle = (key) => {
+        setActiveKeys(prevKeys => {
+            if (accordion) {
+                return prevKeys.includes(key) ? [] : [key];
+            }
+            else {
+                return prevKeys.includes(key)
+                    ? prevKeys.filter(k => k !== key)
+                    : [...prevKeys, key];
+            }
+        });
+    };
+    const contextValue = {
+        activeKeys,
+        onToggle: handleToggle,
+    };
+    return (jsxRuntimeExports.jsx("div", { className: styles.collapse, children: jsxRuntimeExports.jsx(CollapseContext.Provider, { value: contextValue, children: children }) }));
+};
+Collapse.Panel = InternalPanel;
 
 // 设计令牌 - 定义设计系统的基础变量
 const tokens = {
@@ -4307,6 +6667,7 @@ exports.ButtonDefault = Button;
 exports.Card = Card;
 exports.CardDefault = Card;
 exports.Carousel = Carousel;
+exports.Collapse = Collapse;
 exports.Drawer = Drawer;
 exports.Form = Form;
 exports.FormActions = FormActions;

@@ -1,0 +1,92 @@
+.collapse {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px; // 圆角
+  background-color: #ffffff;
+  overflow: hidden; // 确保子元素的圆角生效
+}
+
+// --- 单个面板 ---
+.panel {
+  // 面板之间的分割线
+  border-bottom: 1px solid #d9d9d9;
+
+  // 最后一个面板没有底部分割线
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// --- 面板头部 ---
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #fafafa; // 鼠标悬停时的背景色
+  }
+
+  // 禁用状态的样式
+  &.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    background-color: #f9f9f9;
+  }
+}
+
+.headerText {
+  flex-grow: 1; // 让文字部分占据尽可能多的空间
+}
+
+// --- 头部图标 (小箭头) ---
+.panelIcon {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #888;
+  transition: transform 0.3s ease-in-out; // 平滑的旋转动画
+}
+
+// 面板激活时，图标旋转90度
+.panelIcon.active {
+  transform: rotate(90deg);
+}
+
+// --- 面板内容区域 ---
+.panelContent {
+  overflow: hidden; // 关键！配合 max-height 实现动画
+  background-color: #ffffff;
+  color: #555;
+  // 过渡动画由下面的 CSSTransition 类控制
+}
+
+// 内容区域的内边距，避免外边距折叠问题
+.contentBox {
+  padding: 10px 20px 20px;
+  line-height: 1.6;
+}
+
+// --- react-transition-group 动画类 ---
+.contentEnter {
+  max-height: 0;
+}
+.contentEnterActive {
+  max-height: 500px; // 设置一个足够大的高度，以容纳任意内容
+  transition: max-height 300ms ease-in-out;
+}
+.contentExit {
+  max-height: 500px;
+}
+.contentExitActive {
+  max-height: 0;
+  transition: max-height 300ms ease-in-out;
+}
