@@ -62,6 +62,7 @@ const config: Config = {
         alt: 'Sroof UI Logo',
         src: 'img/logo.svg',
       },
+      hideOnScroll: true,
       items: [
         {
           type: 'docSidebar',

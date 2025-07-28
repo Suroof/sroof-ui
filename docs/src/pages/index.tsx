@@ -17,13 +17,32 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
+      <nav>
+        <h2 className={styles.toptitle}>{siteConfig.title}</h2>
+        <Button
+          variant="outline"
+          rounded="large"
+          size="medium"
+          className={styles.githubButton}
+          onClick={() => {
+            window.location.href = "https://github.com/Suroof/sroof-ui";
+          }}
+        >
+          Github
+        </Button>
+      </nav>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+          Inspire inspiration and bring a better reading experience
         </Heading>
         <p className={styles.hero__subtitle}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Button variant="outline" rounded="large" size="large" onClick={handleTo}>
+          <Button
+            variant="outline"
+            rounded="large"
+            size="large"
+            onClick={handleTo}
+          >
             Browse Components
           </Button>
         </div>
@@ -43,6 +62,56 @@ export default function Home(): ReactNode {
       <main>
         <HomepageFeatures />
       </main>
+       {/* --- 核心部分：完善自定义的 Footer --- */}
+      <footer className={styles.customFooter}>
+        <div className={styles.footerContainer}>
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>文档</h3>
+            <a href="/sroof-ui/docs/intro" className={styles.footerLink}>
+              快速开始
+            </a>
+            <a href="/sroof-ui/docs/components/button" className={styles.footerLink}>
+              组件
+            </a>
+          </div>
+
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>社区</h3>
+            <a
+              href="https://github.com/Suroof/sroof-ui/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footerLink}
+            >
+              反馈问题
+            </a>
+            <a
+              href="https://github.com/Suroof/sroof-ui/discussions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footerLink}
+            >
+              参与讨论
+            </a>
+          </div>
+
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>更多</h3>
+            <a
+              href="https://github.com/Suroof/sroof-ui"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footerLink}
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div className={styles.footerCopyright}>
+          Copyright © {new Date().getFullYear()} Sroof UI - A Future Design
+        </div>
+      </footer>
     </Layout>
   );
 }
