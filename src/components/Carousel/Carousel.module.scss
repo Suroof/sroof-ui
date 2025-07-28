@@ -1,34 +1,75 @@
-.carousel {
-  overflow: hidden;
-  width: 100%;
+.carouselContainer {
   position: relative;
+  width: 100%;
+  max-width: 800px; // 你可以根据需要调整最大宽度
+  margin: auto;
+  overflow: hidden; // 关键：隐藏容器外的内容
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.container {
-  touch-action: pan-y;
-  user-select: none;
-  cursor: grab;
+.carouselWrapper {
+  display: flex; // 关键：让所有项目在同一行显示
+}
+
+.carouselItem {
+  flex: 0 0 100%; // 关键：每个项目占据容器的100%宽度
   width: 100%;
-  
-  &:active {
-    cursor: grabbing;
+  box-sizing: border-box;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block; // 消除图片底部的空白
   }
 }
 
-.slides {
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 20px;
+  z-index: 10;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.prevButton {
+  left: 15px;
+}
+
+.nextButton {
+  right: 15px;
+}
+
+.dotsContainer {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-wrap: nowrap;
-  height: 100%;
+  gap: 8px;
+  z-index: 10;
 }
 
-.transition {
-  transition: transform 0.3s ease-in-out;
-}
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
 
-.slide {
-  flex: 0 0 100%;
-  width: 100%;
-  box-sizing: border-box;
-  height: 100%;
-  min-height: 1px;
+  &.active {
+    background-color: white;
+  }
 }
