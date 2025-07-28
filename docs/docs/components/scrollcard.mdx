@@ -1,0 +1,77 @@
+---
+sidebar_position: 15
+---
+
+# ScrollCard 滑动卡片
+
+滑动卡片组件，用于展示多个内容项，并支持左右滑动。
+
+## 基本用法
+
+```jsx live
+function ScrollCardCustomExample() {
+  const cardData = [
+    { id: 1, imageUrl: 'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg', title: '办公桌', description: '一个现代化的工作空间。' },
+    { id: 2, imageUrl: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg', title: '笔记本电脑', description: '代码与咖啡的完美结合。' },
+    { id: 3, imageUrl: 'https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg', title: '城市夜景', description: '繁华都市的夜晚灯火辉煌。' },
+    { id: 4, imageUrl: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg', title: '山间清晨', description: '云雾缭绕的山峰迎接第一缕阳光。' },
+    { id: 5, imageUrl: 'https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg', title: '绿意盎然', description: '阳光普照的绿色森林。' },
+    { id: 6, imageUrl: 'https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg', title: '瀑布奇观', description: '水流从高处倾泻而下，气势磅礴。' },
+  ];
+  return (
+    <div style={{ padding: '20px 0' }}>
+      <ScrollCard
+        items={cardData}
+        cardWidth={260}
+        scrollSpeed={100}
+      />
+    </div>
+  );
+}
+```
+
+```jsx
+import { ScrollCard } from "sroof-ui";
+
+function ScrollCardCustomExample() {
+  const cardData = [
+    { id: 1, imageUrl: 'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg', title: '办公桌', description: '一个现代化的工作空间。' },
+    { id: 2, imageUrl: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg', title: '笔记本电脑', description: '代码与咖啡的完美结合。' },
+    { id: 3, imageUrl: 'https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg', title: '城市夜景', description: '繁华都市的夜晚灯火辉煌。' },
+    { id: 4, imageUrl: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg', title: '山间清晨', description: '云雾缭绕的山峰迎接第一缕阳光。' },
+    { id: 5, imageUrl: 'https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg', title: '绿意盎然', description: '阳光普照的绿色森林。' },
+    { id: 6, imageUrl: 'https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg', title: '瀑布奇观', description: '水流从高处倾泻而下，气势磅礴。' },
+  ];
+  return (
+    <div style={{ padding: '20px 0' }}>
+      <ScrollCard
+        items={cardData}
+        cardWidth={260}
+        scrollSpeed={100}
+      />
+    </div>
+  );
+}
+```
+
+## API
+
+### ScrollCard Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| items | 必需，卡片数据项的数组 | ScrollCardItem[] | - |
+| autoplay | 是否开启自动滚动 | boolean | true |
+| scrollSpeed | 自动滚动的速度（像素/秒），数值越大滚动越快 | number | 50 |
+| cardWidth | 每个卡片的宽度（像素） | number | 300 |
+
+### ScrollCardItem 类型定义
+
+items 数组中的每个对象都应遵循以下类型：
+
+| 属性 | 说明 | 类型 | 是否必需 |
+| --- | --- | --- | --- |
+| id | 唯一标识符 | string \| number | 是 |
+| imageUrl | 图片的 URL | string | 是 |
+| title | 卡片标题 | ReactNode | 是 |
+| description | 卡片描述（可选） | ReactNode | 否 |

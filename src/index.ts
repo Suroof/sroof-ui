@@ -39,6 +39,7 @@ export { default as CardDefault } from "./components/Card";
 export { default as Notification } from "./components/Notification";
 export { default as Carousel } from "./components/Carousel";
 export { default as Collapse } from "./components/Collapse";
+export { default as ScrollCard } from "./components/ScrollCard";
 
 // 导出国际化相关
 export * from "./i18n";

@@ -1,0 +1,101 @@
+// --- 定义滚动动画 ---
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    // 移动一个原始内容的宽度 (因为内容是双倍的，所以是 -50%)
+    transform: translateX(-50%);
+  }
+}
+
+// 外层容器，作为可视区域
+.scrollContainer {
+  width: 100%;
+  overflow: hidden;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  // 使用 mask-image 实现优雅的左右渐变消失效果
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+// 内部包裹器，容纳所有卡片
+.scrollWrapper {
+  display: flex;
+  gap: 20px;
+  width: max-content; // 让容器宽度由内容决定
+
+  // --- 动画应用 ---
+  // 将 'scroll' 动画应用到这个元素上
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+
+  // 当鼠标悬停在 *外层容器* 上时，暂停动画
+  .scrollContainer:hover & {
+    animation-play-state: paused;
+  }
+}
+
+// 单个卡片的样式
+.card {
+  width: var(--card-width, 300px); // 使用 CSS 变量来控制宽度
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+// 卡片图片
+.cardImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+// 卡片内容区域
+.cardContent {
+  padding: 16px;
+}
+
+// 卡片标题
+.cardTitle {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 卡片描述
+.cardDescription {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(14px * 1.5 * 2);
+}

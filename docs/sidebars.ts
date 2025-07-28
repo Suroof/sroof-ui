@@ -27,6 +27,7 @@ const sidebars: SidebarsConfig = {
         'components/notification',
         'components/carousel',
         'components/collapse',
+        'components/scrollcard',
       ],
     },
     {
