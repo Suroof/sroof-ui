@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
         'components/card',
         'components/drawer',
         'components/notification',
+        'components/carousel',
       ],
     },
     {

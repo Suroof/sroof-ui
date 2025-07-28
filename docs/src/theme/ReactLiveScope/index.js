@@ -17,6 +17,7 @@ import {
   Pagination,
   Drawer,
   Notification,
+  Carousel
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -39,7 +40,8 @@ const ReactLiveScope = {
   LanguageSwitcher,
   Pagination,
   Drawer,
-  Notification
+  Notification,
+  Carousel
 };
 
 export default ReactLiveScope;

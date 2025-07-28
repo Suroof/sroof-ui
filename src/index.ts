@@ -36,7 +36,8 @@ export { default as RadioDefault } from "./components/Radio";
 export { default as SwitchDefault } from "./components/Switch";
 export { default as FormDefault } from "./components/Form";
 export { default as CardDefault } from "./components/Card";
-export { default as Notification} from "./components/Notification";
+export { default as Notification } from "./components/Notification";
+export { default as Carousel } from "./components/Carousel";
 
 // 导出国际化相关
 export * from "./i18n";

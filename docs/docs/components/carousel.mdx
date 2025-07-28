@@ -1,0 +1,94 @@
+---
+sidebar_position: 13
+---
+
+# Carousel 轮播图
+
+轮播图组件
+
+## 基本用法
+
+```jsx live
+function CarouselExample() {
+  const carouselItems = [
+    {
+      id: 1,
+      imageUrl:
+        "https://images.pexels.com/photos/32489805/pexels-photo-32489805.jpeg",
+      altText: "Slide 1",
+    },
+    {
+      id: 2,
+      imageUrl:
+        "https://images.pexels.com/photos/32715939/pexels-photo-32715939.jpeg",
+      altText: "Slide 2",
+    },
+    {
+      id: 3,
+      imageUrl:
+        "https://images.pexels.com/photos/33147349/pexels-photo-33147349.jpeg",
+      altText: "Slide 3",
+    },
+    {
+      id: 4,
+      imageUrl:
+        "https://images.pexels.com/photos/27916610/pexels-photo-27916610.jpeg",
+      altText: "Slide 4",
+    },
+  ];
+
+  return (
+    <div style={{ maxWidth: "1200px", margin: "auto" }}>
+      <Carousel items={carouselItems} autoplayInterval={3000} />
+    </div>
+  );
+}
+```
+
+```jsx
+import { Carousel } from "sroof-ui";
+
+function CarouselExample() {
+  const carouselItems = [
+    {
+      id: 1,
+      imageUrl:
+        "https://images.pexels.com/photos/32489805/pexels-photo-32489805.jpeg",
+      altText: "Slide 1",
+    },
+    {
+      id: 2,
+      imageUrl:
+        "https://images.pexels.com/photos/32715939/pexels-photo-32715939.jpeg",
+      altText: "Slide 2",
+    },
+    {
+      id: 3,
+      imageUrl:
+        "https://images.pexels.com/photos/33147349/pexels-photo-33147349.jpeg",
+      altText: "Slide 3",
+    },
+    {
+      id: 4,
+      imageUrl:
+        "https://images.pexels.com/photos/27916610/pexels-photo-27916610.jpeg",
+      altText: "Slide 4",
+    },
+  ];
+
+  return (
+    <div style={{ maxWidth: "800px", margin: "auto" }}>
+      <Carousel items={carouselItems} />
+    </div>
+  );
+}
+```
+
+## API
+
+### Props
+
+| 属性             | 类型                          | 默认值  | 说明                                                  |
+| ---------------- | ----------------------------- | ------- | ----------------------------------------------------- |
+| items            | CarouselItem[]                | -       | 轮播项目数组，每个对象包含 id, imageUrl, 和 altText   |
+| autoplayInterval | number                        | 3000    | 自动播放的时间间隔（毫秒）。设置为 0 可以禁用自动播放 |

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styles from './Carousel.module.scss';
+import React, { useState, useEffect, useRef } from "react";
+import styles from "./Carousel.module.scss";
 
 // 定义轮播项的类型
-interface CarouselItem {
+export interface CarouselItem {
   id: number | string;
   imageUrl: string;
   altText: string;
@@ -14,7 +14,10 @@ export interface CarouselProps {
   autoplayInterval?: number; // 自动播放间隔，单位毫秒
 }
 
-export const Carousel: React.FC<CarouselProps> = ({ items, autoplayInterval = 3000 }) => {
+export const Carousel: React.FC<CarouselProps> = ({
+  items,
+  autoplayInterval = 3000,
+}) => {
   // 如果没有项目或项目少于1个，则不渲染
   if (!items || items.length === 0) {
     return null;
@@ -26,15 +29,16 @@ export const Carousel: React.FC<CarouselProps> = ({ items, autoplayInterval = 30
   const [currentIndex, setCurrentIndex] = useState(1); // 初始索引为1，因为0是克隆的最后一项
   const [isTransitioning, setIsTransitioning] = useState(true);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const carouselWrapperRef = useRef<HTMLDivElement>(null);
 
   // 切换到下一张
   const nextSlide = () => {
-    setCurrentIndex(prevIndex => prevIndex + 1);
+    setCurrentIndex((prevIndex) => prevIndex + 1);
   };
 
   // 切换到上一张
   const prevSlide = () => {
-    setCurrentIndex(prevIndex => prevIndex - 1);
+    setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
   // 自动播放的核心逻辑
@@ -73,11 +77,16 @@ export const Carousel: React.FC<CarouselProps> = ({ items, autoplayInterval = 30
     };
 
     // 监听过渡结束事件
-    const carouselWrapper = document.querySelector(`.${styles.carouselWrapper}`);
-    carouselWrapper?.addEventListener('transitionend', handleTransitionEnd);
+    const carouselWrapper = document.querySelector(
+      `.${styles.carouselWrapper}`
+    );
+    carouselWrapper?.addEventListener("transitionend", handleTransitionEnd);
 
     return () => {
-      carouselWrapper?.removeEventListener('transitionend', handleTransitionEnd);
+      carouselWrapper?.removeEventListener(
+        "transitionend",
+        handleTransitionEnd
+      );
     };
   }, [currentIndex, items.length, displayItems.length]);
 
@@ -99,10 +108,11 @@ export const Carousel: React.FC<CarouselProps> = ({ items, autoplayInterval = 30
       onMouseLeave={startAutoplay}
     >
       <div
+        ref={carouselWrapperRef}
         className={styles.carouselWrapper}
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
-          transition: isTransitioning ? 'transform 0.5s ease-in-out' : 'none',
+          transition: isTransitioning ? "transform 0.5s ease-in-out" : "none",
         }}
       >
         {displayItems.map((item, index) => (
@@ -113,10 +123,16 @@ export const Carousel: React.FC<CarouselProps> = ({ items, autoplayInterval = 30
       </div>
 
       {/* 左右导航按钮 */}
-      <button onClick={prevSlide} className={`${styles.navButton} ${styles.prevButton}`}>
+      <button
+        onClick={prevSlide}
+        className={`${styles.navButton} ${styles.prevButton}`}
+      >
         ❮
       </button>
-      <button onClick={nextSlide} className={`${styles.navButton} ${styles.nextButton}`}>
+      <button
+        onClick={nextSlide}
+        className={`${styles.navButton} ${styles.nextButton}`}
+      >
         ❯
       </button>
 
@@ -131,7 +147,9 @@ export const Carousel: React.FC<CarouselProps> = ({ items, autoplayInterval = 30
           return (
             <span
               key={index}
-              className={`${styles.dot} ${index === activeIndex ? styles.active : ''}`}
+              className={`${styles.dot} ${
+                index === activeIndex ? styles.active : ""
+              }`}
               onClick={() => setCurrentIndex(index + 1)}
             ></span>
           );
