@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import styles from './ScrollCard.module.scss';
 
-// --- 类型定义 ---
+// --- 类型定义 (无变化) ---
 export interface ScrollCardItem {
   id: string | number;
   imageUrl: string;
@@ -17,34 +17,34 @@ export interface ScrollCardProps {
 
 export const ScrollCard: FC<ScrollCardProps> = ({
   items,
-  speed = 40, // 默认 40 秒完成一次循环
-  cardWidth = 300,
+  speed = 40,
+  cardWidth = 400,
 }) => {
   if (!items || items.length === 0) {
     return null;
   }
 
-  // 复制数组以实现无限滚动
   const displayItems = [...items, ...items];
   
-  // --animation-duration 是一个 CSS 变量，将 speed 传递给它
-  const containerStyle = {
+  const componentStyle = {
     '--animation-duration': `${speed}s`,
     '--card-width': `${cardWidth}px`,
   } as React.CSSProperties;
 
   return (
-    <div className={styles.scrollContainer} style={containerStyle}>
-      <div className={styles.scrollWrapper}>
-        {displayItems.map((item, index) => (
-          <div className={styles.card} key={`${item.id}-${index}`}>
-            <img src={item.imageUrl} alt={typeof item.title === 'string' ? item.title : ''} className={styles.cardImage} />
-            <div className={styles.cardContent}>
-              <h3 className={styles.cardTitle}>{item.title}</h3>
-              {item.description && <p className={styles.cardDescription}>{item.description}</p>}
+    <div className={styles.componentRoot} style={componentStyle}>
+      <div className={styles.scrollContainer}>
+        <div className={styles.scrollWrapper}>
+          {displayItems.map((item, index) => (
+            <div className={styles.card} key={`${item.id}-${index}`}>
+              <img src={item.imageUrl} alt={typeof item.title === 'string' ? item.title : ''} className={styles.cardImage} />
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                {item.description && <p className={styles.cardDescription}>{item.description}</p>}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

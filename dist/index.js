@@ -6606,22 +6606,18 @@ const Collapse = ({ accordion = false, defaultActiveKey, children, }) => {
 };
 Collapse.Panel = InternalPanel;
 
-var styles = {"scrollContainer":"ScrollCard-module_scrollContainer__52IGn","scrollWrapper":"ScrollCard-module_scrollWrapper__HFF-n","card":"ScrollCard-module_card__Fiu1F","cardImage":"ScrollCard-module_cardImage__rLLzC","cardContent":"ScrollCard-module_cardContent__pKjjN","cardTitle":"ScrollCard-module_cardTitle__5qLzI","cardDescription":"ScrollCard-module_cardDescription__dJWHJ"};
+var styles = {"componentRoot":"ScrollCard-module_componentRoot__x-qbF","scrollContainer":"ScrollCard-module_scrollContainer__52IGn","scrollWrapper":"ScrollCard-module_scrollWrapper__HFF-n","card":"ScrollCard-module_card__Fiu1F","cardImage":"ScrollCard-module_cardImage__rLLzC","cardContent":"ScrollCard-module_cardContent__pKjjN","cardTitle":"ScrollCard-module_cardTitle__5qLzI","cardDescription":"ScrollCard-module_cardDescription__dJWHJ"};
 
-const ScrollCard = ({ items, speed = 40, // 默认 40 秒完成一次循环
-cardWidth = 300, }) => {
-    // 如果没有项目，不渲染
+const ScrollCard = ({ items, speed = 40, cardWidth = 400, }) => {
     if (!items || items.length === 0) {
         return null;
     }
-    // 复制数组以实现无限滚动
     const displayItems = [...items, ...items];
-    // --animation-duration 是一个 CSS 变量，我们将 speed 传递给它
-    const containerStyle = {
+    const componentStyle = {
         '--animation-duration': `${speed}s`,
         '--card-width': `${cardWidth}px`,
     };
-    return (jsxRuntimeExports.jsx("div", { className: styles.scrollContainer, style: containerStyle, children: jsxRuntimeExports.jsx("div", { className: styles.scrollWrapper, children: displayItems.map((item, index) => (jsxRuntimeExports.jsxs("div", { className: styles.card, children: [jsxRuntimeExports.jsx("img", { src: item.imageUrl, alt: typeof item.title === 'string' ? item.title : '', className: styles.cardImage }), jsxRuntimeExports.jsxs("div", { className: styles.cardContent, children: [jsxRuntimeExports.jsx("h3", { className: styles.cardTitle, children: item.title }), item.description && jsxRuntimeExports.jsx("p", { className: styles.cardDescription, children: item.description })] })] }, `${item.id}-${index}`))) }) }));
+    return (jsxRuntimeExports.jsx("div", { className: styles.componentRoot, style: componentStyle, children: jsxRuntimeExports.jsx("div", { className: styles.scrollContainer, children: jsxRuntimeExports.jsx("div", { className: styles.scrollWrapper, children: displayItems.map((item, index) => (jsxRuntimeExports.jsxs("div", { className: styles.card, children: [jsxRuntimeExports.jsx("img", { src: item.imageUrl, alt: typeof item.title === 'string' ? item.title : '', className: styles.cardImage }), jsxRuntimeExports.jsxs("div", { className: styles.cardContent, children: [jsxRuntimeExports.jsx("h3", { className: styles.cardTitle, children: item.title }), item.description && jsxRuntimeExports.jsx("p", { className: styles.cardDescription, children: item.description })] })] }, `${item.id}-${index}`))) }) }) }));
 };
 
 // 设计令牌 - 定义设计系统的基础变量
