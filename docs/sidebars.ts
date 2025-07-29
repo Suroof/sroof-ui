@@ -28,6 +28,7 @@ const sidebars: SidebarsConfig = {
         'components/carousel',
         'components/collapse',
         'components/scrollcard',
+        'components/scrollreveal',
       ],
     },
     {

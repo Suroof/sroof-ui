@@ -5,7 +5,7 @@ import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import React from "react";
-import { Button } from "sroof-ui";
+import { Button, ScrollReveal } from "sroof-ui";
 import styles from "./index.module.css";
 import { useHistory } from "react-router-dom";
 
@@ -32,10 +32,12 @@ function HomepageHeader() {
         </Button>
       </nav>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          Inspire inspiration and bring a better reading experience
-        </Heading>
-        <p className={styles.hero__subtitle}>{siteConfig.tagline}</p>
+        <ScrollReveal staggerDelay={500}>
+          <Heading as="h1" className="hero__title">
+            Inspire inspiration and bring a better reading experience
+          </Heading>
+          <p className={styles.hero__subtitle}>{siteConfig.tagline}</p>
+        </ScrollReveal>
         <div className={styles.buttons}>
           <Button
             variant="outline"
@@ -62,7 +64,7 @@ export default function Home(): ReactNode {
       <main>
         <HomepageFeatures />
       </main>
-       {/* --- 核心部分：完善自定义的 Footer --- */}
+      {/* --- 核心部分：完善自定义的 Footer --- */}
       <footer className={styles.customFooter}>
         <div className={styles.footerContainer}>
           <div className={styles.footerSection}>
@@ -70,7 +72,10 @@ export default function Home(): ReactNode {
             <a href="/sroof-ui/docs/intro" className={styles.footerLink}>
               快速开始
             </a>
-            <a href="/sroof-ui/docs/components/button" className={styles.footerLink}>
+            <a
+              href="/sroof-ui/docs/components/button"
+              className={styles.footerLink}
+            >
               组件
             </a>
           </div>

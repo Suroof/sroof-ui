@@ -1,0 +1,220 @@
+---
+sidebar_position: 16
+---
+
+# ScrollReveal 滚动揭示
+
+一个优雅的滚动动画组件，当元素进入屏幕可视区域时，内部的子元素会从指定方向、带动画地浮现出来。
+
+## 基本用法
+
+```jsx live
+function ScrollRevealExample() {
+  return (
+    <div style={{ padding: "2rem 0" }}>
+      <ScrollReveal>
+        <h2 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
+          一个优雅的标题
+        </h2>
+        <p style={{ fontSize: "1.2rem", lineHeight: 1.7 }}>
+          这是第一段文字。当它进入屏幕时，会优雅地浮现出来。
+          这种效果可以极大地吸引用户的注意力，并提升页面的现代感。
+        </p>
+        <p style={{ fontSize: "1.2rem", lineHeight: 1.7 }}>
+          第二段文字会紧随其后，通过 `staggerDelay` 属性控制的延迟，
+          创造出一种逐行展开的、富有节奏感的视觉体验。
+        </p>
+      </ScrollReveal>
+    </div>
+  );
+}
+```
+
+## 不同方向的动画
+
+### 从左侧滑入
+
+```jsx live
+function FromLeftExample() {
+  return (
+    <div style={{ padding: "2rem 0" }}>
+      <ScrollReveal direction="left" distance={60}>
+        <h3 style={{ fontSize: "2rem", marginBottom: "1rem" }}>从左侧滑入</h3>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          这个示例展示了从左侧滑入的动画效果。
+        </p>
+      </ScrollReveal>
+    </div>
+  );
+}
+```
+
+### 从上方滑落
+
+```jsx live
+function FromDownExample() {
+  return (
+    <div style={{ padding: "2rem 0" }}>
+      <ScrollReveal direction="down" staggerDelay={100}>
+        <h3 style={{ fontSize: "2rem", marginBottom: "1rem" }}>从上方滑落</h3>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          每一行文字的出现间隔现在是 100 毫秒。
+        </p>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          创造出更紧凑的动画节奏。
+        </p>
+      </ScrollReveal>
+    </div>
+  );
+}
+```
+
+## 自定义延迟效果
+
+```jsx live
+function LongDelayExample() {
+  return (
+    <div style={{ padding: "2rem 0" }}>
+      <ScrollReveal staggerDelay={500}>
+        <h3 style={{ fontSize: "2rem", marginBottom: "1rem" }}>长延迟效果</h3>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          第一段文字会首先出现。
+        </p>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          第二段文字会在 500ms 后出现。
+        </p>
+        <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          第三段文字会在 1000ms 后出现，形成明显的交错效果。
+        </p>
+      </ScrollReveal>
+    </div>
+  );
+}
+```
+
+## 混合内容支持
+
+```jsx live
+function MixedContentExample() {
+  return (
+    <div style={{ padding: "2rem 0" ,display: "flex", flexDirection: "column",alignItems: "center",}}>
+      <ScrollReveal staggerDelay={200}>
+        <h3
+          style={{
+            fontSize: "2rem",
+            marginBottom: "1rem",
+            textAlign: "center",
+          }}
+        >
+          混合内容展示
+        </h3>
+        <div style={{ width:"300px", lineHeight: 1.6 }}>
+          <Card>卡片</Card>
+        </div>
+        <ul style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+          <li>列表项也会逐个浮现</li>
+          <li>每个元素都有独立的动画时机</li>
+          <li>创造出丰富的视觉层次</li>
+        </ul>
+      </ScrollReveal>
+    </div>
+  );
+}
+```
+
+## API
+
+### Props
+
+| 属性           | 类型                                  | 默认值  | 说明                                                   |
+| -------------- | ------------------------------------- | ------- | ------------------------------------------------------ |
+| `children`     | `ReactNode`                           | -       | 需要应用动画效果的内容节点                             |
+| `threshold`    | `number`                              | `0.1`   | 触发动画的阈值（0-1），0.1 表示元素进入视口 10% 时触发 |
+| `staggerDelay` | `number`                              | `150`   | 每个子元素动画之间的延迟时间（毫秒）                   |
+| `as`           | `React.ElementType`                   | `'div'` | 设置根元素的 HTML 标签或组件类型                       |
+| `direction`    | `'up' \| 'down' \| 'left' \| 'right'` | `'up'`  | 动画浮现的方向                                         |
+| `distance`     | `number`                              | `20`    | 动画浮现的偏移距离（像素）                             |
+
+## 使用示例
+
+### 基础用法
+
+```jsx
+import { ScrollReveal } from "sroof-ui";
+
+function MyComponent() {
+  return (
+    <ScrollReveal>
+      <h2>标题</h2>
+      <p>段落内容</p>
+    </ScrollReveal>
+  );
+}
+```
+
+### 自定义配置
+
+```jsx
+import { ScrollReveal } from "sroof-ui";
+
+function MyComponent() {
+  return (
+    <ScrollReveal
+      direction="left"
+      distance={50}
+      staggerDelay={300}
+      threshold={0.3}
+    >
+      <h2>从左侧滑入的标题</h2>
+      <p>延迟 300ms 出现的段落</p>
+      <p>延迟 600ms 出现的段落</p>
+    </ScrollReveal>
+  );
+}
+```
+
+### 语义化标签
+
+```jsx
+import { ScrollReveal } from "sroof-ui";
+
+function MyComponent() {
+  return (
+    <ScrollReveal as="section">
+      <h2>语义化的内容</h2>
+      <p>这段内容被包裹在 section 标签中</p>
+    </ScrollReveal>
+  );
+}
+```
+
+## 特性
+
+- 🎯 **精确触发** - 基于 Intersection Observer API，性能优异
+- 🎨 **多方向动画** - 支持从上、下、左、右四个方向浮现
+- ⏱️ **交错延迟** - 子元素可以依次出现，创造丰富的视觉层次
+- 🎛️ **高度可配置** - 可自定义触发阈值、动画距离、延迟时间等
+- 📱 **响应式友好** - 在移动设备上表现良好
+- ♿ **无障碍支持** - 尊重用户的动画偏好设置
+
+## 最佳实践
+
+### 1. 合理设置触发阈值
+
+对于较大的内容区域，可以设置较小的阈值；对于较小的元素，可以设置较大的阈值。
+
+### 2. 控制交错延迟
+
+- 对于少量元素，使用较长的延迟创造戏剧效果
+- 对于大量元素，使用较短的延迟避免等待过久
+
+### 3. 选择合适的动画方向
+
+- 对于页面顶部的内容，从上方滑落更自然
+- 对于侧边栏内容，从侧面滑入更合适
+
+## 注意事项
+
+- 组件使用 Intersection Observer API，在不支持的浏览器中需要 polyfill
+- 动画只会在元素首次进入视口时触发一次
+- 当用户设置了"减少动画"偏好时，动画会被自动禁用
