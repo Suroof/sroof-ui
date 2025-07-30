@@ -6711,76 +6711,61 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
 
-var styles = {"progressWrapper":"Progress-module_progressWrapper__yUSZc","linearContainer":"Progress-module_linearContainer__j6y7q","pulse":"Progress-module_pulse__0V89I","linearTrack":"Progress-module_linearTrack__vQ-er","linear-small":"Progress-module_linear-small__qoX00","linear-medium":"Progress-module_linear-medium__wJ9SG","linear-large":"Progress-module_linear-large__QVP-v","linearBar":"Progress-module_linearBar__UhDYi","animated":"Progress-module_animated__j7tcQ","shimmer":"Progress-module_shimmer__b1HSR","striped":"Progress-module_striped__wCnGL","stripes":"Progress-module_stripes__ncc-8","percentageText":"Progress-module_percentageText__bx2Oj","percentage-small":"Progress-module_percentage-small__WhWOY","percentage-medium":"Progress-module_percentage-medium__g1pnl","percentage-large":"Progress-module_percentage-large__4glZ5","circularContainer":"Progress-module_circularContainer__IEQsi","circular-small":"Progress-module_circular-small__aK9sl","circular-medium":"Progress-module_circular-medium__FxcE5","circular-large":"Progress-module_circular-large__-iG2M","circularSvg":"Progress-module_circularSvg__fa-R1","circularTrack":"Progress-module_circularTrack__rsATa","circularBar":"Progress-module_circularBar__5wccn","percentageTextCircular":"Progress-module_percentageTextCircular__JQK8m","percentage-circular-small":"Progress-module_percentage-circular-small__IP2aO","percentage-circular-medium":"Progress-module_percentage-circular-medium__9ej0s","percentage-circular-large":"Progress-module_percentage-circular-large__SucuD"};
+var styles = {"progressWrapper":"Progress-module_progressWrapper__yUSZc","linearContainer":"Progress-module_linearContainer__j6y7q","linearTrack":"Progress-module_linearTrack__vQ-er","linear-small":"Progress-module_linear-small__qoX00","linear-medium":"Progress-module_linear-medium__wJ9SG","linear-large":"Progress-module_linear-large__QVP-v","linearBar":"Progress-module_linearBar__UhDYi","striped":"Progress-module_striped__wCnGL","stripe-flow":"Progress-module_stripe-flow__c-1GG","percentageText":"Progress-module_percentageText__bx2Oj","circularContainer":"Progress-module_circularContainer__IEQsi","circular-small":"Progress-module_circular-small__aK9sl","circular-medium":"Progress-module_circular-medium__FxcE5","circular-large":"Progress-module_circular-large__-iG2M","circularSvg":"Progress-module_circularSvg__fa-R1","circularTrack":"Progress-module_circularTrack__rsATa","circularBar":"Progress-module_circularBar__5wccn","percentageTextCircular":"Progress-module_percentageTextCircular__JQK8m"};
 
 // 内部的线性进度条组件
-const LinearProgress = ({ progress, size = "medium", color, showPercentage = true, animated = true, striped = false, pulse = false, }) => {
+const LinearProgress = ({ progress, size = "medium", color, showPercentage = true, striped = false, }) => {
     const [displayProgress, setDisplayProgress] = React.useState(0);
     const clampedProgress = Math.min(100, Math.max(0, progress));
-    // 动画效果：逐步增加到目标进度
     React.useEffect(() => {
-        if (!animated) {
-            setDisplayProgress(clampedProgress);
-            return;
-        }
-        const timer = setTimeout(() => {
-            setDisplayProgress(clampedProgress);
-        }, 100);
-        return () => clearTimeout(timer);
-    }, [clampedProgress, animated]);
-    const barStyle = Object.assign({ width: `${displayProgress}%` }, (color && {
-        background: color,
-        boxShadow: `0 0 10px ${color}33, inset 0 1px 0 rgba(255,255,255,0.3)`
-    }));
-    const containerClasses = [
-        styles.linearContainer,
-        pulse && styles.pulse,
-    ].filter(Boolean).join(' ');
-    const trackClasses = [
-        styles.linearTrack,
-        styles[`linear-${size}`],
-    ].filter(Boolean).join(' ');
-    const barClasses = [
-        styles.linearBar,
-        striped && styles.striped,
-        animated && styles.animated,
-    ].filter(Boolean).join(' ');
-    return (jsxRuntimeExports.jsxs("div", { className: containerClasses, children: [jsxRuntimeExports.jsx("div", { className: trackClasses, children: jsxRuntimeExports.jsx("div", { className: barClasses, style: barStyle, children: striped && jsxRuntimeExports.jsx("div", { className: styles.stripePattern }) }) }), showPercentage && (jsxRuntimeExports.jsxs("span", { className: `${styles.percentageText} ${styles[`percentage-${size}`]}`, children: [Math.round(displayProgress), "%"] }))] }));
+        // 使用 requestAnimationFrame 实现更平滑的动画
+        let animationFrameId;
+        const animate = () => {
+            setDisplayProgress(prev => {
+                if (Math.abs(clampedProgress - prev) < 0.1) {
+                    return clampedProgress;
+                }
+                return prev + (clampedProgress - prev) * 0.1; // 缓动动画
+            });
+            animationFrameId = requestAnimationFrame(animate);
+        };
+        animationFrameId = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [clampedProgress]);
+    const barStyle = Object.assign({ width: `${displayProgress}%` }, (color && { background: color }));
+    const trackClasses = `${styles.linearTrack} ${styles[`linear-${size}`]}`;
+    const barClasses = `${styles.linearBar} ${striped ? styles.striped : ''}`;
+    return (jsxRuntimeExports.jsxs("div", { className: styles.linearContainer, children: [jsxRuntimeExports.jsx("div", { className: trackClasses, children: jsxRuntimeExports.jsx("div", { className: barClasses, style: barStyle }) }), showPercentage && (jsxRuntimeExports.jsxs("span", { className: styles.percentageText, children: [Math.round(displayProgress), "%"] }))] }));
 };
 // 内部的圆形进度条组件
-const CircularProgress = ({ progress, size = "medium", color, showPercentage = true, animated = true, pulse = false, }) => {
+const CircularProgress = ({ progress, size = "medium", color, showPercentage = true, }) => {
     const [displayProgress, setDisplayProgress] = React.useState(0);
     const clampedProgress = Math.min(100, Math.max(0, progress));
-    // 动画效果：逐步增加到目标进度
     React.useEffect(() => {
-        if (!animated) {
-            setDisplayProgress(clampedProgress);
-            return;
-        }
-        const timer = setTimeout(() => {
-            setDisplayProgress(clampedProgress);
-        }, 100);
-        return () => clearTimeout(timer);
-    }, [clampedProgress, animated]);
+        let animationFrameId;
+        const animate = () => {
+            setDisplayProgress(prev => {
+                if (Math.abs(clampedProgress - prev) < 0.1)
+                    return clampedProgress;
+                return prev + (clampedProgress - prev) * 0.1;
+            });
+            animationFrameId = requestAnimationFrame(animate);
+        };
+        animationFrameId = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [clampedProgress]);
     const radius = 45;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (displayProgress / 100) * circumference;
-    const barStyle = Object.assign({ strokeDashoffset: offset }, (color && {
-        stroke: color,
-        filter: `drop-shadow(0 0 6px ${color}66)`
-    }));
-    const containerClasses = [
-        styles.circularContainer,
-        styles[`circular-${size}`],
-        pulse && styles.pulse,
-    ].filter(Boolean).join(' ');
-    return (jsxRuntimeExports.jsxs("div", { className: containerClasses, children: [jsxRuntimeExports.jsxs("svg", { className: styles.circularSvg, viewBox: "0 0 100 100", children: [jsxRuntimeExports.jsxs("defs", { children: [jsxRuntimeExports.jsxs("filter", { id: "glow", children: [jsxRuntimeExports.jsx("feGaussianBlur", { stdDeviation: "3", result: "coloredBlur" }), jsxRuntimeExports.jsxs("feMerge", { children: [jsxRuntimeExports.jsx("feMergeNode", { in: "coloredBlur" }), jsxRuntimeExports.jsx("feMergeNode", { in: "SourceGraphic" })] })] }), jsxRuntimeExports.jsxs("linearGradient", { id: "progressGradient", x1: "0%", y1: "0%", x2: "100%", y2: "100%", children: [jsxRuntimeExports.jsx("stop", { offset: "0%", stopColor: color || "#4facfe" }), jsxRuntimeExports.jsx("stop", { offset: "100%", stopColor: color || "#00f2fe" })] })] }), jsxRuntimeExports.jsx("circle", { className: styles.circularTrack, cx: "50", cy: "50", r: radius }), jsxRuntimeExports.jsx("circle", { className: styles.circularBar, cx: "50", cy: "50", r: radius, strokeDasharray: circumference, style: barStyle, filter: "url(#glow)" })] }), showPercentage && (jsxRuntimeExports.jsxs("span", { className: `${styles.percentageTextCircular} ${styles[`percentage-circular-${size}`]}`, children: [Math.round(displayProgress), "%"] }))] }));
+    const barStyle = Object.assign({ strokeDashoffset: offset }, (color && { stroke: color }));
+    const containerClasses = `${styles.circularContainer} ${styles[`circular-${size}`]}`;
+    return (jsxRuntimeExports.jsxs("div", { className: containerClasses, children: [jsxRuntimeExports.jsxs("svg", { className: styles.circularSvg, viewBox: "0 0 100 100", children: [jsxRuntimeExports.jsx("circle", { className: styles.circularTrack, cx: "50", cy: "50", r: radius }), jsxRuntimeExports.jsx("circle", { className: styles.circularBar, cx: "50", cy: "50", r: radius, strokeDasharray: circumference, style: barStyle })] }), showPercentage && (jsxRuntimeExports.jsxs("span", { className: styles.percentageTextCircular, children: [Math.round(displayProgress), "%"] }))] }));
 };
 // 主进度条组件
 const Progress = (_a) => {
-    var { variant = "linear", size = "medium", showPercentage = true, className = "", animated = true, striped = false, pulse = false } = _a, rest = __rest(_a, ["variant", "size", "showPercentage", "className", "animated", "striped", "pulse"]);
+    var { variant = "linear", className = "" } = _a, rest = __rest(_a, ["variant", "className"]);
     const Component = variant === "circular" ? CircularProgress : LinearProgress;
-    return (jsxRuntimeExports.jsx("div", { className: `${styles.progressWrapper} ${className}`, role: "progressbar", "aria-valuenow": rest.progress, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": `进度: ${Math.round(rest.progress)}%`, children: jsxRuntimeExports.jsx(Component, Object.assign({ size: size, showPercentage: showPercentage, animated: animated, striped: striped, pulse: pulse }, rest)) }));
+    return (jsxRuntimeExports.jsx("div", { className: `${styles.progressWrapper} ${className}`, role: "progressbar", "aria-valuenow": rest.progress, children: jsxRuntimeExports.jsx(Component, Object.assign({}, rest)) }));
 };
 
 // 设计令牌 - 定义设计系统的基础变量
