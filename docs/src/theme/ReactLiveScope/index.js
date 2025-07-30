@@ -20,7 +20,8 @@ import {
   Carousel,
   Collapse,
   ScrollCard,
-  ScrollReveal
+  ScrollReveal,
+  Progress
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -47,7 +48,8 @@ const ReactLiveScope = {
   Carousel,
   Collapse,
   ScrollCard,
-  ScrollReveal
+  ScrollReveal,
+  Progress
 }; 
 
 export default ReactLiveScope;

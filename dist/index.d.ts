@@ -22,6 +22,7 @@ export { default as Carousel } from "./components/Carousel";
 export { default as Collapse } from "./components/Collapse";
 export { default as ScrollCard } from "./components/ScrollCard";
 export { default as ScrollReveal } from "./components/ScrollReveal";
+export { default as Progress } from "./components/Progress";
 export * from "./i18n";
 export * from "./styles/tokens";
 //# sourceMappingURL=index.d.ts.map

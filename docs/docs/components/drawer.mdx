@@ -31,27 +31,6 @@ function DrawerExample() {
 }
 ```
 
-```jsx
-import { Drawer, Button } from "sroof-ui";
-
-function Example() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div>
-      <Button onClick={() => setOpen(true)}>打开抽屉</Button>
-      <Drawer
-        open={open}
-        onClose={() => setOpen(false)}
-        title="基本抽屉"
-      >
-        <p>抽屉内容</p>
-      </Drawer>
-    </div>
-  );
-}
-```
-
 ## 不同位置
 
 抽屉可以从四个方向滑出：左侧、右侧、顶部、底部。

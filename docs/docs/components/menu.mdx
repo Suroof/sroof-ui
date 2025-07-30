@@ -25,21 +25,6 @@ function MenuExample() {
 }
 ```
 
-```jsx
-import { Menu, MenuItem } from "sroof-ui";
-
-function Example() {
-  return (
-    <Menu defaultSelectedKey="1" onSelect={(key) => console.log("选中:", key)}>
-      <MenuItem itemKey="1">首页</MenuItem>
-      <MenuItem itemKey="2">产品</MenuItem>
-      <MenuItem itemKey="3">关于我们</MenuItem>
-      <MenuItem itemKey="4">联系我们</MenuItem>
-    </Menu>
-  );
-}
-```
-
 ## 垂直菜单
 
 ```jsx live
@@ -53,15 +38,6 @@ function VerticalMenuExample() {
     </Menu>
   );
 }
-```
-
-```jsx
-<Menu mode="vertical" defaultSelectedKey="2">
-  <MenuItem itemKey="1">导航一</MenuItem>
-  <MenuItem itemKey="2">导航二</MenuItem>
-  <MenuItem itemKey="3">导航三</MenuItem>
-  <MenuItem itemKey="4">导航四</MenuItem>
-</Menu>
 ```
 
 ## 子菜单
@@ -82,20 +58,6 @@ function SubMenuExample() {
     </div>
   );
 }
-```
-
-```jsx
-import { Menu, MenuItem, SubMenu } from "sroof-ui";
-
-<Menu defaultSelectedKey="2-1">
-  <MenuItem itemKey="1">首页</MenuItem>
-  <SubMenu itemKey="2" title="产品">
-    <MenuItem itemKey="2-1">产品A</MenuItem>
-    <MenuItem itemKey="2-2">产品B</MenuItem>
-    <MenuItem itemKey="2-3">产品C</MenuItem>
-  </SubMenu>
-  <MenuItem itemKey="3">关于我们</MenuItem>
-</Menu>;
 ```
 
 ## 带图标的菜单
@@ -139,16 +101,6 @@ function DisabledMenuExample() {
     </Menu>
   );
 }
-```
-
-```jsx
-<Menu defaultSelectedKey="1">
-  <MenuItem itemKey="1">可用项</MenuItem>
-  <MenuItem itemKey="2" disabled>
-    禁用项
-  </MenuItem>
-  <MenuItem itemKey="3">另一个可用项</MenuItem>
-</Menu>
 ```
 
 ## 危险项

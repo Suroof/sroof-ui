@@ -1,0 +1,327 @@
+---
+sidebar_position: 17
+---
+
+# Progress 进度条
+
+高级进度条组件，支持线性和圆形两种样式，具有丰富的动画效果和自定义选项。
+
+## 基本用法
+
+最简单的进度条使用方式：
+
+```jsx live
+function ProgressExample() {
+  return (
+    <div style={{ maxWidth: "600px" }}>
+      <Progress progress={30} />
+    </div>
+  );
+}
+```
+
+## 线性进度条
+
+### 基本线性进度条
+```jsx live
+function LinearProgressExample() {
+  return (
+    <div style={{ maxWidth: "600px" }}>
+      <Progress progress={50} variant="linear" />
+    </div>
+  );
+}
+```
+
+### 不同尺寸的线性进度条
+```jsx live
+function LinearProgressSizes() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "600px" }}>
+      <div>
+        <h4>小尺寸</h4>
+        <Progress progress={30} variant="linear" size="small" />
+      </div>
+      <div>
+        <h4>中等尺寸</h4>
+        <Progress progress={50} variant="linear" size="medium" />
+      </div>
+      <div>
+        <h4>大尺寸</h4>
+        <Progress progress={70} variant="linear" size="large" />
+      </div>
+    </div>
+  );
+}
+```
+
+### 条纹效果
+```jsx live
+function StripedProgress() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "600px" }}>
+      <div>
+        <h4>普通进度条</h4>
+        <Progress progress={60} variant="linear" />
+      </div>
+      <div>
+        <h4>条纹进度条</h4>
+        <Progress progress={60} variant="linear" striped={true} />
+      </div>
+    </div>
+  );
+}
+```
+
+## 圆形进度条
+
+### 基本圆形进度条
+```jsx live
+function CircularProgressExample() {
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Progress progress={75} variant="circular" />
+    </div>
+  );
+}
+```
+
+### 不同尺寸的圆形进度条
+```jsx live
+function CircularProgressSizes() {
+  return (
+    <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", gap: "20px" }}>
+      <div style={{ textAlign: "center" }}>
+        <h4>小</h4>
+        <Progress progress={25} variant="circular" size="small" />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <h4>中</h4>
+        <Progress progress={50} variant="circular" size="medium" />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <h4>大</h4>
+        <Progress progress={75} variant="circular" size="large" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 自定义颜色
+
+### 线性进度条颜色
+```jsx live
+function CustomColorLinear() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "600px" }}>
+      <Progress progress={45} color="#e91e63" />
+      <Progress progress={65} color="#9c27b0" />
+      <Progress progress={85} color="#3f51b5" />
+    </div>
+  );
+}
+```
+
+### 圆形进度条颜色
+```jsx live
+function CustomColorCircular() {
+  return (
+    <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+      <Progress progress={60} variant="circular" color="#4caf50" />
+      <Progress progress={80} variant="circular" color="#ff9800" />
+      <Progress progress={40} variant="circular" color="#f44336" />
+    </div>
+  );
+}
+```
+
+## 动画效果
+
+### 脉冲效果
+```jsx live
+function PulseEffect() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "600px" }}>
+      <div>
+        <h4>线性脉冲</h4>
+        <Progress progress={40} variant="linear" pulse={true} />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <h4>圆形脉冲</h4>
+        <Progress progress={85} variant="circular" pulse={true} />
+      </div>
+    </div>
+  );
+}
+```
+
+### 组合效果
+```jsx live
+function CombinedEffects() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "600px" }}>
+      <div>
+        <h4>条纹 + 脉冲</h4>
+        <Progress progress={75} striped={true} pulse={true} color="#f44336" />
+      </div>
+      <div>
+        <h4>自定义颜色 + 条纹</h4>
+        <Progress progress={55} striped={true} color="#ff9800" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 实际应用场景
+
+### 文件上传进度
+```jsx live
+function FileUploadDemo() {
+  const [progress, setProgress] = React.useState(0);
+  
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) return 0;
+        return prev + Math.random() * 10;
+      });
+    }, 500);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  return (
+    <div style={{ maxWidth: "400px" }}>
+      <h4>文件上传中...</h4>
+      <Progress 
+        progress={Math.min(progress, 100)} 
+        striped={true} 
+        animated={true}
+        color="#2196f3" 
+      />
+      <p style={{ fontSize: "12px", color: "#666", marginTop: "8px" }}>
+        {Math.round(Math.min(progress, 100))}% 完成
+      </p>
+    </div>
+  );
+}
+```
+
+### 系统状态监控
+```jsx live
+function SystemMonitor() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "400px" }}>
+      <div>
+        <h4 style={{ margin: "0 0 8px 0", fontSize: "14px" }}>CPU 使用率</h4>
+        <Progress progress={35} color="#4caf50" />
+      </div>
+      <div>
+        <h4 style={{ margin: "0 0 8px 0", fontSize: "14px" }}>内存使用率</h4>
+        <Progress progress={78} color="#ff9800" pulse={true} />
+      </div>
+      <div>
+        <h4 style={{ margin: "0 0 8px 0", fontSize: "14px" }}>磁盘使用率</h4>
+        <Progress progress={92} color="#f44336" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 无障碍支持
+
+进度条组件内置了完整的无障碍支持：
+
+- **ARIA 属性**：`role="progressbar"`、`aria-valuenow`、`aria-valuemin`、`aria-valuemax`
+- **语义化标签**：提供中文语音描述
+- **键盘导航**：支持屏幕阅读器
+- **高对比度模式**：自动适配系统高对比度设置
+- **动画偏好**：尊重用户的动画偏好设置
+
+```jsx live
+function AccessibilityDemo() {
+  return (
+    <div style={{ maxWidth: "600px" }}>
+      <Progress 
+        progress={65} 
+        variant="linear"
+        aria-label="任务完成进度"
+      />
+      <p style={{ fontSize: "12px", color: "#666", marginTop: "8px" }}>
+        此进度条支持屏幕阅读器，会自动朗读"进度: 65%"
+      </p>
+    </div>
+  );
+}
+```
+
+## 响应式设计
+
+组件在不同屏幕尺寸下自动调整：
+
+```jsx live
+function ResponsiveDemo() {
+  return (
+    <div style={{ width: "100%" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <h4>桌面端 (大尺寸)</h4>
+        <Progress progress={60} size="large" />
+      </div>
+      <div style={{ width: "300px", marginBottom: "20px" }}>
+        <h4>平板端 (中等尺寸)</h4>
+        <Progress progress={60} size="medium" />
+      </div>
+      <div style={{ width: "200px" }}>
+        <h4>移动端 (小尺寸)</h4>
+        <Progress progress={60} size="small" />
+      </div>
+    </div>
+  );
+}
+```
+
+## API
+
+### Progress Props
+
+| 属性           | 类型                      | 默认值   | 说明                           |
+| -------------- | ------------------------- | -------- | ------------------------------ |
+| progress       | number                    | -        | 当前进度百分比 (0-100)         |
+| variant        | 'linear' \| 'circular'    | 'linear' | 进度条的样式变体               |
+| size           | 'small' \| 'medium' \| 'large' | 'medium' | 进度条的尺寸/厚度         |
+| color          | string                    | -        | 自定义进度条颜色               |
+| showPercentage | boolean                   | true     | 是否显示百分比文字             |
+| animated       | boolean                   | true     | 是否启用动画效果               |
+| striped        | boolean                   | false    | 是否显示条纹效果               |
+| pulse          | boolean                   | false    | 是否启用脉冲效果               |
+| className      | string                    | -        | 自定义 CSS 类名                |
+
+### 设计规范
+
+#### 颜色使用建议
+- **成功状态**: `#4caf50` (绿色)
+- **警告状态**: `#ff9800` (橙色)  
+- **错误状态**: `#f44336` (红色)
+- **信息状态**: `#2196f3` (蓝色)
+- **默认状态**: 渐变色 `#667eea` → `#764ba2`
+
+#### 尺寸规范
+- **small**: 适用于紧凑布局，高度 8px
+- **medium**: 标准尺寸，高度 12px
+- **large**: 突出显示，高度 18px
+
+#### 动画使用场景
+- **striped**: 适用于持续进行的任务（如上传、下载）
+- **pulse**: 适用于需要用户关注的状态
+- **animated**: 适用于进度值变化的场景
+
+## 最佳实践
+
+1. **合理使用动画**：避免在同一页面使用过多动画效果
+2. **颜色语义化**：使用符合用户预期的颜色表示不同状态
+3. **提供反馈**：配合文字说明提供更好的用户体验
+4. **性能考虑**：大量进度条时考虑关闭动画效果
+5. **无障碍友好**：始终保持 `showPercentage` 为 true 或提供替代文字说明

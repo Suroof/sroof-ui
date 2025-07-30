@@ -32,26 +32,6 @@ function FormExample() {
 }
 ```
 
-```jsx
-import { Form, FormItem, FormActions, Button, Input } from 'sroof-ui';
-
-function Example() {
-  return (
-    <Form onSubmit={(data) => console.log(data)}>
-      <FormItem label="用户名" required>
-        <Input placeholder="请输入用户名" />
-      </FormItem>
-      <FormItem label="邮箱" required>
-        <Input type="email" placeholder="请输入邮箱" />
-      </FormItem>
-      <FormActions>
-        <Button variant="primary" type="submit">提交</Button>
-      </FormActions>
-    </Form>
-  );
-}
-```
-
 ## 表单布局
 
 ```jsx live
@@ -73,17 +53,6 @@ function FormLayoutExample() {
     </Form>
   );
 }
-```
-
-```jsx
-<Form layout="horizontal">
-  <FormItem label="姓名" required>
-    <Input placeholder="请输入姓名" />
-  </FormItem>
-  <FormItem label="年龄">
-    <Input type="number" placeholder="请输入年龄" />
-  </FormItem>
-</Form>
 ```
 
 ## 表单验证
@@ -140,13 +109,6 @@ function FormDisabledExample() {
 }
 ```
 
-```jsx
-<Form disabled>
-  <FormItem label="用户名">
-    <Input placeholder="请输入用户名" />
-  </FormItem>
-</Form>
-```
 
 ## 加载状态
 

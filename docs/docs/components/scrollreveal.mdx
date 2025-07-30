@@ -139,54 +139,9 @@ function MixedContentExample() {
 
 ### 基础用法
 
-```jsx
-import { ScrollReveal } from "sroof-ui";
-
-function MyComponent() {
-  return (
-    <ScrollReveal>
-      <h2>标题</h2>
-      <p>段落内容</p>
-    </ScrollReveal>
-  );
-}
-```
-
 ### 自定义配置
 
-```jsx
-import { ScrollReveal } from "sroof-ui";
-
-function MyComponent() {
-  return (
-    <ScrollReveal
-      direction="left"
-      distance={50}
-      staggerDelay={300}
-      threshold={0.3}
-    >
-      <h2>从左侧滑入的标题</h2>
-      <p>延迟 300ms 出现的段落</p>
-      <p>延迟 600ms 出现的段落</p>
-    </ScrollReveal>
-  );
-}
-```
-
 ### 语义化标签
-
-```jsx
-import { ScrollReveal } from "sroof-ui";
-
-function MyComponent() {
-  return (
-    <ScrollReveal as="section">
-      <h2>语义化的内容</h2>
-      <p>这段内容被包裹在 section 标签中</p>
-    </ScrollReveal>
-  );
-}
-```
 
 ## 特性
 

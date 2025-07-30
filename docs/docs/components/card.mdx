@@ -18,9 +18,10 @@ function ButtonExample() {
 }
 ```
 
-```jsx
+  
 import { Card } from "sroof-ui";
 
+```jsx live
 function ButtonExample() {
   return (
     <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
@@ -55,16 +56,6 @@ function ButtonSizeExample() {
 }
 ```
 
-```jsx
-      <Card type="primary">主要</Card>
-      <Card type="secondary">其次</Card>
-      <Card type="danger">危险</Card>
-      <Card type="success">成功</Card>
-      <Card type="warning">警告</Card>
-      <Card type="glass">玻璃态</Card>
-      <Card type="gradient">渐变</Card>
-```
-
 ## 卡片尺寸
 
 ```jsx live
@@ -86,12 +77,6 @@ function ButtonSizeExample() {
 }
 ```
 
-```jsx
-      <Card size="small">小卡片</Card>
-      <Card size="medium">中卡片</Card>
-      <Card size="large">大卡片</Card>
-```
-
 ## 是否可点击
 
 ```jsx live
@@ -102,10 +87,6 @@ function ButtonDisabledExample() {
     </div>
   );
 }
-```
-
-```jsx
-<Card clickable={true}>点我试试</Card>
 ```
 
 ## 边框显示
@@ -122,10 +103,6 @@ const [bordered, setBordered] = useState(true);
     </div>
   );
 }
-```
-
-```jsx
-      <Card  bordered={true}>有无边框</Card>
 ```
 
 ## 阴影
@@ -145,10 +122,6 @@ const [bordered, setBordered] = useState(true);
     </div>
   );
 }
-```
-
-```jsx
-      <Card  bordered={true}>有无边框</Card>
 ```
 
 ## API

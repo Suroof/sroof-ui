@@ -21,21 +21,6 @@ function ButtonExample() {
 }
 ```
 
-```jsx
-import { Button } from "sroof-ui";
-
-function Example() {
-  return (
-    <div>
-      <Button>默认按钮</Button>
-      <Button variant="primary">主要按钮</Button>
-      <Button variant="secondary">信息按钮</Button>
-      <Button variant="danger">危险按钮</Button>
-    </div>
-  );
-}
-```
-
 ## 按钮尺寸
 
 ```jsx live
@@ -57,12 +42,6 @@ function ButtonSizeExample() {
 }
 ```
 
-```jsx
-<Button size="small">小按钮</Button>
-<Button size="medium">中按钮</Button>
-<Button size="large">大按钮</Button>
-```
-
 ## 禁用状态
 
 ```jsx live
@@ -78,56 +57,9 @@ function ButtonDisabledExample() {
 }
 ```
 
-```jsx
-<Button disabled>禁用按钮</Button>
-<Button variant="primary" disabled>禁用主要按钮</Button>
-```
-
 ## 圆角
 
 ```jsx live
-function ButtonLoadingExample() {
-  return (
-    <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
-      <Button variant="primary" rounded="none">
-        无圆角
-      </Button>
-      <Button variant="primary" rounded="small">
-        微圆角
-      </Button>
-      <Button variant="primary" rounded="medium">
-        中圆角
-      </Button>
-      <Button variant="primary" rounded="large">
-        大圆角
-      </Button>
-    </div>
-  );
-}
-```
-
-```jsx
-function ButtonLoadingExample() {
-  return (
-    <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
-      <Button variant="primary" rounded="none">
-        无圆角
-      </Button>
-      <Button variant="primary" rounded="small">
-        微圆角
-      </Button>
-      <Button variant="primary" rounded="medium">
-        中圆角
-      </Button>
-      <Button variant="primary" rounded="large">
-        大圆角
-      </Button>
-    </div>
-  );
-}
-```
-
-```jsx
 function ButtonLoadingExample() {
   return (
     <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
@@ -161,11 +93,6 @@ function ButtonLoadingExample() {
     </div>
   );
 }
-```
-
-```jsx
-<Button loading>加载中...</Button>
-<Button variant="primary" loading>提交中...</Button>
 ```
 
 ## API

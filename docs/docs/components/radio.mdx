@@ -20,14 +20,6 @@ function RadioGroupVerticalExample() {
 }
 ```
 
-```jsx
-<RadioGroup defaultValue="option2" name="vertical-group">
-  <Radio value="option1">选项 1</Radio>
-  <Radio value="option2">选项 2</Radio>
-  <Radio value="option3">选项 3</Radio>
-</RadioGroup>
-```
-
 ## 单选框组 - 水平布局
 
 ```jsx live
@@ -40,14 +32,6 @@ function RadioGroupHorizontalExample() {
     </RadioGroup>
   );
 }
-```
-
-```jsx
-<RadioGroup direction="horizontal" defaultValue="small">
-  <Radio value="small">小</Radio>
-  <Radio value="medium">中</Radio>
-  <Radio value="large">大</Radio>
-</RadioGroup>
 ```
 
 ## 受控模式
@@ -76,20 +60,6 @@ function RadioControlledExample() {
 }
 ```
 
-```jsx
-function ControlledRadio() {
-  const [value, setValue] = useState('react');
-  
-  return (
-    <RadioGroup value={value} onChange={setValue}>
-      <Radio value="react">React</Radio>
-      <Radio value="vue">Vue</Radio>
-      <Radio value="angular">Angular</Radio>
-    </RadioGroup>
-  );
-}
-```
-
 ## 禁用状态
 
 ```jsx live
@@ -108,12 +78,6 @@ function RadioDisabledExample() {
 }
 ```
 
-```jsx
-<Radio value="normal">正常状态</Radio>
-<Radio value="disabled" disabled>禁用状态</Radio>
-<Radio value="disabled-checked" disabled defaultChecked>禁用且选中</Radio>
-```
-
 ## 单选框组禁用
 
 ```jsx live
@@ -126,14 +90,6 @@ function RadioGroupDisabledExample() {
     </RadioGroup>
   );
 }
-```
-
-```jsx
-<RadioGroup disabled defaultValue="option2">
-  <Radio value="option1">选项 1</Radio>
-  <Radio value="option2">选项 2</Radio>
-  <Radio value="option3">选项 3</Radio>
-</RadioGroup>
 ```
 
 ## 混合禁用状态
@@ -149,14 +105,6 @@ function RadioMixedDisabledExample() {
     </RadioGroup>
   );
 }
-```
-
-```jsx
-<RadioGroup defaultValue="enabled1">
-  <Radio value="enabled1">可用选项 1</Radio>
-  <Radio value="disabled1" disabled>禁用选项</Radio>
-  <Radio value="enabled2">可用选项 2</Radio>
-</RadioGroup>
 ```
 
 ## 自定义样式
@@ -212,102 +160,9 @@ function RadioCustomExample() {
 
 ### 表单中使用
 
-```jsx
-import { Radio, RadioGroup } from 'sroof-ui';
-
-function PreferenceForm() {
-  const [theme, setTheme] = useState('light');
-  const [size, setSize] = useState('medium');
-  
-  return (
-    <form>
-      <div>
-        <label>主题偏好:</label>
-        <RadioGroup value={theme} onChange={setTheme}>
-          <Radio value="light">浅色主题</Radio>
-          <Radio value="dark">深色主题</Radio>
-          <Radio value="auto">跟随系统</Radio>
-        </RadioGroup>
-      </div>
-      
-      <div>
-        <label>字体大小:</label>
-        <RadioGroup 
-          direction="horizontal" 
-          value={size} 
-          onChange={setSize}
-        >
-          <Radio value="small">小</Radio>
-          <Radio value="medium">中</Radio>
-          <Radio value="large">大</Radio>
-        </RadioGroup>
-      </div>
-    </form>
-  );
-}
-```
-
 ### 问卷调查
 
-```jsx
-function SurveyQuestion() {
-  const [satisfaction, setSatisfaction] = useState('');
-  
-  return (
-    <div>
-      <h3>您对我们的服务满意度如何？</h3>
-      <RadioGroup value={satisfaction} onChange={setSatisfaction}>
-        <Radio value="very-satisfied">非常满意</Radio>
-        <Radio value="satisfied">满意</Radio>
-        <Radio value="neutral">一般</Radio>
-        <Radio value="dissatisfied">不满意</Radio>
-        <Radio value="very-dissatisfied">非常不满意</Radio>
-      </RadioGroup>
-    </div>
-  );
-}
-```
-
 ### 配置选择
-
-```jsx
-function ConfigurationPanel() {
-  const [config, setConfig] = useState({
-    layout: 'grid',
-    sorting: 'name',
-    view: 'card'
-  });
-  
-  return (
-    <div>
-      <div>
-        <h4>布局方式</h4>
-        <RadioGroup 
-          direction="horizontal"
-          value={config.layout}
-          onChange={(value) => setConfig(prev => ({ ...prev, layout: value }))}
-        >
-          <Radio value="list">列表</Radio>
-          <Radio value="grid">网格</Radio>
-          <Radio value="table">表格</Radio>
-        </RadioGroup>
-      </div>
-      
-      <div>
-        <h4>排序方式</h4>
-        <RadioGroup 
-          value={config.sorting}
-          onChange={(value) => setConfig(prev => ({ ...prev, sorting: value }))}
-        >
-          <Radio value="name">按名称</Radio>
-          <Radio value="date">按日期</Radio>
-          <Radio value="size">按大小</Radio>
-        </RadioGroup>
-      </div>
-    </div>
-  );
-}
-```
 
 ## 注意事项
 

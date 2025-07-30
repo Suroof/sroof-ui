@@ -41,6 +41,7 @@ export { default as Carousel } from "./components/Carousel";
 export { default as Collapse } from "./components/Collapse";
 export { default as ScrollCard } from "./components/ScrollCard";
 export { default as ScrollReveal } from "./components/ScrollReveal";
+export { default as Progress } from "./components/Progress";
 
 // 导出国际化相关
 export * from "./i18n";

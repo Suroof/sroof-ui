@@ -23,23 +23,6 @@ function PaginationExample() {
 }
 ```
 
-```jsx
-import { Pagination } from 'sroof-ui';
-
-function Example() {
-  const [current, setCurrent] = useState(1);
-  
-  return (
-    <Pagination
-      total={100}
-      current={current}
-      pageSize={10}
-      onChange={setCurrent}
-    />
-  );
-}
-```
-
 ## 大量页码
 
 当页码数量较多时，组件会自动显示省略号来简化显示。

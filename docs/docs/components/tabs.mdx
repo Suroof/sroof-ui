@@ -35,26 +35,6 @@ function TabsExample() {
 }
 ```
 
-```jsx
-import { Tabs, Tab } from 'sroof-ui';
-
-function Example() {
-  return (
-    <Tabs defaultActiveKey="tab1">
-      <Tab key="tab1" label="标签页 1">
-        <div>标签页 1 的内容</div>
-      </Tab>
-      <Tab key="tab2" label="标签页 2">
-        <div>标签页 2 的内容</div>
-      </Tab>
-      <Tab key="tab3" label="标签页 3">
-        <div>标签页 3 的内容</div>
-      </Tab>
-    </Tabs>
-  );
-}
-```
-
 ## 受控模式
 
 ```jsx live
@@ -122,29 +102,6 @@ function ControlledTabsExample() {
         </Tab>
       </Tabs>
     </div>
-  );
-}
-```
-
-```jsx
-function ControlledTabs() {
-  const [activeKey, setActiveKey] = useState('home');
-
-  return (
-    <Tabs
-      activeKey={activeKey}
-      onChange={(key) => {
-        setActiveKey(key);
-        console.log('切换到:', key);
-      }}
-    >
-      <Tab key="home" label="首页">
-        <div>首页内容</div>
-      </Tab>
-      <Tab key="profile" label="个人资料">
-        <div>个人资料内容</div>
-      </Tab>
-    </Tabs>
   );
 }
 ```
@@ -240,23 +197,6 @@ function IconTabsExample() {
 }
 ```
 
-```jsx
-<Tabs defaultActiveKey="dashboard">
-  <Tab 
-    key="dashboard" 
-    label={<span><Icon name="dashboard" /> 仪表盘</span>}
-  >
-    <DashboardContent />
-  </Tab>
-  <Tab 
-    key="analytics" 
-    label={<span><Icon name="chart" /> 分析</span>}
-  >
-    <AnalyticsContent />
-  </Tab>
-</Tabs>
-```
-
 ## 多标签页示例
 
 ```jsx live
@@ -282,16 +222,6 @@ function ManyTabsExample() {
     </Tabs>
   );
 }
-```
-
-```jsx
-<Tabs defaultActiveKey="tab1">
-  {Array.from({ length: 8 }, (_, index) => (
-    <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
-      <div>标签 {index + 1} 的内容</div>
-    </Tab>
-  ))}
-</Tabs>
 ```
 
 ## 自定义样式
@@ -400,17 +330,6 @@ function CustomStyleTabsExample() {
 }
 ```
 
-```jsx
-<Tabs defaultActiveKey="tab1" className="custom-tabs">
-  <Tab key="tab1" label="自定义标签 1">
-    <CustomContent1 />
-  </Tab>
-  <Tab key="tab2" label="自定义标签 2">
-    <CustomContent2 />
-  </Tab>
-</Tabs>
-```
-
 ## 动态标签页
 
 ```jsx live
@@ -504,46 +423,6 @@ function DynamicTabsExample() {
                 标签页 ID: {tab.key}
               </div>
             </div>
-          </Tab>
-        ))}
-      </Tabs>
-    </div>
-  );
-}
-```
-
-```jsx
-function DynamicTabs() {
-  const [tabs, setTabs] = useState([
-    { key: 'tab1', label: '标签 1', content: '内容 1' }
-  ]);
-  const [activeKey, setActiveKey] = useState('tab1');
-
-  const addTab = () => {
-    const newKey = `tab${Date.now()}`;
-    setTabs([...tabs, { 
-      key: newKey, 
-      label: `新标签 ${tabs.length + 1}`, 
-      content: `新内容 ${tabs.length + 1}` 
-    }]);
-    setActiveKey(newKey);
-  };
-
-  const removeTab = (targetKey) => {
-    const newTabs = tabs.filter(tab => tab.key !== targetKey);
-    setTabs(newTabs);
-    if (activeKey === targetKey && newTabs.length > 0) {
-      setActiveKey(newTabs[0].key);
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={addTab}>添加标签页</button>
-      <Tabs activeKey={activeKey} onChange={setActiveKey}>
-        {tabs.map(tab => (
-          <Tab key={tab.key} label={tab.label}>
-            <div>{tab.content}</div>
           </Tab>
         ))}
       </Tabs>
@@ -708,26 +587,6 @@ function TabsExample() {
 }
 ```
 
-```jsx
-import { Tabs, Tab } from 'sroof-ui';
-
-function Example() {
-  return (
-    <Tabs defaultActiveKey="tab1">
-      <Tab key="tab1" label="标签页 1">
-        <div>标签页 1 的内容</div>
-      </Tab>
-      <Tab key="tab2" label="标签页 2">
-        <div>标签页 2 的内容</div>
-      </Tab>
-      <Tab key="tab3" label="标签页 3">
-        <div>标签页 3 的内容</div>
-      </Tab>
-    </Tabs>
-  );
-}
-```
-
 ## 受控模式
 
 ```jsx live
@@ -795,29 +654,6 @@ function ControlledTabsExample() {
         </Tab>
       </Tabs>
     </div>
-  );
-}
-```
-
-```jsx
-function ControlledTabs() {
-  const [activeKey, setActiveKey] = useState('home');
-
-  return (
-    <Tabs
-      activeKey={activeKey}---
-      onChange={(key) => {
-        setActiveKey(key);
-        console.log('切换到:', key);
-      }}
-    >
-      <Tab key="home" label="首页">
-        <div>首页内容</div>
-      </Tab>
-      <Tab key="profile" label="个人资料">
-        <div>个人资料内容</div>
-      </Tab>
-    </Tabs>
   );
 }
 ```
@@ -913,23 +749,6 @@ function IconTabsExample() {
 }
 ```
 
-```jsx
-<Tabs defaultActiveKey="dashboard">
-  <Tab 
-    key="dashboard" 
-    label={<span><Icon name="dashboard" /> 仪表盘</span>}
-  >
-    <DashboardContent />
-  </Tab>
-  <Tab 
-    key="analytics" 
-    label={<span><Icon name="chart" /> 分析</span>}
-  >
-    <AnalyticsContent />
-  </Tab>
-</Tabs>
-```
-
 ## 多标签页示例
 
 ```jsx live
@@ -955,16 +774,6 @@ function ManyTabsExample() {
     </Tabs>
   );
 }
-```
-
-```jsx
-<Tabs defaultActiveKey="tab1">
-  {Array.from({ length: 8 }, (_, index) => (
-    <Tab key={`tab${index + 1}`} label={`标签 ${index + 1}`}>
-      <div>标签 {index + 1} 的内容</div>
-    </Tab>
-  ))}
-</Tabs>
 ```
 
 ## 自定义样式
@@ -1073,17 +882,6 @@ function CustomStyleTabsExample() {
 }
 ```
 
-```jsx
-<Tabs defaultActiveKey="tab1" className="custom-tabs">
-  <Tab key="tab1" label="自定义标签 1">
-    <CustomContent1 />
-  </Tab>
-  <Tab key="tab2" label="自定义标签 2">
-    <CustomContent2 />
-  </Tab>
-</Tabs>
-```
-
 ## 动态标签页
 
 ```jsx live
@@ -1177,46 +975,6 @@ function DynamicTabsExample() {
                 标签页 ID: {tab.key}
               </div>
             </div>
-          </Tab>
-        ))}
-      </Tabs>
-    </div>
-  );
-}
-```
-
-```jsx
-function DynamicTabs() {
-  const [tabs, setTabs] = useState([
-    { key: 'tab1', label: '标签 1', content: '内容 1' }
-  ]);
-  const [activeKey, setActiveKey] = useState('tab1');
-
-  const addTab = () => {
-    const newKey = `tab${Date.now()}`;
-    setTabs([...tabs, { 
-      key: newKey, 
-      label: `新标签 ${tabs.length + 1}`, 
-      content: `新内容 ${tabs.length + 1}` 
-    }]);
-    setActiveKey(newKey);
-  };
-
-  const removeTab = (targetKey) => {
-    const newTabs = tabs.filter(tab => tab.key !== targetKey);
-    setTabs(newTabs);
-    if (activeKey === targetKey && newTabs.length > 0) {
-      setActiveKey(newTabs[0].key);
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={addTab}>添加标签页</button>
-      <Tabs activeKey={activeKey} onChange={setActiveKey}>
-        {tabs.map(tab => (
-          <Tab key={tab.key} label={tab.label}>
-            <div>{tab.content}</div>
           </Tab>
         ))}
       </Tabs>
