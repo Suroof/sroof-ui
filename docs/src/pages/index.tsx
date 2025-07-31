@@ -20,7 +20,7 @@ function HomepageHeader() {
       <nav>
         <h2 className={styles.toptitle}>{siteConfig.title}</h2>
         <Button
-          variant="outline"
+          variant="text"
           rounded="large"
           size="medium"
           className={styles.githubButton}
