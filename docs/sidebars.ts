@@ -19,6 +19,7 @@ const sidebars: SidebarsConfig = {
         'components/scrollreveal',
         'components/progress',
         'components/switch',
+        'components/emergetext',
       ],
     },
     {

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, FC } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
-import styles from "./Emerge.module.scss";
+import styles from "./EmergeText.module.scss";
 
 gsap.registerPlugin(SplitText);
 
-export interface EmergeProps {
+export interface EmergeTextProps {
   /**
    * 需要进行动画的文本内容
    */
@@ -25,14 +25,14 @@ export interface EmergeProps {
   /**
    * 动画分割的类型
    */
-  splitType?: "words" | "chars" | "lines";
+  splitType?: "words" | "chars";
   /**
    * 自定义 CSS 类名
    */
   className?: string;
 }
 
-export const Emerge: FC<EmergeProps> = ({
+export const EmergeText: FC<EmergeTextProps> = ({
   text,
   duration = 0.8,
   stagger = 0.05,
@@ -76,12 +76,13 @@ export const Emerge: FC<EmergeProps> = ({
       splitTextRef.current?.revert();
       gsap.killTweensOf(animateRef.current);
     };
-  }, [text, duration, stagger, y, splitType]); // 依赖项数组确保 props 变化时动画能重建
+  }, [text, duration, stagger, y, splitType]);
 
   return (
+    //既保留默认样式也支持用户自定义样式
     <div className={`${styles.container} ${className}`} ref={containerRef}>
       {/* 动画的目标元素，对屏幕阅读器隐藏 */}
-      <div className={styles.animateMe} ref={animateRef} aria-hidden="true">
+      <div className={styles.animateMe} ref={animateRef} aria-hidden="true" data-split-type={splitType}>
         {text}
       </div>
       {/* 为屏幕阅读器提供的纯文本，视觉上隐藏 */}

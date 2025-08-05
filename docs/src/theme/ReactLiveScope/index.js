@@ -22,7 +22,8 @@ import {
   ScrollCard,
   Switch,
   ScrollReveal,
-  Progress
+  Progress,
+  EmergeText
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -51,7 +52,8 @@ const ReactLiveScope = {
   ScrollCard,
   Switch,
   ScrollReveal,
-  Progress
+  Progress,
+  EmergeText
 }; 
 
 export default ReactLiveScope;

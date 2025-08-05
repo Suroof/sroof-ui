@@ -1,0 +1,59 @@
+---
+sidebar_position: 19
+---
+
+# EmergeText 浮动文字
+
+浮动文字组件，通过动画效果让文字逐字、逐词或逐行浮现。
+
+## 单词分割
+
+```jsx live
+<div>
+  <div style={{ fontSize: "1.5rem" }}>
+    <EmergeText
+      text="This is a sample text with words animation"
+      splitType="words"
+      duration={1.5}
+      stagger={0.2}
+    />
+  </div>
+  <div style={{ fontSize: "1.5rem", fontFamily: "monospace" }}>
+    <EmergeText
+      text="# $ ##@$"
+      splitType="chars"
+      duration={1.5}
+      stagger={0.1}
+    />
+  </div>
+</div>
+```
+
+## 字符分割
+
+```jsx live
+<div style={{ fontSize: "1.5rem", fontFamily: "monospace" }}>
+  <EmergeText text="# $ ##@$" splitType="chars" duration={0.6} stagger={0.05} />
+</div>
+```
+
+## 自定义动画参数
+
+```jsx live
+<div style={{ fontSize: "1.8rem" }}>
+  <EmergeText text="Custom Animation" duration={1.2} stagger={0.15} y={30} />
+</div>
+```
+
+## API
+
+### Emerge Props
+
+| 属性      | 说明                                         | 类型                  | 默认值  |
+| --------- | -------------------------------------------- | --------------------- | ------- |
+| text      | 需要进行动画的文本内容                       | string                | -       |
+| duration  | 动画的持续时间（秒）                         | number                | 0.8     |
+| stagger   | 每个单词/字符动画之间的交错延迟（秒）        | number                | 0.05    |
+| y         | 动画的垂直偏移量（像素）。正值表示从下方浮现 | number                | 20      |
+| splitType | 动画分割的类型                               | "words" \| "chars" \  | "words" |
+| className | 自定义 CSS 类名                              | string                | -       |

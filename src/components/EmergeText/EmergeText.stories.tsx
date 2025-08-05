@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Emerge } from "./Emerge";
+import { EmergeText } from "./EmergeText";
 import React from "react";
 
-const meta: Meta<typeof Emerge> = {
+const meta: Meta<typeof EmergeText> = {
 title: "Components/Emerge",
-  component: Emerge,
+  component: EmergeText,
   parameters: {
     layout: "centered",
     docs: {
@@ -39,7 +39,7 @@ title: "Components/Emerge",
   },
 };
 export default meta;
-type Story = StoryObj<typeof Emerge>;
+type Story = StoryObj<typeof EmergeText>;
 
 /**
  * 默认情况下，文本会以“单词”为单位，从下方 20px 处逐个浮现。
@@ -54,7 +54,7 @@ export const DefaultByWord: Story = {
   },
   render: (args) => (
     <div style={{ fontSize: '2rem', fontWeight: 'bold', fontFamily: 'serif' }}>
-      <Emerge {...args} />
+      <EmergeText {...args} />
     </div>
   ),
 };
@@ -71,7 +71,7 @@ export const ByCharacter: Story = {
   },
   render: (args) => (
     <div style={{ fontSize: '2.5rem', fontWeight: 'bold', fontFamily: 'sans-serif' }}>
-      <Emerge {...args} />
+      <EmergeText {...args} />
     </div>
   ),
 };
@@ -87,7 +87,7 @@ export const FromTop: Story = {
   },
   render: (args) => (
     <div style={{ fontSize: '2rem', fontWeight: 500 }}>
-      <Emerge {...args} />
+      <EmergeText {...args} />
     </div>
   ),
 };
@@ -104,7 +104,8 @@ export const FadeInOnly: Story = {
   },
   render: (args) => (
     <div style={{ fontSize: '2rem' }}>
-      <Emerge {...args} />
+      <EmergeText {...args} />
     </div>
   ),
 };
+
