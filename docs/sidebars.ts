@@ -20,6 +20,7 @@ const sidebars: SidebarsConfig = {
         'components/progress',
         'components/switch',
         'components/emergetext',
+        'components/float',
       ],
     },
     {

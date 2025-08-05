@@ -3,6 +3,7 @@ sidebar_position: 18
 ---
 
 import { Float } from "sroof-ui";
+import { useState } from "react";
 
 # Float 浮动效果
 
@@ -13,39 +14,107 @@ import { Float } from "sroof-ui";
 最基础的用法。默认情况下，元素会以 10 秒的速度横穿屏幕，同时以 2 秒一圈的速度自转。
 
 ```jsx live
-function FloatBasicExample() {
-  // 必须为父容器设置相对定位和溢出隐藏，以创建动画的“舞台”
+function InteractiveFloatExample() {
+  const [duration, setDuration] = useState(3);
+  const [delay, setDelay] = useState(0);
+
   const containerStyle = {
     position: "relative",
     width: "100%",
-    height: "150px",
+    height: "200px",
     overflow: "hidden",
     background: "#f8f9fa",
     borderRadius: "8px",
+    border: "1px solid #dee2e6",
+  };
+
+  const controlPanelStyle = {
+    marginBottom: "15px",
+    padding: "10px",
+    background: "#e9ecef",
+    borderRadius: "4px",
+  };
+
+  const sliderContainerStyle = {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "8px",
+  };
+
+  const labelStyle = {
+    width: "120px",
+    fontWeight: "bold",
+    fontSize: "14px",
+  };
+
+  const sliderStyle = {
+    flex: 1,
+    marginRight: "10px",
+  };
+
+  const valueStyle = {
+    width: "40px",
+    fontSize: "14px",
   };
 
   const itemStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "100px",
-    height: "100px",
-    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    width: "80px",
+    height: "80px",
+    background: "linear-gradient(45deg, #ff6b6b, #4ecdc4)",
     color: "white",
     borderRadius: "12px",
-    fontSize: "14px",
+    fontSize: "12px",
+    fontWeight: "bold",
   };
 
   return (
-    <div style={containerStyle}>
-      <Float>
-        <div style={itemStyle}>默认效果</div>
-      </Float>
+    <div>
+      <div style={controlPanelStyle}>
+        <div style={sliderContainerStyle}>
+          <span style={labelStyle}>Duration:</span>
+          <input
+            type="range"
+            min="1"
+            max="10"
+            step="0.5"
+            value={duration}
+            onChange={(e) => setDuration(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
+          <span style={valueStyle}>{duration}s</span>
+        </div>
+        <div style={sliderContainerStyle}>
+          <span style={labelStyle}>Delay:</span>
+          <input
+            type="range"
+            min="0"
+            max="5"
+            step="0.5"
+            value={delay}
+            onChange={(e) => setDelay(parseFloat(e.target.value))}
+            style={sliderStyle}
+          />
+          <span style={valueStyle}>{delay}s</span>
+        </div>
+      </div>
+      <div style={containerStyle}>
+        <Float duration={duration} delay={delay}>
+          <div style={itemStyle}>
+            Float
+            <br />
+            Element
+          </div>
+        </Float>
+      </div>
     </div>
   );
 }
 ```
 
+## 自定义速度
 ```jsx live
 function FloatSpeedExample() {
   const containerStyle = {
