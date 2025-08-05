@@ -1,0 +1,30 @@
+.container {
+  // 初始时整个容器是不可见的，防止闪烁
+  opacity: 0;
+  // 确保容器尺寸由内部内容决定
+  display: inline-block;
+  position: relative;
+}
+
+.animateMe {
+  // :global 选择器允许我们为 GSAP 动态生成的子元素设置样式
+  // SplitText 会将每个单词/字符包裹在一个 div 中
+  :global(> div) {
+    // 默认情况下，单词/字符是垂直排列的，我们需要让它们水平排列
+    display: inline-block;
+  }
+}
+
+// 专为屏幕阅读器设计的文本样式 (sr-only / visually-hidden)
+// 这是一种标准的、可访问性友好的隐藏技术
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
