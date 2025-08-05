@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
         'components/scrollcard',
         'components/scrollreveal',
         'components/progress',
+        'components/switch',
       ],
     },
     {

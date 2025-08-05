@@ -20,6 +20,7 @@ import {
   Carousel,
   Collapse,
   ScrollCard,
+  Switch,
   ScrollReveal,
   Progress
 } from "sroof-ui";
@@ -48,6 +49,7 @@ const ReactLiveScope = {
   Carousel,
   Collapse,
   ScrollCard,
+  Switch,
   ScrollReveal,
   Progress
 }; 

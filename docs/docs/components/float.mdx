@@ -1,0 +1,134 @@
+---
+sidebar_position: 18
+---
+
+import { Float } from "sroof-ui";
+
+# Float 浮动效果
+
+一个高性能的浮动效果组件，可以为任何子元素（如图片、卡片或文本）添加持续的、可自定义的平移和自转动画。
+
+## 基本用法
+
+最基础的用法。默认情况下，元素会以 10 秒的速度横穿屏幕，同时以 2 秒一圈的速度自转。
+
+```jsx live
+function FloatBasicExample() {
+  // 必须为父容器设置相对定位和溢出隐藏，以创建动画的“舞台”
+  const containerStyle = {
+    position: "relative",
+    width: "100%",
+    height: "150px",
+    overflow: "hidden",
+    background: "#f8f9fa",
+    borderRadius: "8px",
+  };
+
+  const itemStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100px",
+    height: "100px",
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    color: "white",
+    borderRadius: "12px",
+    fontSize: "14px",
+  };
+
+  return (
+    <div style={containerStyle}>
+      <Float>
+        <div style={itemStyle}>默认效果</div>
+      </Float>
+    </div>
+  );
+}
+```
+
+```jsx live
+function FloatSpeedExample() {
+  const containerStyle = {
+    position: "relative",
+    width: "100%",
+    height: "150px",
+    overflow: "hidden",
+    background: "#f8f9fa",
+    borderRadius: "8px",
+  };
+
+  const itemBaseStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "8px",
+    color: "white",
+    fontSize: "12px",
+  };
+
+  return (
+    <div style={containerStyle}>
+      {/* 示例 1: 移动慢，旋转快 */}
+      <Float duration={20} rotationDuration={1.5} delay={0}>
+        <div
+          style={{
+            ...itemBaseStyle,
+            width: "80px",
+            height: "50px",
+            background: "#28a745",
+          }}
+        >
+          移动慢
+          <br />
+          旋转快
+        </div>
+      </Float>
+
+      {/* 示例 2: 移动快，旋转慢 */}
+      <Float duration={8} rotationDuration={10} delay={1}>
+        <div
+          style={{
+            ...itemBaseStyle,
+            width: "100px",
+            height: "40px",
+            background: "#fd7e14",
+            top: "70px",
+          }}
+        >
+          移动快
+          <br />
+          旋转慢
+        </div>
+      </Float>
+
+      {/* 示例 3: 只移动，不旋转 (rotationDuration 设置为 0) */}
+      <Float duration={12} rotationDuration={0} delay={2}>
+        <div
+          style={{
+            ...itemBaseStyle,
+            width: "60px",
+            height: "60px",
+            background: "#6f42c1",
+            borderRadius: "50%",
+            top: "140px",
+          }}
+        >
+          不旋转
+        </div>
+      </Float>
+    </div>
+  );
+}
+```
+
+## API
+
+### Float Props
+
+| 属性             | 说明                                                                             | 类型            | 默认值 |
+| ---------------- | -------------------------------------------------------------------------------- | --------------- | ------ |
+| duration         | 元素横穿屏幕一次所需的总时间（秒），数值越大平移越慢。                           | number          | 10     |
+| rotationDuration | 元素完成一次 360 度自转所需的时间（秒），数值越小转速越快。设置为 0 可禁用自转。 | number          | 2      |
+| delay            | 每次平移动画循环之间的延迟时间（秒）。                                           | number          | 0      |
+| className        | 应用于根元素的自定义 CSS 类名。                                                  | string          | ''     |
+| children         | 要应用浮动效果的任何 React 节点。                                                | React.ReactNode | -      |
