@@ -1,11 +1,10 @@
 import type { ReactNode } from "react";
-import clsx from "clsx";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import React from "react";
-import { Button, ScrollReveal } from "sroof-ui";
+import { Button, ScrollReveal, EmergeText } from "sroof-ui";
 import styles from "./index.module.css";
 import { useHistory } from "react-router-dom";
 
@@ -16,7 +15,7 @@ function HomepageHeader() {
   };
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
+    <header className={styles.heroBanner}>
       <nav>
         <h2 className={styles.toptitle}>{siteConfig.title}</h2>
         <Button
@@ -33,8 +32,13 @@ function HomepageHeader() {
       </nav>
       <div className="container">
         <ScrollReveal staggerDelay={500}>
-          <Heading as="h1" className="hero__title">
-            Inspire inspiration and bring a better reading experience
+          <Heading as="h1">
+            <EmergeText
+              text="Inspire inspiration and bring a better reading experience"
+              splitType="chars"
+              duration={1}
+              stagger={0.05}
+            />
           </Heading>
           <p className={styles.hero__subtitle}>{siteConfig.tagline}</p>
         </ScrollReveal>
