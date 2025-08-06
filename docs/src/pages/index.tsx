@@ -4,7 +4,7 @@ import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import React from "react";
-import { Button, ScrollReveal, EmergeText } from "sroof-ui";
+import { Button, ScrollReveal, EmergeText, LineMotion } from "sroof-ui";
 import styles from "./index.module.css";
 import { useHistory } from "react-router-dom";
 
@@ -66,8 +66,18 @@ export default function Home(): ReactNode {
     >
       <HomepageHeader />
       <main>
+        <LineMotion
+          pathData="M 50 300 Q 200 350 250 450 Q 250 250 350 150 Q 250 500 700 300  "
+          duration={3}
+          ease="expo.out"
+          stroke="#9e83b3"
+          strokeWidth={3}
+          width="50%"
+          height="25%"
+        />
         <HomepageFeatures />
       </main>
+
       <footer className={styles.customFooter}>
         <div className={styles.footerContainer}>
           <div className={styles.footerSection}>

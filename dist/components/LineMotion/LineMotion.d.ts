@@ -38,7 +38,7 @@ export interface LineMotionProps {
      * 是否自动适应路径的边界框
      * 默认值: true
      */
-    autoFit: boolean;
+    autoFit?: boolean;
     width?: string | number;
     height?: string | number;
 }
