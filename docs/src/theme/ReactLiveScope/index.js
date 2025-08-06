@@ -24,7 +24,8 @@ import {
   ScrollReveal,
   Progress,
   EmergeText,
-  Float
+  Float,
+  LineMotion
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -55,7 +56,8 @@ const ReactLiveScope = {
   ScrollReveal,
   Progress,
   EmergeText,
-  Float
+  Float,
+  LineMotion
 }; 
 
 export default ReactLiveScope;

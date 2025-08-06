@@ -68,7 +68,6 @@ export default function Home(): ReactNode {
       <main>
         <HomepageFeatures />
       </main>
-      {/* --- 核心部分：完善自定义的 Footer --- */}
       <footer className={styles.customFooter}>
         <div className={styles.footerContainer}>
           <div className={styles.footerSection}>

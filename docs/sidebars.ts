@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
         'components/switch',
         'components/emergetext',
         'components/float',
+        'components/line',
       ],
     },
     {

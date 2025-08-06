@@ -44,6 +44,7 @@ export { default as ScrollReveal } from "./components/ScrollReveal";
 export { default as Progress } from "./components/Progress";
 export { default as Float } from "./components/Float";
 export { default as EmergeText } from "./components/EmergeText";
+export { default as LineMotion } from "./components/LineMotion";
 
 // 导出国际化相关
 export * from "./i18n";
