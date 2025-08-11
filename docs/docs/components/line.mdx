@@ -4,7 +4,7 @@ sidebar_position: 20
 
 # LineMotion 线条动图
 
-线条动图组件，支持自定义 svg 绘图
+一个强大的 SVG 路径绘画动画组件。它不仅可以播放基于时间的动画，现在还支持与页面滚动同步的绘画效果。通过 `scroll` 属性，您可以轻松地将动画绑定到滚动条，实现丰富的交互式视觉体验。
 
 ## 基本用法
 
@@ -44,16 +44,47 @@ function Example() {
 }
 ```
 
+## 滚动触发动画
+
+通过设置 `scroll={true}`，动画将由滚动位置控制。在下面的示例中，您可以在容器内滚动来查看效果。
+
+```jsx live
+function ScrollExample() {
+  return (
+    <div >
+        <p style={{textAlign: 'center'}}>向下滚动</p>
+        <LineMotion
+          pathData="M 50,0 V 400"
+          scroll={true}
+          scrub={1}
+          stroke="#22c55e"
+          strokeWidth={4}
+          width={100}
+          height={400}
+        />
+         <p style={{textAlign: 'center', marginTop: '20px'}}>滚动结束</p>
+    </div>
+  );
+}
+```
+
 ## API
 
 ### Props
 
-| 属性        | 类型   | 默认值         | 说明                                                                                         |
-| ----------- | ------ | -------------- | -------------------------------------------------------------------------------------------- |
-| pathData    | string | -              | SVG 路径数据字符串，定义要绘制的路径形状，例如: "M10 10 L20 20" 表示从(10,10)到(20,20)的直线 |
-| duration    | number | 2              | 动画持续时间（秒）                                                                           |
-| ease        | string | "power1.inOut" | 动画缓动函数，可选值参考 GSAP 的 ease 选项                                                   |
-| stroke      | string | "black"        | 路径描边颜色                                                                                 |
-| strokeWidth | number | 3              | 路径描边宽度                                                                                 |
-| className   | string | -              | 可选的 CSS 类名，用于自定义样式                                                              |
-| id          | string | -              | 可选的元素 ID                                                                                |
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `pathData` | `string` | - | SVG 路径的 `d` 属性字符串，定义了线条的形状。 |
+| `scroll` | `boolean` | `false` | 是否启用滚动触发动画。 |
+| `duration` | `number` | `2` | 动画的持续时间（秒），仅在 `scroll={false}` 时生效。 |
+| `ease` | `string` | `"power1.inOut"` | GSAP 缓动函数，仅在 `scroll={false}` 时生效。 |
+| `stroke` | `string` | `"black"` | 线条的颜色。 |
+| `strokeWidth` | `number` | `3` | 线条的宽度。 |
+| `width` | `string \| number` | `"100%"` | 组件的宽度。 |
+| `height` | `string \| number` | `"100%"` | 组件的高度。 |
+| `autoFit` | `boolean` | `true` | 是否自动根据路径计算 `viewBox` 以适应内容。 |
+| `scrub` | `boolean \| number` | `true` | **[滚动模式]** 控制动画与滚动条的同步平滑度。`true` 等同于 `1`。 |
+| `start` | `string` | `"top bottom"` | **[滚动模式]** `ScrollTrigger` 的起始触发位置。 |
+| `end` | `string` | `"bottom top"` | **[滚动模式]** `ScrollTrigger` 的结束触发位置。 |
+| `className` | `string` | - | 可选的 CSS 类名。 |
+| `id` | `string` | - | 可选的元素 ID。 |

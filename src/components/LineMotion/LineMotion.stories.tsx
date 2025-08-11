@@ -1,3 +1,4 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { LineMotion } from "./LineMotion";
 
@@ -11,7 +12,7 @@ const meta: Meta<typeof LineMotion> = {
     docs: {
       description: {
         component:
-          "一个可复用的 SVG 路径绘画动画组件。它接收一个 SVG 路径的 `d` 属性，并播放一条线沿着该路径绘画过去的动画。现在，你还可以通过 `width` 和 `height` 控制其显示尺寸。",
+          "一个强大的 SVG 路径绘画动画组件。它不仅可以播放基于时间的动画，现在还支持与页面滚动同步的绘画效果。通过 `scroll` 属性，您可以轻松地将动画绑定到滚动条，实现丰富的交互式视觉体验。",
       },
     },
   },
@@ -20,21 +21,21 @@ const meta: Meta<typeof LineMotion> = {
     pathData: {
       description: "SVG 路径的 `d` 属性字符串，定义了线条的形状。",
       control: { type: "text" },
+    },
+    scroll: {
+      description: "是否启用滚动触发动画。",
+      control: { type: "boolean" },
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
       },
     },
     duration: {
-      description: "动画的持续时间，单位是秒。",
+      description: "动画的持续时间（秒），仅在 `scroll={false}` 时生效。",
       control: { type: "number", min: 0.1, max: 10, step: 0.1 },
-      table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "2" },
-      },
     },
     ease: {
-      description: "GSAP 动画的缓动函数，控制动画的速度变化。",
+      description: "GSAP 缓动函数，仅在 `scroll={false}` 时生效。",
       control: { type: "select" },
       options: [
         "none",
@@ -83,7 +84,30 @@ const meta: Meta<typeof LineMotion> = {
         defaultValue: { summary: "100%" },
       },
     },
-    // --- 新增结束 ---
+    scrub:{
+      description: "是否使用 ScrollTrigger 的 scrub 模式。",
+      control: { type: "boolean" },
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+      },
+    },
+    start:{
+      description: "ScrollTrigger 的起始位置。",
+      control: { type: "text" },
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "top bottom" },
+      },
+    },
+    end:{
+      description: "ScrollTrigger 的结束位置。",
+      control: { type: "text" },
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "bottom top" },
+      },
+    }
   },
   // 设置默认的 args，这样每个故事都会继承这些默认值
   args: {
@@ -95,6 +119,7 @@ const meta: Meta<typeof LineMotion> = {
     // 为 width 和 height 设置一个明确的默认尺寸，方便在 Storybook 中查看
     width: 400,
     height: 200,
+    scroll: false, // 默认不开启滚动模式
   },
   tags: ["autodocs"],
 };
@@ -162,4 +187,51 @@ export const Interactive: Story = {
   name: "交互式控制",
   // 这个故事会自动继承 meta 中定义的所有 argTypes 和 args，
   // 现在它将包含 width 和 height 的控制选项。
+};
+
+// 7. 新增故事：滚动控制动画
+export const ScrollControlled: Story = {
+  name: "滚动控制动画",
+  parameters: {
+    // 使用全屏布局以更好地展示滚动效果
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story:
+          "这个示例展示了如何将线条动画与页面滚动关联。向下滚动页面，线条会随之绘制；向上滚动则会反向收回。你需要一个足够长的页面来观察效果。",
+      },
+    },
+  },
+  args: {
+    // 开启滚动模式
+    scroll: true,
+    // 使用一条更长的、垂直的路径来演示
+    pathData: "M 50,0 V 800",
+    stroke: "#22c55e",
+    strokeWidth: 6,
+    // 确保 SVG 足够高以容纳路径
+    width: 100,
+    height: 820,
+  },
+  // 使用 render 函数来添加额外的上下文，创建滚动环境
+  render: (args) => (
+    <div style={{ height: "200vh", padding: "5rem 0" }}>
+      <h2 style={{ textAlign: "center", fontFamily: "sans-serif" }}>
+        向下滚动页面
+      </h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "5rem",
+          marginBottom: "5rem",
+        }}
+      >
+        <LineMotion {...args} />
+      </div>
+      <h2 style={{ textAlign: "center", fontFamily: "sans-serif" }}>
+        滚动结束
+      </h2>
+    </div>
+  ),
 };

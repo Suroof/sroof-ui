@@ -66,15 +66,35 @@ export default function Home(): ReactNode {
     >
       <HomepageHeader />
       <main>
-        <LineMotion
-          pathData="M 50 300 Q 200 350 250 450 Q 250 250 350 150 Q 250 500 700 300  "
-          duration={3}
-          ease="expo.out"
-          stroke="#9e83b3"
-          strokeWidth={3}
-          width="50%"
-          height="25%"
-        />
+        <div className={styles.lineMotionContainer}>
+          <svg width="100%" height="400" style={{ overflow: 'visible' }}>
+            <defs>
+              <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#8a2be2" />
+                <stop offset="50%" stopColor="#ff1493" />
+                <stop offset="100%" stopColor="#ff8c00" />
+              </linearGradient>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <LineMotion
+              pathData="M 40 40 A 40 40 0 0 0 40 120 A 40 40 0 0 0 80 80 A 40 40 0 0 1 160 80 A 40 40 0 0 0 240 80 C 240 40 280 40 280 40 Q 240 160 280 120"
+              scroll={true}
+              scrub={1}
+              stroke="url(#line-gradient)"
+              strokeWidth={5}
+              autoFit={true}
+              style={{ filter: 'url(#glow)' }}
+              end="bottom center" 
+            />
+          </svg>
+        </div>
         <HomepageFeatures />
       </main>
 
