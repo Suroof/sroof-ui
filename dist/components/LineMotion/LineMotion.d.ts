@@ -61,8 +61,8 @@ export interface LineMotionProps {
     width?: string | number;
     height?: string | number;
     /**
-     * 可选的内联样式
-     */
+   * 可选的内联样式
+   */
     style?: React.CSSProperties;
 }
 export declare const LineMotion: React.FC<LineMotionProps>;

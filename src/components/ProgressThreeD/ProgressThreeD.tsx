@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState, useCallback } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "@react-three/drei";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";

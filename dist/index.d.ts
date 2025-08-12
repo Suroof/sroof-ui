@@ -26,6 +26,7 @@ export { default as Progress } from "./components/Progress";
 export { default as Float } from "./components/Float";
 export { default as EmergeText } from "./components/EmergeText";
 export { default as LineMotion } from "./components/LineMotion";
+export { ProgressThreeD, type ProgressThreeDProps } from "./components/ProgressThreeD";
 export * from "./i18n";
 export * from "./styles/tokens";
 //# sourceMappingURL=index.d.ts.map
