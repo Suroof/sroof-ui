@@ -1,0 +1,338 @@
+// Breadcrumb 面包屑导航样式
+
+.breadcrumb {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+.breadcrumbList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbListItem {
+  display: flex;
+  align-items: center;
+  
+  &:last-child {
+    .breadcrumbItem {
+      color: rgba(0, 0, 0, 0.88);
+      font-weight: 400;
+    }
+  }
+}
+
+.breadcrumbItem {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  outline: none;
+  
+  &:hover {
+    color: #1890ff;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  &.disabled {
+    color: rgba(0, 0, 0, 0.25);
+    cursor: not-allowed;
+    
+    &:hover {
+      color: rgba(0, 0, 0, 0.25);
+    }
+  }
+  
+  &.last {
+    color: rgba(0, 0, 0, 0.88);
+    cursor: default;
+    
+    &:hover {
+      color: rgba(0, 0, 0, 0.88);
+    }
+  }
+}
+
+.separator {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 8px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  user-select: none;
+}
+
+// 暗色主题
+@media (prefers-color-scheme: dark) {
+  .breadcrumb {
+    color: rgba(255, 255, 255, 0.45);
+  }
+  
+  .breadcrumbListItem {
+    &:last-child {
+      .breadcrumbItem {
+        color: rgba(255, 255, 255, 0.88);
+      }
+    }
+  }
+  
+  .breadcrumbItem {
+    color: rgba(255, 255, 255, 0.45);
+    
+    &:hover {
+      color: #1890ff;
+    }
+    
+    &:focus-visible {
+      outline-color: #1890ff;
+    }
+    
+    &.disabled {
+      color: rgba(255, 255, 255, 0.25);
+      
+      &:hover {
+        color: rgba(255, 255, 255, 0.25);
+      }
+    }
+    
+    &.last {
+      color: rgba(255, 255, 255, 0.88);
+      
+      &:hover {
+        color: rgba(255, 255, 255, 0.88);
+      }
+    }
+  }
+  
+  .separator {
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+// 高对比度模式
+@media (prefers-contrast: high) {
+  .breadcrumb {
+    color: #000;
+  }
+  
+  .breadcrumbItem {
+    color: #000;
+    
+    &:hover {
+      color: #0066cc;
+      text-decoration: underline;
+    }
+    
+    &:focus-visible {
+      outline: 3px solid #0066cc;
+      outline-offset: 2px;
+    }
+    
+    &.disabled {
+      color: #666;
+      
+      &:hover {
+        color: #666;
+        text-decoration: none;
+      }
+    }
+    
+    &.last {
+      color: #000;
+      font-weight: bold;
+      
+      &:hover {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  }
+  
+  .separator {
+    color: #000;
+    font-weight: bold;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .breadcrumb {
+      color: #fff;
+    }
+    
+    .breadcrumbItem {
+      color: #fff;
+      
+      &:hover {
+        color: #66b3ff;
+      }
+      
+      &:focus-visible {
+        outline-color: #66b3ff;
+      }
+      
+      &.disabled {
+        color: #999;
+        
+        &:hover {
+          color: #999;
+        }
+      }
+      
+      &.last {
+        color: #fff;
+        
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+    
+    .separator {
+      color: #fff;
+    }
+  }
+}
+
+// 减少动画模式
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumbItem {
+    transition: none;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .breadcrumb {
+    font-size: 13px;
+  }
+  
+  .separator {
+    margin: 0 6px;
+    font-size: 13px;
+  }
+  
+  .breadcrumbList {
+    flex-wrap: wrap;
+  }
+  
+  .breadcrumbListItem {
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumb {
+    font-size: 12px;
+  }
+  
+  .separator {
+    margin: 0 4px;
+    font-size: 12px;
+  }
+}
+
+// 打印样式
+@media print {
+  .breadcrumb {
+    color: #000 !important;
+  }
+  
+  .breadcrumbItem {
+    color: #000 !important;
+    text-decoration: none !important;
+    
+    &.last {
+      font-weight: bold !important;
+    }
+  }
+  
+  .separator {
+    color: #000 !important;
+  }
+}
+
+// 特殊分隔符样式
+.breadcrumb {
+  // 箭头分隔符
+  &[data-separator="arrow"] {
+    .separator {
+      &::before {
+        content: '>';
+      }
+    }
+  }
+  
+  // 斜杠分隔符（默认）
+  &[data-separator="slash"] {
+    .separator {
+      &::before {
+        content: '/';
+      }
+    }
+  }
+  
+  // 点分隔符
+  &[data-separator="dot"] {
+    .separator {
+      &::before {
+        content: '·';
+      }
+    }
+  }
+}
+
+// 可访问性增强
+.breadcrumbItem {
+  // 确保足够的点击区域
+  min-height: 24px;
+  min-width: 24px;
+  
+  // 为屏幕阅读器提供更好的体验
+  &[aria-current="page"] {
+    font-weight: 600;
+  }
+}
+
+// 加载状态
+.breadcrumb {
+  &.loading {
+    .breadcrumbItem {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+}
+
+// 紧凑模式
+.breadcrumb {
+  &.compact {
+    font-size: 12px;
+    
+    .separator {
+      margin: 0 4px;
+      font-size: 12px;
+    }
+    
+    .breadcrumbItem {
+      min-height: 20px;
+      min-width: 20px;
+    }
+  }
+}

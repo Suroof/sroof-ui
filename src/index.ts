@@ -46,6 +46,17 @@ export { default as Float } from "./components/Float";
 export { default as EmergeText } from "./components/EmergeText";
 export { default as LineMotion } from "./components/LineMotion";
 export { ProgressThreeD, type ProgressThreeDProps } from "./components/ProgressThreeD";
+export { Modal, type ModalProps } from "./components/Modal";
+export { Tooltip, type TooltipProps } from "./components/Tooltip";
+export { Badge, type BadgeProps } from "./components/Badge";
+export { Avatar, type AvatarProps } from "./components/Avatar";
+export { Alert, type AlertProps } from "./components/Alert";
+export { Skeleton, SkeletonButton, SkeletonInput, SkeletonImage, type SkeletonProps } from "./components/Skeleton";
+export { Breadcrumb, type BreadcrumbProps, type BreadcrumbItem, type BreadcrumbItemProps } from "./components/Breadcrumb";
+export { Steps, Step, type StepsProps, type StepProps } from "./components/Steps";
+export { Rate, type RateProps } from "./components/Rate";
+export { Upload, type UploadProps, type UploadFile } from "./components/Upload";
+export { Slider, type SliderProps, type SliderMarks } from "./components/Slider";
 
 // 导出国际化相关
 export * from "./i18n";

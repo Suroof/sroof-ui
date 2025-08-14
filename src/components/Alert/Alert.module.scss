@@ -1,0 +1,312 @@
+.alert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 15px;
+  margin-bottom: 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5715;
+  word-wrap: break-word;
+  transition: all 0.3s;
+}
+
+// 不同类型的样式
+.success {
+  background-color: #f6ffed;
+  border-color: #b7eb8f;
+  color: #52c41a;
+}
+
+.info {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+  color: #1890ff;
+}
+
+.warning {
+  background-color: #fffbe6;
+  border-color: #ffe58f;
+  color: #faad14;
+}
+
+.error {
+  background-color: #fff2f0;
+  border-color: #ffccc7;
+  color: #ff4d4f;
+}
+
+// 图标样式
+.icon {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+// 内容区域
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.message {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+
+.description {
+  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+// 操作区域
+.action {
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+// 关闭按钮
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.75);
+  }
+  
+  &:focus {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+  }
+}
+
+// 带图标的样式调整
+.withIcon {
+  padding: 8px 15px 8px 38px;
+  
+  .icon {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+}
+
+// 带描述的样式调整
+.withDescription {
+  padding: 15px 15px 15px 64px;
+  
+  .icon {
+    position: absolute;
+    top: 16px;
+    left: 24px;
+    font-size: 24px;
+  }
+  
+  .message {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .description {
+    font-size: 14px;
+  }
+}
+
+// 顶部公告样式
+.banner {
+  margin-bottom: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+// 关闭动画
+.closing {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.3s ease-out;
+}
+
+// 不同类型在暗色主题下的样式
+@media (prefers-color-scheme: dark) {
+  .success {
+    background-color: #162312;
+    border-color: #274916;
+    color: #49aa19;
+    
+    .message {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+  
+  .info {
+    background-color: #111b26;
+    border-color: #153450;
+    color: #177ddc;
+    
+    .message {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+  
+  .warning {
+    background-color: #2b2111;
+    border-color: #594214;
+    color: #d89614;
+    
+    .message {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+  
+  .error {
+    background-color: #2a1215;
+    border-color: #58181c;
+    color: #dc4446;
+    
+    .message {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+  
+  .closeBtn {
+    color: rgba(255, 255, 255, 0.45);
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.75);
+    }
+  }
+}
+
+// 高对比度模式
+@media (prefers-contrast: high) {
+  .alert {
+    border-width: 2px;
+  }
+  
+  .success {
+    border-color: #52c41a;
+  }
+  
+  .info {
+    border-color: #1890ff;
+  }
+  
+  .warning {
+    border-color: #faad14;
+  }
+  
+  .error {
+    border-color: #ff4d4f;
+  }
+}
+
+// 减少动画模式
+@media (prefers-reduced-motion: reduce) {
+  .alert {
+    transition: none;
+  }
+  
+  .closing {
+    transition: none;
+  }
+  
+  .closeBtn {
+    transition: none;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .alert {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .withIcon {
+    padding: 6px 12px 6px 32px;
+    
+    .icon {
+      top: 6px;
+      left: 12px;
+      font-size: 14px;
+    }
+  }
+  
+  .withDescription {
+    padding: 12px 12px 12px 48px;
+    
+    .icon {
+      top: 12px;
+      left: 16px;
+      font-size: 20px;
+    }
+    
+    .message {
+      font-size: 14px;
+    }
+    
+    .description {
+      font-size: 12px;
+    }
+  }
+  
+  .closeBtn {
+    top: 6px;
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}
+
+// 打印样式
+@media print {
+  .alert {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  .closeBtn {
+    display: none !important;
+  }
+}

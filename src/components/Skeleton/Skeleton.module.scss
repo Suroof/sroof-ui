@@ -1,0 +1,331 @@
+// Skeleton 骨架屏样式
+
+// 基础动画
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+// 基础骨架屏
+.skeleton {
+  display: block;
+  width: 100%;
+}
+
+// 激活动画状态
+.active {
+  .avatar,
+  .title,
+  .line,
+  .skeletonButton,
+  .skeletonInput,
+  .skeletonImage {
+    background: linear-gradient(
+      90deg,
+      #f0f0f0 25%,
+      #e6e6e6 37%,
+      #f0f0f0 63%
+    );
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+  }
+}
+
+// 内容区域
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+// 头部（头像区域）
+.header {
+  flex-shrink: 0;
+}
+
+// 头像
+.avatar {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  
+  &.circle {
+    border-radius: 50%;
+  }
+  
+  &.square {
+    border-radius: 4px;
+  }
+}
+
+// 主体内容
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+// 标题
+.title {
+  height: 16px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+// 段落
+.paragraph {
+  .line {
+    height: 16px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// 骨架屏按钮
+.skeletonButton {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  vertical-align: top;
+  
+  // 尺寸
+  &.large {
+    height: 40px;
+    width: 80px;
+  }
+  
+  &.default {
+    height: 32px;
+    width: 64px;
+  }
+  
+  &.small {
+    height: 24px;
+    width: 48px;
+  }
+  
+  // 形状
+  &.round {
+    border-radius: 16px;
+  }
+  
+  &.circle {
+    border-radius: 50%;
+    width: 32px;
+    
+    &.large {
+      width: 40px;
+    }
+    
+    &.small {
+      width: 24px;
+    }
+  }
+  
+  // 块级
+  &.block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// 骨架屏输入框
+.skeletonInput {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  width: 100%;
+  
+  // 尺寸
+  &.large {
+    height: 40px;
+  }
+  
+  &.default {
+    height: 32px;
+  }
+  
+  &.small {
+    height: 24px;
+  }
+  
+  // 块级
+  &.block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// 骨架屏图片
+.skeletonImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  width: 100%;
+  height: 200px;
+  
+  .imageIcon {
+    font-size: 48px;
+    color: #bfbfbf;
+    opacity: 0.3;
+  }
+}
+
+// 暗色主题
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    .avatar,
+    .title,
+    .line,
+    .skeletonButton,
+    .skeletonInput,
+    .skeletonImage {
+      background-color: #303030;
+    }
+    
+    &.active {
+      .avatar,
+      .title,
+      .line,
+      .skeletonButton,
+      .skeletonInput,
+      .skeletonImage {
+        background: linear-gradient(
+          90deg,
+          #303030 25%,
+          #404040 37%,
+          #303030 63%
+        );
+      }
+    }
+    
+    .skeletonImage {
+      .imageIcon {
+        color: #595959;
+      }
+    }
+  }
+}
+
+// 高对比度模式
+@media (prefers-contrast: high) {
+  .skeleton {
+    .avatar,
+    .title,
+    .line,
+    .skeletonButton,
+    .skeletonInput,
+    .skeletonImage {
+      background-color: #d9d9d9;
+      border: 1px solid #8c8c8c;
+    }
+    
+    &.active {
+      .avatar,
+      .title,
+      .line,
+      .skeletonButton,
+      .skeletonInput,
+      .skeletonImage {
+        background: linear-gradient(
+          90deg,
+          #d9d9d9 25%,
+          #bfbfbf 37%,
+          #d9d9d9 63%
+        );
+      }
+    }
+  }
+}
+
+// 减少动画模式
+@media (prefers-reduced-motion: reduce) {
+  .active {
+    .avatar,
+    .title,
+    .line,
+    .skeletonButton,
+    .skeletonInput,
+    .skeletonImage {
+      animation: none;
+      background: #f0f0f0;
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .active {
+      .avatar,
+      .title,
+      .line,
+      .skeletonButton,
+      .skeletonInput,
+      .skeletonImage {
+        background: #303030;
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .content {
+    gap: 12px;
+  }
+  
+  .title {
+    margin-bottom: 12px;
+  }
+  
+  .paragraph {
+    .line {
+      margin-bottom: 8px;
+    }
+  }
+  
+  .skeletonImage {
+    height: 150px;
+    
+    .imageIcon {
+      font-size: 36px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    gap: 8px;
+  }
+  
+  .skeletonImage {
+    height: 120px;
+    
+    .imageIcon {
+      font-size: 24px;
+    }
+  }
+}
+
+// 打印样式
+@media print {
+  .skeleton {
+    .avatar,
+    .title,
+    .line,
+    .skeletonButton,
+    .skeletonInput,
+    .skeletonImage {
+      background-color: #f5f5f5 !important;
+      animation: none !important;
+    }
+  }
+}

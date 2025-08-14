@@ -1,0 +1,185 @@
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 250px;
+  word-wrap: break-word;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  animation: tooltipFadeIn 0.15s ease-out;
+  pointer-events: none;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tooltipContent {
+  position: relative;
+  z-index: 1;
+}
+
+.tooltipArrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+}
+
+// 箭头位置 - 顶部
+.tooltip.top .tooltipArrow {
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: rgba(0, 0, 0, 0.85);
+  border-bottom: none;
+}
+
+.tooltip.topLeft .tooltipArrow {
+  bottom: -10px;
+  left: 16px;
+  border-top-color: rgba(0, 0, 0, 0.85);
+  border-bottom: none;
+}
+
+.tooltip.topRight .tooltipArrow {
+  bottom: -10px;
+  right: 16px;
+  border-top-color: rgba(0, 0, 0, 0.85);
+  border-bottom: none;
+}
+
+// 箭头位置 - 底部
+.tooltip.bottom .tooltipArrow {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: rgba(0, 0, 0, 0.85);
+  border-top: none;
+}
+
+.tooltip.bottomLeft .tooltipArrow {
+  top: -10px;
+  left: 16px;
+  border-bottom-color: rgba(0, 0, 0, 0.85);
+  border-top: none;
+}
+
+.tooltip.bottomRight .tooltipArrow {
+  top: -10px;
+  right: 16px;
+  border-bottom-color: rgba(0, 0, 0, 0.85);
+  border-top: none;
+}
+
+// 箭头位置 - 左侧
+.tooltip.left .tooltipArrow {
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: rgba(0, 0, 0, 0.85);
+  border-right: none;
+}
+
+// 箭头位置 - 右侧
+.tooltip.right .tooltipArrow {
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: rgba(0, 0, 0, 0.85);
+  border-left: none;
+}
+
+// 自定义颜色时的箭头颜色
+.tooltip[style*="background-color"] {
+  &.top .tooltipArrow,
+  &.topLeft .tooltipArrow,
+  &.topRight .tooltipArrow {
+    border-top-color: inherit;
+  }
+  
+  &.bottom .tooltipArrow,
+  &.bottomLeft .tooltipArrow,
+  &.bottomRight .tooltipArrow {
+    border-bottom-color: inherit;
+  }
+  
+  &.left .tooltipArrow {
+    border-left-color: inherit;
+  }
+  
+  &.right .tooltipArrow {
+    border-right-color: inherit;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 200px;
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+  
+  .tooltipArrow {
+    border-width: 4px;
+  }
+  
+  .tooltip.top .tooltipArrow,
+  .tooltip.topLeft .tooltipArrow,
+  .tooltip.topRight .tooltipArrow {
+    bottom: -8px;
+  }
+  
+  .tooltip.bottom .tooltipArrow,
+  .tooltip.bottomLeft .tooltipArrow,
+  .tooltip.bottomRight .tooltipArrow {
+    top: -8px;
+  }
+  
+  .tooltip.left .tooltipArrow {
+    right: -8px;
+  }
+  
+  .tooltip.right .tooltipArrow {
+    left: -8px;
+  }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+  .tooltip {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+  
+  .tooltip.top .tooltipArrow,
+  .tooltip.topLeft .tooltipArrow,
+  .tooltip.topRight .tooltipArrow {
+    border-top-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .tooltip.bottom .tooltipArrow,
+  .tooltip.bottomLeft .tooltipArrow,
+  .tooltip.bottomRight .tooltipArrow {
+    border-bottom-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .tooltip.left .tooltipArrow {
+    border-left-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .tooltip.right .tooltipArrow {
+    border-right-color: rgba(255, 255, 255, 0.9);
+  }
+}

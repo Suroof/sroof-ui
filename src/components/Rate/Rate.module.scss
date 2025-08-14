@@ -1,0 +1,336 @@
+// Rate 评分组件样式
+.rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 20px;
+  line-height: 1;
+  color: #fadb14;
+  outline: none;
+  cursor: pointer;
+  
+  &:focus {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+  }
+  
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  &.focused {
+    .star {
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// 星星容器
+.star {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &.disabled {
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// 星星的第一层（背景层）
+.starFirst {
+  position: relative;
+  color: #f0f0f0;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+// 星星的第二层（前景层）
+.starSecond {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: inherit;
+  transition: all 0.3s;
+  user-select: none;
+  overflow: hidden;
+}
+
+// 空星星状态
+.star.empty {
+  .starSecond {
+    width: 0;
+  }
+}
+
+// 半星状态
+.star.half {
+  .starSecond {
+    width: 50%;
+  }
+}
+
+// 满星状态
+.star.full {
+  .starSecond {
+    width: 100%;
+  }
+}
+
+// 尺寸变体
+.rate.small {
+  font-size: 16px;
+  gap: 2px;
+}
+
+.rate.large {
+  font-size: 24px;
+  gap: 6px;
+}
+
+// 悬停效果
+.star:hover {
+  .starFirst {
+    color: #e6f7ff;
+  }
+}
+
+// 激活状态的星星
+.star.full,
+.star.half {
+  .starFirst {
+    color: #ffd666;
+  }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+  .rate {
+    color: #fadb14;
+    
+    &:focus {
+      outline-color: #177ddc;
+    }
+  }
+  
+  .starFirst {
+    color: #434343;
+  }
+  
+  .star:hover {
+    .starFirst {
+      color: #112b42;
+    }
+  }
+  
+  .star.full,
+  .star.half {
+    .starFirst {
+      color: #613400;
+    }
+  }
+}
+
+// 高对比度模式
+@media (prefers-contrast: high) {
+  .rate {
+    color: #d48806;
+    
+    &:focus {
+      outline-width: 3px;
+    }
+  }
+  
+  .starFirst {
+    color: #8c8c8c;
+  }
+  
+  .star.full,
+  .star.half {
+    .starFirst {
+      color: #434343;
+    }
+  }
+}
+
+// 减少动画模式
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .starFirst,
+  .starSecond {
+    transition: none;
+  }
+  
+  .star:hover {
+    transform: none;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .rate {
+    font-size: 18px;
+    gap: 3px;
+    
+    &.small {
+      font-size: 14px;
+      gap: 2px;
+    }
+    
+    &.large {
+      font-size: 20px;
+      gap: 4px;
+    }
+  }
+  
+  .star:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .rate {
+    font-size: 16px;
+    gap: 2px;
+    
+    &.small {
+      font-size: 12px;
+      gap: 1px;
+    }
+    
+    &.large {
+      font-size: 18px;
+      gap: 3px;
+    }
+  }
+}
+
+// 打印样式
+@media print {
+  .rate {
+    color: #000 !important;
+    
+    .starFirst {
+      color: #ccc !important;
+    }
+    
+    .star.full,
+    .star.half {
+      .starFirst {
+        color: #666 !important;
+      }
+    }
+  }
+}
+
+// 触摸设备优化
+@media (hover: none) and (pointer: coarse) {
+  .star {
+    &:hover {
+      transform: none;
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// 键盘导航增强
+.rate:focus-visible {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// 无障碍增强
+.star[aria-checked="true"] {
+  .starSecond {
+    filter: brightness(1.1);
+  }
+}
+
+// 自定义字符支持
+.star {
+  svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+  }
+}
+
+// 工具提示样式增强
+.star[title] {
+  &:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+  }
+}
+
+// 加载状态
+.rate.loading {
+  .star {
+    animation: rateLoading 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes rateLoading {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// 错误状态
+.rate.error {
+  color: #ff4d4f;
+  
+  .starFirst {
+    color: #ffccc7;
+  }
+  
+  .star.full,
+  .star.half {
+    .starFirst {
+      color: #ffa39e;
+    }
+  }
+}
+
+// 只读状态
+.rate.readonly {
+  cursor: default;
+  
+  .star {
+    cursor: default;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}
