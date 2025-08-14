@@ -77,11 +77,11 @@ const Slider: React.FC<SliderProps> = ({
   autoFocus = false,
   reverse = false,
 }) => {
-  const getDefaultValue = () => {
+  const getDefaultValue = (): number | [number, number] => {
     if (defaultValue !== undefined) {
       return defaultValue;
     }
-    return range ? [min, max] : min;
+    return range ? [min, max] as [number, number] : min;
   };
   
   const [internalValue, setInternalValue] = useState<number | [number, number]>(getDefaultValue());

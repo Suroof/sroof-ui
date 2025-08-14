@@ -192,7 +192,7 @@ export const WithDots: Story = {
 export const WithTooltip: Story = {
   args: {
     defaultValue: 30,
-    tooltip: 'always'
+    tooltip: { open: true }
   }
 };
 
@@ -253,8 +253,10 @@ export const ControlledRange: Story = {
 export const CustomFormatter: Story = {
   args: {
     defaultValue: 30,
-    tooltip: 'always',
-    tipFormatter: (value: number) => `${value}%`
+    tooltip: { 
+      open: true,
+      formatter: (value?: number) => `${value}%`
+    }
   }
 };
 
@@ -318,8 +320,8 @@ export const ComplexExample: Story = {
           min={0}
           max={100}
           step={5}
-          tooltip="always"
-          tipFormatter={(value) => `${value}%`}
+          tooltip={{ open: true }}
+          
           onChange={(val) => setVolume(val as number)}
           style={{ marginBottom: 30 }}
         />
@@ -356,7 +358,7 @@ export const VerticalLayout: Story = {
           vertical
           defaultValue={60}
           style={{ height: 200 }}
-          tooltip="always"
+          tooltip={{ open: true }}
         />
       </div>
       

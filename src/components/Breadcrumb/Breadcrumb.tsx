@@ -189,8 +189,8 @@ const Breadcrumb: React.FC<BreadcrumbProps> & {
   return (
     <nav className={getBreadcrumbClassName()} style={style} aria-label="面包屑导航">
       <ol className={styles.breadcrumbList}>
-        {React.Children.map(renderItems, (item, index) => {
-          const isLast = index === React.Children.count(renderItems) - 1;
+        {Array.isArray(renderItems) ? renderItems.map((item, index) => {
+          const isLast = index === renderItems.length - 1;
           
           return (
             <li key={index} className={styles.breadcrumbListItem}>
@@ -202,7 +202,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> & {
               )}
             </li>
           );
-        })}
+        }) : null}
       </ol>
     </nav>
   );

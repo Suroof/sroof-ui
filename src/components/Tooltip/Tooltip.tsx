@@ -206,12 +206,12 @@ const Tooltip: React.FC<TooltipProps> = ({
   // 克隆子元素并添加事件处理
   const clonedChild = React.cloneElement(children, {
     ref: triggerRef,
-    onMouseEnter: trigger === 'hover' ? showTooltip : children.props.onMouseEnter,
-    onMouseLeave: trigger === 'hover' ? hideTooltip : children.props.onMouseLeave,
-    onClick: trigger === 'click' ? handleClick : children.props.onClick,
-    onFocus: trigger === 'focus' ? handleFocus : children.props.onFocus,
-    onBlur: trigger === 'focus' ? handleBlur : children.props.onBlur,
-  });
+    onMouseEnter: trigger === 'hover' ? showTooltip : (children.props as any).onMouseEnter,
+    onMouseLeave: trigger === 'hover' ? hideTooltip : (children.props as any).onMouseLeave,
+    onClick: trigger === 'click' ? handleClick : (children.props as any).onClick,
+    onFocus: trigger === 'focus' ? handleFocus : (children.props as any).onFocus,
+    onBlur: trigger === 'focus' ? handleBlur : (children.props as any).onBlur,
+  } as any);
 
   const tooltipContent = visible && title && (
     <div

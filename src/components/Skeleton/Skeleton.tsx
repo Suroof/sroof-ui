@@ -126,8 +126,8 @@ const Skeleton: React.FC<SkeletonProps> = ({
             <div 
               className={`${styles.avatar} ${styles[avatarConfig.shape || 'circle']}`}
               style={{
-                width: getAvatarSize(avatarConfig.size),
-                height: getAvatarSize(avatarConfig.size),
+                width: getAvatarSize(avatarConfig.size as 'large' | 'small' | 'default' | number),
+                height: getAvatarSize(avatarConfig.size as 'large' | 'small' | 'default' | number),
               }}
             />
           </div>

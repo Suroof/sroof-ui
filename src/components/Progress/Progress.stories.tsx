@@ -38,18 +38,12 @@ const meta: Meta<typeof Progress> = {
       control: { type: "boolean" },
       description: "是否显示百分比文字",
     },
-    animated: {
-      control: { type: "boolean" },
-      description: "是否启用动画效果",
-    },
+
     striped: {
       control: { type: "boolean" },
       description: "是否显示条纹效果",
     },
-    pulse: {
-      control: { type: "boolean" },
-      description: "是否启用脉冲效果",
-    },
+
     className: {
       control: { type: "text" },
       description: "自定义 CSS 类名",
@@ -67,7 +61,6 @@ export const Linear: Story = {
     variant: "linear",
     size: "medium",
     showPercentage: true,
-    animated: true,
   },
   render: (args) => (
     <div style={{ maxWidth: "600px" }}>
@@ -82,7 +75,6 @@ export const Circular: Story = {
     variant: "circular",
     size: "medium",
     showPercentage: true,
-    animated: true,
   },
 };
 
@@ -193,7 +185,6 @@ export const PulseLinear: Story = {
   args: {
     progress: 40,
     variant: "linear",
-    pulse: true,
     showPercentage: true,
   },
 };
@@ -202,7 +193,6 @@ export const PulseCircular: Story = {
   args: {
     progress: 85,
     variant: "circular",
-    pulse: true,
     showPercentage: true,
   },
 };
@@ -213,7 +203,6 @@ export const StripedPulse: Story = {
     progress: 75,
     variant: "linear",
     striped: true,
-    pulse: true,
     color: "#f44336",
     showPercentage: true,
   },
@@ -224,7 +213,6 @@ export const NoAnimation: Story = {
   args: {
     progress: 50,
     variant: "linear",
-    animated: false,
     showPercentage: true,
   },
 };
@@ -290,13 +278,13 @@ export const LoadingScenario: Story = {
         <h4 style={{ margin: "0 0 8px 0", fontSize: "14px", color: "#666" }}>
           文件上传
         </h4>
-        <Progress progress={35} striped animated color="#2196f3" />
+        <Progress progress={35} striped color="#2196f3" />
       </div>
       <div>
         <h4 style={{ margin: "0 0 8px 0", fontSize: "14px", color: "#666" }}>
           安装进度
         </h4>
-        <Progress progress={78} pulse color="#4caf50" />
+        <Progress progress={78} color="#4caf50" />
       </div>
       <div>
         <h4 style={{ margin: "0 0 8px 0", fontSize: "14px", color: "#666" }}>
@@ -331,8 +319,6 @@ export const PerformanceTest: Story = {
           variant={i % 2 === 0 ? "linear" : "circular"}
           size={["small", "medium", "large"][i % 3] as any}
           striped={i % 3 === 0}
-          pulse={i % 4 === 0}
-          animated
         />
       ))}
     </div>
@@ -360,7 +346,7 @@ export const ThemeVariations: Story = {
       </div>
       <div>
         <h4 style={{ margin: "0 0 8px 0" }}>错误状态</h4>
-        <Progress progress={25} color="#f44336" pulse />
+        <Progress progress={25} color="#f44336" />
       </div>
       <div>
         <h4 style={{ margin: "0 0 8px 0" }}>信息状态</h4>

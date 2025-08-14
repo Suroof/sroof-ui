@@ -505,7 +505,7 @@ export const ComplexExample: Story = {
             showDownloadIcon: true,
           }}
         >
-          {uploadConfig.listType === 'picture-card' ? null : (
+          {uploadConfig.listType === 'picture' ? null : (
             <div style={{ padding: uploadConfig.drag ? '40px 20px' : '20px', textAlign: 'center' }}>
               <p>{uploadConfig.drag ? '拖拽文件到此处或点击上传' : '点击上传文件'}</p>
               <p style={{ fontSize: '12px', color: '#666', marginTop: '8px' }}>

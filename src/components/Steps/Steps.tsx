@@ -269,4 +269,5 @@ const Steps: React.FC<StepsProps> & {
 // 添加 Step 组件到 Steps
 Steps.Step = Step;
 
+export { Step, Steps };
 export default Steps;

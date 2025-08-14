@@ -228,7 +228,7 @@ const Rate: React.FC<RateProps> = ({
     return (
       <div
         key={index}
-        ref={(el) => (starsRef.current[index] = el)}
+        ref={(el) => { starsRef.current[index] = el; }}
         className={starClasses}
         onClick={handleStarClick}
         onMouseMove={handleStarMouseMove}
