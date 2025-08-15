@@ -9,6 +9,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* 原有的3D进度组件 */}
       <header className="App-header">
         <h1>3D Progress Component Demo</h1>
         <p>使用鼠标滚轮控制魔方动画进度</p>

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Slider } from './Slider';
+import Slider from './Slider';
+import type { SliderProps } from './Slider';
 
 const meta: Meta<typeof Slider> = {
   title: 'Components/Slider',
@@ -9,149 +10,107 @@ const meta: Meta<typeof Slider> = {
     layout: 'centered',
     docs: {
       description: {
-        component: '滑动输入条，用于在数值区间内进行选择。'
+        component: '一个功能完善的滑块组件，支持单值和范围选择，具有丰富的自定义选项和优秀的用户体验。'
       }
     }
   },
+  tags: ['autodocs'],
   argTypes: {
     value: {
-      control: { type: 'number' },
-      description: '设置当前取值'
+      description: '当前值（受控模式）',
+      control: { type: 'number' }
     },
     defaultValue: {
-      control: { type: 'number' },
-      description: '设置初始取值'
+      description: '默认值（非受控模式）',
+      control: { type: 'number' }
     },
     min: {
-      control: { type: 'number' },
-      description: '最小值'
+      description: '最小值',
+      control: { type: 'number' }
     },
     max: {
-      control: { type: 'number' },
-      description: '最大值'
+      description: '最大值',
+      control: { type: 'number' }
     },
     step: {
-      control: { type: 'number' },
-      description: '步长，取值必须大于 0，并且可被 (max - min) 整除'
-    },
-    disabled: {
-      control: { type: 'boolean' },
-      description: '值为 true 时，滑块为禁用状态'
+      description: '步长',
+      control: { type: 'number' }
     },
     range: {
-      control: { type: 'boolean' },
-      description: '双滑块模式'
+      description: '是否为范围选择器',
+      control: { type: 'boolean' }
+    },
+    disabled: {
+      description: '是否禁用',
+      control: { type: 'boolean' }
     },
     vertical: {
-      control: { type: 'boolean' },
-      description: '值为 true 时，Slider 为垂直方向'
-    },
-    included: {
-      control: { type: 'boolean' },
-      description: 'marks 不为空对象时有效，值为 true 时表示值为包含关系，false 表示并列'
-    },
-    tooltip: {
-      control: { type: 'select' },
-      options: ['always', 'never', 'hover'],
-      description: '设置 Tooltip 展示规则'
-    },
-    marks: {
-      control: { type: 'object' },
-      description: '刻度标记，key 的类型必须为 number 且取值在闭区间 [min, max] 内'
-    },
-    dots: {
-      control: { type: 'boolean' },
-      description: '是否只能拖拽到刻度上'
+      description: '是否垂直方向',
+      control: { type: 'boolean' }
     },
     reverse: {
-      control: { type: 'boolean' },
-      description: '反向坐标轴'
+      description: '是否反向',
+      control: { type: 'boolean' }
+    },
+    dots: {
+      description: '是否显示点',
+      control: { type: 'boolean' }
+    },
+    tooltip: {
+      description: '是否显示提示信息',
+      control: { type: 'select' },
+      options: [true, false, 'always']
+    },
+    autoFocus: {
+      description: '是否自动聚焦',
+      control: { type: 'boolean' }
     },
     onChange: {
-      action: 'changed',
-      description: '当 Slider 的值发生改变时，会触发 onChange 事件'
+      description: '值变化时的回调',
+      action: 'onChange'
     },
     onAfterChange: {
-      action: 'afterChanged',
-      description: '与 onmouseup 触发时机一致，把当前值作为参数传入'
+      description: '拖拽结束后的回调',
+      action: 'onAfterChange'
     },
     onChangeComplete: {
-      action: 'changeComplete',
-      description: '拖拽结束后触发'
+      description: '拖拽完成后的回调',
+      action: 'onChangeComplete'
     }
-  },
-  tags: ['autodocs']
+  }
 };
 
 export default meta;
-type Story = StoryObj<typeof Slider>;
+type Story = StoryObj<typeof meta>;
 
-// 基础用法
+// 基础示例
 export const Default: Story = {
   args: {
     defaultValue: 30,
     min: 0,
-    max: 100
-  }
-};
-
-// 带步长
-export const WithStep: Story = {
-  args: {
-    defaultValue: 20,
-    min: 0,
     max: 100,
-    step: 10
+    step: 1
   }
 };
 
-// 禁用状态
-export const Disabled: Story = {
-  args: {
-    defaultValue: 30,
-    disabled: true
-  }
-};
-
-// 范围选择
+// 范围选择器
 export const Range: Story = {
   args: {
     range: true,
-    defaultValue: [20, 50],
+    defaultValue: [20, 80],
     min: 0,
-    max: 100
+    max: 100,
+    step: 1
   }
 };
 
-// 垂直方向
-export const Vertical: Story = {
-  args: {
-    vertical: true,
-    defaultValue: 30,
-    style: { height: 200 }
-  },
-  parameters: {
-    layout: 'centered'
-  }
-};
-
-// 垂直范围选择
-export const VerticalRange: Story = {
-  args: {
-    vertical: true,
-    range: true,
-    defaultValue: [20, 50],
-    style: { height: 200 }
-  },
-  parameters: {
-    layout: 'centered'
-  }
-};
-
-// 带刻度标记
+// 带标记的滑块
 export const WithMarks: Story = {
   args: {
-    defaultValue: 37,
+    defaultValue: 50,
+    min: 0,
+    max: 100,
+    step: 10,
     marks: {
       0: '0°C',
       26: '26°C',
@@ -166,48 +125,90 @@ export const WithMarks: Story = {
   }
 };
 
-// 带刻度点
+// 带点的滑块
 export const WithDots: Story = {
   args: {
     defaultValue: 30,
-    dots: true,
+    min: 0,
+    max: 100,
     step: 10,
-    marks: {
-      0: '0',
-      10: '10',
-      20: '20',
-      30: '30',
-      40: '40',
-      50: '50',
-      60: '60',
-      70: '70',
-      80: '80',
-      90: '90',
-      100: '100'
-    }
+    dots: true
   }
 };
 
-// 工具提示
-export const WithTooltip: Story = {
+// 垂直滑块
+export const Vertical: Story = {
   args: {
     defaultValue: 30,
-    tooltip: { open: true }
+    min: 0,
+    max: 100,
+    step: 1,
+    vertical: true,
+    style: { height: 200 }
   }
 };
 
-// 反向坐标轴
+// 垂直范围滑块
+export const VerticalRange: Story = {
+  args: {
+    range: true,
+    defaultValue: [20, 80],
+    min: 0,
+    max: 100,
+    step: 1,
+    vertical: true,
+    style: { height: 200 }
+  }
+};
+
+// 反向滑块
 export const Reverse: Story = {
   args: {
     defaultValue: 30,
+    min: 0,
+    max: 100,
+    step: 1,
     reverse: true
   }
 };
 
-// 受控模式
+// 禁用状态
+export const Disabled: Story = {
+  args: {
+    defaultValue: 30,
+    min: 0,
+    max: 100,
+    step: 1,
+    disabled: true
+  }
+};
+
+// 始终显示提示
+export const AlwaysTooltip: Story = {
+  args: {
+    defaultValue: 30,
+    min: 0,
+    max: 100,
+    step: 1,
+    tooltip: 'always'
+  }
+};
+
+// 自定义提示格式
+export const CustomTooltip: Story = {
+  args: {
+    defaultValue: 30,
+    min: 0,
+    max: 100,
+    step: 1,
+    tipFormatter: (value: number) => `${value}%`
+  }
+};
+
+// 受控组件示例
 export const Controlled: Story = {
   render: (args) => {
-    const [value, setValue] = useState(30);
+    const [value, setValue] = useState<number>(30);
     
     return (
       <div style={{ width: 300 }}>
@@ -216,20 +217,23 @@ export const Controlled: Story = {
           value={value}
           onChange={(val) => setValue(val as number)}
         />
-        <p>当前值: {value}</p>
+        <div style={{ marginTop: 16, textAlign: 'center' }}>
+          当前值: {value}
+        </div>
       </div>
     );
   },
   args: {
     min: 0,
-    max: 100
+    max: 100,
+    step: 1
   }
 };
 
-// 受控范围模式
+// 受控范围组件示例
 export const ControlledRange: Story = {
   render: (args) => {
-    const [value, setValue] = useState<[number, number]>([20, 50]);
+    const [value, setValue] = useState<[number, number]>([20, 80]);
     
     return (
       <div style={{ width: 300 }}>
@@ -239,212 +243,154 @@ export const ControlledRange: Story = {
           value={value}
           onChange={(val) => setValue(val as [number, number])}
         />
-        <p>当前值: [{value[0]}, {value[1]}]</p>
+        <div style={{ marginTop: 16, textAlign: 'center' }}>
+          当前范围: [{value[0]}, {value[1]}]
+        </div>
       </div>
     );
   },
   args: {
     min: 0,
-    max: 100
+    max: 100,
+    step: 1
   }
 };
 
-// 自定义格式化
-export const CustomFormatter: Story = {
-  args: {
-    defaultValue: 30,
-    tooltip: { 
-      open: true,
-      formatter: (value?: number) => `${value}%`
-    }
-  }
-};
-
-// 不同尺寸组合
-export const DifferentSizes: Story = {
-  render: () => (
-    <div style={{ width: 400, padding: 20 }}>
-      <h4>默认尺寸</h4>
-      <Slider defaultValue={30} style={{ marginBottom: 20 }} />
-      
-      <h4>自定义轨道高度</h4>
-      <Slider 
-        defaultValue={50} 
-        style={{ 
-          marginBottom: 20,
-          '--slider-rail-height': '8px',
-          '--slider-track-height': '8px'
-        } as React.CSSProperties} 
-      />
-      
-      <h4>大号手柄</h4>
-      <Slider 
-        defaultValue={70} 
-        style={{
-          '--slider-handle-size': '20px'
-        } as React.CSSProperties}
-      />
-    </div>
-  )
-};
-
-// 复杂示例
-export const ComplexExample: Story = {
+// 复杂示例：音量控制
+export const VolumeControl: Story = {
   render: () => {
-    const [temperatureRange, setTemperatureRange] = useState<[number, number]>([16, 26]);
-    const [volume, setVolume] = useState(50);
-    const [brightness, setBrightness] = useState(80);
+    const [volume, setVolume] = useState<number>(50);
+    
+    const getVolumeIcon = (vol: number) => {
+      if (vol === 0) return '🔇';
+      if (vol < 30) return '🔈';
+      if (vol < 70) return '🔉';
+      return '🔊';
+    };
     
     return (
-      <div style={{ width: 400, padding: 20 }}>
-        <h4>温度控制 ({temperatureRange[0]}°C - {temperatureRange[1]}°C)</h4>
-        <Slider
-          range
-          value={temperatureRange}
-          min={0}
-          max={40}
-          marks={{
-            0: '0°C',
-            10: '10°C',
-            20: '20°C',
-            30: '30°C',
-            40: '40°C'
-          }}
-          onChange={(val) => setTemperatureRange(val as [number, number])}
-          style={{ marginBottom: 30 }}
-        />
-        
-        <h4>音量 ({volume}%)</h4>
+      <div style={{ width: 300, padding: 20, border: '1px solid #ddd', borderRadius: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+          <span style={{ fontSize: 20 }}>{getVolumeIcon(volume)}</span>
+          <span style={{ fontWeight: 'bold' }}>音量控制</span>
+        </div>
         <Slider
           value={volume}
-          min={0}
-          max={100}
-          step={5}
-          tooltip={{ open: true }}
-          
           onChange={(val) => setVolume(val as number)}
-          style={{ marginBottom: 30 }}
-        />
-        
-        <h4>亮度 ({brightness}%)</h4>
-        <Slider
-          value={brightness}
           min={0}
           max={100}
-          dots
-          step={20}
+          step={1}
+          tipFormatter={(value) => `${value}%`}
           marks={{
-            0: '🌑',
-            20: '🌘',
-            40: '🌗',
-            60: '🌖',
-            80: '🌕',
-            100: '☀️'
+            0: '静音',
+            50: '50%',
+            100: '最大'
           }}
-          onChange={(val) => setBrightness(val as number)}
         />
+        <div style={{ marginTop: 12, textAlign: 'center', color: '#666' }}>
+          当前音量: {volume}%
+        </div>
       </div>
     );
   }
 };
 
-// 垂直布局示例
-export const VerticalLayout: Story = {
-  render: () => (
-    <div style={{ display: 'flex', height: 300, gap: 40, padding: 20 }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h4>音量</h4>
-        <Slider
-          vertical
-          defaultValue={60}
-          style={{ height: 200 }}
-          tooltip={{ open: true }}
-        />
-      </div>
-      
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h4>均衡器</h4>
-        <Slider
-          vertical
-          range
-          defaultValue={[20, 80]}
-          style={{ height: 200 }}
-        />
-      </div>
-      
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h4>温度</h4>
-        <Slider
-          vertical
-          defaultValue={25}
-          min={0}
-          max={50}
-          marks={{
-            0: '0°',
-            25: '25°',
-            50: '50°'
-          }}
-          style={{ height: 200 }}
-        />
-      </div>
-    </div>
-  )
-};
-
-// 动态演示
-export const DynamicDemo: Story = {
+// 复杂示例：价格范围筛选
+export const PriceRange: Story = {
   render: () => {
-    const [value, setValue] = useState(30);
-    const [disabled, setDisabled] = useState(false);
-    const [reverse, setReverse] = useState(false);
-    const [vertical, setVertical] = useState(false);
+    const [priceRange, setPriceRange] = useState<[number, number]>([100, 500]);
     
     return (
-      <div style={{ padding: 20 }}>
-        <div style={{ marginBottom: 20 }}>
-          <label style={{ marginRight: 10 }}>
-            <input
-              type="checkbox"
-              checked={disabled}
-              onChange={(e) => setDisabled(e.target.checked)}
-            />
-            禁用
-          </label>
-          <label style={{ marginRight: 10 }}>
-            <input
-              type="checkbox"
-              checked={reverse}
-              onChange={(e) => setReverse(e.target.checked)}
-            />
-            反向
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={vertical}
-              onChange={(e) => setVertical(e.target.checked)}
-            />
-            垂直
-          </label>
+      <div style={{ width: 400, padding: 20, border: '1px solid #ddd', borderRadius: 8 }}>
+        <div style={{ marginBottom: 16 }}>
+          <h3 style={{ margin: 0, marginBottom: 8 }}>价格筛选</h3>
+          <div style={{ color: '#666' }}>
+            选择价格范围: ¥{priceRange[0]} - ¥{priceRange[1]}
+          </div>
         </div>
-        
-        <div style={{ 
-          width: vertical ? 'auto' : 300, 
-          height: vertical ? 200 : 'auto',
-          display: 'flex',
-          justifyContent: 'center'
-        }}>
-          <Slider
-            value={value}
-            disabled={disabled}
-            reverse={reverse}
-            vertical={vertical}
-            onChange={(val) => setValue(val as number)}
-            style={vertical ? { height: 200 } : { width: 300 }}
-          />
+        <Slider
+          range
+          value={priceRange}
+          onChange={(val) => setPriceRange(val as [number, number])}
+          min={0}
+          max={1000}
+          step={10}
+          tipFormatter={(value) => `¥${value}`}
+          marks={{
+            0: '¥0',
+            200: '¥200',
+            500: '¥500',
+            800: '¥800',
+            1000: '¥1000'
+          }}
+        />
+        <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between' }}>
+          <div>
+            <label>最低价格: </label>
+            <input 
+              type="number" 
+              value={priceRange[0]} 
+              onChange={(e) => {
+                const newValue = Math.max(0, Math.min(Number(e.target.value), priceRange[1]));
+                setPriceRange([newValue, priceRange[1]]);
+              }}
+              style={{ width: 80, padding: 4, border: '1px solid #ddd', borderRadius: 4 }}
+            />
+          </div>
+          <div>
+            <label>最高价格: </label>
+            <input 
+              type="number" 
+              value={priceRange[1]} 
+              onChange={(e) => {
+                const newValue = Math.min(1000, Math.max(Number(e.target.value), priceRange[0]));
+                setPriceRange([priceRange[0], newValue]);
+              }}
+              style={{ width: 80, padding: 4, border: '1px solid #ddd', borderRadius: 4 }}
+            />
+          </div>
         </div>
-        
-        <p style={{ marginTop: 20 }}>当前值: {value}</p>
+      </div>
+    );
+  }
+};
+
+// 复杂示例：时间范围选择
+export const TimeRange: Story = {
+  render: () => {
+    const [timeRange, setTimeRange] = useState<[number, number]>([9, 17]);
+    
+    const formatTime = (hour: number) => {
+      return `${hour.toString().padStart(2, '0')}:00`;
+    };
+    
+    return (
+      <div style={{ width: 350, padding: 20, border: '1px solid #ddd', borderRadius: 8 }}>
+        <div style={{ marginBottom: 16 }}>
+          <h3 style={{ margin: 0, marginBottom: 8 }}>工作时间设置</h3>
+          <div style={{ color: '#666' }}>
+            工作时间: {formatTime(timeRange[0])} - {formatTime(timeRange[1])}
+          </div>
+        </div>
+        <Slider
+          range
+          value={timeRange}
+          onChange={(val) => setTimeRange(val as [number, number])}
+          min={0}
+          max={24}
+          step={1}
+          tipFormatter={(value) => formatTime(value)}
+          marks={{
+            0: '00:00',
+            6: '06:00',
+            12: '12:00',
+            18: '18:00',
+            24: '24:00'
+          }}
+        />
+        <div style={{ marginTop: 16, textAlign: 'center', padding: 12, backgroundColor: '#f5f5f5', borderRadius: 4 }}>
+          总工作时长: {timeRange[1] - timeRange[0]} 小时
+        </div>
       </div>
     );
   }

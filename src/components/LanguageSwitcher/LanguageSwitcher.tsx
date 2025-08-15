@@ -3,7 +3,7 @@ import { useLanguageSwitch } from '../../i18n/hooks/useTranslation';
 import { supportedLanguages, type SupportedLanguage } from '../../i18n';
 import styles from './LanguageSwitcher.module.css';
 
-interface LanguageSwitcherProps {
+export interface LanguageSwitcherProps {
   className?: string;
   variant?: 'dropdown' | 'buttons';
 }

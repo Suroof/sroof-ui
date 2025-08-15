@@ -13,6 +13,8 @@ interface ChildProps {
   onFocus?: EventHandler;
   onBlur?: EventHandler;
   ref?: React.Ref<HTMLElement>;
+  tabIndex?: number;
+  'aria-describedby'?: string;
 }
 
 export interface TooltipProps {
@@ -200,7 +202,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     triggerRef.current = node;
     
     // 处理子组件原有的ref
-    const childRef = children.ref;
+    const childRef = (children as any).ref;
     if (childRef) {
       if (typeof childRef === 'function') {
         childRef(node);
@@ -208,7 +210,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         (childRef as React.MutableRefObject<HTMLElement | null>).current = node;
       }
     }
-  }, [children.ref]);
+  }, [(children as any).ref]);
 
   // 更新位置
   useEffect(() => {

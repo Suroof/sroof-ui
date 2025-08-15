@@ -1,480 +1,439 @@
-// Slider 组件样式
+// Slider组件样式
+// 使用CSS变量以便主题定制
+:root {
+  --slider-primary-color: #1890ff;
+  --slider-primary-hover: #40a9ff;
+  --slider-primary-active: #096dd9;
+  --slider-disabled-color: #d9d9d9;
+  --slider-track-bg: #f5f5f5;
+  --slider-rail-bg: #f5f5f5;
+  --slider-handle-bg: #fff;
+  --slider-handle-border: #d9d9d9;
+  --slider-handle-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --slider-handle-shadow-active: 0 4px 16px rgba(24, 144, 255, 0.3);
+  --slider-tooltip-bg: rgba(0, 0, 0, 0.85);
+  --slider-tooltip-color: #fff;
+  --slider-mark-color: #8c8c8c;
+  --slider-dot-border: #d9d9d9;
+  --slider-dot-bg: #fff;
+}
+
 .slider {
   position: relative;
-  touch-action: none;
-  user-select: none;
-  cursor: pointer;
-}
-
-// 水平滑块
-.sliderHorizontal {
+  width: 100%;
   height: 12px;
   padding: 4px 0;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  outline: none;
   
-  .sliderRail,
-  .sliderTrack {
-    height: 4px;
-    border-radius: 2px;
+  &:focus-visible {
+    outline: 2px solid var(--slider-primary-color);
+    outline-offset: 2px;
   }
   
-  .sliderHandle {
-    margin-left: -6px;
-    margin-top: -2px;
+  // 水平滑块
+  &.sliderHorizontal {
+    width: 100%;
+    min-width: 100px;
   }
   
-  .sliderMark {
-    top: 14px;
-    transform: translateX(-50%);
+  // 垂直滑块
+  &.sliderVertical {
+    width: 12px;
+    height: 100%;
+    min-height: 100px;
+    padding: 0 4px;
+    
+    .rail,
+    .track {
+      width: 4px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+    
+    .handle {
+      margin-left: -6px;
+      margin-top: -6px;
+    }
+    
+    .tooltip {
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      
+      &::before {
+        left: -4px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+    }
+    
+    .marks {
+      left: 20px;
+      top: 0;
+      width: auto;
+      height: 100%;
+    }
+    
+    .mark {
+      left: 0;
+      top: auto;
+      transform: translateY(-50%);
+      
+      .markDot {
+        left: -8px;
+      }
+      
+      .markLabel {
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    
+    .dots {
+      left: 50%;
+      top: 0;
+      width: auto;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+    
+    .dot {
+      left: 50%;
+      top: auto;
+      transform: translateX(-50%);
+      
+      &:hover {
+        transform: translateX(-50%) scale(1.2);
+      }
+    }
   }
   
-  .sliderDot {
-    top: -2px;
-    margin-left: -2px;
+  // 禁用状态
+  &.sliderDisabled {
+    cursor: not-allowed;
+    
+    .rail {
+      background-color: var(--slider-disabled-color);
+    }
+    
+    .track {
+      background-color: var(--slider-disabled-color);
+    }
+    
+    .handle {
+      border-color: var(--slider-disabled-color);
+      background-color: #fff;
+      cursor: not-allowed;
+      box-shadow: none;
+      
+      &:hover,
+      &:focus {
+        border-color: var(--slider-disabled-color);
+        box-shadow: none;
+      }
+    }
+    
+    .markDot {
+      border-color: var(--slider-disabled-color);
+      background-color: #fff;
+    }
+    
+    .dot {
+      border-color: var(--slider-disabled-color);
+      background-color: #fff;
+    }
   }
 }
 
-// 垂直滑块
-.sliderVertical {
-  width: 12px;
-  height: 200px;
-  padding: 0 4px;
-  
-  .sliderRail,
-  .sliderTrack {
-    width: 4px;
-    border-radius: 2px;
-  }
-  
-  .sliderHandle {
-    margin-bottom: -6px;
-    margin-left: -2px;
-  }
-  
-  .sliderMark {
-    left: 14px;
-    transform: translateY(50%);
-  }
-  
-  .sliderDot {
-    left: -2px;
-    margin-bottom: -2px;
-  }
-}
-
-// 轨道
-.sliderRail {
+// 轨道背景
+.rail {
   position: absolute;
-  background-color: var(--slider-rail-color, #f5f5f5);
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
-}
-
-.sliderHorizontal .sliderRail {
   width: 100%;
+  height: 4px;
+  background-color: var(--slider-rail-bg);
+  border-radius: 2px;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.sliderVertical .sliderRail {
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  transition: background-color 0.2s ease;
 }
 
 // 激活轨道
-.sliderTrack {
+.track {
   position: absolute;
-  background-color: var(--slider-track-color, #1890ff);
+  height: 4px;
+  background-color: var(--slider-primary-color);
   border-radius: 2px;
-  transition: background-color 0.3s ease;
-}
-
-.sliderHorizontal .sliderTrack {
   top: 50%;
   transform: translateY(-50%);
-}
-
-.sliderVertical .sliderTrack {
-  left: 50%;
-  transform: translateX(-50%);
+  transition: all 0.2s ease;
+  
+  .slider:hover & {
+    background-color: var(--slider-primary-hover);
+  }
 }
 
 // 滑块手柄
-.sliderHandle {
+.handle {
   position: absolute;
   width: 12px;
   height: 12px;
-  background-color: var(--slider-handle-color, #fff);
-  border: 2px solid var(--slider-handle-border-color, #1890ff);
+  background-color: var(--slider-handle-bg);
+  border: 2px solid var(--slider-primary-color);
   border-radius: 50%;
   cursor: grab;
-  transition: all 0.3s ease;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+  box-shadow: var(--slider-handle-shadow);
   z-index: 2;
   
   &:hover {
-    border-color: var(--slider-handle-hover-color, #40a9ff);
-    transform: scale(1.2);
+    border-color: var(--slider-primary-hover);
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: var(--slider-handle-shadow-active);
   }
   
   &:focus {
     outline: none;
-    border-color: var(--slider-handle-focus-color, #40a9ff);
-    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    border-color: var(--slider-primary-hover);
+    box-shadow: var(--slider-handle-shadow-active);
+  }
+  
+  &:active,
+  &.handleActive {
+    cursor: grabbing;
+    border-color: var(--slider-primary-active);
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: var(--slider-handle-shadow-active);
+  }
+  
+  &.handleDisabled {
+    cursor: not-allowed;
+    
+    &:hover,
+    &:focus,
+    &:active {
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
-// 拖拽状态
-.sliderHandleDragging {
-  cursor: grabbing;
-  border-color: var(--slider-handle-active-color, #096dd9);
-  box-shadow: 0 0 0 4px rgba(24, 144, 255, 0.16);
-  transform: scale(1.2);
-}
-
-// 工具提示
-.sliderTooltip {
+// 提示框
+.tooltip {
   position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--slider-tooltip-bg);
+  color: var(--slider-tooltip-color);
   padding: 4px 8px;
-  background-color: var(--tooltip-bg-color, rgba(0, 0, 0, 0.85));
-  color: var(--tooltip-text-color, #fff);
-  font-size: 12px;
   border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
   white-space: nowrap;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 10;
+  animation: tooltipFadeIn 0.2s ease;
   
-  &::after {
+  &::before {
     content: '';
     position: absolute;
-    width: 0;
-    height: 0;
-    border: 4px solid transparent;
-  }
-}
-
-// 工具提示位置
-.sliderTooltipTop {
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 8px;
-  
-  &::after {
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
-    border-top-color: var(--tooltip-bg-color, rgba(0, 0, 0, 0.85));
+    transform: translateX(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background-color: var(--slider-tooltip-bg);
+    margin-top: -3px;
   }
 }
 
-.sliderTooltipBottom {
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// 标记点容器
+.marks {
+  position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  width: 100%;
+  height: auto;
   margin-top: 8px;
+}
+
+// 单个标记点
+.mark {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
   
-  &::after {
-    bottom: 100%;
+  .markDot {
+    position: absolute;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    border-bottom-color: var(--tooltip-bg-color, rgba(0, 0, 0, 0.85));
+    width: 6px;
+    height: 6px;
+    background-color: var(--slider-dot-bg);
+    border: 1px solid var(--slider-dot-border);
+    border-radius: 50%;
+    transition: all 0.2s ease;
   }
-}
-
-.sliderTooltipLeft {
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 8px;
   
-  &::after {
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    border-left-color: var(--tooltip-bg-color, rgba(0, 0, 0, 0.85));
+  .markLabel {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: var(--slider-mark-color);
+    line-height: 1.4;
+    white-space: nowrap;
+    user-select: none;
   }
 }
 
-.sliderTooltipRight {
-  left: 100%;
+// 点容器
+.dots {
+  position: absolute;
   top: 50%;
+  left: 0;
+  width: 100%;
+  height: auto;
   transform: translateY(-50%);
-  margin-left: 8px;
-  
-  &::after {
-    right: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    border-right-color: var(--tooltip-bg-color, rgba(0, 0, 0, 0.85));
-  }
 }
 
-// 刻度标记
-.sliderMark {
+// 单个点
+.dot {
   position: absolute;
-  font-size: 12px;
-  color: var(--slider-mark-color, #666);
-  cursor: pointer;
-}
-
-.sliderMarkText {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  cursor: pointer;
-}
-
-// 刻度点
-.sliderDot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background-color: var(--slider-dot-color, #fff);
-  border: 1px solid var(--slider-dot-border-color, #d9d9d9);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--slider-dot-bg);
+  border: 1px solid var(--slider-dot-border);
   border-radius: 50%;
-  cursor: pointer;
+  transition: all 0.2s ease;
   
   &:hover {
-    border-color: var(--slider-dot-hover-color, #1890ff);
-  }
-}
-
-// 禁用状态
-.sliderDisabled {
-  cursor: not-allowed;
-  
-  .sliderRail {
-    background-color: var(--slider-rail-disabled-color, #f5f5f5);
-  }
-  
-  .sliderTrack {
-    background-color: var(--slider-track-disabled-color, #bfbfbf);
-  }
-  
-  .sliderHandle {
-    cursor: not-allowed;
-    border-color: var(--slider-handle-disabled-color, #bfbfbf);
-    background-color: var(--slider-handle-bg-disabled-color, #f5f5f5);
-    
-    &:hover {
-      transform: none;
-      border-color: var(--slider-handle-disabled-color, #bfbfbf);
-    }
-  }
-  
-  .sliderMark {
-    color: var(--slider-mark-disabled-color, #bfbfbf);
-    cursor: not-allowed;
-  }
-  
-  .sliderDot {
-    background-color: var(--slider-dot-disabled-color, #f5f5f5);
-    border-color: var(--slider-dot-border-disabled-color, #d9d9d9);
-    cursor: not-allowed;
-    
-    &:hover {
-      border-color: var(--slider-dot-border-disabled-color, #d9d9d9);
-    }
-  }
-}
-
-// 暗色主题
-@media (prefers-color-scheme: dark) {
-  .slider {
-    --slider-rail-color: #434343;
-    --slider-track-color: #1890ff;
-    --slider-handle-color: #1f1f1f;
-    --slider-handle-border-color: #1890ff;
-    --slider-handle-hover-color: #40a9ff;
-    --slider-handle-focus-color: #40a9ff;
-    --slider-handle-active-color: #096dd9;
-    --slider-mark-color: #bfbfbf;
-    --slider-dot-color: #1f1f1f;
-    --slider-dot-border-color: #434343;
-    --slider-dot-hover-color: #1890ff;
-    --tooltip-bg-color: rgba(255, 255, 255, 0.85);
-    --tooltip-text-color: #000;
-    
-    // 禁用状态
-    --slider-rail-disabled-color: #2a2a2a;
-    --slider-track-disabled-color: #434343;
-    --slider-handle-disabled-color: #434343;
-    --slider-handle-bg-disabled-color: #2a2a2a;
-    --slider-mark-disabled-color: #434343;
-    --slider-dot-disabled-color: #2a2a2a;
-    --slider-dot-border-disabled-color: #434343;
-  }
-}
-
-// 高对比度模式
-@media (prefers-contrast: high) {
-  .slider {
-    --slider-rail-color: #000;
-    --slider-track-color: #0066cc;
-    --slider-handle-border-color: #000;
-    --slider-dot-border-color: #000;
-  }
-  
-  .sliderHandle {
-    border-width: 3px;
-  }
-  
-  .sliderDot {
-    border-width: 2px;
-  }
-}
-
-// 减少动画模式
-@media (prefers-reduced-motion: reduce) {
-  .sliderRail,
-  .sliderTrack,
-  .sliderHandle {
-    transition: none;
+    border-color: var(--slider-primary-color);
+    transform: translate(-50%, -50%) scale(1.2);
   }
 }
 
 // 响应式设计
 @media (max-width: 768px) {
-  .sliderHandle {
+  .slider {
+    &.sliderHorizontal {
+      height: 16px;
+      padding: 6px 0;
+    }
+    
+    &.sliderVertical {
+      width: 16px;
+      padding: 0 6px;
+    }
+  }
+  
+  .handle {
     width: 16px;
     height: 16px;
     
     &:hover {
-      transform: none;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    
+    &:active,
+    &.handleActive {
+      transform: translate(-50%, -50%) scale(1.1);
     }
   }
   
-  .sliderHorizontal {
-    .sliderHandle {
-      margin-left: -8px;
-      margin-top: -4px;
-    }
-  }
-  
-  .sliderVertical {
-    .sliderHandle {
-      margin-bottom: -8px;
-      margin-left: -4px;
-    }
-  }
-  
-  .sliderTooltip {
+  .tooltip {
     font-size: 14px;
     padding: 6px 10px;
   }
 }
 
-@media (max-width: 480px) {
-  .sliderHandle {
-    width: 20px;
-    height: 20px;
+// 高对比度模式支持
+@media (prefers-contrast: high) {
+  :root {
+    --slider-primary-color: #0066cc;
+    --slider-handle-border: #000;
+    --slider-track-bg: #000;
+    --slider-rail-bg: #ccc;
+    --slider-tooltip-bg: #000;
+    --slider-mark-color: #000;
+  }
+}
+
+// 减少动画模式支持
+@media (prefers-reduced-motion: reduce) {
+  .slider,
+  .rail,
+  .track,
+  .handle,
+  .markDot,
+  .dot {
+    transition: none;
   }
   
-  .sliderHorizontal {
-    .sliderHandle {
-      margin-left: -10px;
-      margin-top: -6px;
-    }
+  .tooltip {
+    animation: none;
   }
-  
-  .sliderVertical {
-    .sliderHandle {
-      margin-bottom: -10px;
-      margin-left: -6px;
-    }
+}
+
+// 深色主题支持
+@media (prefers-color-scheme: dark) {
+  :root {
+    --slider-primary-color: #177ddc;
+    --slider-primary-hover: #3c9ae8;
+    --slider-primary-active: #0958d9;
+    --slider-disabled-color: #434343;
+    --slider-track-bg: #262626;
+    --slider-rail-bg: #262626;
+    --slider-handle-bg: #1f1f1f;
+    --slider-handle-border: #434343;
+    --slider-tooltip-bg: rgba(255, 255, 255, 0.85);
+    --slider-tooltip-color: #000;
+    --slider-mark-color: #a6a6a6;
+    --slider-dot-border: #434343;
+    --slider-dot-bg: #1f1f1f;
   }
 }
 
 // 打印样式
 @media print {
   .slider {
-    .sliderTooltip {
+    .tooltip {
       display: none;
     }
-  }
-}
-
-// 触摸设备优化
-@media (hover: none) and (pointer: coarse) {
-  .sliderHandle {
-    width: 20px;
-    height: 20px;
     
-    &:hover {
-      transform: none;
-    }
-  }
-  
-  .sliderHorizontal {
-    .sliderHandle {
-      margin-left: -10px;
-      margin-top: -6px;
-    }
-  }
-  
-  .sliderVertical {
-    .sliderHandle {
-      margin-bottom: -10px;
-      margin-left: -6px;
-    }
-  }
-}
-
-// 无障碍增强
-.sliderHandle:focus-visible {
-  outline: 2px solid var(--slider-handle-focus-color, #40a9ff);
-  outline-offset: 2px;
-}
-
-// 范围选择器特殊样式
-.slider[data-range="true"] {
-  .sliderHandle:first-of-type {
-    z-index: 3;
-  }
-  
-  .sliderHandle:last-of-type {
-    z-index: 2;
-  }
-}
-
-// 动画效果
-@keyframes sliderHandlePulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(24, 144, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0);
-  }
-}
-
-.sliderHandle:active {
-  animation: sliderHandlePulse 0.6s ease-out;
-}
-
-// 自定义颜色支持
-.slider[data-color] {
-  .sliderTrack {
-    background-color: var(--custom-color, #1890ff);
-  }
-  
-  .sliderHandle {
-    border-color: var(--custom-color, #1890ff);
-    
-    &:hover {
-      border-color: var(--custom-color-hover, #40a9ff);
+    .handle {
+      box-shadow: none;
+      border: 1px solid #000;
     }
     
-    &:focus {
-      border-color: var(--custom-color-focus, #40a9ff);
-      box-shadow: 0 0 0 2px var(--custom-color-shadow, rgba(24, 144, 255, 0.2));
+    .track {
+      background-color: #000;
     }
-  }
-  
-  .sliderHandleDragging {
-    border-color: var(--custom-color-active, #096dd9);
-    box-shadow: 0 0 0 4px var(--custom-color-shadow, rgba(24, 144, 255, 0.16));
+    
+    .rail {
+      background-color: #ccc;
+    }
   }
 }
