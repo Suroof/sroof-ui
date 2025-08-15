@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'SROOF UI',
   tagline: 'Smooth to use like flowing water,build with React',
-  favicon: 'img/logo.svg',
+  favicon: 'icon/logo.svg',
 
   future: {
     v4: true,
@@ -60,7 +60,7 @@ const config: Config = {
       title: 'Sroof UI',
       logo: {
         alt: 'Sroof UI Logo',
-        src: 'img/logo.svg',
+        src: 'icon/logo.svg',
       },
       hideOnScroll: true,
       items: [

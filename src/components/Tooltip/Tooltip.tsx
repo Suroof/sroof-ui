@@ -1,12 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Tooltip.module.scss';
+
+interface EventHandler {
+  (...args: unknown[]): void;
+}
+
+interface ChildProps {
+  onMouseEnter?: EventHandler;
+  onMouseLeave?: EventHandler;
+  onClick?: EventHandler;
+  onFocus?: EventHandler;
+  onBlur?: EventHandler;
+  ref?: React.Ref<HTMLElement>;
+}
 
 export interface TooltipProps {
   /** 提示内容 */
   title: React.ReactNode;
   /** 子元素 */
-  children: React.ReactElement;
+  children: React.ReactElement<ChildProps>;
   /** 显示位置 */
   placement?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
   /** 触发方式 */
@@ -46,14 +59,19 @@ const Tooltip: React.FC<TooltipProps> = ({
   const tooltipRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 计算tooltip位置
-  const calculatePosition = () => {
-    if (!triggerRef.current || !tooltipRef.current) return;
+  // 计算tooltip位置（带重试机制）
+  const calculatePosition = useCallback(() => {
+    const calculate = () => {
+      if (!triggerRef.current || !tooltipRef.current) {
+        // 如果元素还未准备好，延迟重试
+        setTimeout(calculate, 10);
+        return;
+      }
 
-    const triggerRect = triggerRef.current.getBoundingClientRect();
-    const tooltipRect = tooltipRef.current.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const tooltipRect = tooltipRef.current.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
     let top = 0;
     let left = 0;
@@ -106,74 +124,117 @@ const Tooltip: React.FC<TooltipProps> = ({
       top = scrollTop + viewportHeight - tooltipRect.height - 8;
     }
 
-    setPosition({ top, left });
-  };
+      setPosition({ top, left });
+    };
+    
+    calculate();
+  }, [placement]);
 
   // 显示tooltip
-  const showTooltip = () => {
+  const showTooltip = useCallback(() => {
     if (disabled || !title) return;
-    
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
+
     timeoutRef.current = setTimeout(() => {
       setVisible(true);
     }, mouseEnterDelay);
-  };
+  }, [disabled, title, mouseEnterDelay]);
+
+  // 安全的事件合并策略
+  const mergeEventHandlers = useCallback((newHandler: EventHandler, existingHandler?: EventHandler): EventHandler => {
+    return existingHandler
+      ? (...args: unknown[]) => {
+          existingHandler(...args);
+          newHandler();
+        }
+      : newHandler;
+  }, []);
 
   // 隐藏tooltip
-  const hideTooltip = () => {
+  const hideTooltip = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
+
     timeoutRef.current = setTimeout(() => {
       setVisible(false);
     }, mouseLeaveDelay);
-  };
+  }, [mouseLeaveDelay]);
 
   // 处理点击触发
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (disabled || !title) return;
-    
+
     if (trigger === 'click') {
       setVisible(!visible);
     }
-  };
+  }, [disabled, title, trigger, visible]);
 
   // 处理焦点触发
-  const handleFocus = () => {
+  const handleFocus = useCallback(() => {
     if (disabled || !title) return;
-    
+
     if (trigger === 'focus') {
       setVisible(true);
     }
-  };
+  }, [disabled, title, trigger]);
 
-  const handleBlur = () => {
+  const handleBlur = useCallback(() => {
     if (trigger === 'focus') {
       setVisible(false);
     }
-  };
+  }, [trigger]);
+
+  // 处理键盘事件
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (trigger === 'focus' && event.key === 'Escape') {
+      setVisible(false);
+    }
+  }, [trigger]);
+
+  // 安全的ref处理
+  const handleRef = useCallback((node: HTMLElement | null) => {
+    triggerRef.current = node;
+    
+    // 处理子组件原有的ref
+    const childRef = children.ref;
+    if (childRef) {
+      if (typeof childRef === 'function') {
+        childRef(node);
+      } else {
+        (childRef as React.MutableRefObject<HTMLElement | null>).current = node;
+      }
+    }
+  }, [children.ref]);
 
   // 更新位置
   useEffect(() => {
     if (visible) {
       calculatePosition();
-      
+
       const handleResize = () => calculatePosition();
       const handleScroll = () => calculatePosition();
-      
+
       window.addEventListener('resize', handleResize);
       window.addEventListener('scroll', handleScroll);
-      
+
       return () => {
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [visible, placement]);
+  }, [visible, calculatePosition]);
+
+  // 键盘事件监听
+  useEffect(() => {
+    if (visible && trigger === 'focus') {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [visible, trigger, handleKeyDown]);
 
   // 点击外部关闭
   useEffect(() => {
@@ -188,7 +249,7 @@ const Tooltip: React.FC<TooltipProps> = ({
           setVisible(false);
         }
       };
-      
+
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
@@ -205,13 +266,25 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   // 克隆子元素并添加事件处理
   const clonedChild = React.cloneElement(children, {
-    ref: triggerRef,
-    onMouseEnter: trigger === 'hover' ? showTooltip : (children.props as any).onMouseEnter,
-    onMouseLeave: trigger === 'hover' ? hideTooltip : (children.props as any).onMouseLeave,
-    onClick: trigger === 'click' ? handleClick : (children.props as any).onClick,
-    onFocus: trigger === 'focus' ? handleFocus : (children.props as any).onFocus,
-    onBlur: trigger === 'focus' ? handleBlur : (children.props as any).onBlur,
-  } as any);
+    ref: handleRef,
+    onMouseEnter: trigger === 'hover' 
+      ? mergeEventHandlers(showTooltip, children.props.onMouseEnter)
+      : children.props.onMouseEnter,
+    onMouseLeave: trigger === 'hover' 
+      ? mergeEventHandlers(hideTooltip, children.props.onMouseLeave)
+      : children.props.onMouseLeave,
+    onClick: trigger === 'click' 
+      ? mergeEventHandlers(handleClick, children.props.onClick)
+      : children.props.onClick,
+    onFocus: trigger === 'focus' 
+      ? mergeEventHandlers(handleFocus, children.props.onFocus)
+      : children.props.onFocus,
+    onBlur: trigger === 'focus' 
+      ? mergeEventHandlers(handleBlur, children.props.onBlur)
+      : children.props.onBlur,
+    'aria-describedby': visible ? `tooltip-${Math.random().toString(36).substr(2, 9)}` : undefined,
+    tabIndex: trigger === 'focus' && !children.props.tabIndex ? 0 : children.props.tabIndex,
+  });
 
   const tooltipContent = visible && title && (
     <div
@@ -224,6 +297,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         backgroundColor: color,
       }}
       role="tooltip"
+      aria-hidden={!visible}
       onMouseEnter={trigger === 'hover' ? showTooltip : undefined}
       onMouseLeave={trigger === 'hover' ? hideTooltip : undefined}
     >

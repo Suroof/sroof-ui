@@ -34,7 +34,6 @@ export { Avatar, type AvatarProps } from "./components/Avatar";
 export { Alert, type AlertProps } from "./components/Alert";
 export { Skeleton, SkeletonButton, SkeletonInput, SkeletonImage, type SkeletonProps } from "./components/Skeleton";
 export { Breadcrumb, type BreadcrumbProps, type BreadcrumbItem, type BreadcrumbItemProps } from "./components/Breadcrumb";
-export { Steps, Step, type StepsProps, type StepProps } from "./components/Steps";
 export { Rate, type RateProps } from "./components/Rate";
 export { Upload, type UploadProps, type UploadFile } from "./components/Upload";
 export { Slider, type SliderProps, type SliderMarks } from "./components/Slider";

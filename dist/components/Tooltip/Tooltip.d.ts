@@ -1,9 +1,20 @@
 import React from 'react';
+interface EventHandler {
+    (...args: unknown[]): void;
+}
+interface ChildProps {
+    onMouseEnter?: EventHandler;
+    onMouseLeave?: EventHandler;
+    onClick?: EventHandler;
+    onFocus?: EventHandler;
+    onBlur?: EventHandler;
+    ref?: React.Ref<HTMLElement>;
+}
 export interface TooltipProps {
     /** 提示内容 */
     title: React.ReactNode;
     /** 子元素 */
-    children: React.ReactElement;
+    children: React.ReactElement<ChildProps>;
     /** 显示位置 */
     placement?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
     /** 触发方式 */

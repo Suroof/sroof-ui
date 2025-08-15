@@ -6,19 +6,20 @@ import { ScrollCard } from "sroof-ui";
 
 function ScrollCardCustomExample() {
   const cardData = [
-    { id: 1, imageUrl: 'https://pic1.imgdb.cn/item/688755f858cb8da5c8e90992.png', title: 'Button', description: 'Easy to use' },
-    { id: 2, imageUrl: 'https://pic1.imgdb.cn/item/688769bc58cb8da5c8e956a4.png', title: 'Card', description: 'Easy to use' },
-    { id: 3, imageUrl: 'https://pic1.imgdb.cn/item/68876a0358cb8da5c8e95814.png', title: 'Collapse', description: 'Easy to use' },
-    { id: 4, imageUrl: 'https://pic1.imgdb.cn/item/68876a2a58cb8da5c8e9591d.png', title: 'Form', description: 'Easy to use' },
-    { id: 5, imageUrl: 'https://pic1.imgdb.cn/item/68876a6658cb8da5c8e95b41.png', title: 'Switch', description: 'Easy to use' },
-    { id: 6, imageUrl: 'https://pic1.imgdb.cn/item/68876a8758cb8da5c8e95c30.png', title: 'Pagination', description: 'Easy to use' },
-  ];
+    { id: 1, imageUrl: '/sroof-ui/img/Button.jpg', title: 'Button', description: '提供多种点击操作的按钮组件' },
+    { id: 2, imageUrl: '/sroof-ui/img/Card.jpg', title: 'Card', description: '用于展示信息的卡片容器组件' },
+    { id: 3, imageUrl: '/sroof-ui/img/Carousel.jpg', title: 'Carousel', description: '支持自动轮播和手动切换的走马灯组件' },
+    { id: 4, imageUrl: '/sroof-ui/img/Font.jpg', title: 'Font', description: '提供多种字体样式和排版选项' },
+    { id: 5, imageUrl: '/sroof-ui/img/Form.jpg', title: 'Form', description: '用于数据录入和验证的表单组件' },
+    { id: 6, imageUrl: '/sroof-ui/img/Slider.jpg', title: 'Slider', description: '支持范围选择的滑动输入条组件' },
+    { id: 7, imageUrl: '/sroof-ui/img/Progress.jpg', title: 'Progress', description: '用于展示任务进度的进度条组件' },
+  ]
   return (
-    <div style={{ padding: '20px 0',overflow: 'hidden'}}>
+    <div style={{ padding: '20px 0', overflow: 'hidden' }}>
       <ScrollCard
         items={cardData}
         cardWidth={400}
-        speed={30}
+        speed={10}
       />
     </div>
   );
@@ -29,7 +30,7 @@ export default function HomepageFeatures(): ReactNode {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-       <ScrollCardCustomExample/>
+          <ScrollCardCustomExample />
         </div>
       </div>
     </section>
