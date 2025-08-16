@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Badge 徽标数
 
-图标右上角的圆形徽标数字。
+图标右上角的圆形徽标数字，用于显示消息数量或状态信息。支持数字显示、红点提示、状态指示等多种模式。
 
 ## 基本用法
 
@@ -13,13 +13,13 @@ function BadgeExample() {
   return (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge count={5}>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+       <Button>按钮</Button>
       </Badge>
       <Badge count={0} showZero>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+       <Button>按钮</Button>
       </Badge>
       <Badge count={99}>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+        <Button>按钮</Button>
       </Badge>
     </div>
   );
@@ -33,16 +33,16 @@ function BadgeOverflowExample() {
   return (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
       <Badge count={99}>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+        <Button>按钮</Button>
       </Badge>
       <Badge count={100}>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+       <Button>按钮</Button>
       </Badge>
       <Badge count={99} overflowCount={10}>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+        <Button>上限10</Button>
       </Badge>
       <Badge count={1000} overflowCount={999}>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+         <Button>上限999</Button>
       </Badge>
     </div>
   );
@@ -56,30 +56,116 @@ function BadgeStandaloneExample() {
   return (
     <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
       <Badge count={25} />
-      <Badge count={4} style={{ backgroundColor: '#52c41a' }} />
-      <Badge count={109} style={{ backgroundColor: '#f5222d' }} />
+      <Badge count={4} color="#52c41a" />
+      <Badge count={109} color="#faad14" />
     </div>
   );
 }
 ```
 
-## 状态点
+## 小尺寸
 
 ```jsx live
-function BadgeStatusExample() {
+function BadgeSizeExample() {
   return (
     <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-      <Badge dot>
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      <Badge count={5} size="default">
+        <Button>默认</Button>
       </Badge>
-      <Badge dot status="processing">
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      <Badge count={5} size="small">
+        <Button>小尺寸</Button>
       </Badge>
-      <Badge dot status="success">
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+    </div>
+  );
+}
+```
+
+## 位置偏移
+
+通过 `offset` 属性调整徽标的位置。
+
+```jsx live
+function BadgeOffsetExample() {
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+      <Badge count={5}>
+        <Button>默认位置</Button>
       </Badge>
-      <Badge dot status="error">
-        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      <Badge count={5} offset={[10, -5]}>
+        <Button>向右上偏移</Button>
+      </Badge>
+      <Badge count={5} offset={[-5, 5]}>
+        <Button>向左下偏移</Button>
+      </Badge>
+    </div>
+  );
+}
+```
+
+## 自定义颜色
+
+```jsx live
+function BadgeColorExample() {
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
+      <Badge count={5} color="#f50">
+        <Button>红色</Button>
+      </Badge>
+      <Badge count={5} color="#2db7f5">
+        <Button>蓝色</Button>
+      </Badge>
+      <Badge count={5} color="#87d068">
+        <Button>绿色</Button>
+      </Badge>
+      <Badge count={5} color="#108ee9">
+        <Button>深蓝</Button>
+      </Badge>
+    </div>
+  );
+}
+```
+
+## 动态效果
+
+```jsx live
+function BadgeDynamicExample() {
+  const [count, setCount] = React.useState(5);
+  const [show, setShow] = React.useState(true);
+  
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
+      <Badge count={show ? count : 0}>
+        <Button>动态数字</Button>
+      </Badge>
+      <div style={{ display: "flex", gap: "8px" }}>
+        <Button size="small" onClick={() => setCount(c => Math.max(0, c - 1))}>-</Button>
+        <Button size="small" onClick={() => setCount(c => c + 1)}>+</Button>
+        <Button size="small" onClick={() => setShow(!show)}>{show ? '隐藏' : '显示'}</Button>
+      </div>
+    </div>
+  );
+}
+```
+
+## 可访问性
+
+Badge 组件内置了完整的可访问性支持：
+
+- 状态点使用 `role="status"` 属性
+- 数字徽标使用 `role="img"` 属性  
+- 提供描述性的 `aria-label` 属性
+- 支持键盘导航和屏幕阅读器
+
+```jsx live
+function BadgeAccessibilityExample() {
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
+      <Badge count={5} title="5条未读消息">
+        <Button>消息</Button>
+      </Badge>
+      <Badge status="error" text="错误" title="系统出现错误" />
+      <Badge dot title="有新通知">
+        <Button>通知</Button>
       </Badge>
     </div>
   );
@@ -92,14 +178,24 @@ function BadgeStatusExample() {
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| count | 展示的数字，大于 overflowCount 时显示为 `${overflowCount}+` | `number` | - |
-| dot | 不展示数字，只有一个小红点 | `boolean` | `false` |
-| overflowCount | 展示封顶的数字值 | `number` | `99` |
+| count | 展示的数字，大于 overflowCount 时显示为 `${overflowCount}+`，为 0 时隐藏 | `number` | - |
+| overflowCount | 展示封顶的数字值，默认为 99 | `number` | `99` |
 | showZero | 当数值为 0 时，是否展示 Badge | `boolean` | `false` |
-| status | 设置 Badge 为状态点 | `'success' \| 'processing' \| 'default' \| 'error' \| 'warning'` | - |
-| text | 在设置了 status 的前提下有效，设置状态点的文本 | `string` | - |
-| offset | 设置状态点的位置偏移 | `[number, number]` | - |
-| size | 在设置了 count 的前提下有效，设置小圆点的大小 | `'default' \| 'small'` | - |
-| title | 设置鼠标放在状态点上时显示的文字 | `string` | - |
+| dot | 不展示数字，只显示一个小红点 | `boolean` | `false` |
+| status | 设置 Badge 的状态类型 | `'success' \| 'processing' \| 'default' \| 'error' \| 'warning'` | - |
+| text | 在设置了 status 的前提下有效，设置状态点的描述文本 | `React.ReactNode` | - |
+| color | 设置徽标的自定义颜色（不适用于 status 模式） | `string` | - |
+| size | 设置 Badge 的大小 | `'default' \| 'small'` | `'default'` |
+| offset | 设置徽标的位置偏移，格式为 [x, y] | `[number, number]` | - |
+| title | 设置鼠标悬停时显示的提示文字 | `string` | - |
+| children | 包裹的子元素，当为空时 Badge 将独立显示 | `React.ReactNode` | - |
 | className | 自定义类名 | `string` | - |
 | style | 自定义样式 | `React.CSSProperties` | - |
+
+## 注意事项
+
+- 当 `count` 为 0 时，默认不显示徽标，除非设置 `showZero={true}`
+- `status` 模式下，`color` 属性不生效，颜色由状态类型决定
+- `offset` 属性仅在有子元素时生效
+- `text` 属性仅在设置了 `status` 时有效
+- 组件会自动进行参数验证，无效参数会在控制台显示警告

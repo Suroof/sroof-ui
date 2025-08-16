@@ -29,7 +29,6 @@ export { default as Slider } from './components/Slider';
 export { default as Steps } from './components/Steps';
 export { default as Switch } from './components/Switch';
 export { default as Tabs } from './components/Tabs';
-export { default as Tooltip } from './components/Tooltip';
 export { default as Upload } from './components/Upload';
 
 // 导出类型定义
@@ -63,7 +62,6 @@ export type { SliderProps, SliderMarks } from './components/Slider';
 export type { StepsProps } from './components/Steps';
 export type { SwitchProps } from './components/Switch';
 export type { TabsProps } from './components/Tabs';
-export type { TooltipProps } from './components/Tooltip';
 export type { UploadProps } from './components/Upload';
 
 // 导出国际化相关

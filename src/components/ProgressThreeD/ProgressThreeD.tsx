@@ -2,35 +2,27 @@ import React, { FC, useEffect, useRef, useState, useCallback } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "@react-three/drei";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
-import styles from "./ProgressThreeD.module.scss";
-
-// 注册GSAP插件
-gsap.registerPlugin(ScrollTrigger);
 
 export interface ProgressThreeDProps {
   modelPath?: string;
-  height?: number;
-  showProgress?: boolean;
-  showInstructions?: boolean;
   sensitivity?: number; // 滚轮敏感度，值越小动画越慢
+  initialRotation?: [number, number, number]; // 初始旋转角度 [x, y, z] (弧度)
   onProgressChange?: (progress: number) => void;
 }
 
 interface ModelProps {
   modelPath: string;
   progress: number;
+  initialRotation?: [number, number, number];
 }
 
 // 3D模型组件
-const Model: FC<ModelProps> = ({ modelPath, progress }) => {
+const Model: FC<ModelProps> = ({ modelPath, progress, initialRotation = [0, 0, 0] }) => {
   const gltf = useLoader(GLTFLoader, modelPath);
   const modelRef = useRef<THREE.Group>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
   const actionRef = useRef<THREE.AnimationAction | null>(null);
-
   useEffect(() => {
     if (gltf && gltf.animations.length > 0) {
       const mixer = new THREE.AnimationMixer(gltf.scene);
@@ -75,8 +67,11 @@ const Model: FC<ModelProps> = ({ modelPath, progress }) => {
       // 居中模型
       const center = box.getCenter(new THREE.Vector3());
       modelRef.current.position.copy(center).multiplyScalar(-scale);
+      
+      // 设置初始旋转角度
+      modelRef.current.rotation.set(initialRotation[0], initialRotation[1], initialRotation[2]);
     }
-  }, [gltf]);
+  }, [gltf, initialRotation]);
 
   return (
     <group ref={modelRef}>
@@ -87,10 +82,8 @@ const Model: FC<ModelProps> = ({ modelPath, progress }) => {
 
 export const ProgressThreeD: FC<ProgressThreeDProps> = ({
   modelPath = "/assets/gltf/rubiks_cube.glb",
-  height = 400,
-  showProgress = true,
-  showInstructions = true,
   sensitivity = 0.0003, // 默认敏感度降低，让动画更慢
+  initialRotation = [0, 0, 0], // 默认无旋转
   onProgressChange
 }) => {
   const [progress, setProgress] = useState(0);
@@ -101,7 +94,7 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
   const handleWheel = useCallback((event: WheelEvent) => {
     event.preventDefault();
     
-    const delta = event.deltaY;
+    const delta = event.deltaY; // 正常滚轮方向
     const newProgress = Math.max(0, Math.min(1, progressRef.current + delta * sensitivity));
     
     progressRef.current = newProgress;
@@ -142,20 +135,34 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
   return (
     <div 
       ref={containerRef}
-      className={styles.progressThreeD} 
-      style={{ height: `${height}px` }}
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 1000,
+        background: 'transparent'
+      }}
     >
       <Canvas 
-        className={styles.canvas}
-        camera={{ position: [0, 0, 4], fov: 50 }}
-        gl={{ antialias: true }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
+        camera={{ position: [0, 0, 10], fov: 50 }}
+        gl={{ antialias: true, alpha: true }}
       >
         <OrbitControls 
           enableZoom={true} 
           enablePan={true} 
           enableRotate={true}
           maxDistance={10}
-          minDistance={2}
+          minDistance={3}
+          zoomSpeed={-1}
         />
         
         {/* 增强环境光 */}
@@ -190,20 +197,10 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
         <pointLight position={[0, -10, 0]} intensity={0.3} color="#ffffff" />
         
         {/* 3D模型 */}
-        <Model modelPath={modelPath} progress={progress} />
+        <Model modelPath={modelPath} progress={progress} initialRotation={initialRotation} />
       </Canvas>
       
-      {showProgress && (
-        <div className={styles.progressInfo}>
-          <div>进度: <span className={styles.progressValue}>{Math.round(progress * 100)}%</span></div>
-        </div>
-      )}
       
-      {showInstructions && (
-        <div className={styles.instructions}>
-          使用鼠标滚轮控制动画进度
-        </div>
-      )}
     </div>
   );
 };

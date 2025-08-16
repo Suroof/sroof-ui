@@ -19,21 +19,13 @@ const meta: Meta<typeof ProgressThreeD> = {
       control: 'text',
       description: 'GLB模型文件路径'
     },
-    height: {
-      control: 'number',
-      description: '组件高度（像素）'
-    },
-    showProgress: {
-      control: 'boolean',
-      description: '是否显示进度信息'
-    },
-    showInstructions: {
-      control: 'boolean',
-      description: '是否显示操作说明'
-    },
     sensitivity: {
       control: { type: 'range', min: 0.0001, max: 0.002, step: 0.0001 },
       description: '滚轮敏感度，值越小动画越慢'
+    },
+    initialRotation: {
+      control: 'object',
+      description: '初始旋转角度 [x, y, z] (弧度)'
     },
     onProgressChange: {
       action: 'progress-changed',
@@ -47,11 +39,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    height: 400,
     modelPath: '/assets/gltf/rubiks_cube.glb',
-    showProgress: true,
-    showInstructions: true,
-    sensitivity: 0.0003
+    sensitivity: 0.0003,
+    initialRotation: [0, 0, 0]
   },
   render: (args) => {
     const [progress, setProgress] = React.useState(0);
@@ -73,37 +63,75 @@ export const Default: Story = {
   }
 };
 
-export const CustomSize: Story = {
+export const YAxisRotation: Story = {
   args: {
-    height: 500,
     modelPath: '/assets/gltf/rubiks_cube.glb',
-    showProgress: true,
-    showInstructions: false
+    sensitivity: 0.0003,
+    initialRotation: [0, Math.PI / 4, 0] // Y轴旋转45度
   },
   render: (args) => (
-    <ProgressThreeD {...args} />
+    <div>
+      <ProgressThreeD {...args} />
+      <p style={{ marginTop: '10px', fontSize: '14px' }}>
+        Y轴旋转45度 - initialRotation: [0, π/4, 0]
+      </p>
+    </div>
   )
 };
 
-export const SmallSize: Story = {
+export const MultiAxisRotation: Story = {
   args: {
-    height: 200,
     modelPath: '/assets/gltf/rubiks_cube.glb',
-    showProgress: false,
-    showInstructions: false
+    sensitivity: 0.0003,
+    initialRotation: [Math.PI /8, Math.PI / 3, Math.PI / 12]
   },
   render: (args) => (
-    <ProgressThreeD {...args} />
+    <div>
+      <ProgressThreeD {...args} />
+      <p style={{ marginTop: '10px', fontSize: '14px' }}>
+        多轴旋转 - X:30°, Y:45°, Z:22.5°
+      </p>
+    </div>
+  )
+};
+
+export const UpsideDown: Story = {
+  args: {
+    modelPath: '/assets/gltf/rubiks_cube.glb',
+    sensitivity: 0.0003,
+    initialRotation: [0, Math.PI, 0] // Y轴旋转180度（倒置）
+  },
+  render: (args) => (
+    <div>
+      <ProgressThreeD {...args} />
+      <p style={{ marginTop: '10px', fontSize: '14px' }}>
+        倒置视角 - Y轴旋转180度
+      </p>
+    </div>
+  )
+};
+
+export const SlightTilt: Story = {
+  args: {
+    modelPath: '/assets/gltf/rubiks_cube.glb',
+    sensitivity: 0.0003,
+    initialRotation: [Math.PI / 12, Math.PI / 8, 0] // 轻微倾斜
+  },
+  render: (args) => (
+    <div>
+      <ProgressThreeD {...args} />
+      <p style={{ marginTop: '10px', fontSize: '14px' }}>
+        轻微倾斜 - X:15°, Y:22.5°
+      </p>
+    </div>
   )
 };
 
 export const SlowAnimation: Story = {
   args: {
-    height: 400,
     modelPath: '/assets/gltf/rubiks_cube.glb',
-    showProgress: true,
-    showInstructions: true,
-    sensitivity: 0.0001 // 非常慢的动画
+    sensitivity: 0.0001, // 非常慢的动画
+    initialRotation: [0, Math.PI / 6, 0]
   },
   render: (args) => (
     <div>
@@ -115,31 +143,11 @@ export const SlowAnimation: Story = {
   )
 };
 
-export const FastAnimation: Story = {
-  args: {
-    height: 400,
-    modelPath: '/assets/gltf/rubiks_cube.glb',
-    showProgress: true,
-    showInstructions: true,
-    sensitivity: 0.001 // 较快的动画
-  },
-  render: (args) => (
-    <div>
-      <ProgressThreeD {...args} />
-      <p style={{ marginTop: '10px', fontSize: '14px' }}>
-        快速动画模式 - 滚轮敏感度: 0.001
-      </p>
-    </div>
-  )
-};
-
 export const WithCallback: Story = {
   args: {
-    height: 400,
     modelPath: '/assets/gltf/rubiks_cube.glb',
-    showProgress: true,
-    showInstructions: true,
     sensitivity: 0.0003,
+    initialRotation: [0, 0, 0],
     onProgressChange: (progress: number) => {
       console.log('Progress changed:', progress);
     }

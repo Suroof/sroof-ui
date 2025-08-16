@@ -72,7 +72,6 @@ const sidebars: SidebarsConfig = {
       items: [
         'components/emergetext',
         'components/scrollreveal',
-        'components/lineMotion',
         'components/line',
       ],
     },
