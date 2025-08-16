@@ -14,7 +14,7 @@
 
 // 有关闭按钮时的样式调整
 .hasCloseBtn {
-  padding-right: 38px; // 为关闭按钮预留空间
+  padding-right: 38px; 
 }
 
 // 不同类型的样式
@@ -98,6 +98,11 @@
   line-height: 1;
   cursor: pointer;
   transition: all 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  writing-mode: horizontal-tb;
   
   &:hover {
     background-color: rgba(0, 0, 0, 0.06);
@@ -225,6 +230,9 @@
   
   .closeBtn {
     color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+    overflow-wrap:normal;
+    word-break: keep-all;
     
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);

@@ -11,7 +11,6 @@ const sidebars: SidebarsConfig = {
         'components/card',
         'components/avatar',
         'components/badge',
-        'components/tooltip',
       ],
     },
     {

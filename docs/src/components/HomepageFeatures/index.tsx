@@ -19,7 +19,7 @@ function ScrollCardCustomExample() {
       <ScrollCard
         items={cardData}
         cardWidth={400}
-        speed={10}
+        speed={30}
       />
     </div>
   );
