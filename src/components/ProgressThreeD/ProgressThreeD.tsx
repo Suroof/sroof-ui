@@ -93,7 +93,10 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
   const [isActive, setIsActive] = useState(false);
 
   const handleWheel = useCallback((event: WheelEvent) => {
-    if (!isActive) return;
+    // 如果组件不活跃或进度已达到100%，允许页面正常滚动
+    if (!isActive || progressRef.current >= 1) {
+      return;
+    }
     
     event.preventDefault();
     
@@ -124,13 +127,10 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // 如果进度已达到100%，重置进度
-          if (progressRef.current >= 1) {
-            progressRef.current = 0;
-            setProgress(0);
-            onProgressChange?.(0);
+          // 只有在进度未达到100%时才激活组件
+          if (progressRef.current < 1) {
+            setIsActive(true);
           }
-          setIsActive(true);
         } else {
           setIsActive(false);
         }
@@ -154,7 +154,7 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
     
     // 阻止容器内的默认滚动行为
     const preventScroll = (e: Event) => {
-      if (isScrollingRef.current && isActive) {
+      if (isScrollingRef.current && isActive && progressRef.current < 1) {
         e.preventDefault();
       }
     };
@@ -176,6 +176,7 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
         position: 'relative',
         width: '100vw',
         height: '100vh',
+        minHeight: '400px',
         background: 'transparent',
         overflow: 'hidden'
       }}
@@ -192,9 +193,9 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
         gl={{ antialias: true, alpha: true }}
       >
         <OrbitControls 
-          enableZoom={true} 
-          enablePan={true} 
-          enableRotate={true}
+          enableZoom={isActive && progress < 1} 
+          enablePan={isActive && progress < 1} 
+          enableRotate={isActive && progress < 1}
           maxDistance={10}
           minDistance={4}
           zoomSpeed={-1}
