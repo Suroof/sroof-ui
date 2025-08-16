@@ -9,6 +9,8 @@ interface ChildProps {
     onFocus?: EventHandler;
     onBlur?: EventHandler;
     ref?: React.Ref<HTMLElement>;
+    tabIndex?: number;
+    'aria-describedby'?: string;
 }
 export interface TooltipProps {
     /** 提示内容 */

@@ -1,0 +1,77 @@
+---
+sidebar_position: 2
+---
+
+# Alert 警告提示
+
+用于页面中展示重要的提示信息。
+
+## 基本用法
+
+```jsx live
+function AlertExample() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <Alert type="info">这是一条信息提示</Alert>
+      <Alert type="success">这是一条成功提示</Alert>
+      <Alert type="warning">这是一条警告提示</Alert>
+      <Alert type="error">这是一条错误提示</Alert>
+    </div>
+  );
+}
+```
+
+## 可关闭的警告
+
+```jsx live
+function AlertClosableExample() {
+  const [visible, setVisible] = React.useState(true);
+  
+  return (
+    <div>
+      {visible && (
+        <Alert 
+          type="warning" 
+          closable 
+          onClose={() => setVisible(false)}
+        >
+          这是一条可关闭的警告提示
+        </Alert>
+      )}
+      {!visible && (
+        <Button onClick={() => setVisible(true)}>重新显示警告</Button>
+      )}
+    </div>
+  );
+}
+```
+
+## 带图标的警告
+
+```jsx live
+function AlertWithIconExample() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <Alert type="info" showIcon>这是一条带图标的信息提示</Alert>
+      <Alert type="success" showIcon>这是一条带图标的成功提示</Alert>
+      <Alert type="warning" showIcon>这是一条带图标的警告提示</Alert>
+      <Alert type="error" showIcon>这是一条带图标的错误提示</Alert>
+    </div>
+  );
+}
+```
+
+## API
+
+### Alert Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| type | 警告类型 | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` |
+| message | 警告内容 | `React.ReactNode` | - |
+| description | 警告辅助性文字介绍 | `React.ReactNode` | - |
+| closable | 是否可关闭 | `boolean` | `false` |
+| showIcon | 是否显示图标 | `boolean` | `false` |
+| onClose | 关闭时触发的回调函数 | `() => void` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |

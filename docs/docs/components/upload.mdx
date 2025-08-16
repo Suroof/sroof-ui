@@ -1,0 +1,296 @@
+---
+sidebar_position: 10
+---
+
+# Upload 上传
+
+文件选择上传和拖拽上传控件。
+
+## 基本用法
+
+```jsx live
+function UploadExample() {
+  const handleChange = (info) => {
+    console.log('文件信息:', info);
+  };
+  
+  return (
+    <Upload onChange={handleChange}>
+      <Button>点击上传</Button>
+    </Upload>
+  );
+}
+```
+
+## 拖拽上传
+
+```jsx live
+function UploadDragExample() {
+  const handleChange = (info) => {
+    console.log('拖拽上传:', info);
+  };
+  
+  return (
+    <Upload.Dragger 
+      onChange={handleChange}
+      style={{ padding: '20px' }}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ fontSize: '48px', margin: '0' }}>📁</p>
+        <p>点击或拖拽文件到此区域上传</p>
+        <p style={{ color: '#999' }}>支持单个或批量上传</p>
+      </div>
+    </Upload.Dragger>
+  );
+}
+```
+
+## 文件列表
+
+```jsx live
+function UploadListExample() {
+  const [fileList, setFileList] = React.useState([
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPiUjhimbqI.gif',
+    },
+    {
+      uid: '-2',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPiUjhimbqI.gif',
+    }
+  ]);
+  
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+  
+  return (
+    <Upload
+      fileList={fileList}
+      onChange={handleChange}
+      listType="picture"
+    >
+      <Button>上传文件</Button>
+    </Upload>
+  );
+}
+```
+
+## 照片墙
+
+```jsx live
+function UploadPictureCardExample() {
+  const [fileList, setFileList] = React.useState([
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPiUjhimbqI.gif',
+    }
+  ]);
+  
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+  
+  const uploadButton = (
+    <div>
+      <div style={{ fontSize: '16px' }}>+</div>
+      <div style={{ marginTop: 8 }}>上传</div>
+    </div>
+  );
+  
+  return (
+    <Upload
+      fileList={fileList}
+      onChange={handleChange}
+      listType="picture-card"
+    >
+      {fileList.length >= 8 ? null : uploadButton}
+    </Upload>
+  );
+}
+```
+
+## 手动上传
+
+```jsx live
+function UploadManualExample() {
+  const [fileList, setFileList] = React.useState([]);
+  const [uploading, setUploading] = React.useState(false);
+  
+  const handleUpload = () => {
+    setUploading(true);
+    
+    // 模拟上传过程
+    setTimeout(() => {
+      setUploading(false);
+      setFileList([]);
+      alert('上传成功！');
+    }, 2000);
+  };
+  
+  const props = {
+    onRemove: (file) => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      newFileList.splice(index, 1);
+      setFileList(newFileList);
+    },
+    beforeUpload: (file) => {
+      setFileList([...fileList, file]);
+      return false;
+    },
+    fileList,
+  };
+  
+  return (
+    <div>
+      <Upload {...props}>
+        <Button>选择文件</Button>
+      </Upload>
+      <Button
+        type="primary"
+        onClick={handleUpload}
+        disabled={fileList.length === 0}
+        loading={uploading}
+        style={{ marginTop: 16 }}
+      >
+        {uploading ? '上传中' : '开始上传'}
+      </Button>
+    </div>
+  );
+}
+```
+
+## 限制文件类型和大小
+
+```jsx live
+function UploadRestrictExample() {
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      alert('只能上传 JPG/PNG 文件!');
+      return false;
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      alert('图片必须小于 2MB!');
+      return false;
+    }
+    return true;
+  };
+  
+  return (
+    <Upload
+      beforeUpload={beforeUpload}
+      accept=".jpg,.jpeg,.png"
+    >
+      <Button>上传图片 (JPG/PNG, < 2MB)</Button>
+    </Upload>
+  );
+}
+```
+
+## 自定义上传列表
+
+```jsx live
+function UploadCustomListExample() {
+  const [fileList, setFileList] = React.useState([]);
+  
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+  
+  const itemRender = (originNode, file, currFileList) => {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        padding: '8px', 
+        border: '1px solid #d9d9d9', 
+        borderRadius: '4px',
+        marginBottom: '8px'
+      }}>
+        <span style={{ marginRight: '8px' }}>📄</span>
+        <span style={{ flex: 1 }}>{file.name}</span>
+        <span style={{ color: '#999', fontSize: '12px' }}>
+          {file.status === 'uploading' && '上传中...'}
+          {file.status === 'done' && '✅'}
+          {file.status === 'error' && '❌'}
+        </span>
+      </div>
+    );
+  };
+  
+  return (
+    <Upload
+      fileList={fileList}
+      onChange={handleChange}
+      itemRender={itemRender}
+    >
+      <Button>上传文件</Button>
+    </Upload>
+  );
+}
+```
+
+## API
+
+### Upload Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| accept | 接受上传的文件类型 | `string` | - |
+| action | 上传的地址 | `string \| (file) => string \| Promise<string>` | - |
+| beforeUpload | 上传文件之前的钩子 | `(file, fileList) => boolean \| Promise<File>` | - |
+| className | 自定义类名 | `string` | - |
+| customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | `(options) => void` | - |
+| data | 上传所需额外参数或返回上传额外参数的方法 | `object \| (file) => object \| Promise<object>` | - |
+| defaultFileList | 默认已经上传的文件列表 | `UploadFile[]` | - |
+| directory | 支持上传文件夹 | `boolean` | `false` |
+| disabled | 是否禁用 | `boolean` | `false` |
+| fileList | 已经上传的文件列表（受控） | `UploadFile[]` | - |
+| headers | 设置上传的请求头部 | `object` | - |
+| itemRender | 自定义上传列表项 | `(originNode, file, fileList, actions) => React.ReactNode` | - |
+| listType | 上传列表的内建样式 | `'text' \| 'picture' \| 'picture-card'` | `'text'` |
+| maxCount | 限制上传数量 | `number` | - |
+| method | 上传请求的 http method | `string` | `'post'` |
+| multiple | 是否支持多选文件 | `boolean` | `false` |
+| name | 发到后台的文件参数名 | `string` | `'file'` |
+| openFileDialogOnClick | 点击打开文件对话框 | `boolean` | `true` |
+| previewFile | 自定义文件预览逻辑 | `(file: File \| Blob) => Promise<dataURL: string>` | - |
+| progress | 自定义进度条样式 | `ProgressProps` | - |
+| showUploadList | 是否展示文件列表 | `boolean \| ShowUploadListInterface` | `true` |
+| style | 自定义样式 | `React.CSSProperties` | - |
+| withCredentials | 上传请求时是否携带 cookie | `boolean` | `false` |
+| onChange | 上传文件改变时的回调 | `(info: UploadChangeParam) => void` | - |
+| onDrop | 当文件被拖入上传区域时执行的回调功能 | `(event: React.DragEvent) => void` | - |
+| onDownload | 点击下载文件时的回调 | `(file: UploadFile) => void` | - |
+| onPreview | 点击文件链接或预览图标时的回调 | `(file: UploadFile) => void` | - |
+| onRemove | 点击移除文件时的回调 | `(file: UploadFile) => boolean \| Promise<boolean>` | - |
+
+### Upload.Dragger Props
+
+继承 Upload 的所有属性。
+
+### UploadFile
+
+| 属性 | 说明 | 类型 |
+| --- | --- | --- |
+| uid | 文件唯一标识符 | `string` |
+| name | 文件名 | `string` |
+| status | 上传状态 | `'uploading' \| 'done' \| 'error' \| 'removed'` |
+| response | 服务端响应内容 | `any` |
+| linkProps | 下载链接额外的 HTML 属性 | `any` |
+| type | 文件类型 | `string` |
+| size | 文件大小 | `number` |
+| percent | 上传进度 | `number` |
+| thumbUrl | 缩略图地址 | `string` |
+| url | 文件地址 | `string` |
+| preview | 预览地址 | `string` |
+| originFileObj | 原始文件对象 | `File` |

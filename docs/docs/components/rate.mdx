@@ -1,0 +1,174 @@
+---
+sidebar_position: 8
+---
+
+# Rate 评分
+
+评分组件，用于对事物进行评级操作。
+
+## 基本用法
+
+```jsx live
+function RateExample() {
+  const [value, setValue] = React.useState(3);
+  
+  return (
+    <div>
+      <Rate value={value} onChange={setValue} />
+      <div style={{ marginTop: '8px' }}>当前评分: {value} 星</div>
+    </div>
+  );
+}
+```
+
+## 半星
+
+```jsx live
+function RateHalfExample() {
+  const [value, setValue] = React.useState(2.5);
+  
+  return (
+    <div>
+      <Rate value={value} onChange={setValue} allowHalf />
+      <div style={{ marginTop: '8px' }}>当前评分: {value} 星</div>
+    </div>
+  );
+}
+```
+
+## 只读
+
+```jsx live
+function RateReadOnlyExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Rate value={4} disabled />
+      <Rate value={3.5} allowHalf disabled />
+      <Rate value={2} disabled />
+    </div>
+  );
+}
+```
+
+## 清除功能
+
+```jsx live
+function RateClearExample() {
+  const [value, setValue] = React.useState(3);
+  
+  return (
+    <div>
+      <Rate value={value} onChange={setValue} allowClear />
+      <div style={{ marginTop: '8px' }}>
+        当前评分: {value || '未评分'}
+        {value && (
+          <Button 
+            size="small" 
+            style={{ marginLeft: '8px' }}
+            onClick={() => setValue(0)}
+          >
+            清除
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+## 自定义字符
+
+```jsx live
+function RateCustomExample() {
+  const [value1, setValue1] = React.useState(3);
+  const [value2, setValue2] = React.useState(2);
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div>
+        <Rate value={value1} onChange={setValue1} character="❤️" />
+        <div style={{ marginTop: '8px' }}>爱心评分: {value1}</div>
+      </div>
+      
+      <div>
+        <Rate value={value2} onChange={setValue2} character="👍" />
+        <div style={{ marginTop: '8px' }}>点赞评分: {value2}</div>
+      </div>
+    </div>
+  );
+}
+```
+
+## 不同尺寸
+
+```jsx live
+function RateSizeExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div>
+        <div>小尺寸</div>
+        <Rate value={3} size="small" />
+      </div>
+      
+      <div>
+        <div>默认尺寸</div>
+        <Rate value={3} />
+      </div>
+      
+      <div>
+        <div>大尺寸</div>
+        <Rate value={3} size="large" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 带文字说明
+
+```jsx live
+function RateWithTextExample() {
+  const [value, setValue] = React.useState(3);
+  const desc = ['很差', '差', '一般', '好', '很好'];
+  
+  return (
+    <div>
+      <Rate value={value} onChange={setValue} />
+      <div style={{ marginTop: '8px' }}>
+        {value ? desc[value - 1] : '未评分'}
+      </div>
+    </div>
+  );
+}
+```
+
+## API
+
+### Rate Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| allowClear | 是否允许再次点击后清除 | `boolean` | `true` |
+| allowHalf | 是否允许半选 | `boolean` | `false` |
+| autoFocus | 自动获取焦点 | `boolean` | `false` |
+| character | 自定义字符 | `React.ReactNode` | `★` |
+| className | 自定义样式类名 | `string` | - |
+| count | star 总数 | `number` | `5` |
+| defaultValue | 默认值 | `number` | `0` |
+| disabled | 只读，无法进行交互 | `boolean` | `false` |
+| size | 组件大小 | `'small' \| 'default' \| 'large'` | `'default'` |
+| style | 自定义样式对象 | `React.CSSProperties` | - |
+| tooltips | 自定义每项的提示信息 | `string[]` | - |
+| value | 当前数，受控值 | `number` | - |
+| onBlur | 失去焦点时的回调 | `() => void` | - |
+| onChange | 选择时的回调 | `(value: number) => void` | - |
+| onFocus | 获取焦点时的回调 | `() => void` | - |
+| onHoverChange | 鼠标经过时数值变化的回调 | `(value: number) => void` | - |
+| onKeyDown | 按键回调 | `(event: React.KeyboardEvent) => void` | - |
+
+## 方法
+
+| 名称 | 描述 |
+| --- | --- |
+| blur() | 移除焦点 |
+| focus() | 获取焦点 |

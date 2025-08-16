@@ -1,4 +1,3 @@
-export { default as Steps } from './Steps';
-export type { StepsProps, StepProps } from './Steps';
-export { Step } from './Steps';
+export { default } from './Steps';
+export type { StepsProps, StepItem } from './Steps';
 //# sourceMappingURL=index.d.ts.map

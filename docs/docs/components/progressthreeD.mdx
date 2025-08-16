@@ -1,0 +1,189 @@
+---
+sidebar_position: 7
+---
+
+# ProgressThreeD 3D进度条
+
+基于Three.js的3D进度条组件，提供炫酷的3D视觉效果。
+
+## 基本用法
+
+```jsx live
+function ProgressThreeDExample() {
+  const [progress, setProgress] = React.useState(0.3);
+  
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        const next = prev + 0.01;
+        return next > 1 ? 0 : next;
+      });
+    }, 100);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  return (
+    <div style={{ height: '300px', width: '100%' }}>
+      <ProgressThreeD 
+        progress={progress}
+        width={600}
+        height={300}
+      />
+    </div>
+  );
+}
+```
+
+## 自定义颜色
+
+```jsx live
+function ProgressThreeDColorExample() {
+  const [progress, setProgress] = React.useState(0.6);
+  
+  return (
+    <div style={{ height: '300px', width: '100%' }}>
+      <ProgressThreeD 
+        progress={progress}
+        width={600}
+        height={300}
+        color="#ff6b6b"
+        backgroundColor="#4ecdc4"
+      />
+      <div style={{ marginTop: '16px', textAlign: 'center' }}>
+        <input 
+          type="range" 
+          min="0" 
+          max="1" 
+          step="0.01" 
+          value={progress}
+          onChange={(e) => setProgress(parseFloat(e.target.value))}
+          style={{ width: '300px' }}
+        />
+        <div>进度: {Math.round(progress * 100)}%</div>
+      </div>
+    </div>
+  );
+}
+```
+
+## 不同形状
+
+```jsx live
+function ProgressThreeDShapeExample() {
+  const [progress, setProgress] = React.useState(0.75);
+  
+  return (
+    <div>
+      <div style={{ height: '250px', width: '100%', marginBottom: '20px' }}>
+        <h4>圆形进度条</h4>
+        <ProgressThreeD 
+          progress={progress}
+          width={500}
+          height={200}
+          shape="circle"
+        />
+      </div>
+      
+      <div style={{ height: '250px', width: '100%' }}>
+        <h4>条形进度条</h4>
+        <ProgressThreeD 
+          progress={progress}
+          width={500}
+          height={200}
+          shape="bar"
+        />
+      </div>
+      
+      <div style={{ marginTop: '16px', textAlign: 'center' }}>
+        <input 
+          type="range" 
+          min="0" 
+          max="1" 
+          step="0.01" 
+          value={progress}
+          onChange={(e) => setProgress(parseFloat(e.target.value))}
+          style={{ width: '300px' }}
+        />
+        <div>进度: {Math.round(progress * 100)}%</div>
+      </div>
+    </div>
+  );
+}
+```
+
+## 动画效果
+
+```jsx live
+function ProgressThreeDAnimationExample() {
+  const [progress, setProgress] = React.useState(0);
+  const [isAnimating, setIsAnimating] = React.useState(false);
+  
+  const startAnimation = () => {
+    setIsAnimating(true);
+    setProgress(0);
+    
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        const next = prev + 0.02;
+        if (next >= 1) {
+          clearInterval(timer);
+          setIsAnimating(false);
+          return 1;
+        }
+        return next;
+      });
+    }, 50);
+  };
+  
+  return (
+    <div>
+      <div style={{ height: '300px', width: '100%' }}>
+        <ProgressThreeD 
+          progress={progress}
+          width={600}
+          height={300}
+          animated={true}
+          animationSpeed={2}
+        />
+      </div>
+      
+      <div style={{ marginTop: '16px', textAlign: 'center' }}>
+        <Button 
+          onClick={startAnimation} 
+          disabled={isAnimating}
+        >
+          {isAnimating ? '动画进行中...' : '开始动画'}
+        </Button>
+        <div style={{ marginTop: '8px' }}>进度: {Math.round(progress * 100)}%</div>
+      </div>
+    </div>
+  );
+}
+```
+
+## API
+
+### ProgressThreeD Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| progress | 进度值，范围 0-1 | `number` | `0` |
+| width | 画布宽度 | `number` | `400` |
+| height | 画布高度 | `number` | `200` |
+| color | 进度条颜色 | `string` | `'#1890ff'` |
+| backgroundColor | 背景颜色 | `string` | `'#f0f0f0'` |
+| shape | 进度条形状 | `'bar' \| 'circle' \| 'sphere'` | `'bar'` |
+| animated | 是否启用动画 | `boolean` | `false` |
+| animationSpeed | 动画速度 | `number` | `1` |
+| showPercentage | 是否显示百分比文字 | `boolean` | `true` |
+| onChange | 进度变化回调 | `(progress: number) => void` | - |
+| onComplete | 进度完成回调 | `() => void` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |
+
+## 注意事项
+
+- 该组件基于 Three.js 实现，首次加载可能需要一些时间
+- 建议在容器中设置固定的宽高以获得最佳显示效果
+- 在移动设备上可能存在性能问题，建议适当降低画布尺寸

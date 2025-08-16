@@ -1,0 +1,161 @@
+---
+sidebar_position: 6
+---
+
+# Modal 对话框
+
+模态对话框，在浮层中显示，引导用户进行相关操作。
+
+## 基本用法
+
+```jsx live
+function ModalExample() {
+  const [visible, setVisible] = React.useState(false);
+  
+  return (
+    <div>
+      <Button onClick={() => setVisible(true)}>打开对话框</Button>
+      <Modal
+        title="基本对话框"
+        visible={visible}
+        onOk={() => setVisible(false)}
+        onCancel={() => setVisible(false)}
+      >
+        <p>这是一个基本的对话框内容。</p>
+        <p>你可以在这里放置任何内容。</p>
+      </Modal>
+    </div>
+  );
+}
+```
+
+## 异步关闭
+
+```jsx live
+function ModalAsyncExample() {
+  const [visible, setVisible] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setVisible(false);
+    }, 2000);
+  };
+  
+  return (
+    <div>
+      <Button onClick={() => setVisible(true)}>异步关闭</Button>
+      <Modal
+        title="异步关闭对话框"
+        visible={visible}
+        confirmLoading={loading}
+        onOk={handleOk}
+        onCancel={() => setVisible(false)}
+      >
+        <p>点击确定后，对话框将在2秒后关闭。</p>
+      </Modal>
+    </div>
+  );
+}
+```
+
+## 自定义页脚
+
+```jsx live
+function ModalCustomFooterExample() {
+  const [visible, setVisible] = React.useState(false);
+  
+  return (
+    <div>
+      <Button onClick={() => setVisible(true)}>自定义页脚</Button>
+      <Modal
+        title="自定义页脚"
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        footer={[
+          <Button key="back" onClick={() => setVisible(false)}>
+            返回
+          </Button>,
+          <Button key="submit" variant="primary" onClick={() => setVisible(false)}>
+            提交
+          </Button>,
+        ]}
+      >
+        <p>这是一个自定义页脚的对话框。</p>
+      </Modal>
+    </div>
+  );
+}
+```
+
+## 信息提示
+
+```jsx live
+function ModalInfoExample() {
+  const showInfo = () => {
+    Modal.info({
+      title: '这是一个信息提示',
+      content: '这里是信息内容，可以是文字或者其他组件。',
+      onOk() {
+        console.log('确定');
+      },
+    });
+  };
+  
+  const showConfirm = () => {
+    Modal.confirm({
+      title: '确认删除',
+      content: '删除后无法恢复，确定要删除吗？',
+      onOk() {
+        console.log('确认删除');
+      },
+      onCancel() {
+        console.log('取消删除');
+      },
+    });
+  };
+  
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button onClick={showInfo}>信息提示</Button>
+      <Button onClick={showConfirm}>确认对话框</Button>
+    </div>
+  );
+}
+```
+
+## API
+
+### Modal Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| visible | 对话框是否可见 | `boolean` | `false` |
+| title | 标题 | `React.ReactNode` | - |
+| closable | 是否显示右上角的关闭按钮 | `boolean` | `true` |
+| onOk | 点击确定回调 | `(e: React.MouseEvent) => void` | - |
+| onCancel | 点击遮罩层或右上角叉或取消按钮的回调 | `(e: React.MouseEvent) => void` | - |
+| width | 宽度 | `string \| number` | `520` |
+| footer | 底部内容 | `React.ReactNode` | 确定取消按钮 |
+| confirmLoading | 确定按钮 loading | `boolean` | `false` |
+| destroyOnClose | 关闭时销毁 Modal 里的子元素 | `boolean` | `false` |
+| mask | 是否展示遮罩 | `boolean` | `true` |
+| maskClosable | 点击蒙层是否允许关闭 | `boolean` | `true` |
+| keyboard | 是否支持键盘 esc 关闭 | `boolean` | `true` |
+| centered | 垂直居中展示 Modal | `boolean` | `false` |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |
+
+### Modal.method()
+
+包括：
+
+- `Modal.info`
+- `Modal.success`
+- `Modal.error`
+- `Modal.warning`
+- `Modal.confirm`
+
+以上均为一次性声明式的弹窗，返回值为关闭函数。

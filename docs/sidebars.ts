@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
   // 手动定义侧边栏结构
@@ -22,6 +22,17 @@ const sidebars: SidebarsConfig = {
         'components/emergetext',
         'components/float',
         'components/line',
+        'components/slider',
+        'components/skeleton',
+        'components/tooltip',
+        'components/upload',
+        'components/progressthreeD',
+        'components/rate',
+        'components/modal',
+        'components/badge',
+        'components/alert',
+        'components/avatar',
+        'components/breadcrumb',
       ],
     },
     {

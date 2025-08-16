@@ -15,43 +15,36 @@ export interface SliderProps {
     /** 最大值 */
     max?: number;
     /** 步长 */
-    step?: number | null;
-    /** 是否禁用 */
-    disabled?: boolean;
+    step?: number;
     /** 是否为范围选择器 */
     range?: boolean;
+    /** 是否禁用 */
+    disabled?: boolean;
     /** 是否垂直方向 */
     vertical?: boolean;
-    /** 是否包含关系 */
-    included?: boolean;
-    /** 是否显示工具提示 */
-    tooltip?: {
-        /** 是否显示 */
-        open?: boolean;
-        /** 格式化函数 */
-        formatter?: (value?: number) => React.ReactNode;
-        /** 位置 */
-        placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
-    };
-    /** 刻度标记 */
+    /** 是否反向 */
+    reverse?: boolean;
+    /** 是否显示标记 */
     marks?: SliderMarks;
-    /** 是否只能拖拽到刻度上 */
+    /** 是否显示点 */
     dots?: boolean;
-    /** 自定义类名 */
+    /** 是否显示提示信息 */
+    tooltip?: boolean | 'always';
+    /** 提示信息格式化函数 */
+    tipFormatter?: (value: number) => React.ReactNode;
+    /** 是否自动聚焦 */
+    autoFocus?: boolean;
+    /** 值变化时的回调 */
+    onChange?: (value: number | [number, number]) => void;
+    /** 拖拽结束后的回调 */
+    onAfterChange?: (value: number | [number, number]) => void;
+    /** 拖拽完成后的回调 */
+    onChangeComplete?: (value: number | [number, number]) => void;
+    /** 自定义样式类名 */
     className?: string;
     /** 自定义样式 */
     style?: React.CSSProperties;
-    /** 值变化时的回调 */
-    onChange?: (value: number | [number, number]) => void;
-    /** 拖拽开始时的回调 */
-    onAfterChange?: (value: number | [number, number]) => void;
-    /** 拖拽时的回调 */
-    onChangeComplete?: (value: number | [number, number]) => void;
-    /** 自动获取焦点 */
-    autoFocus?: boolean;
-    /** 反向坐标轴 */
-    reverse?: boolean;
 }
 declare const Slider: React.FC<SliderProps>;
-export { Slider };
+export default Slider;
 //# sourceMappingURL=Slider.d.ts.map

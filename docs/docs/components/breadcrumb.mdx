@@ -1,0 +1,107 @@
+---
+sidebar_position: 5
+---
+
+# Breadcrumb 面包屑
+
+显示当前页面在系统层级结构中的位置，并能向上返回。
+
+## 基本用法
+
+```jsx live
+function BreadcrumbExample() {
+  return (
+    <Breadcrumb>
+      <Breadcrumb.Item>首页</Breadcrumb.Item>
+      <Breadcrumb.Item>应用中心</Breadcrumb.Item>
+      <Breadcrumb.Item>应用列表</Breadcrumb.Item>
+      <Breadcrumb.Item>某应用</Breadcrumb.Item>
+    </Breadcrumb>
+  );
+}
+```
+
+## 带链接的面包屑
+
+```jsx live
+function BreadcrumbWithLinkExample() {
+  return (
+    <Breadcrumb>
+      <Breadcrumb.Item href="/">
+        <span>首页</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item href="/apps">
+        <span>应用中心</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item href="/apps/list">
+        <span>应用列表</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item>某应用</Breadcrumb.Item>
+    </Breadcrumb>
+  );
+}
+```
+
+## 自定义分隔符
+
+```jsx live
+function BreadcrumbSeparatorExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Breadcrumb separator=">">
+        <Breadcrumb.Item>首页</Breadcrumb.Item>
+        <Breadcrumb.Item>应用中心</Breadcrumb.Item>
+        <Breadcrumb.Item>应用列表</Breadcrumb.Item>
+        <Breadcrumb.Item>某应用</Breadcrumb.Item>
+      </Breadcrumb>
+      
+      <Breadcrumb separator="|">
+        <Breadcrumb.Item>首页</Breadcrumb.Item>
+        <Breadcrumb.Item>应用中心</Breadcrumb.Item>
+        <Breadcrumb.Item>应用列表</Breadcrumb.Item>
+        <Breadcrumb.Item>某应用</Breadcrumb.Item>
+      </Breadcrumb>
+    </div>
+  );
+}
+```
+
+## 带图标的面包屑
+
+```jsx live
+function BreadcrumbWithIconExample() {
+  return (
+    <Breadcrumb>
+      <Breadcrumb.Item>
+        <span>🏠 首页</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item>
+        <span>📱 应用中心</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item>
+        <span>📋 应用列表</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item>某应用</Breadcrumb.Item>
+    </Breadcrumb>
+  );
+}
+```
+
+## API
+
+### Breadcrumb Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| separator | 分隔符自定义 | `React.ReactNode` | `'/'` |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |
+
+### Breadcrumb.Item Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| href | 链接的目的地 | `string` | - |
+| onClick | 单击事件 | `(event: React.MouseEvent) => void` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |

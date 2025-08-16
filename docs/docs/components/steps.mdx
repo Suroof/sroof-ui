@@ -1,0 +1,278 @@
+---
+sidebar_position: 9
+---
+
+# Steps 步骤条
+
+引导用户按照流程完成任务的导航条。
+
+## 基本用法
+
+```jsx live
+function StepsExample() {
+  const [current, setCurrent] = React.useState(1);
+  
+  const steps = [
+    {
+      title: '已完成',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '进行中',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '待运行',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '待运行',
+      description: '这里是该步骤的描述信息'
+    }
+  ];
+  
+  return (
+    <div>
+      <Steps current={current} items={steps} />
+      <div style={{ marginTop: '16px' }}>
+        <Button 
+          onClick={() => setCurrent(Math.max(0, current - 1))}
+          disabled={current === 0}
+        >
+          上一步
+        </Button>
+        <Button 
+          style={{ marginLeft: '8px' }}
+          onClick={() => setCurrent(Math.min(steps.length - 1, current + 1))}
+          disabled={current === steps.length - 1}
+        >
+          下一步
+        </Button>
+      </div>
+    </div>
+  );
+}
+```
+
+## 迷你版
+
+```jsx live
+function StepsSmallExample() {
+  const steps = [
+    { title: '已完成' },
+    { title: '进行中' },
+    { title: '待运行' },
+    { title: '待运行' }
+  ];
+  
+  return (
+    <Steps current={1} size="small" items={steps} />
+  );
+}
+```
+
+## 带图标的步骤条
+
+```jsx live
+function StepsWithIconExample() {
+  const steps = [
+    {
+      title: '登录',
+      status: 'finish',
+      icon: '👤'
+    },
+    {
+      title: '验证',
+      status: 'process',
+      icon: '🔐'
+    },
+    {
+      title: '支付',
+      status: 'wait',
+      icon: '💳'
+    },
+    {
+      title: '完成',
+      status: 'wait',
+      icon: '✅'
+    }
+  ];
+  
+  return (
+    <Steps current={1} items={steps} />
+  );
+}
+```
+
+## 竖直方向的步骤条
+
+```jsx live
+function StepsVerticalExample() {
+  const steps = [
+    {
+      title: '已完成',
+      description: '这里是该步骤的描述信息，可以很长很长',
+      status: 'finish'
+    },
+    {
+      title: '进行中',
+      description: '这里是该步骤的描述信息，可以很长很长',
+      status: 'process'
+    },
+    {
+      title: '待运行',
+      description: '这里是该步骤的描述信息，可以很长很长',
+      status: 'wait'
+    }
+  ];
+  
+  return (
+    <Steps 
+      current={1} 
+      direction="vertical" 
+      items={steps}
+      style={{ maxWidth: '400px' }}
+    />
+  );
+}
+```
+
+## 步骤运行错误
+
+```jsx live
+function StepsErrorExample() {
+  const steps = [
+    {
+      title: '已完成',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '进行中',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '待运行',
+      description: '这里是该步骤的描述信息'
+    }
+  ];
+  
+  return (
+    <Steps current={1} status="error" items={steps} />
+  );
+}
+```
+
+## 点状步骤条
+
+```jsx live
+function StepsDotExample() {
+  const [current, setCurrent] = React.useState(1);
+  
+  const steps = [
+    {
+      title: '已完成',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '进行中',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '待运行',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '待运行',
+      description: '这里是该步骤的描述信息'
+    }
+  ];
+  
+  return (
+    <div>
+      <Steps 
+        current={current} 
+        progressDot 
+        items={steps}
+      />
+      <div style={{ marginTop: '16px' }}>
+        <Button 
+          onClick={() => setCurrent(Math.max(0, current - 1))}
+          disabled={current === 0}
+        >
+          上一步
+        </Button>
+        <Button 
+          style={{ marginLeft: '8px' }}
+          onClick={() => setCurrent(Math.min(steps.length - 1, current + 1))}
+          disabled={current === steps.length - 1}
+        >
+          下一步
+        </Button>
+      </div>
+    </div>
+  );
+}
+```
+
+## 可点击的步骤条
+
+```jsx live
+function StepsClickableExample() {
+  const [current, setCurrent] = React.useState(0);
+  
+  const steps = [
+    {
+      title: '第一步',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '第二步',
+      description: '这里是该步骤的描述信息'
+    },
+    {
+      title: '第三步',
+      description: '这里是该步骤的描述信息'
+    }
+  ];
+  
+  return (
+    <Steps 
+      current={current} 
+      items={steps}
+      onChange={setCurrent}
+    />
+  );
+}
+```
+
+## API
+
+### Steps Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| className | 步骤条类名 | `string` | - |
+| current | 指定当前步骤，从 0 开始记数 | `number` | `0` |
+| direction | 指定步骤条方向 | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| initial | 起始序号，从 0 开始记数 | `number` | `0` |
+| items | 配置选项卡内容 | `StepItem[]` | `[]` |
+| labelPlacement | 指定标签放置位置 | `'horizontal' \| 'vertical'` | `'horizontal'` |
+| percent | 当前 `process` 步骤显示的进度条进度（只对基本类型的 Steps 生效） | `number` | - |
+| progressDot | 点状步骤条 | `boolean \| (iconDot, {index, status, title, description}) => React.ReactNode` | `false` |
+| responsive | 当屏幕宽度小于 532px 时自动变为垂直模式 | `boolean` | `true` |
+| size | 指定大小 | `'default' \| 'small'` | `'default'` |
+| status | 指定当前步骤的状态 | `'wait' \| 'process' \| 'finish' \| 'error'` | `'process'` |
+| style | 自定义样式 | `React.CSSProperties` | - |
+| type | 步骤条类型 | `'default' \| 'navigation'` | `'default'` |
+| onChange | 点击切换步骤时触发 | `(current: number) => void` | - |
+
+### StepItem
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| description | 步骤的详情描述 | `React.ReactNode` | - |
+| disabled | 禁用点击 | `boolean` | `false` |
+| icon | 步骤图标的类型 | `React.ReactNode` | - |
+| status | 指定状态 | `'wait' \| 'process' \| 'finish' \| 'error'` | `'wait'` |
+| subTitle | 子标题 | `React.ReactNode` | - |
+| title | 标题 | `React.ReactNode` | - |

@@ -1,0 +1,105 @@
+---
+sidebar_position: 4
+---
+
+# Badge 徽标数
+
+图标右上角的圆形徽标数字。
+
+## 基本用法
+
+```jsx live
+function BadgeExample() {
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+      <Badge count={5}>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge count={0} showZero>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge count={99}>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+    </div>
+  );
+}
+```
+
+## 封顶数字
+
+```jsx live
+function BadgeOverflowExample() {
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+      <Badge count={99}>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge count={100}>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge count={99} overflowCount={10}>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge count={1000} overflowCount={999}>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+    </div>
+  );
+}
+```
+
+## 独立使用
+
+```jsx live
+function BadgeStandaloneExample() {
+  return (
+    <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+      <Badge count={25} />
+      <Badge count={4} style={{ backgroundColor: '#52c41a' }} />
+      <Badge count={109} style={{ backgroundColor: '#f5222d' }} />
+    </div>
+  );
+}
+```
+
+## 状态点
+
+```jsx live
+function BadgeStatusExample() {
+  return (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+      <Badge dot>
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge dot status="processing">
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge dot status="success">
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+      <Badge dot status="error">
+        <div style={{ width: 40, height: 40, background: '#f0f0f0', borderRadius: 4 }} />
+      </Badge>
+    </div>
+  );
+}
+```
+
+## API
+
+### Badge Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| count | 展示的数字，大于 overflowCount 时显示为 `${overflowCount}+` | `number` | - |
+| dot | 不展示数字，只有一个小红点 | `boolean` | `false` |
+| overflowCount | 展示封顶的数字值 | `number` | `99` |
+| showZero | 当数值为 0 时，是否展示 Badge | `boolean` | `false` |
+| status | 设置 Badge 为状态点 | `'success' \| 'processing' \| 'default' \| 'error' \| 'warning'` | - |
+| text | 在设置了 status 的前提下有效，设置状态点的文本 | `string` | - |
+| offset | 设置状态点的位置偏移 | `[number, number]` | - |
+| size | 在设置了 count 的前提下有效，设置小圆点的大小 | `'default' \| 'small'` | - |
+| title | 设置鼠标放在状态点上时显示的文字 | `string` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |

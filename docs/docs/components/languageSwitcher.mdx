@@ -1,0 +1,234 @@
+---
+sidebar_position: 11
+---
+
+# LanguageSwitcher 语言切换器
+
+用于切换应用程序语言的组件。
+
+## 基本用法
+
+```jsx live
+function LanguageSwitcherExample() {
+  const [currentLanguage, setCurrentLanguage] = React.useState('zh-CN');
+  
+  const languages = [
+    { code: 'zh-CN', name: '简体中文', flag: '🇨🇳' },
+    { code: 'en-US', name: 'English', flag: '🇺🇸' },
+    { code: 'ja-JP', name: '日本語', flag: '🇯🇵' },
+    { code: 'ko-KR', name: '한국어', flag: '🇰🇷' }
+  ];
+  
+  const handleLanguageChange = (languageCode) => {
+    setCurrentLanguage(languageCode);
+    console.log('切换语言到:', languageCode);
+  };
+  
+  return (
+    <div>
+      <LanguageSwitcher 
+        currentLanguage={currentLanguage}
+        languages={languages}
+        onChange={handleLanguageChange}
+      />
+      <div style={{ marginTop: '16px' }}>
+        当前语言: {languages.find(lang => lang.code === currentLanguage)?.name}
+      </div>
+    </div>
+  );
+}
+```
+
+## 下拉菜单样式
+
+```jsx live
+function LanguageSwitcherDropdownExample() {
+  const [currentLanguage, setCurrentLanguage] = React.useState('zh-CN');
+  
+  const languages = [
+    { code: 'zh-CN', name: '简体中文', flag: '🇨🇳' },
+    { code: 'zh-TW', name: '繁體中文', flag: '🇹🇼' },
+    { code: 'en-US', name: 'English', flag: '🇺🇸' },
+    { code: 'fr-FR', name: 'Français', flag: '🇫🇷' },
+    { code: 'de-DE', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'es-ES', name: 'Español', flag: '🇪🇸' }
+  ];
+  
+  return (
+    <LanguageSwitcher 
+      currentLanguage={currentLanguage}
+      languages={languages}
+      onChange={setCurrentLanguage}
+      type="dropdown"
+      showFlag={true}
+      showName={true}
+    />
+  );
+}
+```
+
+## 按钮组样式
+
+```jsx live
+function LanguageSwitcherButtonGroupExample() {
+  const [currentLanguage, setCurrentLanguage] = React.useState('en-US');
+  
+  const languages = [
+    { code: 'zh-CN', name: '中文', flag: '🇨🇳' },
+    { code: 'en-US', name: 'EN', flag: '🇺🇸' },
+    { code: 'ja-JP', name: '日本', flag: '🇯🇵' }
+  ];
+  
+  return (
+    <LanguageSwitcher 
+      currentLanguage={currentLanguage}
+      languages={languages}
+      onChange={setCurrentLanguage}
+      type="button-group"
+      size="small"
+    />
+  );
+}
+```
+
+## 仅显示国旗
+
+```jsx live
+function LanguageSwitcherFlagOnlyExample() {
+  const [currentLanguage, setCurrentLanguage] = React.useState('zh-CN');
+  
+  const languages = [
+    { code: 'zh-CN', name: '简体中文', flag: '🇨🇳' },
+    { code: 'en-US', name: 'English', flag: '🇺🇸' },
+    { code: 'ja-JP', name: '日本語', flag: '🇯🇵' },
+    { code: 'ko-KR', name: '한국어', flag: '🇰🇷' },
+    { code: 'fr-FR', name: 'Français', flag: '🇫🇷' }
+  ];
+  
+  return (
+    <LanguageSwitcher 
+      currentLanguage={currentLanguage}
+      languages={languages}
+      onChange={setCurrentLanguage}
+      showFlag={true}
+      showName={false}
+      size="large"
+    />
+  );
+}
+```
+
+## 自定义样式
+
+```jsx live
+function LanguageSwitcherCustomExample() {
+  const [currentLanguage, setCurrentLanguage] = React.useState('zh-CN');
+  
+  const languages = [
+    { code: 'zh-CN', name: '简体中文', flag: '🇨🇳' },
+    { code: 'en-US', name: 'English', flag: '🇺🇸' }
+  ];
+  
+  return (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <span>选择语言:</span>
+      <LanguageSwitcher 
+        currentLanguage={currentLanguage}
+        languages={languages}
+        onChange={setCurrentLanguage}
+        style={{ 
+          border: '2px solid #1890ff',
+          borderRadius: '8px'
+        }}
+        dropdownStyle={{
+          borderRadius: '8px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+        }}
+      />
+    </div>
+  );
+}
+```
+
+## 带搜索功能
+
+```jsx live
+function LanguageSwitcherSearchExample() {
+  const [currentLanguage, setCurrentLanguage] = React.useState('zh-CN');
+  
+  const languages = [
+    { code: 'zh-CN', name: '简体中文', flag: '🇨🇳' },
+    { code: 'zh-TW', name: '繁體中文', flag: '🇹🇼' },
+    { code: 'en-US', name: 'English', flag: '🇺🇸' },
+    { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧' },
+    { code: 'fr-FR', name: 'Français', flag: '🇫🇷' },
+    { code: 'de-DE', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'es-ES', name: 'Español', flag: '🇪🇸' },
+    { code: 'it-IT', name: 'Italiano', flag: '🇮🇹' },
+    { code: 'pt-PT', name: 'Português', flag: '🇵🇹' },
+    { code: 'ru-RU', name: 'Русский', flag: '🇷🇺' }
+  ];
+  
+  return (
+    <LanguageSwitcher 
+      currentLanguage={currentLanguage}
+      languages={languages}
+      onChange={setCurrentLanguage}
+      searchable={true}
+      placeholder="搜索语言..."
+    />
+  );
+}
+```
+
+## API
+
+### LanguageSwitcher Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| currentLanguage | 当前选中的语言代码 | `string` | - |
+| languages | 可选语言列表 | `Language[]` | `[]` |
+| onChange | 语言切换时的回调函数 | `(languageCode: string) => void` | - |
+| type | 组件类型 | `'dropdown' \| 'button-group' \| 'select'` | `'dropdown'` |
+| size | 组件大小 | `'small' \| 'default' \| 'large'` | `'default'` |
+| showFlag | 是否显示国旗 | `boolean` | `true` |
+| showName | 是否显示语言名称 | `boolean` | `true` |
+| showCode | 是否显示语言代码 | `boolean` | `false` |
+| searchable | 是否支持搜索 | `boolean` | `false` |
+| placeholder | 搜索框占位符 | `string` | `'Search languages...'` |
+| disabled | 是否禁用 | `boolean` | `false` |
+| loading | 是否显示加载状态 | `boolean` | `false` |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |
+| dropdownStyle | 下拉菜单自定义样式 | `React.CSSProperties` | - |
+| popupClassName | 下拉菜单自定义类名 | `string` | - |
+| getPopupContainer | 菜单渲染父节点 | `(triggerNode: HTMLElement) => HTMLElement` | `() => document.body` |
+| onDropdownVisibleChange | 下拉菜单显示状态改变时的回调 | `(visible: boolean) => void` | - |
+
+### Language
+
+| 属性 | 说明 | 类型 | 必填 |
+| --- | --- | --- | --- |
+| code | 语言代码 | `string` | ✅ |
+| name | 语言名称 | `string` | ✅ |
+| flag | 国旗 emoji 或图标 | `string \| React.ReactNode` | - |
+| nativeName | 本地语言名称 | `string` | - |
+| disabled | 是否禁用该语言选项 | `boolean` | - |
+
+## 常用语言代码
+
+| 语言 | 代码 | 国旗 |
+| --- | --- | --- |
+| 简体中文 | `zh-CN` | 🇨🇳 |
+| 繁體中文 | `zh-TW` | 🇹🇼 |
+| English | `en-US` | 🇺🇸 |
+| English (UK) | `en-GB` | 🇬🇧 |
+| 日本語 | `ja-JP` | 🇯🇵 |
+| 한국어 | `ko-KR` | 🇰🇷 |
+| Français | `fr-FR` | 🇫🇷 |
+| Deutsch | `de-DE` | 🇩🇪 |
+| Español | `es-ES` | 🇪🇸 |
+| Italiano | `it-IT` | 🇮🇹 |
+| Português | `pt-PT` | 🇵🇹 |
+| Русский | `ru-RU` | 🇷🇺 |

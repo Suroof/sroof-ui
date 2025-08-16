@@ -1,0 +1,389 @@
+---
+sidebar_position: 13
+---
+
+# Slider 滑动输入条
+
+滑动型输入器，展示当前值和可选范围。
+
+## 基本用法
+
+```jsx live
+function SliderExample() {
+  const [value, setValue] = React.useState(30);
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>
+        当前值: {value}
+      </div>
+      <Slider 
+        value={value}
+        onChange={setValue}
+        style={{ width: '300px' }}
+      />
+    </div>
+  );
+}
+```
+
+## 带输入框的滑块
+
+```jsx live
+function SliderWithInputExample() {
+  const [value, setValue] = React.useState(20);
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <Slider 
+          value={value}
+          onChange={setValue}
+          style={{ width: '200px' }}
+        />
+        <input 
+          type="number"
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+          style={{ 
+            width: '60px', 
+            padding: '4px 8px',
+            border: '1px solid #d9d9d9',
+            borderRadius: '4px'
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 双滑块
+
+```jsx live
+function RangeSliderExample() {
+  const [range, setRange] = React.useState([20, 80]);
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>
+        范围: {range[0]} - {range[1]}
+      </div>
+      <Slider 
+        range
+        value={range}
+        onChange={setRange}
+        style={{ width: '300px' }}
+      />
+    </div>
+  );
+}
+```
+
+## 带刻度的滑块
+
+```jsx live
+function SliderWithMarksExample() {
+  const [value, setValue] = React.useState(37);
+  
+  const marks = {
+    0: '0°C',
+    26: '26°C',
+    37: '37°C',
+    100: {
+      style: {
+        color: '#f50',
+      },
+      label: <strong>100°C</strong>,
+    },
+  };
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>
+        温度: {value}°C
+      </div>
+      <Slider 
+        value={value}
+        onChange={setValue}
+        marks={marks}
+        step={null}
+        style={{ width: '300px' }}
+      />
+    </div>
+  );
+}
+```
+
+## 垂直滑块
+
+```jsx live
+function VerticalSliderExample() {
+  const [value, setValue] = React.useState(30);
+  
+  return (
+    <div style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div>
+        <div style={{ marginBottom: '16px' }}>垂直滑块</div>
+        <Slider 
+          vertical
+          value={value}
+          onChange={setValue}
+          style={{ height: '200px' }}
+        />
+      </div>
+      <div>
+        <div style={{ marginBottom: '16px' }}>带刻度的垂直滑块</div>
+        <Slider 
+          vertical
+          value={value}
+          onChange={setValue}
+          marks={{ 0: '0', 25: '25', 50: '50', 75: '75', 100: '100' }}
+          style={{ height: '200px' }}
+        />
+      </div>
+      <div style={{ marginTop: '20px' }}>
+        当前值: {value}
+      </div>
+    </div>
+  );
+}
+```
+
+## 控制滑块
+
+```jsx live
+function ControlledSliderExample() {
+  const [value, setValue] = React.useState(30);
+  const [disabled, setDisabled] = React.useState(false);
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>
+        <label>
+          <input 
+            type="checkbox"
+            checked={disabled}
+            onChange={(e) => setDisabled(e.target.checked)}
+          />
+          禁用滑块
+        </label>
+      </div>
+      
+      <div style={{ marginBottom: '16px' }}>
+        当前值: {value}
+      </div>
+      
+      <Slider 
+        value={value}
+        onChange={setValue}
+        disabled={disabled}
+        style={{ width: '300px' }}
+      />
+      
+      <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+        <button onClick={() => setValue(0)}>最小值</button>
+        <button onClick={() => setValue(50)}>中间值</button>
+        <button onClick={() => setValue(100)}>最大值</button>
+      </div>
+    </div>
+  );
+}
+```
+
+## 自定义提示
+
+```jsx live
+function SliderWithTooltipExample() {
+  const [value, setValue] = React.useState(30);
+  
+  const formatter = (value) => `${value}%`;
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>自定义提示格式</div>
+      <Slider 
+        value={value}
+        onChange={setValue}
+        tooltip={{ formatter }}
+        style={{ width: '300px' }}
+      />
+      
+      <div style={{ marginTop: '32px', marginBottom: '16px' }}>始终显示提示</div>
+      <Slider 
+        value={value}
+        onChange={setValue}
+        tooltip={{ 
+          formatter,
+          open: true
+        }}
+        style={{ width: '300px' }}
+      />
+    </div>
+  );
+}
+```
+
+## 不同尺寸
+
+```jsx live
+function SliderSizeExample() {
+  const [value, setValue] = React.useState(30);
+  
+  return (
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      <div>
+        <div style={{ marginBottom: '16px' }}>小尺寸</div>
+        <Slider 
+          size="small"
+          value={value}
+          onChange={setValue}
+          style={{ width: '300px' }}
+        />
+      </div>
+      
+      <div>
+        <div style={{ marginBottom: '16px' }}>默认尺寸</div>
+        <Slider 
+          value={value}
+          onChange={setValue}
+          style={{ width: '300px' }}
+        />
+      </div>
+      
+      <div>
+        <div style={{ marginBottom: '16px' }}>大尺寸</div>
+        <Slider 
+          size="large"
+          value={value}
+          onChange={setValue}
+          style={{ width: '300px' }}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 步长和精度
+
+```jsx live
+function SliderStepExample() {
+  const [value1, setValue1] = React.useState(20);
+  const [value2, setValue2] = React.useState(0.2);
+  
+  return (
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      <div>
+        <div style={{ marginBottom: '16px' }}>步长为 10: {value1}</div>
+        <Slider 
+          value={value1}
+          onChange={setValue1}
+          step={10}
+          marks
+          style={{ width: '300px' }}
+        />
+      </div>
+      
+      <div>
+        <div style={{ marginBottom: '16px' }}>步长为 0.1: {value2}</div>
+        <Slider 
+          value={value2}
+          onChange={setValue2}
+          min={0}
+          max={1}
+          step={0.1}
+          marks
+          style={{ width: '300px' }}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 事件处理
+
+```jsx live
+function SliderEventsExample() {
+  const [value, setValue] = React.useState(30);
+  const [events, setEvents] = React.useState([]);
+  
+  const addEvent = (event, value) => {
+    setEvents(prev => [...prev.slice(-4), `${event}: ${value}`]);
+  };
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>
+        当前值: {value}
+      </div>
+      
+      <Slider 
+        value={value}
+        onChange={(val) => {
+          setValue(val);
+          addEvent('onChange', val);
+        }}
+        onAfterChange={(val) => addEvent('onAfterChange', val)}
+        style={{ width: '300px' }}
+      />
+      
+      <div style={{ marginTop: '16px' }}>
+        <h4>事件日志:</h4>
+        <div style={{ 
+          background: '#f5f5f5', 
+          padding: '8px', 
+          borderRadius: '4px',
+          fontFamily: 'monospace',
+          fontSize: '12px'
+        }}>
+          {events.map((event, index) => (
+            <div key={index}>{event}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## API
+
+### Slider Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| autoFocus | 自动获取焦点 | `boolean` | `false` |
+| className | 自定义类名 | `string` | - |
+| defaultValue | 设置初始取值 | `number \| [number, number]` | `0` |
+| disabled | 值为 true 时，滑块为禁用状态 | `boolean` | `false` |
+| keyboard | 支持键盘操作 | `boolean` | `true` |
+| marks | 刻度标记，key 的类型必须为 number 且取值在闭区间 [min, max] 内 | `object` | - |
+| max | 最大值 | `number` | `100` |
+| min | 最小值 | `number` | `0` |
+| range | 双滑块模式 | `boolean` | `false` |
+| reverse | 反向坐标轴 | `boolean` | `false` |
+| size | 滑块大小 | `'small' \| 'default' \| 'large'` | `'default'` |
+| step | 步长，取值必须大于 0，并且可被 (max - min) 整除 | `number \| null` | `1` |
+| style | 自定义样式 | `React.CSSProperties` | - |
+| tooltip | 设置 Tooltip 相关属性 | `object` | - |
+| value | 设置当前取值 | `number \| [number, number]` | - |
+| vertical | 值为 true 时，Slider 为垂直方向 | `boolean` | `false` |
+| onAfterChange | 与 onmouseup 触发时机一致，把当前值作为参数传入 | `(value) => void` | - |
+| onChange | 当 Slider 的值发生改变时，会触发 onChange 事件，并把改变后的值作为参数传入 | `(value) => void` | - |
+
+### Tooltip Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| formatter | Tooltip 文字格式化 | `(value) => ReactNode` | `IDENTITY` |
+| open | 值为true时，Tooltip 将会始终显示；否则始终不显示，哪怕在拖拽及移入时 | `boolean` | - |
+| placement | 设置 Tooltip 展示位置 | `string` | - |
+
+### 方法
+
+| 名称 | 描述 |
+| --- | --- |
+| blur() | 移除焦点 |
+| focus() | 获取焦点 |

@@ -1,0 +1,389 @@
+---
+sidebar_position: 15
+---
+
+# LineMotion 线条动画
+
+提供各种线条动画效果的组件，适用于装饰、分割线、进度指示等场景。
+
+## 基本用法
+
+```jsx live
+function LineMotionExample() {
+  return (
+    <div style={{ padding: '20px' }}>
+      <h4>基本线条动画</h4>
+      <LineMotion />
+    </div>
+  );
+}
+```
+
+## 不同动画类型
+
+```jsx live
+function LineMotionTypesExample() {
+  const animationTypes = [
+    { type: 'slide', name: '滑动' },
+    { type: 'fade', name: '淡入' },
+    { type: 'grow', name: '生长' },
+    { type: 'wave', name: '波浪' },
+    { type: 'pulse', name: '脉冲' },
+    { type: 'dash', name: '虚线' }
+  ];
+  
+  return (
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {animationTypes.map(({ type, name }) => (
+        <div key={type}>
+          <h4>{name}动画</h4>
+          <LineMotion animationType={type} />
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## 不同方向
+
+```jsx live
+function LineMotionDirectionExample() {
+  const directions = [
+    { direction: 'horizontal', name: '水平' },
+    { direction: 'vertical', name: '垂直' },
+    { direction: 'diagonal', name: '对角线' }
+  ];
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      {directions.map(({ direction, name }) => (
+        <div key={direction} style={{ marginBottom: '32px' }}>
+          <h4>{name}方向</h4>
+          <div style={{ 
+            height: direction === 'vertical' ? '100px' : 'auto',
+            width: direction === 'horizontal' ? '300px' : 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <LineMotion direction={direction} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## 自定义颜色和样式
+
+```jsx live
+function LineMotionStyleExample() {
+  return (
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div>
+        <h4>自定义颜色</h4>
+        <LineMotion color="#ff4d4f" />
+      </div>
+      
+      <div>
+        <h4>渐变色</h4>
+        <LineMotion color="linear-gradient(90deg, #ff4d4f, #1890ff)" />
+      </div>
+      
+      <div>
+        <h4>自定义粗细</h4>
+        <LineMotion thickness={4} color="#52c41a" />
+      </div>
+      
+      <div>
+        <h4>自定义长度</h4>
+        <LineMotion width={200} color="#722ed1" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 动画控制
+
+```jsx live
+function LineMotionControlExample() {
+  const [playing, setPlaying] = React.useState(true);
+  const [speed, setSpeed] = React.useState(1);
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ marginBottom: '16px', display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <button onClick={() => setPlaying(!playing)}>
+          {playing ? '暂停' : '播放'}
+        </button>
+        
+        <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          速度:
+          <input 
+            type="range"
+            min="0.1"
+            max="3"
+            step="0.1"
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+          />
+          {speed}x
+        </label>
+      </div>
+      
+      <LineMotion 
+        playing={playing}
+        speed={speed}
+        animationType="grow"
+        color="#1890ff"
+      />
+    </div>
+  );
+}
+```
+
+## 循环和延迟
+
+```jsx live
+function LineMotionTimingExample() {
+  return (
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div>
+        <h4>无限循环</h4>
+        <LineMotion loop={true} animationType="pulse" color="#ff4d4f" />
+      </div>
+      
+      <div>
+        <h4>播放3次</h4>
+        <LineMotion loop={3} animationType="wave" color="#52c41a" />
+      </div>
+      
+      <div>
+        <h4>延迟1秒开始</h4>
+        <LineMotion delay={1000} animationType="slide" color="#722ed1" />
+      </div>
+      
+      <div>
+        <h4>自定义持续时间</h4>
+        <LineMotion duration={3000} animationType="grow" color="#fa8c16" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 触发方式
+
+```jsx live
+function LineMotionTriggerExample() {
+  const [manualTrigger, setManualTrigger] = React.useState(0);
+  
+  return (
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div>
+        <h4>自动播放</h4>
+        <LineMotion trigger="auto" animationType="slide" color="#1890ff" />
+      </div>
+      
+      <div>
+        <h4>鼠标悬停触发</h4>
+        <div style={{ padding: '16px', border: '1px dashed #d9d9d9', borderRadius: '4px' }}>
+          <div>悬停此区域触发动画</div>
+          <LineMotion trigger="hover" animationType="grow" color="#52c41a" />
+        </div>
+      </div>
+      
+      <div>
+        <h4>点击触发</h4>
+        <div style={{ padding: '16px', border: '1px dashed #d9d9d9', borderRadius: '4px', cursor: 'pointer' }}>
+          <div>点击此区域触发动画</div>
+          <LineMotion trigger="click" animationType="wave" color="#ff4d4f" />
+        </div>
+      </div>
+      
+      <div>
+        <h4>手动触发</h4>
+        <button onClick={() => setManualTrigger(prev => prev + 1)} style={{ marginBottom: '8px' }}>
+          触发动画
+        </button>
+        <LineMotion 
+          trigger="manual" 
+          triggerKey={manualTrigger}
+          animationType="pulse" 
+          color="#722ed1" 
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 组合效果
+
+```jsx live
+function LineMotionComboExample() {
+  return (
+    <div style={{ padding: '20px' }}>
+      <h4>多条线组合</h4>
+      <div style={{ position: 'relative', height: '120px', border: '1px solid #f0f0f0', borderRadius: '8px' }}>
+        <LineMotion 
+          direction="horizontal"
+          animationType="slide"
+          color="#1890ff"
+          delay={0}
+          style={{ position: 'absolute', top: '20px', left: '20px', right: '20px' }}
+        />
+        
+        <LineMotion 
+          direction="vertical"
+          animationType="grow"
+          color="#52c41a"
+          delay={500}
+          style={{ position: 'absolute', top: '20px', bottom: '20px', left: '20px' }}
+        />
+        
+        <LineMotion 
+          direction="horizontal"
+          animationType="slide"
+          color="#ff4d4f"
+          delay={1000}
+          style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px' }}
+        />
+        
+        <LineMotion 
+          direction="vertical"
+          animationType="grow"
+          color="#722ed1"
+          delay={1500}
+          style={{ position: 'absolute', top: '20px', bottom: '20px', right: '20px' }}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 进度指示器
+
+```jsx live
+function LineMotionProgressExample() {
+  const [progress, setProgress] = React.useState(0);
+  
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 100);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  return (
+    <div style={{ padding: '20px' }}>
+      <h4>进度指示器</h4>
+      <div style={{ marginBottom: '8px' }}>进度: {progress}%</div>
+      <div style={{ position: 'relative', height: '4px', background: '#f0f0f0', borderRadius: '2px' }}>
+        <LineMotion 
+          width={`${progress}%`}
+          height={4}
+          color="#1890ff"
+          animationType="none"
+          style={{ borderRadius: '2px' }}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 装饰线条
+
+```jsx live
+function LineMotionDecorativeExample() {
+  return (
+    <div style={{ padding: '20px' }}>
+      <div style={{ textAlign: 'center', margin: '40px 0' }}>
+        <LineMotion 
+          width={100}
+          animationType="grow"
+          color="#d9d9d9"
+          style={{ margin: '0 auto 16px' }}
+        />
+        <h3 style={{ margin: '0', color: '#333' }}>标题装饰</h3>
+        <LineMotion 
+          width={100}
+          animationType="grow"
+          color="#d9d9d9"
+          delay={500}
+          style={{ margin: '16px auto 0' }}
+        />
+      </div>
+      
+      <div style={{ margin: '40px 0' }}>
+        <h4>段落分割</h4>
+        <p>这是第一段内容，下面有一个动画分割线。</p>
+        <LineMotion 
+          animationType="slide"
+          color="#1890ff"
+          thickness={1}
+          style={{ margin: '16px 0' }}
+        />
+        <p>这是第二段内容，上面有一个动画分割线。</p>
+      </div>
+    </div>
+  );
+}
+```
+
+## API
+
+### LineMotion Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| animationType | 动画类型 | `'slide' \| 'fade' \| 'grow' \| 'wave' \| 'pulse' \| 'dash' \| 'none'` | `'slide'` |
+| direction | 线条方向 | `'horizontal' \| 'vertical' \| 'diagonal'` | `'horizontal'` |
+| color | 线条颜色，支持渐变 | `string` | `'#1890ff'` |
+| thickness | 线条粗细 | `number` | `2` |
+| width | 线条宽度 | `number \| string` | `'100%'` |
+| height | 线条高度 | `number \| string` | - |
+| playing | 是否播放动画 | `boolean` | `true` |
+| speed | 动画速度倍数 | `number` | `1` |
+| loop | 循环次数，true 为无限循环 | `boolean \| number` | `false` |
+| delay | 延迟开始时间（毫秒） | `number` | `0` |
+| duration | 动画持续时间（毫秒） | `number` | `1000` |
+| trigger | 触发方式 | `'auto' \| 'hover' \| 'click' \| 'manual'` | `'auto'` |
+| triggerKey | 手动触发的键值，改变时重新触发动画 | `any` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |
+| onAnimationStart | 动画开始回调 | `() => void` | - |
+| onAnimationEnd | 动画结束回调 | `() => void` | - |
+| onAnimationIteration | 动画循环回调 | `() => void` | - |
+
+### 动画类型说明
+
+| 类型 | 说明 |
+| --- | --- |
+| `slide` | 滑动效果，线条从一端滑动到另一端 |
+| `fade` | 淡入效果，线条逐渐显现 |
+| `grow` | 生长效果，线条从中心或一端逐渐延伸 |
+| `wave` | 波浪效果，线条呈波浪状动画 |
+| `pulse` | 脉冲效果，线条呈现脉冲闪烁 |
+| `dash` | 虚线效果，虚线流动动画 |
+| `none` | 无动画，静态显示 |
+
+### 使用场景
+
+- **页面装饰**: 为标题、段落添加装饰线条
+- **分割线**: 动态分割不同内容区域
+- **进度指示**: 显示加载或操作进度
+- **导航指示**: 指示当前页面或步骤
+- **视觉引导**: 引导用户注意力到特定区域
+- **品牌元素**: 作为品牌视觉元素的一部分

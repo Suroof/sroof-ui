@@ -1,5 +1,5 @@
 import React from 'react';
-interface LanguageSwitcherProps {
+export interface LanguageSwitcherProps {
     className?: string;
     variant?: 'dropdown' | 'buttons';
 }

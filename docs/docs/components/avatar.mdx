@@ -1,0 +1,87 @@
+---
+sidebar_position: 3
+---
+
+# Avatar 头像
+
+用来代表用户或事物，支持图片、图标或字符展示。
+
+## 基本用法
+
+```jsx live
+function AvatarExample() {
+  return (
+    <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+      <Avatar src="https://via.placeholder.com/40" alt="用户头像" />
+      <Avatar>U</Avatar>
+      <Avatar>用户</Avatar>
+    </div>
+  );
+}
+```
+
+## 不同尺寸
+
+```jsx live
+function AvatarSizeExample() {
+  return (
+    <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+      <Avatar size="small">S</Avatar>
+      <Avatar size="medium">M</Avatar>
+      <Avatar size="large">L</Avatar>
+    </div>
+  );
+}
+```
+
+## 不同形状
+
+```jsx live
+function AvatarShapeExample() {
+  return (
+    <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+      <Avatar shape="circle">圆</Avatar>
+      <Avatar shape="square">方</Avatar>
+    </div>
+  );
+}
+```
+
+## 头像组
+
+```jsx live
+function AvatarGroupExample() {
+  return (
+    <Avatar.Group maxCount={3}>
+      <Avatar src="https://via.placeholder.com/40" />
+      <Avatar>A</Avatar>
+      <Avatar>B</Avatar>
+      <Avatar>C</Avatar>
+      <Avatar>D</Avatar>
+    </Avatar.Group>
+  );
+}
+```
+
+## API
+
+### Avatar Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| src | 图片头像的资源地址 | `string` | - |
+| alt | 图像无法显示时的替代文本 | `string` | - |
+| size | 设置头像的大小 | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |
+| shape | 指定头像的形状 | `'circle' \| 'square'` | `'circle'` |
+| icon | 设置头像的图标类型 | `React.ReactNode` | - |
+| children | 文字头像 | `React.ReactNode` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `React.CSSProperties` | - |
+
+### Avatar.Group Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| maxCount | 显示的最大头像个数 | `number` | - |
+| maxStyle | 多余头像样式 | `React.CSSProperties` | - |
+| size | 设置头像的大小 | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |

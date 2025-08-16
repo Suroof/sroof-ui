@@ -25,7 +25,19 @@ import {
   Progress,
   EmergeText,
   Float,
-  LineMotion
+  LineMotion,
+  Slider,
+  Steps,
+  Skeleton,
+  Tooltip,
+  Upload,
+  ProgressThreeD,
+  Rate,
+  Modal,
+  Badge,
+  Alert,
+  Avatar,
+  Breadcrumb
 } from "sroof-ui";
 import "sroof-ui/dist/index.css";
 
@@ -57,7 +69,19 @@ const ReactLiveScope = {
   Progress,
   EmergeText,
   Float,
-  LineMotion
+  LineMotion,
+  Slider,
+  Steps,
+  Skeleton,
+  Tooltip,
+  Upload,
+  ProgressThreeD,
+  Rate,
+  Modal,
+  Badge,
+  Alert,
+  Avatar,
+  Breadcrumb
 }; 
 
 export default ReactLiveScope;
