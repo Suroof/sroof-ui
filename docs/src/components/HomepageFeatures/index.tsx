@@ -26,13 +26,11 @@ function ScrollCardCustomExample() {
 }
 
 function ProgressThreeDExample() {
-  const [progress, setProgress] = React.useState(0)
   return (
     <div style={{ padding: '20px 0', overflow: 'hidden' }}>
       <ProgressThreeD
         modelPath={'/sroof-ui/assets/gltf/rubiks_cube.glb'}
         sensitivity={0.0003}
-
         initialRotation={ [Math.PI /8, Math.PI / 3, Math.PI / 12] }
       />
     </div>
