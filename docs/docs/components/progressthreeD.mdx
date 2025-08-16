@@ -2,12 +2,67 @@
 sidebar_position: 7
 ---
 
-# ProgressThreeD 3D进度条
+# ProgressThreeD 3D模型展示
 
-基于Three.js的3D进度条组件，提供炫酷的3D视觉效果。
+基于Three.js的3D进度条组件，通过鼠标滚轮控制3D模型动画进度，提供沉浸式的3D视觉体验。
 
 ## 基本用法
 
+```jsx
+function App() {
+  return (
+
+      <ProgressThreeD
+        modelPath={'/sroof-ui/assets/gltf/rubiks_cube.glb'}
+        sensitivity={0.0001}
+        initialProgress={0.1}
+        initialRotation={[Math.PI / 8, Math.PI / 3, Math.PI / 12]}
+      />
+
+  );
+}
+```
+
+## 高级用法
+
+### 自定义初始旋转
+
+```jsx 
+<ProgressThreeD 
+  modelPath="/sroof-ui/assets/gltf/rubiks_cube.glb"
+  initialRotation={[0, Math.PI / 4, 0]} // Y轴旋转45度
+  sensitivity={0.0003}
+/>
+```
+
+### 多轴旋转
+
+```jsx 
+<ProgressThreeD 
+  modelPath="/sroof-ui/assets/gltf/rubiks_cube.glb"
+  initialRotation={[Math.PI / 8, Math.PI / 3, Math.PI / 12]} // X:22.5°, Y:60°, Z:15°
+  sensitivity={0.0003}
+/>
+```
+
+### 设置初始进度
+
+```jsx
+<ProgressThreeD 
+  modelPath="/sroof-ui/assets/gltf/rubiks_cube.glb"
+  initialProgress={0.5} // 从50%开始
+  sensitivity={0.0003}
+/>
+```
+
+### 超慢动画模式
+
+```jsx 
+<ProgressThreeD 
+  modelPath="/sroof-ui/assets/gltf/rubiks_cube.glb"
+  sensitivity={0.0001} // 非常慢的动画
+/>
+```
 
 ## API
 
@@ -15,3 +70,23 @@ sidebar_position: 7
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| modelPath | GLB模型文件路径 | `string` | `"/assets/gltf/rubiks_cube.glb"` |
+| sensitivity | 滚轮敏感度，值越小动画越慢 | `number` | `0.0003` |
+| initialRotation | 初始旋转角度 [x, y, z] (弧度) | `[number, number, number]` | `[0, 0, 0]` |
+| initialProgress | 初始进度值 (0-1) | `number` | `0` |
+| onProgressChange | 进度变化回调函数 | `(progress: number) => void` | - |
+
+## 注意事项
+
+### 模型要求
+
+- **格式支持** - 仅支持GLB格式的3D模型文件
+- **动画要求** - 模型必须包含至少一个动画轨道
+- **文件大小** - 建议模型文件大小控制在10MB以内以确保加载性能
+- **路径配置** - 确保模型文件路径正确且可访问
+
+### 性能考虑
+
+- **视口检测** - 组件仅在视口内时才激活，避免不必要的性能消耗
+- **防抖机制** - 内置滚轮事件防抖，避免过度频繁的更新
+- **内存管理** - 组件卸载时自动清理Three.js资源

@@ -96,7 +96,7 @@ export default function Home(): ReactNode {
           </svg>
         </div>
         <HomepageFeatures />
-      </main>
+      </main> 
 
       <footer className={styles.customFooter}>
         <div className={styles.footerContainer}>

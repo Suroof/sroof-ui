@@ -20,7 +20,6 @@ const sidebars: SidebarsConfig = {
         'components/drawer',
         'components/modal',
         'components/collapse',
-        'components/float',
       ],
     },
     {
@@ -53,7 +52,6 @@ const sidebars: SidebarsConfig = {
         'components/alert',
         'components/notification',
         'components/progress',
-        'components/progressthreeD',
         'components/skeleton',
       ],
     },
@@ -73,6 +71,8 @@ const sidebars: SidebarsConfig = {
         'components/emergetext',
         'components/scrollreveal',
         'components/line',
+        'components/float',
+        'components/progressthreeD',
       ],
     },
     {
@@ -80,7 +80,6 @@ const sidebars: SidebarsConfig = {
       label: '功能组件',
       items: [
         'components/language',
-        'components/languageSwitcher',
       ],
     },
   ],

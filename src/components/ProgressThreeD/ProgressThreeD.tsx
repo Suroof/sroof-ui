@@ -8,6 +8,7 @@ export interface ProgressThreeDProps {
   modelPath?: string;
   sensitivity?: number; // 滚轮敏感度，值越小动画越慢
   initialRotation?: [number, number, number]; // 初始旋转角度 [x, y, z] (弧度)
+  initialProgress?: number; // 初始进度值 (0-1)
   onProgressChange?: (progress: number) => void;
 }
 
@@ -84,11 +85,12 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
   modelPath = "/assets/gltf/rubiks_cube.glb",
   sensitivity = 0.0003, // 默认敏感度降低，让动画更慢
   initialRotation = [0, 0, 0], // 默认无旋转
+  initialProgress = 0, // 默认进度为0
   onProgressChange
 }) => {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(initialProgress);
   const containerRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef(0);
+  const progressRef = useRef(initialProgress);
   const isScrollingRef = useRef(false);
   const [isActive, setIsActive] = useState(false);
 
@@ -195,9 +197,9 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
         <OrbitControls 
           enableZoom={isActive && progress < 1} 
           enablePan={isActive && progress < 1} 
-          enableRotate={isActive && progress < 1}
+          // enableRotate={isActive && progress < 1}
           maxDistance={10}
-          minDistance={4}
+          minDistance={3}
           zoomSpeed={-1}
         />
         
@@ -207,7 +209,7 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
         {/* 主方向光 */}
         <directionalLight 
           position={[5, 5, 5]} 
-          intensity={1.2} 
+          intensity={2.2} 
           color="#ffffff"
           castShadow
           shadow-mapSize-width={2048}

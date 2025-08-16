@@ -24,7 +24,7 @@ export { default as Radio } from './components/Radio';
 export { default as Rate } from './components/Rate';
 export { default as ScrollCard } from './components/ScrollCard';
 export { default as ScrollReveal } from './components/ScrollReveal';
-export { default as Skeleton } from './components/Skeleton';
+export { default as Skeleton, SkeletonButton, SkeletonInput, SkeletonImage } from './components/Skeleton';
 export { default as Slider } from './components/Slider';
 export { default as Steps } from './components/Steps';
 export { default as Switch } from './components/Switch';
@@ -63,6 +63,7 @@ export type { StepsProps } from './components/Steps';
 export type { SwitchProps } from './components/Switch';
 export type { TabsProps } from './components/Tabs';
 export type { UploadProps } from './components/Upload';
+
 
 // 导出国际化相关
 export * from './i18n';

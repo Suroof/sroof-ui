@@ -132410,15 +132410,18 @@ const Model = ({ modelPath, progress, initialRotation = [0, 0, 0] }) => {
 };
 const ProgressThreeD = ({ modelPath = "/assets/gltf/rubiks_cube.glb", sensitivity = 0.0003, // 默认敏感度降低，让动画更慢
 initialRotation = [0, 0, 0], // 默认无旋转
+initialProgress = 0, // 默认进度为0
 onProgressChange }) => {
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(initialProgress);
     const containerRef = useRef(null);
-    const progressRef = useRef(0);
+    const progressRef = useRef(initialProgress);
     const isScrollingRef = useRef(false);
     const [isActive, setIsActive] = useState(false);
     const handleWheel = useCallback((event) => {
-        if (!isActive)
+        // 如果组件不活跃或进度已达到100%，允许页面正常滚动
+        if (!isActive || progressRef.current >= 1) {
             return;
+        }
         event.preventDefault();
         const delta = event.deltaY; // 正常滚轮方向
         const newProgress = Math.max(0, Math.min(1, progressRef.current + delta * sensitivity));
@@ -132442,13 +132445,10 @@ onProgressChange }) => {
             return;
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
-                // 如果进度已达到100%，重置进度
-                if (progressRef.current >= 1) {
-                    progressRef.current = 0;
-                    setProgress(0);
-                    onProgressChange === null || onProgressChange === void 0 ? void 0 : onProgressChange(0);
+                // 只有在进度未达到100%时才激活组件
+                if (progressRef.current < 1) {
+                    setIsActive(true);
                 }
-                setIsActive(true);
             }
             else {
                 setIsActive(false);
@@ -132467,7 +132467,7 @@ onProgressChange }) => {
         container.addEventListener('wheel', handleWheel, { passive: false });
         // 阻止容器内的默认滚动行为
         const preventScroll = (e) => {
-            if (isScrollingRef.current && isActive) {
+            if (isScrollingRef.current && isActive && progressRef.current < 1) {
                 e.preventDefault();
             }
         };
@@ -132483,6 +132483,7 @@ onProgressChange }) => {
             position: 'relative',
             width: '100vw',
             height: '100vh',
+            minHeight: '400px',
             background: 'transparent',
             overflow: 'hidden'
         }, children: jsxRuntimeExports.jsxs(Canvas, { style: {
@@ -132491,7 +132492,9 @@ onProgressChange }) => {
                 left: 0,
                 width: '100%',
                 height: '100%'
-            }, camera: { position: [0, 0, 10], fov: 50 }, gl: { antialias: true, alpha: true }, children: [jsxRuntimeExports.jsx(OrbitControls, { enableZoom: true, enablePan: true, enableRotate: true, maxDistance: 10, minDistance: 3, zoomSpeed: -1 }), jsxRuntimeExports.jsx("ambientLight", { intensity: 0.8, color: "#ffffff" }), jsxRuntimeExports.jsx("directionalLight", { position: [5, 5, 5], intensity: 1.2, color: "#ffffff", castShadow: true, "shadow-mapSize-width": 2048, "shadow-mapSize-height": 2048, "shadow-camera-far": 50, "shadow-camera-left": -10, "shadow-camera-right": 10, "shadow-camera-top": 10, "shadow-camera-bottom": -10 }), jsxRuntimeExports.jsx("directionalLight", { position: [-5, -5, 5], intensity: 0.6, color: "#ffffff" }), jsxRuntimeExports.jsx("pointLight", { position: [0, 10, 0], intensity: 0.5, color: "#ffffff" }), jsxRuntimeExports.jsx("pointLight", { position: [0, -10, 0], intensity: 0.3, color: "#ffffff" }), jsxRuntimeExports.jsx(Model, { modelPath: modelPath, progress: progress, initialRotation: initialRotation })] }) }));
+            }, camera: { position: [0, 0, 10], fov: 50 }, gl: { antialias: true, alpha: true }, children: [jsxRuntimeExports.jsx(OrbitControls, { enableZoom: isActive && progress < 1, enablePan: isActive && progress < 1, 
+                    // enableRotate={isActive && progress < 1}
+                    maxDistance: 10, minDistance: 3, zoomSpeed: -1 }), jsxRuntimeExports.jsx("ambientLight", { intensity: 0.8, color: "#ffffff" }), jsxRuntimeExports.jsx("directionalLight", { position: [5, 5, 5], intensity: 2.2, color: "#ffffff", castShadow: true, "shadow-mapSize-width": 2048, "shadow-mapSize-height": 2048, "shadow-camera-far": 50, "shadow-camera-left": -10, "shadow-camera-right": 10, "shadow-camera-top": 10, "shadow-camera-bottom": -10 }), jsxRuntimeExports.jsx("directionalLight", { position: [-5, -5, 5], intensity: 0.6, color: "#ffffff" }), jsxRuntimeExports.jsx("pointLight", { position: [0, 10, 0], intensity: 0.5, color: "#ffffff" }), jsxRuntimeExports.jsx("pointLight", { position: [0, -10, 0], intensity: 0.3, color: "#ffffff" }), jsxRuntimeExports.jsx(Model, { modelPath: modelPath, progress: progress, initialRotation: initialRotation })] }) }));
 };
 
 var styles$9 = {"radio":"Radio-module_radio__MfgN-","disabled":"Radio-module_disabled__0-cna","label":"Radio-module_label__vAFIP"};
@@ -132820,6 +132823,57 @@ const Skeleton = ({ active = false, avatar = false, loading = true, paragraph = 
                         } }) })), jsxRuntimeExports.jsxs("div", { className: styles$5.body, children: [titleConfig && (jsxRuntimeExports.jsx("div", { className: styles$5.title, style: { width: titleConfig.width } })), paragraphConfig && (jsxRuntimeExports.jsx("div", { className: styles$5.paragraph, children: Array.from({ length: paragraphConfig.rows || 3 }, (_, index) => (jsxRuntimeExports.jsx("div", { className: styles$5.line, style: {
                                     width: getParagraphWidth(paragraphConfig.width, index, paragraphConfig.rows || 3),
                                 } }, index))) }))] })] }) }));
+};
+// 骨架屏按钮
+const SkeletonButton = ({ active = false, size = 'default', shape = 'default', block = false, className, style }) => {
+    const getButtonClassName = () => {
+        const classes = [styles$5.skeletonButton];
+        if (active) {
+            classes.push(styles$5.active);
+        }
+        classes.push(styles$5[size]);
+        classes.push(styles$5[shape]);
+        if (block) {
+            classes.push(styles$5.block);
+        }
+        if (className) {
+            classes.push(className);
+        }
+        return classes.join(' ');
+    };
+    return jsxRuntimeExports.jsx("div", { className: getButtonClassName(), style: style });
+};
+// 骨架屏输入框
+const SkeletonInput = ({ active = false, size = 'default', block = false, className, style }) => {
+    const getInputClassName = () => {
+        const classes = [styles$5.skeletonInput];
+        if (active) {
+            classes.push(styles$5.active);
+        }
+        classes.push(styles$5[size]);
+        if (block) {
+            classes.push(styles$5.block);
+        }
+        if (className) {
+            classes.push(className);
+        }
+        return classes.join(' ');
+    };
+    return jsxRuntimeExports.jsx("div", { className: getInputClassName(), style: style });
+};
+// 骨架屏图片
+const SkeletonImage = ({ active = false, className, style }) => {
+    const getImageClassName = () => {
+        const classes = [styles$5.skeletonImage];
+        if (active) {
+            classes.push(styles$5.active);
+        }
+        if (className) {
+            classes.push(className);
+        }
+        return classes.join(' ');
+    };
+    return (jsxRuntimeExports.jsx("div", { className: getImageClassName(), style: style, children: jsxRuntimeExports.jsx("div", { className: styles$5.imageIcon, children: jsxRuntimeExports.jsx("svg", { viewBox: "0 0 1024 1024", width: "1em", height: "1em", fill: "currentColor", children: jsxRuntimeExports.jsx("path", { d: "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zM338 304c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm513.9 437.1L677.8 583c-16.1-13.3-39.4-13.3-55.5 0l-77.4 64.2-245.9-204.1c-16.1-13.3-39.4-13.3-55.5 0L112 563.6V792h739.9v-50.9z" }) }) }) }));
 };
 
 var styles$4 = {"slider":"Slider-module_slider__yXhwI","sliderHorizontal":"Slider-module_sliderHorizontal__Mi-n5","sliderVertical":"Slider-module_sliderVertical__RHOV-","rail":"Slider-module_rail__-ayJQ","track":"Slider-module_track__q0WxT","handle":"Slider-module_handle__1A6Ne","tooltip":"Slider-module_tooltip__siWl5","marks":"Slider-module_marks__o3G98","mark":"Slider-module_mark__w9V70","markDot":"Slider-module_markDot__v70EW","markLabel":"Slider-module_markLabel__900oh","dots":"Slider-module_dots__rQrtz","dot":"Slider-module_dot__ARgnb","sliderDisabled":"Slider-module_sliderDisabled__7iMPo","handleActive":"Slider-module_handleActive__YZw2v","handleDisabled":"Slider-module_handleDisabled__29r8y"};
@@ -133732,5 +133786,5 @@ const tokens = {
 // 版本信息
 const version = '1.0.0';
 
-export { Alert, Avatar, Badge, Breadcrumb, Button, Card, Carousel, Collapse, Drawer, EmergeText, Float, Form, Input, LanguageSwitcher, LineMotion, Menu, Modal, Notification, Pagination, Progress, ProgressThreeD, Radio, Rate, ScrollCard, ScrollReveal, Skeleton, Slider, Steps, Switch, Tabs, Upload, formatCurrency, formatDate, formatNumber, getBrowserLanguage, getLanguageNativeName, getSavedLanguage, getTextDirection, instance as i18n, isValidLanguage, saveLanguage, supportedLanguages, tokens, useCurrentLanguage, useLanguageSwitch, useTranslation, version };
+export { Alert, Avatar, Badge, Breadcrumb, Button, Card, Carousel, Collapse, Drawer, EmergeText, Float, Form, Input, LanguageSwitcher, LineMotion, Menu, Modal, Notification, Pagination, Progress, ProgressThreeD, Radio, Rate, ScrollCard, ScrollReveal, Skeleton, SkeletonButton, SkeletonImage, SkeletonInput, Slider, Steps, Switch, Tabs, Upload, formatCurrency, formatDate, formatNumber, getBrowserLanguage, getLanguageNativeName, getSavedLanguage, getTextDirection, instance as i18n, isValidLanguage, saveLanguage, supportedLanguages, tokens, useCurrentLanguage, useLanguageSwitch, useTranslation, version };
 //# sourceMappingURL=index.esm.js.map
