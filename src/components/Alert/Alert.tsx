@@ -105,6 +105,10 @@ const Alert: React.FC<AlertProps> = ({
       classes.push(styles.withDescription);
     }
     
+    if (closable) {
+      classes.push(styles.hasCloseBtn);
+    }
+    
     if (closing) {
       classes.push(styles.closing);
     }

@@ -12,6 +12,11 @@
   transition: all 0.3s;
 }
 
+// 有关闭按钮时的样式调整
+.hasCloseBtn {
+  padding-right: 38px; // 为关闭按钮预留空间
+}
+
 // 不同类型的样式
 .success {
   background-color: #f6ffed;
@@ -69,6 +74,9 @@
 .action {
   margin-left: 8px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 // 关闭按钮
@@ -111,6 +119,10 @@
     top: 8px;
     left: 16px;
   }
+  
+  &.hasCloseBtn {
+    padding: 8px 38px 8px 38px; // 左右都预留空间
+  }
 }
 
 // 带描述的样式调整
@@ -119,9 +131,9 @@
   
   .icon {
     position: absolute;
-    top: 16px;
+    top: 26px;
     left: 24px;
-    font-size: 24px;
+    font-size: 27px;
   }
   
   .message {
@@ -131,6 +143,10 @@
   
   .description {
     font-size: 14px;
+  }
+  
+  &.hasCloseBtn {
+    padding: 15px 38px 15px 64px; // 右侧预留关闭按钮空间
   }
 }
 
@@ -260,6 +276,10 @@
   .alert {
     padding: 6px 12px;
     font-size: 13px;
+    
+    &.hasCloseBtn {
+      padding-right: 32px; // 移动端减少右侧预留空间
+    }
   }
   
   .withIcon {
@@ -269,6 +289,10 @@
       top: 6px;
       left: 12px;
       font-size: 14px;
+    }
+    
+    &.hasCloseBtn {
+      padding: 6px 32px 6px 32px;
     }
   }
   
@@ -288,6 +312,10 @@
     .description {
       font-size: 12px;
     }
+    
+    &.hasCloseBtn {
+      padding: 12px 32px 12px 48px;
+    }
   }
   
   .closeBtn {
@@ -296,6 +324,11 @@
     width: 20px;
     height: 20px;
     font-size: 10px;
+  }
+  
+  .action {
+    margin-left: 4px;
+    gap: 4px;
   }
 }
 

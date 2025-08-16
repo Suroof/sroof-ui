@@ -433,7 +433,7 @@ function requireJsxRuntime () {
 
 var jsxRuntimeExports = requireJsxRuntime();
 
-var styles$v = {"alert":"Alert-module_alert__zP4AL","success":"Alert-module_success__lftZT","info":"Alert-module_info__-J-F1","warning":"Alert-module_warning__uOpos","error":"Alert-module_error__ah9Kg","icon":"Alert-module_icon__RUu7X","content":"Alert-module_content__9Fty2","message":"Alert-module_message__Wd9FZ","description":"Alert-module_description__ysmJi","action":"Alert-module_action__a5XCP","closeBtn":"Alert-module_closeBtn__rEeaV","withIcon":"Alert-module_withIcon__Co8yt","withDescription":"Alert-module_withDescription__Xo0y7","banner":"Alert-module_banner__epaT8","closing":"Alert-module_closing__s53YZ"};
+var styles$v = {"alert":"Alert-module_alert__zP4AL","hasCloseBtn":"Alert-module_hasCloseBtn__5Or4v","success":"Alert-module_success__lftZT","info":"Alert-module_info__-J-F1","warning":"Alert-module_warning__uOpos","error":"Alert-module_error__ah9Kg","icon":"Alert-module_icon__RUu7X","content":"Alert-module_content__9Fty2","message":"Alert-module_message__Wd9FZ","description":"Alert-module_description__ysmJi","action":"Alert-module_action__a5XCP","closeBtn":"Alert-module_closeBtn__rEeaV","withIcon":"Alert-module_withIcon__Co8yt","withDescription":"Alert-module_withDescription__Xo0y7","banner":"Alert-module_banner__epaT8","closing":"Alert-module_closing__s53YZ"};
 
 const Alert = ({ message, description, type = 'info', closable = false, onClose, closeText, action, icon, showIcon = false, banner = false, className, style, afterClose, }) => {
     const [visible, setVisible] = useState(true);
@@ -470,6 +470,9 @@ const Alert = ({ message, description, type = 'info', closable = false, onClose,
         }
         if (description) {
             classes.push(styles$v.withDescription);
+        }
+        if (closable) {
+            classes.push(styles$v.hasCloseBtn);
         }
         if (closing) {
             classes.push(styles$v.closing);
