@@ -90,8 +90,11 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
   const isScrollingRef = useRef(false);
+  const [isActive, setIsActive] = useState(false);
 
   const handleWheel = useCallback((event: WheelEvent) => {
+    if (!isActive) return;
+    
     event.preventDefault();
     
     const delta = event.deltaY; // 正常滚轮方向
@@ -101,12 +104,46 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
     setProgress(newProgress);
     onProgressChange?.(newProgress);
     
+    // 当进度达到100%时，失去焦点
+    if (newProgress >= 1) {
+      setIsActive(false);
+    }
+    
     // 防抖处理
     isScrollingRef.current = true;
     setTimeout(() => {
       isScrollingRef.current = false;
     }, 100);
-  }, [onProgressChange, sensitivity]);
+  }, [onProgressChange, sensitivity, isActive]);
+
+  // 检测组件是否在视口中
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // 如果进度已达到100%，重置进度
+          if (progressRef.current >= 1) {
+            progressRef.current = 0;
+            setProgress(0);
+            onProgressChange?.(0);
+          }
+          setIsActive(true);
+        } else {
+          setIsActive(false);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [onProgressChange]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -117,7 +154,7 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
     
     // 阻止容器内的默认滚动行为
     const preventScroll = (e: Event) => {
-      if (isScrollingRef.current) {
+      if (isScrollingRef.current && isActive) {
         e.preventDefault();
       }
     };
@@ -130,19 +167,17 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
       container.removeEventListener('scroll', preventScroll);
       container.removeEventListener('touchmove', preventScroll);
     };
-  }, [handleWheel]);
+  }, [handleWheel, isActive]);
 
   return (
     <div 
       ref={containerRef}
       style={{ 
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 1000,
-        background: 'transparent'
+        position: 'relative',
+        width: '100vw',
+        height: '100vh',
+        background: 'transparent',
+        overflow: 'hidden'
       }}
     >
       <Canvas 
@@ -161,7 +196,7 @@ export const ProgressThreeD: FC<ProgressThreeDProps> = ({
           enablePan={true} 
           enableRotate={true}
           maxDistance={10}
-          minDistance={3}
+          minDistance={4}
           zoomSpeed={-1}
         />
         

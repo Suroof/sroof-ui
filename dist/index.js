@@ -132435,19 +132435,50 @@ onProgressChange }) => {
     const containerRef = React.useRef(null);
     const progressRef = React.useRef(0);
     const isScrollingRef = React.useRef(false);
+    const [isActive, setIsActive] = React.useState(false);
     const handleWheel = React.useCallback((event) => {
+        if (!isActive)
+            return;
         event.preventDefault();
         const delta = event.deltaY; // 正常滚轮方向
         const newProgress = Math.max(0, Math.min(1, progressRef.current + delta * sensitivity));
         progressRef.current = newProgress;
         setProgress(newProgress);
         onProgressChange === null || onProgressChange === void 0 ? void 0 : onProgressChange(newProgress);
+        // 当进度达到100%时，失去焦点
+        if (newProgress >= 1) {
+            setIsActive(false);
+        }
         // 防抖处理
         isScrollingRef.current = true;
         setTimeout(() => {
             isScrollingRef.current = false;
         }, 100);
-    }, [onProgressChange, sensitivity]);
+    }, [onProgressChange, sensitivity, isActive]);
+    // 检测组件是否在视口中
+    React.useEffect(() => {
+        const container = containerRef.current;
+        if (!container)
+            return;
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                // 如果进度已达到100%，重置进度
+                if (progressRef.current >= 1) {
+                    progressRef.current = 0;
+                    setProgress(0);
+                    onProgressChange === null || onProgressChange === void 0 ? void 0 : onProgressChange(0);
+                }
+                setIsActive(true);
+            }
+            else {
+                setIsActive(false);
+            }
+        }, { threshold: 0.5 });
+        observer.observe(container);
+        return () => {
+            observer.disconnect();
+        };
+    }, [onProgressChange]);
     React.useEffect(() => {
         const container = containerRef.current;
         if (!container)
@@ -132456,7 +132487,7 @@ onProgressChange }) => {
         container.addEventListener('wheel', handleWheel, { passive: false });
         // 阻止容器内的默认滚动行为
         const preventScroll = (e) => {
-            if (isScrollingRef.current) {
+            if (isScrollingRef.current && isActive) {
                 e.preventDefault();
             }
         };
@@ -132467,15 +132498,13 @@ onProgressChange }) => {
             container.removeEventListener('scroll', preventScroll);
             container.removeEventListener('touchmove', preventScroll);
         };
-    }, [handleWheel]);
+    }, [handleWheel, isActive]);
     return (jsxRuntimeExports.jsx("div", { ref: containerRef, style: {
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: 1000,
-            background: 'transparent'
+            position: 'relative',
+            width: '100vw',
+            height: '100vh',
+            background: 'transparent',
+            overflow: 'hidden'
         }, children: jsxRuntimeExports.jsxs(Canvas, { style: {
                 position: 'absolute',
                 top: 0,

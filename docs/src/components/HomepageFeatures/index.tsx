@@ -27,7 +27,7 @@ function ScrollCardCustomExample() {
 
 function ProgressThreeDExample() {
   return (
-    <div style={{ padding: '20px 0', overflow: 'hidden' }}>
+    <div style={{  overflow: 'hidden' }}>
       <ProgressThreeD
         modelPath={'/sroof-ui/assets/gltf/rubiks_cube.glb'}
         sensitivity={0.0003}
