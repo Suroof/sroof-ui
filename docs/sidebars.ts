@@ -1,7 +1,6 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
-  // 手动定义侧边栏结构
   tutorialSidebar: [
     'intro',
     {
