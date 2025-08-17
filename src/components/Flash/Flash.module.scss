@@ -1,0 +1,192 @@
+.flashContainer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.flashElement {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: 
+    opacity var(--fade-in-duration, 500ms) ease-out,
+    transform var(--fade-in-duration, 500ms) ease-out;
+  pointer-events: none;
+  
+  // 确保元素在容器中居中
+  &:first-child {
+    position: relative;
+  }
+}
+
+.flashElement.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.flashElement.hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+}
+
+.flashElement.entering {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: flashEnter var(--fade-in-duration, 500ms) ease-out forwards;
+}
+
+.flashElement.leaving {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: flashLeave var(--fade-out-duration, 500ms) ease-in forwards;
+}
+
+// 淡入动画
+@keyframes flashEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// 淡出动画
+@keyframes flashLeave {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-10px) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .flashElement {
+    transform: translateY(15px) scale(0.96);
+  }
+  
+  .flashElement.entering {
+    animation: flashEnterMobile var(--fade-in-duration, 500ms) ease-out forwards;
+  }
+  
+  .flashElement.leaving {
+    animation: flashLeaveMobile var(--fade-out-duration, 500ms) ease-in forwards;
+  }
+}
+
+@keyframes flashEnterMobile {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes flashLeaveMobile {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px) scale(1.04);
+  }
+}
+
+// 减少动画效果（用户偏好）
+@media (prefers-reduced-motion: reduce) {
+  .flashElement {
+    transition: opacity var(--fade-in-duration, 500ms) ease-out;
+    transform: none;
+  }
+  
+  .flashElement.entering,
+  .flashElement.leaving {
+    animation: none;
+  }
+  
+  .flashElement.entering {
+    opacity: 1;
+  }
+  
+  .flashElement.leaving {
+    opacity: 0;
+  }
+}
+
+// 高对比度模式支持
+@media (prefers-contrast: high) {
+  .flashElement {
+    border: 1px solid currentColor;
+  }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+  .flashContainer {
+    color: #ffffff;
+  }
+}
+
+// 自定义变体类
+.flashContainer.compact {
+  .flashElement {
+    padding: 0.5rem;
+  }
+}
+
+.flashContainer.large {
+  .flashElement {
+    padding: 2rem;
+    font-size: 1.2em;
+  }
+}
+
+.flashContainer.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+// 性能优化
+.flashElement {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 确保容器有足够的高度
+.flashContainer:empty::before {
+  content: '';
+  display: block;
+  height: 100px;
+}
