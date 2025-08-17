@@ -128,43 +128,33 @@ export const Flash: FC<FlashProps> = ({
     setCurrentIndex(0); // 重置索引
 
     let index = 0;
-    const activeElements = new Set<number>();
 
     const showNextElement = () => {
-      // 显示当前元素
-      showElement(index);
-      activeElements.add(index);
-      
-      // 设置隐藏定时器
-      const hideTimeout = setTimeout(() => {
-        activeElements.delete(index);
-      }, duration + fadeOutDuration);
-      timeoutRefs.current.push(hideTimeout);
-
-      // 移动到下一个元素
-      index = (index + 1) % children.length;
-      
-      // 如果不是循环模式且已经显示完所有元素，停止
-      if (!loop && index === 0 && activeElements.size === 0) {
+      // 检查是否应该停止（非循环模式且已完成一轮）
+      if (!loop && index >= children.length) {
         return;
       }
 
-      // 计算下次显示的延迟时间
-      let nextDelay = duration / maxVisible;
+      // 获取当前要显示的元素索引（循环模式下取模）
+      const currentElementIndex = index % children.length;
       
-      // 如果当前活跃元素数量已达到最大值，等待一个元素消失
-      if (activeElements.size >= maxVisible) {
-        nextDelay = duration - fadeInDuration;
-      }
-
+      // 显示当前元素
+      showElement(currentElementIndex);
+      
+      // 移动到下一个元素
+      index++;
+      
+      // 计算下一个元素的显示时间：当前元素的完整生命周期
+      const nextElementDelay = duration + fadeOutDuration;
+      
       // 设置下次显示的定时器
-      const nextTimeout = setTimeout(showNextElement, nextDelay);
+      const nextTimeout = setTimeout(showNextElement, nextElementDelay);
       timeoutRefs.current.push(nextTimeout);
     };
 
     // 开始动画
     showNextElement();
-  }, [autoPlay, children.length, duration, fadeInDuration, fadeOutDuration, loop, maxVisible, showElement, clearAllTimeouts]);
+  }, [autoPlay, children.length, duration, fadeOutDuration, loop, showElement, clearAllTimeouts]);
 
   // Intersection Observer
   useEffect(() => {

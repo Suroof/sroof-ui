@@ -35,7 +35,7 @@
 
 .flashElement.hidden {
   opacity: 0;
-  transform: translateY(20px) scale(0.95);
+  transform: translateY(-20px) scale(0.95);
   pointer-events: none;
 }
 
@@ -75,11 +75,11 @@
   }
   50% {
     opacity: 0.5;
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-15px) scale(1.02);
   }
   100% {
     opacity: 0;
-    transform: translateY(-20px) scale(1.05);
+    transform: translateY(-30px) scale(1.05);
   }
 }
 
@@ -116,7 +116,7 @@
   }
   100% {
     opacity: 0;
-    transform: translateY(-15px) scale(1.04);
+    transform: translateY(-25px) scale(1.04);
   }
 }
 
