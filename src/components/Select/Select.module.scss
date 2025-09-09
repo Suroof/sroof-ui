@@ -1,0 +1,531 @@
+// Select 选择器样式
+
+// CSS 变量定义
+:root {
+  --select-border-color: #d1d5db;
+  --select-border-color-hover: #9ca3af;
+  --select-border-color-focus: #3b82f6;
+  --select-bg: #ffffff;
+  --select-text-color: #374151;
+  --select-placeholder-color: #9ca3af;
+  --select-disabled-bg: #f9fafb;
+  --select-disabled-text: #d1d5db;
+  --select-arrow-color: #6b7280;
+  --select-clear-color: #9ca3af;
+  --select-clear-hover: #ef4444;
+  --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --select-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  --select-dropdown-shadow: 0 10px 25px rgba(0, 0, 0, 0.1),
+                            0 4px 10px rgba(0, 0, 0, 0.05);
+  --select-border-radius: 6px;
+  --select-dropdown-border-radius: 8px;
+  --select-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 暗色主题
+@media (prefers-color-scheme: dark) {
+  :root {
+    --select-border-color: #374151;
+    --select-border-color-hover: #4b5563;
+    --select-border-color-focus: #3b82f6;
+    --select-bg: #1f2937;
+    --select-text-color: #f9fafb;
+    --select-placeholder-color: #9ca3af;
+    --select-disabled-bg: #111827;
+    --select-disabled-text: #6b7280;
+    --select-arrow-color: #9ca3af;
+    --select-clear-color: #6b7280;
+    --select-clear-hover: #ef4444;
+    --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --select-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    --select-dropdown-shadow: 0 10px 25px rgba(0, 0, 0, 0.4),
+                              0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// 主选择器容器
+.select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  background-color: var(--select-bg);
+  border: 1px solid var(--select-border-color);
+  border-radius: var(--select-border-radius);
+  box-shadow: var(--select-shadow);
+  transition: var(--select-transition);
+  cursor: pointer;
+  outline: none;
+
+  &:hover:not(.disabled) {
+    border-color: var(--select-border-color-hover);
+  }
+
+  &:focus:not(.disabled),
+  &.open:not(.disabled) {
+    border-color: var(--select-border-color-focus);
+    box-shadow: var(--select-shadow-focus);
+  }
+
+  // 尺寸变体
+  &.select-small {
+    min-height: 24px;
+
+    .selector {
+      padding: 1px 7px;
+      font-size: 12px;
+    }
+
+    .arrow {
+      right: 4px;
+    }
+  }
+
+  &.select-middle {
+    min-height: 32px;
+
+    .selector {
+      padding: 4px 11px;
+      font-size: 14px;
+    }
+
+    .arrow {
+      right: 8px;
+    }
+  }
+
+  &.select-large {
+    min-height: 40px;
+
+    .selector {
+      padding: 7px 11px;
+      font-size: 16px;
+    }
+
+    .arrow {
+      right: 8px;
+    }
+  }
+
+  // 禁用状态
+  &.disabled {
+    background-color: var(--select-disabled-bg);
+    color: var(--select-disabled-text);
+    cursor: not-allowed;
+
+    .selector {
+      color: var(--select-disabled-text);
+    }
+
+    .arrow {
+      color: var(--select-disabled-text);
+    }
+  }
+
+  // 多选模式
+  &.multiple {
+    .selector {
+      flex-wrap: wrap;
+      min-height: auto;
+    }
+  }
+}
+
+// 选择器内部容器
+.selector {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  color: var(--select-text-color);
+  line-height: 1.5;
+}
+
+// 占位符
+.placeholder {
+  color: var(--select-placeholder-color);
+  user-select: none;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 单选值显示
+.singleValue {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 多选容器
+.selectionContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+// 标签样式
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  margin: 1px 0;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  max-width: 150px;
+  transition: var(--select-transition);
+
+  &:hover {
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border-color: #6b7280;
+    color: #f9fafb;
+
+    &:hover {
+      background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+    }
+  }
+}
+
+.tagContent {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.tagClose {
+  margin-left: 4px;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 14px;
+  line-height: 1;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--select-clear-hover);
+  }
+}
+
+// 搜索输入框
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  flex: 1;
+  min-width: 20px;
+  padding: 0;
+  margin: 0;
+
+  &::placeholder {
+    color: var(--select-placeholder-color);
+  }
+}
+
+// 箭头区域
+.arrow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--select-arrow-color);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+// 清除图标
+.clearIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  border-radius: 50%;
+  background: var(--select-clear-color);
+  color: white;
+  cursor: pointer;
+  transition: var(--select-transition);
+
+  &:hover {
+    background: var(--select-clear-hover);
+    transform: scale(1.1);
+  }
+}
+
+// 箭头图标
+.arrowIcon {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+// 下拉菜单
+.dropdown {
+  background: var(--select-bg);
+  border: 1px solid var(--select-border-color);
+  border-radius: var(--select-dropdown-border-radius);
+  box-shadow: var(--select-dropdown-shadow);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  // 玻璃态效果
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(31, 41, 55, 0.95);
+    border: 1px solid rgba(55, 65, 81, 0.3);
+  }
+}
+
+// 下拉内容
+.dropdownContent {
+  max-height: inherit;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // 自定义滚动条
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+}
+
+// 选项样式
+.option {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: var(--select-transition);
+  color: var(--select-text-color);
+  font-size: 14px;
+  line-height: 1.5;
+
+  &:hover:not(.disabled) {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  }
+
+  &.selected {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #1e40af;
+    font-weight: 500;
+  }
+
+  &.focused {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    outline: 2px solid var(--select-border-color-focus);
+    outline-offset: -2px;
+  }
+
+  &.disabled {
+    color: var(--select-disabled-text);
+    cursor: not-allowed;
+    background: transparent;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:hover:not(.disabled) {
+      background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    }
+
+    &.selected {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      color: #bfdbfe;
+    }
+
+    &.focused {
+      background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+    }
+  }
+}
+
+// 复选框（多选模式）
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid var(--select-border-color);
+  border-radius: 3px;
+  font-size: 10px;
+  transition: var(--select-transition);
+
+  &.checked {
+    background: var(--select-border-color-focus);
+    border-color: var(--select-border-color-focus);
+    color: white;
+  }
+}
+
+// 选项内容
+.optionContent {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 选项组
+.optGroup {
+  &:not(:first-child) {
+    border-top: 1px solid var(--select-border-color);
+  }
+}
+
+.optGroupLabel {
+  padding: 8px 12px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--select-placeholder-color);
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid var(--select-border-color);
+  user-select: none;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.optGroupOptions {
+  // 嵌套选项的样式调整
+  .option {
+    padding-left: 24px;
+  }
+}
+
+// 空状态
+.empty {
+  padding: 16px 12px;
+  text-align: center;
+  color: var(--select-placeholder-color);
+  font-size: 14px;
+  user-select: none;
+
+  &::before {
+    content: '😔';
+    display: block;
+    font-size: 24px;
+    margin-bottom: 8px;
+    opacity: 0.5;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .select {
+    font-size: 16px; // 防止移动端缩放
+
+    &.select-small {
+      min-height: 32px;
+
+      .selector {
+        padding: 4px 8px;
+        font-size: 14px;
+      }
+    }
+
+    &.select-middle {
+      min-height: 36px;
+
+      .selector {
+        padding: 6px 12px;
+        font-size: 16px;
+      }
+    }
+
+    &.select-large {
+      min-height: 44px;
+
+      .selector {
+        padding: 10px 12px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .dropdown {
+    max-width: calc(100vw - 32px);
+  }
+
+  .tag {
+    max-width: 120px;
+  }
+}
+
+// 高对比度模式支持
+@media (prefers-contrast: high) {
+  .select {
+    border-width: 2px;
+  }
+
+  .option.selected {
+    background: #0066cc;
+    color: white;
+  }
+
+  .checkbox.checked {
+    background: #0066cc;
+    border-color: #0066cc;
+  }
+}
+
+// 减少动画偏好
+@media (prefers-reduced-motion: reduce) {
+  .select,
+  .option,
+  .tag,
+  .arrowIcon,
+  .clearIcon {
+    transition: none;
+  }
+
+  .tag:hover {
+    transform: none;
+  }
+}

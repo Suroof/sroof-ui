@@ -1,0 +1,457 @@
+// Timeline 时间轴组件样式
+
+:root {
+  --timeline-primary-color: #1890ff;
+  --timeline-success-color: #52c41a;
+  --timeline-error-color: #ff4d4f;
+  --timeline-warning-color: #fa8c16;
+  --timeline-gray-color: #d9d9d9;
+  --timeline-text-color: rgba(0, 0, 0, 0.88);
+  --timeline-text-color-secondary: rgba(0, 0, 0, 0.65);
+  --timeline-border-color: #d9d9d9;
+  --timeline-background-color: #ffffff;
+  --timeline-dot-size: 10px;
+  --timeline-dot-border-width: 2px;
+  --timeline-tail-width: 2px;
+  --timeline-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+// 暗色主题
+@media (prefers-color-scheme: dark) {
+  :root {
+    --timeline-text-color: rgba(255, 255, 255, 0.88);
+    --timeline-text-color-secondary: rgba(255, 255, 255, 0.65);
+    --timeline-border-color: #434343;
+    --timeline-background-color: #1f1f1f;
+    --timeline-gray-color: #434343;
+  }
+}
+
+// 主时间轴容器
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: var(--timeline-text-color);
+}
+
+// 时间轴项目
+.timelineItem {
+  position: relative;
+  margin: 0;
+  padding-bottom: 20px;
+  list-style: none;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  // 最后一项隐藏连接线
+  &.last {
+    .timelineItemTail {
+      display: none;
+    }
+  }
+}
+
+// 时间轴连接线
+.timelineItemTail {
+  position: absolute;
+  top: 10px;
+  left: 4px;
+  width: var(--timeline-tail-width);
+  height: calc(100% - 10px);
+  border-left: var(--timeline-tail-width) solid var(--timeline-border-color);
+}
+
+// 时间轴点
+.timelineDot {
+  position: absolute;
+  top: 5.5px;
+  left: 0;
+  width: var(--timeline-dot-size);
+  height: var(--timeline-dot-size);
+  border: var(--timeline-dot-border-width) solid transparent;
+  border-radius: 50%;
+  background-color: var(--timeline-background-color);
+  transition: var(--timeline-transition);
+
+  // 预定义颜色
+  &.dot-blue {
+    border-color: var(--timeline-primary-color);
+    background-color: var(--timeline-background-color);
+  }
+
+  &.dot-red {
+    border-color: var(--timeline-error-color);
+    background-color: var(--timeline-background-color);
+  }
+
+  &.dot-green {
+    border-color: var(--timeline-success-color);
+    background-color: var(--timeline-background-color);
+  }
+
+  &.dot-gray {
+    border-color: var(--timeline-gray-color);
+    background-color: var(--timeline-background-color);
+  }
+
+  // 自定义点
+  &.customDot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    min-width: var(--timeline-dot-size);
+    min-height: var(--timeline-dot-size);
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  // 待处理状态点
+  &.pendingDot {
+    background-color: var(--timeline-background-color);
+    border-color: var(--timeline-border-color);
+  }
+}
+
+// 时间轴内容
+.timelineItemContent {
+  position: relative;
+  top: -6px;
+  margin-left: 20px;
+  min-height: 32px;
+  word-wrap: break-word;
+}
+
+// 时间轴标签
+.timelineItemLabel {
+  margin-bottom: 8px;
+  color: var(--timeline-text-color-secondary);
+  font-size: 12px;
+  line-height: 1.5715;
+}
+
+// 时间轴描述
+.timelineItemDescription {
+  position: relative;
+  color: var(--timeline-text-color);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+// 左侧模式（默认）
+.timeline-left {
+  .timelineItem {
+    text-align: left;
+  }
+}
+
+// 右侧模式
+.timeline-right {
+  .timelineItem {
+    text-align: right;
+
+    .timelineItemTail {
+      right: 4px;
+      left: auto;
+    }
+
+    .timelineDot {
+      right: 0;
+      left: auto;
+    }
+
+    .timelineItemContent {
+      margin-right: 20px;
+      margin-left: 0;
+    }
+  }
+}
+
+// 交替模式
+.timeline-alternate {
+  .timelineItem {
+    &.item-left {
+      text-align: left;
+
+      .timelineItemTail {
+        left: 50%;
+        margin-left: -1px;
+      }
+
+      .timelineDot {
+        left: 50%;
+        margin-left: -5px;
+      }
+
+      .timelineItemContent {
+        margin-left: calc(50% + 20px);
+        margin-right: 0;
+        width: calc(50% - 20px);
+      }
+    }
+
+    &.item-right {
+      text-align: right;
+
+      .timelineItemTail {
+        right: 50%;
+        margin-right: -1px;
+        left: auto;
+      }
+
+      .timelineDot {
+        right: 50%;
+        margin-right: -5px;
+        left: auto;
+      }
+
+      .timelineItemContent {
+        margin-right: calc(50% + 20px);
+        margin-left: 0;
+        width: calc(50% - 20px);
+      }
+    }
+  }
+}
+
+// 待处理状态
+.timelinePending {
+  .timelineItem.pending {
+    .timelineDot {
+      animation: timeline-pending 1s infinite;
+    }
+  }
+}
+
+// 倒序模式
+.timelineReverse {
+  .timelineItem {
+    &:first-child {
+      padding-bottom: 0;
+
+      .timelineItemTail {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      padding-bottom: 20px;
+
+      .timelineItemTail {
+        display: block;
+      }
+    }
+  }
+}
+
+// 待处理加载动画
+.pendingSpinner {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--timeline-primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: timeline-spin 1s linear infinite;
+}
+
+// 动画定义
+@keyframes timeline-pending {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes timeline-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .timeline-alternate {
+    .timelineItem {
+      &.item-left,
+      &.item-right {
+        text-align: left;
+
+        .timelineItemTail {
+          left: 4px;
+          right: auto;
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        .timelineDot {
+          left: 0;
+          right: auto;
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        .timelineItemContent {
+          margin-left: 20px;
+          margin-right: 0;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+// 高对比度模式
+@media (prefers-contrast: high) {
+  .timeline {
+    --timeline-border-color: #000000;
+    --timeline-primary-color: #0000ff;
+    --timeline-error-color: #ff0000;
+    --timeline-success-color: #008000;
+  }
+
+  .timelineDot {
+    border-width: 3px;
+  }
+}
+
+// 减少动画偏好
+@media (prefers-reduced-motion: reduce) {
+  .timelineDot,
+  .pendingSpinner {
+    animation: none;
+    transition: none;
+  }
+}
+
+// 自定义内容样式
+.timelineItemDescription {
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol {
+    margin: 8px 0;
+    padding-left: 20px;
+  }
+
+  blockquote {
+    margin: 8px 0;
+    padding: 8px 16px;
+    border-left: 4px solid var(--timeline-primary-color);
+    background-color: rgba(24, 144, 255, 0.05);
+  }
+
+  code {
+    padding: 2px 6px;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.85em;
+  }
+}
+
+// 链接样式
+.timelineItemDescription a {
+  color: var(--timeline-primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #40a9ff;
+    text-decoration: underline;
+  }
+}
+
+// 大尺寸时间轴
+.timeline.large {
+  --timeline-dot-size: 14px;
+
+  .timelineItemContent {
+    margin-left: 28px;
+  }
+
+  .timelineItemDescription {
+    font-size: 16px;
+  }
+
+  .timeline-right & {
+    .timelineItemContent {
+      margin-right: 28px;
+      margin-left: 0;
+    }
+  }
+
+  .timeline-alternate & {
+    .timelineItem {
+      &.item-left .timelineItemContent {
+        margin-left: calc(50% + 28px);
+        width: calc(50% - 28px);
+      }
+
+      &.item-right .timelineItemContent {
+        margin-right: calc(50% + 28px);
+        width: calc(50% - 28px);
+      }
+    }
+  }
+}
+
+// 小尺寸时间轴
+.timeline.small {
+  --timeline-dot-size: 8px;
+  font-size: 12px;
+
+  .timelineItemContent {
+    margin-left: 16px;
+  }
+
+  .timelineItemDescription {
+    font-size: 12px;
+  }
+
+  .timeline-right & {
+    .timelineItemContent {
+      margin-right: 16px;
+      margin-left: 0;
+    }
+  }
+
+  .timeline-alternate & {
+    .timelineItem {
+      &.item-left .timelineItemContent {
+        margin-left: calc(50% + 16px);
+        width: calc(50% - 16px);
+      }
+
+      &.item-right .timelineItemContent {
+        margin-right: calc(50% + 16px);
+        width: calc(50% - 16px);
+      }
+    }
+  }
+}

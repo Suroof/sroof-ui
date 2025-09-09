@@ -30,6 +30,11 @@ export { default as Steps } from './components/Steps';
 export { default as Switch } from './components/Switch';
 export { default as Tabs } from './components/Tabs';
 export { default as Upload } from './components/Upload';
+export { default as Timeline } from './components/Timeline';
+export { default as Tag } from './components/Tag';
+export { default as Popover } from './components/Popover';
+export { default as Select } from './components/Select';
+export { default as DatePicker } from './components/DatePicker';
 
 // 导出类型定义
 export type { AlertProps } from './components/Alert';
@@ -63,6 +68,10 @@ export type { StepsProps } from './components/Steps';
 export type { SwitchProps } from './components/Switch';
 export type { TabsProps } from './components/Tabs';
 export type { UploadProps } from './components/Upload';
+export type { TimelineProps, TimelineItem } from './components/Timeline';
+export type { TagProps } from './components/Tag';
+export type { PopoverProps } from './components/Popover';
+export type { DatePickerProps } from './components/DatePicker';
 
 
 // 导出国际化相关

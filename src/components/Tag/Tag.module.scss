@@ -1,0 +1,473 @@
+// Tag 标签组件样式
+
+:root {
+  --tag-primary-color: #1890ff;
+  --tag-success-color: #52c41a;
+  --tag-warning-color: #fa8c16;
+  --tag-danger-color: #ff4d4f;
+  --tag-info-color: #13c2c2;
+  --tag-default-color: #d9d9d9;
+  --tag-default-text-color: #000000d9;
+  --tag-border-radius: 6px;
+  --tag-font-size: 12px;
+  --tag-line-height: 20px;
+  --tag-padding-horizontal: 7px;
+  --tag-margin: 2px;
+  --tag-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+// 暗色主题
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tag-default-color: #434343;
+    --tag-default-text-color: #ffffffd9;
+  }
+}
+
+// 基础标签样式
+.tag {
+  display: inline-flex;
+  align-items: center;
+  margin: var(--tag-margin);
+  padding: 0 var(--tag-padding-horizontal);
+  font-size: var(--tag-font-size);
+  line-height: var(--tag-line-height);
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--tag-border-radius);
+  cursor: default;
+  transition: var(--tag-transition);
+  user-select: none;
+
+  // 默认焦点样式
+  &:focus-visible {
+    outline: 2px solid var(--tag-primary-color);
+    outline-offset: 2px;
+  }
+}
+
+// 尺寸变体
+.tag-small {
+  --tag-font-size: 10px;
+  --tag-line-height: 16px;
+  --tag-padding-horizontal: 4px;
+  --tag-border-radius: 4px;
+
+  .tagIcon {
+    font-size: 10px;
+  }
+
+  .tagCloseIcon {
+    margin-left: 2px;
+
+    svg {
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+.tag-medium {
+  // 使用默认值
+}
+
+.tag-large {
+  --tag-font-size: 14px;
+  --tag-line-height: 24px;
+  --tag-padding-horizontal: 12px;
+  --tag-border-radius: 8px;
+
+  .tagIcon {
+    font-size: 14px;
+  }
+
+  .tagCloseIcon {
+    margin-left: 6px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+// 填充变体
+.tag-filled {
+  // 默认颜色定义将在颜色类中设定
+}
+
+// 描边变体
+.tag-outlined {
+  background-color: transparent;
+}
+
+// 浅色变体
+.tag-light {
+  border-width: 1px;
+}
+
+// 颜色变体 - 填充样式
+.tag-filled {
+  &.tag-default {
+    background-color: var(--tag-default-color);
+    border-color: var(--tag-default-color);
+    color: var(--tag-default-text-color);
+  }
+
+  &.tag-primary {
+    background-color: var(--tag-primary-color);
+    border-color: var(--tag-primary-color);
+    color: #ffffff;
+  }
+
+  &.tag-success {
+    background-color: var(--tag-success-color);
+    border-color: var(--tag-success-color);
+    color: #ffffff;
+  }
+
+  &.tag-warning {
+    background-color: var(--tag-warning-color);
+    border-color: var(--tag-warning-color);
+    color: #ffffff;
+  }
+
+  &.tag-danger {
+    background-color: var(--tag-danger-color);
+    border-color: var(--tag-danger-color);
+    color: #ffffff;
+  }
+
+  &.tag-info {
+    background-color: var(--tag-info-color);
+    border-color: var(--tag-info-color);
+    color: #ffffff;
+  }
+}
+
+// 颜色变体 - 描边样式
+.tag-outlined {
+  &.tag-default {
+    border-color: var(--tag-default-color);
+    color: var(--tag-default-text-color);
+  }
+
+  &.tag-primary {
+    border-color: var(--tag-primary-color);
+    color: var(--tag-primary-color);
+  }
+
+  &.tag-success {
+    border-color: var(--tag-success-color);
+    color: var(--tag-success-color);
+  }
+
+  &.tag-warning {
+    border-color: var(--tag-warning-color);
+    color: var(--tag-warning-color);
+  }
+
+  &.tag-danger {
+    border-color: var(--tag-danger-color);
+    color: var(--tag-danger-color);
+  }
+
+  &.tag-info {
+    border-color: var(--tag-info-color);
+    color: var(--tag-info-color);
+  }
+}
+
+// 颜色变体 - 浅色样式
+.tag-light {
+  &.tag-default {
+    background-color: rgba(217, 217, 217, 0.2);
+    border-color: rgba(217, 217, 217, 0.4);
+    color: var(--tag-default-text-color);
+  }
+
+  &.tag-primary {
+    background-color: rgba(24, 144, 255, 0.2);
+    border-color: rgba(24, 144, 255, 0.4);
+    color: var(--tag-primary-color);
+  }
+
+  &.tag-success {
+    background-color: rgba(82, 196, 26, 0.2);
+    border-color: rgba(82, 196, 26, 0.4);
+    color: var(--tag-success-color);
+  }
+
+  &.tag-warning {
+    background-color: rgba(250, 140, 22, 0.2);
+    border-color: rgba(250, 140, 22, 0.4);
+    color: var(--tag-warning-color);
+  }
+
+  &.tag-danger {
+    background-color: rgba(255, 77, 79, 0.2);
+    border-color: rgba(255, 77, 79, 0.4);
+    color: var(--tag-danger-color);
+  }
+
+  &.tag-info {
+    background-color: rgba(19, 194, 194, 0.2);
+    border-color: rgba(19, 194, 194, 0.4);
+    color: var(--tag-info-color);
+  }
+}
+
+// 自定义颜色
+.tagCustomColor {
+  // 样式将通过内联样式设置
+}
+
+// 可关闭标签
+.tagClosable {
+  padding-right: calc(var(--tag-padding-horizontal) - 2px);
+}
+
+// 可选择标签
+.tagCheckable {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 选中状态
+.tagChecked {
+  &.tag-filled {
+    &.tag-default {
+      background-color: var(--tag-primary-color);
+      border-color: var(--tag-primary-color);
+      color: #ffffff;
+    }
+  }
+
+  &.tag-outlined {
+    &.tag-default {
+      background-color: var(--tag-primary-color);
+      border-color: var(--tag-primary-color);
+      color: #ffffff;
+    }
+  }
+
+  &.tag-light {
+    &.tag-default {
+      background-color: rgba(24, 144, 255, 0.3);
+      border-color: var(--tag-primary-color);
+      color: var(--tag-primary-color);
+    }
+  }
+}
+
+// 无边框
+.tagNoBorder {
+  border: none;
+}
+
+// 标签图标
+.tagIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 4px;
+  font-size: var(--tag-font-size);
+}
+
+// 标签内容
+.tagContent {
+  display: inline-block;
+}
+
+// 关闭图标
+.tagCloseIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: var(--tag-transition);
+  border-radius: 50%;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+}
+
+// 特殊状态样式
+.tag:hover {
+  &.tagCheckable {
+    .tagCloseIcon {
+      opacity: 0.8;
+    }
+  }
+}
+
+// 动画效果
+@keyframes tag-zoom-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tag-zoom-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.tag {
+  animation: tag-zoom-in 0.3s ease-out;
+}
+
+// 高对比度模式
+@media (prefers-contrast: high) {
+  .tag {
+    border-width: 2px;
+
+    &.tag-filled {
+      &.tag-default {
+        background-color: #000000;
+        border-color: #000000;
+        color: #ffffff;
+      }
+    }
+
+    &.tag-outlined {
+      border-width: 2px;
+
+      &.tag-default {
+        border-color: #000000;
+        color: #000000;
+      }
+    }
+  }
+}
+
+// 减少动画偏好
+@media (prefers-reduced-motion: reduce) {
+  .tag {
+    transition: none;
+    animation: none;
+
+    &:active {
+      transform: none;
+    }
+  }
+
+  .tagCloseIcon {
+    transition: none;
+
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 576px) {
+  .tag-large {
+    --tag-font-size: 12px;
+    --tag-line-height: 20px;
+    --tag-padding-horizontal: 8px;
+  }
+}
+
+// 标签组合样式（当多个标签一起使用时）
+.tagGroup {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  .tag {
+    margin: 0;
+  }
+}
+
+// 垂直标签组
+.tagGroupVertical {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .tag {
+    margin: 0;
+  }
+}
+
+// 紧凑模式
+.tagCompact {
+  --tag-margin: 1px;
+  --tag-padding-horizontal: 4px;
+}
+
+// 标签状态指示器
+.tagWithStatus {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--tag-danger-color);
+  }
+
+  &.statusSuccess::before {
+    background-color: var(--tag-success-color);
+  }
+
+  &.statusWarning::before {
+    background-color: var(--tag-warning-color);
+  }
+
+  &.statusInfo::before {
+    background-color: var(--tag-info-color);
+  }
+}
+
+// 标签链接样式
+.tagLink {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

@@ -1,0 +1,598 @@
+// DatePicker 日期选择器样式
+
+// CSS 变量定义
+:root {
+  --datepicker-border-color: #d1d5db;
+  --datepicker-border-color-hover: #9ca3af;
+  --datepicker-border-color-focus: #3b82f6;
+  --datepicker-bg: #ffffff;
+  --datepicker-text-color: #374151;
+  --datepicker-placeholder-color: #9ca3af;
+  --datepicker-disabled-bg: #f9fafb;
+  --datepicker-disabled-text: #d1d5db;
+  --datepicker-selected-bg: #3b82f6;
+  --datepicker-selected-color: #ffffff;
+  --datepicker-today-color: #ef4444;
+  --datepicker-range-bg: rgba(59, 130, 246, 0.1);
+  --datepicker-hover-bg: #f3f4f6;
+  --datepicker-panel-shadow: 0 10px 25px rgba(0, 0, 0, 0.1),
+                              0 4px 10px rgba(0, 0, 0, 0.05);
+  --datepicker-border-radius: 6px;
+  --datepicker-panel-border-radius: 8px;
+  --datepicker-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 暗色主题
+@media (prefers-color-scheme: dark) {
+  :root {
+    --datepicker-border-color: #374151;
+    --datepicker-border-color-hover: #4b5563;
+    --datepicker-border-color-focus: #3b82f6;
+    --datepicker-bg: #1f2937;
+    --datepicker-text-color: #f9fafb;
+    --datepicker-placeholder-color: #9ca3af;
+    --datepicker-disabled-bg: #111827;
+    --datepicker-disabled-text: #6b7280;
+    --datepicker-selected-bg: #3b82f6;
+    --datepicker-selected-color: #ffffff;
+    --datepicker-today-color: #ef4444;
+    --datepicker-range-bg: rgba(59, 130, 246, 0.2);
+    --datepicker-hover-bg: #374151;
+    --datepicker-panel-shadow: 0 10px 25px rgba(0, 0, 0, 0.4),
+                               0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// 主日期选择器容器
+.datePicker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  background-color: var(--datepicker-bg);
+  border: 1px solid var(--datepicker-border-color);
+  border-radius: var(--datepicker-border-radius);
+  transition: var(--datepicker-transition);
+  cursor: pointer;
+  outline: none;
+
+  &:hover:not(.disabled) {
+    border-color: var(--datepicker-border-color-hover);
+  }
+
+  &:focus:not(.disabled),
+  &.open:not(.disabled) {
+    border-color: var(--datepicker-border-color-focus);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  }
+
+  // 尺寸变体
+  &.datePicker-small {
+    min-height: 24px;
+
+    .inputWrapper {
+      padding: 1px 7px;
+    }
+
+    .input {
+      font-size: 12px;
+    }
+  }
+
+  &.datePicker-middle {
+    min-height: 32px;
+
+    .inputWrapper {
+      padding: 4px 11px;
+    }
+
+    .input {
+      font-size: 14px;
+    }
+  }
+
+  &.datePicker-large {
+    min-height: 40px;
+
+    .inputWrapper {
+      padding: 7px 11px;
+    }
+
+    .input {
+      font-size: 16px;
+    }
+  }
+
+  // 禁用状态
+  &.disabled {
+    background-color: var(--datepicker-disabled-bg);
+    color: var(--datepicker-disabled-text);
+    cursor: not-allowed;
+
+    .input {
+      color: var(--datepicker-disabled-text);
+    }
+
+    .suffix {
+      color: var(--datepicker-disabled-text);
+    }
+  }
+
+  // 范围选择模式
+  &.range {
+    .inputWrapper {
+      min-width: 0;
+    }
+  }
+}
+
+// 输入容器
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+// 输入框
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--datepicker-text-color);
+  font-size: inherit;
+  line-height: 1.5;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+
+  &::placeholder {
+    color: var(--datepicker-placeholder-color);
+  }
+
+  &:read-only {
+    cursor: pointer;
+  }
+}
+
+// 范围输入
+.rangeInput {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.separator {
+  margin: 0 8px;
+  color: var(--datepicker-placeholder-color);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+// 后缀区域
+.suffix {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.clearIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  border-radius: 50%;
+  background: #9ca3af;
+  color: white;
+  cursor: pointer;
+  transition: var(--datepicker-transition);
+
+  &:hover {
+    background: #ef4444;
+    transform: scale(1.1);
+  }
+}
+
+.calendarIcon {
+  color: var(--datepicker-placeholder-color);
+  font-size: 14px;
+  user-select: none;
+}
+
+// 日历面板
+.panel {
+  position: absolute;
+  background: var(--datepicker-bg);
+  border: 1px solid var(--datepicker-border-color);
+  border-radius: var(--datepicker-panel-border-radius);
+  box-shadow: var(--datepicker-panel-shadow);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  // 玻璃态效果
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(31, 41, 55, 0.95);
+    border: 1px solid rgba(55, 65, 81, 0.3);
+  }
+}
+
+// 面板头部
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--datepicker-border-color);
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--datepicker-text-color);
+    cursor: pointer;
+    transition: var(--datepicker-transition);
+
+    &:hover {
+      background: var(--datepicker-hover-bg);
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+.monthYear {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--datepicker-text-color);
+  user-select: none;
+}
+
+// 星期标题
+.weekHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid var(--datepicker-border-color);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.weekDay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--datepicker-placeholder-color);
+  user-select: none;
+}
+
+// 日期网格
+.dateGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 8px;
+  gap: 2px;
+}
+
+// 日期单元格
+.dayCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--datepicker-transition);
+  color: var(--datepicker-text-color);
+
+  &:hover:not(.disabled) {
+    background: var(--datepicker-hover-bg);
+  }
+
+  // 其他月份日期
+  &.otherMonth {
+    color: var(--datepicker-placeholder-color);
+    opacity: 0.4;
+  }
+
+  // 今天
+  &.today {
+    color: var(--datepicker-today-color);
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--datepicker-today-color);
+    }
+  }
+
+  // 选中状态
+  &.selected {
+    background: var(--datepicker-selected-bg);
+    color: var(--datepicker-selected-color);
+    font-weight: 600;
+
+    &:hover {
+      background: var(--datepicker-selected-bg);
+    }
+  }
+
+  // 范围内
+  &.inRange {
+    background: var(--datepicker-range-bg);
+
+    &:hover {
+      background: var(--datepicker-range-bg);
+    }
+  }
+
+  // 悬停范围内
+  &.inHoverRange {
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  // 范围开始
+  &.rangeStart {
+    background: var(--datepicker-selected-bg);
+    color: var(--datepicker-selected-color);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      background: var(--datepicker-range-bg);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      z-index: -1;
+    }
+  }
+
+  // 范围结束
+  &.rangeEnd {
+    background: var(--datepicker-selected-bg);
+    color: var(--datepicker-selected-color);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      background: var(--datepicker-range-bg);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      z-index: -1;
+    }
+  }
+
+  // 禁用状态
+  &.disabled {
+    color: var(--datepicker-disabled-text);
+    cursor: not-allowed;
+    background: transparent !important;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--datepicker-disabled-text);
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
+}
+
+// 面板底部
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-top: 1px solid var(--datepicker-border-color);
+  background: rgba(0, 0, 0, 0.02);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.todayBtn {
+  padding: 4px 12px;
+  border: 1px solid var(--datepicker-border-color);
+  border-radius: 4px;
+  background: var(--datepicker-bg);
+  color: var(--datepicker-text-color);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--datepicker-transition);
+
+  &:hover {
+    border-color: var(--datepicker-border-color-focus);
+    color: var(--datepicker-border-color-focus);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .datePicker {
+    font-size: 16px; // 防止移动端缩放
+
+    &.datePicker-small {
+      min-height: 32px;
+
+      .inputWrapper {
+        padding: 4px 8px;
+      }
+
+      .input {
+        font-size: 14px;
+      }
+    }
+
+    &.datePicker-middle {
+      min-height: 36px;
+
+      .inputWrapper {
+        padding: 6px 12px;
+      }
+
+      .input {
+        font-size: 16px;
+      }
+    }
+
+    &.datePicker-large {
+      min-height: 44px;
+
+      .inputWrapper {
+        padding: 10px 12px;
+      }
+
+      .input {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .panel {
+    max-width: calc(100vw - 32px);
+    margin: 0 16px;
+  }
+
+  .dayCell {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .separator {
+    margin: 0 4px;
+  }
+}
+
+// 动画效果
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.panel {
+  animation: slideDown 0.2s ease-out;
+}
+
+// 高对比度模式支持
+@media (prefers-contrast: high) {
+  .datePicker {
+    border-width: 2px;
+  }
+
+  .dayCell.selected {
+    background: #0066cc;
+    color: white;
+  }
+
+  .dayCell.today {
+    color: #cc0000;
+  }
+}
+
+// 减少动画偏好
+@media (prefers-reduced-motion: reduce) {
+  .datePicker,
+  .dayCell,
+  .clearIcon,
+  .todayBtn,
+  .header button {
+    transition: none;
+  }
+
+  .panel {
+    animation: none;
+  }
+
+  .clearIcon:hover,
+  .todayBtn:hover,
+  .header button:hover {
+    transform: none;
+  }
+}
+
+// 打印样式优化
+@media print {
+  .panel {
+    display: none;
+  }
+
+  .datePicker {
+    border: 1px solid #000;
+    box-shadow: none;
+  }
+}
