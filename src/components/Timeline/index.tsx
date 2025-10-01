@@ -1,3 +1,2 @@
-export { Timeline as default } from './Timeline';
-export type { TimelineProps, TimelineItem } from './Timeline';
-
+export { TimelineItem as default } from './Timeline';
+export type { TimelineItemProps, TimelineProps } from './Timeline';
