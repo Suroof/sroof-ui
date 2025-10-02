@@ -1,6 +1,3 @@
-// Select 选择器样式
-
-// CSS 变量定义
 :root {
   --select-border-color: #d1d5db;
   --select-border-color-hover: #9ca3af;
@@ -16,7 +13,7 @@
   --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   --select-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
   --select-dropdown-shadow: 0 10px 25px rgba(0, 0, 0, 0.1),
-                            0 4px 10px rgba(0, 0, 0, 0.05);
+    0 4px 10px rgba(0, 0, 0, 0.05);
   --select-border-radius: 6px;
   --select-dropdown-border-radius: 8px;
   --select-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -39,7 +36,7 @@
     --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     --select-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.2);
     --select-dropdown-shadow: 0 10px 25px rgba(0, 0, 0, 0.4),
-                              0 4px 10px rgba(0, 0, 0, 0.2);
+      0 4px 10px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -247,6 +244,15 @@
   color: var(--select-arrow-color);
   user-select: none;
   flex-shrink: 0;
+
+  // 固定在右侧
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  // 确保箭头始终可见
+  z-index: 1;
 }
 
 // 清除图标
@@ -273,9 +279,10 @@
 .arrowIcon {
   font-size: 10px;
   transition: transform 0.2s ease;
-
+  width: 13px;
+  height: 10px;
   &.open {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
   }
 }
 
@@ -448,7 +455,7 @@
   user-select: none;
 
   &::before {
-    content: '😔';
+    content: "😔";
     display: block;
     font-size: 24px;
     margin-bottom: 8px;

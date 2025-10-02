@@ -1,6 +1,12 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import ReactDOM from 'react-dom';
-import styles from './Select.module.scss';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
+import ReactDOM from "react-dom";
+import styles from "./Select.module.scss";
 
 export interface SelectOption {
   label: React.ReactNode;
@@ -26,7 +32,7 @@ export interface SelectProps {
   /** 默认选中的值（非受控） */
   defaultValue?: string | number | (string | number)[];
   /** 是否多选 */
-  mode?: 'multiple' | 'tags' | undefined;
+  mode?: "multiple" | "tags" | undefined;
   /** 是否禁用 */
   disabled?: boolean;
   /** 是否显示清除按钮 */
@@ -38,7 +44,7 @@ export interface SelectProps {
   /** 占位符 */
   placeholder?: string;
   /** 尺寸 */
-  size?: 'small' | 'middle' | 'large';
+  size?: "small" | "middle" | "large";
   /** 自定义类名 */
   className?: string;
   /** 自定义样式 */
@@ -52,13 +58,18 @@ export interface SelectProps {
   /** 最多显示多少个选中项 */
   maxTagCount?: number;
   /** 隐藏超出maxTagCount的选中项时的占位符 */
-  maxTagPlaceholder?: React.ReactNode | ((omittedValues: (string | number)[]) => React.ReactNode);
+  maxTagPlaceholder?:
+    | React.ReactNode
+    | ((omittedValues: (string | number)[]) => React.ReactNode);
   /** 下拉菜单最大高度 */
   listHeight?: number;
   /** 是否开启虚拟滚动 */
   virtual?: boolean;
   /** 选择时的回调 */
-  onChange?: (value: string | number | (string | number)[], option?: SelectOption | SelectOption[]) => void;
+  onChange?: (
+    value: string | number | (string | number)[],
+    option?: SelectOption | SelectOption[]
+  ) => void;
   /** 搜索时的回调 */
   onSearch?: (value: string) => void;
   /** 获得焦点时的回调 */
@@ -72,9 +83,17 @@ export interface SelectProps {
   /** 取消选中时的回调 */
   onDeselect?: (value: string | number, option: SelectOption) => void;
   /** 自定义选中项的渲染 */
-  tagRender?: (props: { label: React.ReactNode; value: string | number; disabled: boolean; onClose: () => void }) => React.ReactElement;
+  tagRender?: (props: {
+    label: React.ReactNode;
+    value: string | number;
+    disabled: boolean;
+    onClose: () => void;
+  }) => React.ReactElement;
   /** 自定义下拉选项的渲染 */
-  optionRender?: (option: SelectOption, info: { index: number }) => React.ReactNode;
+  optionRender?: (
+    option: SelectOption,
+    info: { index: number }
+  ) => React.ReactNode;
   /** 空数据时的显示内容 */
   notFoundContent?: React.ReactNode;
   /** 自定义下拉列表滚动条 */
@@ -90,8 +109,8 @@ export const Select: React.FC<SelectProps> = ({
   allowClear = false,
   showSearch = false,
   filterOption,
-  placeholder = '请选择',
-  size = 'middle',
+  placeholder = "请选择",
+  size = "middle",
   className,
   style,
   dropdownClassName,
@@ -110,14 +129,14 @@ export const Select: React.FC<SelectProps> = ({
   onDeselect,
   tagRender,
   optionRender,
-  notFoundContent = '无数据',
+  notFoundContent = "无数据",
   dropdownRender,
 }) => {
-  const [internalValue, setInternalValue] = useState<string | number | (string | number)[]>(
-    defaultValue || (mode === 'multiple' || mode === 'tags' ? [] : '')
-  );
+  const [internalValue, setInternalValue] = useState<
+    string | number | (string | number)[]
+  >(defaultValue || (mode === "multiple" || mode === "tags" ? [] : ""));
   const [open, setOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [position, setPosition] = useState({ top: 0, left: 0, width: 0 });
 
@@ -128,13 +147,13 @@ export const Select: React.FC<SelectProps> = ({
 
   const isControlled = value !== undefined;
   const finalValue = isControlled ? value : internalValue;
-  const isMultiple = mode === 'multiple' || mode === 'tags';
+  const isMultiple = mode === "multiple" || mode === "tags";
 
   // 扁平化选项
   const flatOptions = useMemo(() => {
     const result: SelectOption[] = [];
     options.forEach((item) => {
-      if ('options' in item) {
+      if ("options" in item) {
         result.push(...item.options);
       } else {
         result.push(item);
@@ -157,9 +176,13 @@ export const Select: React.FC<SelectProps> = ({
 
     return options
       .map((item) => {
-        if ('options' in item) {
-          const filteredSubOptions = item.options.filter((option) => filter(searchValue, option));
-          return filteredSubOptions.length > 0 ? { ...item, options: filteredSubOptions } : null;
+        if ("options" in item) {
+          const filteredSubOptions = item.options.filter((option) =>
+            filter(searchValue, option)
+          );
+          return filteredSubOptions.length > 0
+            ? { ...item, options: filteredSubOptions }
+            : null;
         } else {
           return filter(searchValue, item) ? item : null;
         }
@@ -176,7 +199,10 @@ export const Select: React.FC<SelectProps> = ({
 
   // 更新选中值
   const updateValue = useCallback(
-    (newValue: string | number | (string | number)[], selectedOption?: SelectOption | SelectOption[]) => {
+    (
+      newValue: string | number | (string | number)[],
+      selectedOption?: SelectOption | SelectOption[]
+    ) => {
       if (!isControlled) {
         setInternalValue(newValue);
       }
@@ -196,7 +222,9 @@ export const Select: React.FC<SelectProps> = ({
 
         if (isSelected) {
           const newValues = currentValues.filter((v) => v !== option.value);
-          const newOptions = selectedOptions.filter((opt) => opt.value !== option.value);
+          const newOptions = selectedOptions.filter(
+            (opt) => opt.value !== option.value
+          );
           updateValue(newValues, newOptions);
           onDeselect?.(option.value, option);
         } else {
@@ -207,7 +235,7 @@ export const Select: React.FC<SelectProps> = ({
       } else {
         updateValue(option.value, option);
         setOpen(false);
-        setSearchValue('');
+        setSearchValue("");
       }
     },
     [isMultiple, finalValue, selectedOptions, updateValue, onDeselect]
@@ -219,8 +247,12 @@ export const Select: React.FC<SelectProps> = ({
       e?.stopPropagation();
       if (isMultiple && Array.isArray(finalValue)) {
         const newValues = finalValue.filter((v) => v !== valueToRemove);
-        const removedOption = selectedOptions.find((opt) => opt.value === valueToRemove);
-        const newOptions = selectedOptions.filter((opt) => opt.value !== valueToRemove);
+        const removedOption = selectedOptions.find(
+          (opt) => opt.value === valueToRemove
+        );
+        const newOptions = selectedOptions.filter(
+          (opt) => opt.value !== valueToRemove
+        );
         updateValue(newValues, newOptions);
         if (removedOption) {
           onDeselect?.(valueToRemove, removedOption);
@@ -234,11 +266,11 @@ export const Select: React.FC<SelectProps> = ({
   const clearAll = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
-      const emptyValue = isMultiple ? [] : '';
+      const emptyValue = isMultiple ? [] : "";
       updateValue(emptyValue, isMultiple ? [] : undefined);
       onClear?.();
       if (showSearch) {
-        setSearchValue('');
+        setSearchValue("");
       }
     },
     [isMultiple, updateValue, onClear, showSearch]
@@ -250,7 +282,8 @@ export const Select: React.FC<SelectProps> = ({
 
     const rect = selectRef.current.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
 
     setPosition({
       top: rect.bottom + scrollTop,
@@ -265,21 +298,23 @@ export const Select: React.FC<SelectProps> = ({
       if (disabled) return;
 
       switch (e.key) {
-        case 'ArrowDown':
+        case "ArrowDown":
           e.preventDefault();
           if (!open) {
             setOpen(true);
           } else {
-            setFocusedIndex((prev) => Math.min(prev + 1, flatOptions.length - 1));
+            setFocusedIndex((prev) =>
+              Math.min(prev + 1, flatOptions.length - 1)
+            );
           }
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           e.preventDefault();
           if (open) {
             setFocusedIndex((prev) => Math.max(prev - 1, 0));
           }
           break;
-        case 'Enter':
+        case "Enter":
           e.preventDefault();
           if (open && focusedIndex >= 0) {
             selectOption(flatOptions[focusedIndex]);
@@ -287,20 +322,35 @@ export const Select: React.FC<SelectProps> = ({
             setOpen(!open);
           }
           break;
-        case 'Escape':
+        case "Escape":
           e.preventDefault();
           setOpen(false);
-          setSearchValue('');
+          setSearchValue("");
           break;
-        case 'Backspace':
-          if (isMultiple && Array.isArray(finalValue) && finalValue.length > 0 && !searchValue) {
+        case "Backspace":
+          if (
+            isMultiple &&
+            Array.isArray(finalValue) &&
+            finalValue.length > 0 &&
+            !searchValue
+          ) {
             const lastValue = finalValue[finalValue.length - 1];
             removeSelectedItem(lastValue);
           }
           break;
       }
     },
-    [disabled, open, focusedIndex, flatOptions, selectOption, isMultiple, finalValue, searchValue, removeSelectedItem]
+    [
+      disabled,
+      open,
+      focusedIndex,
+      flatOptions,
+      selectOption,
+      isMultiple,
+      finalValue,
+      searchValue,
+      removeSelectedItem,
+    ]
   );
 
   // 处理搜索输入
@@ -334,12 +384,12 @@ export const Select: React.FC<SelectProps> = ({
       const handleResize = () => updatePosition();
       const handleScroll = () => updatePosition();
 
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('scroll', handleScroll, true);
+      window.addEventListener("resize", handleResize);
+      window.addEventListener("scroll", handleScroll, true);
 
       return () => {
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("scroll", handleScroll, true);
       };
     }
   }, [open, updatePosition]);
@@ -355,13 +405,14 @@ export const Select: React.FC<SelectProps> = ({
           !dropdownRef.current.contains(event.target as Node)
         ) {
           setOpen(false);
-          setSearchValue('');
+          setSearchValue("");
           onDropdownVisibleChange?.(false);
         }
       };
 
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [open, onDropdownVisibleChange]);
 
@@ -378,7 +429,7 @@ export const Select: React.FC<SelectProps> = ({
     if (open) classes.push(styles.open);
     if (isMultiple) classes.push(styles.multiple);
     if (className) classes.push(className);
-    return classes.join(' ');
+    return classes.join(" ");
   };
 
   // 渲染选中项
@@ -388,8 +439,12 @@ export const Select: React.FC<SelectProps> = ({
         return <span className={styles.placeholder}>{placeholder}</span>;
       }
 
-      const visibleItems = maxTagCount ? finalValue.slice(0, maxTagCount) : finalValue;
-      const hiddenCount = maxTagCount ? Math.max(0, finalValue.length - maxTagCount) : 0;
+      const visibleItems = maxTagCount
+        ? finalValue.slice(0, maxTagCount)
+        : finalValue;
+      const hiddenCount = maxTagCount
+        ? Math.max(0, finalValue.length - maxTagCount)
+        : 0;
 
       return (
         <div className={styles.selectionContainer}>
@@ -409,7 +464,10 @@ export const Select: React.FC<SelectProps> = ({
             return (
               <span key={val} className={styles.tag}>
                 <span className={styles.tagContent}>{option.label}</span>
-                <span className={styles.tagClose} onClick={(e) => removeSelectedItem(val, e)}>
+                <span
+                  className={styles.tagClose}
+                  onClick={(e) => removeSelectedItem(val, e)}
+                >
                   ×
                 </span>
               </span>
@@ -417,7 +475,7 @@ export const Select: React.FC<SelectProps> = ({
           })}
           {hiddenCount > 0 && (
             <span className={styles.tag}>
-              {typeof maxTagPlaceholder === 'function'
+              {typeof maxTagPlaceholder === "function"
                 ? maxTagPlaceholder(finalValue.slice(maxTagCount!))
                 : maxTagPlaceholder || `+${hiddenCount}...`}
             </span>
@@ -446,8 +504,10 @@ export const Select: React.FC<SelectProps> = ({
       isSelected && styles.selected,
       isFocused && styles.focused,
       option.disabled && styles.disabled,
-      option.className
-    ].filter(Boolean).join(' ');
+      option.className,
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     if (optionRender) {
       return (
@@ -470,8 +530,10 @@ export const Select: React.FC<SelectProps> = ({
         style={option.style}
       >
         {isMultiple && (
-          <span className={`${styles.checkbox} ${isSelected ? styles.checked : ''}`}>
-            {isSelected && '✓'}
+          <span
+            className={`${styles.checkbox} ${isSelected ? styles.checked : ""}`}
+          >
+            {isSelected && "✓"}
           </span>
         )}
         <span className={styles.optionContent}>{option.label}</span>
@@ -490,12 +552,17 @@ export const Select: React.FC<SelectProps> = ({
     } else {
       let optionIndex = 0;
       content = filteredOptions.map((item) => {
-        if ('options' in item) {
+        if ("options" in item) {
           return (
-            <div key={item.key || String(item.label)} className={styles.optGroup}>
+            <div
+              key={item.key || String(item.label)}
+              className={styles.optGroup}
+            >
               <div className={styles.optGroupLabel}>{item.label}</div>
               <div className={styles.optGroupOptions}>
-                {item.options.map((option) => renderOption(option, optionIndex++))}
+                {item.options.map((option) =>
+                  renderOption(option, optionIndex++)
+                )}
               </div>
             </div>
           );
@@ -508,9 +575,9 @@ export const Select: React.FC<SelectProps> = ({
     const dropdown = (
       <div
         ref={dropdownRef}
-        className={`${styles.dropdown} ${dropdownClassName || ''}`}
+        className={`${styles.dropdown} ${dropdownClassName || ""}`}
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: position.top,
           left: position.left,
           width: position.width,
@@ -559,12 +626,25 @@ export const Select: React.FC<SelectProps> = ({
           )}
         </div>
         <div className={styles.arrow}>
-          {allowClear && (finalValue || (Array.isArray(finalValue) && finalValue.length > 0)) && (
-            <span className={styles.clearIcon} onClick={clearAll}>
-              ×
-            </span>
-          )}
-          <span className={`${styles.arrowIcon} ${open ? styles.open : ''}`}>▼</span>
+          {allowClear &&
+            (finalValue ||
+              (Array.isArray(finalValue) && finalValue.length > 0)) && (
+              <span className={styles.clearIcon} onClick={clearAll}>
+                ×
+              </span>
+            )}
+          <span className={`${styles.arrowIcon} ${open ? styles.open : ""}`}>
+            <svg viewBox="0 0 10 10" className={styles.customArrowIcon}>
+              <path
+                d="M2 3.5L5 6.5L8 3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
         </div>
       </div>
       {ReactDOM.createPortal(renderDropdown(), container)}
