@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 export interface SelectOption {
     label: React.ReactNode;
     value: string | number;
@@ -21,7 +21,7 @@ export interface SelectProps {
     /** 默认选中的值（非受控） */
     defaultValue?: string | number | (string | number)[];
     /** 是否多选 */
-    mode?: 'multiple' | 'tags' | undefined;
+    mode?: "multiple" | "tags" | undefined;
     /** 是否禁用 */
     disabled?: boolean;
     /** 是否显示清除按钮 */
@@ -33,7 +33,7 @@ export interface SelectProps {
     /** 占位符 */
     placeholder?: string;
     /** 尺寸 */
-    size?: 'small' | 'middle' | 'large';
+    size?: "small" | "middle" | "large";
     /** 自定义类名 */
     className?: string;
     /** 自定义样式 */

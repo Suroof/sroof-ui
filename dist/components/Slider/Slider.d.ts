@@ -38,8 +38,6 @@ export interface SliderProps {
     onChange?: (value: number | [number, number]) => void;
     /** 拖拽结束后的回调 */
     onAfterChange?: (value: number | [number, number]) => void;
-    /** 拖拽完成后的回调 */
-    onChangeComplete?: (value: number | [number, number]) => void;
     /** 自定义样式类名 */
     className?: string;
     /** 自定义样式 */
